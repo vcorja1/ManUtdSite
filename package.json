@@ -1,0 +1,27 @@
+{
+  "name": "man-utd-site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Manchester United Website",
+  "author": "Vladimir Corja",
+  "license": "ISC",
+  "homepage": "https://github.com/vcorja1/ManUtdSite#readme",
+  "scripts": {
+    "test": "npm test"
+  },
+  "engines": {
+    "node": "4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcorja1/ManUtdSite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vcorja1/ManUtdSite/issues"
+  },
+  "keywords": [
+    "Manchester United",
+    "Man Utd",
+    "ManUtd"
+  ]
+}
