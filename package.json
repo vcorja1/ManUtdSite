@@ -1,7 +1,7 @@
 {
   "name": "man-utd-site",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "description": "Manchester United Website",
   "author": "Vladimir Corja",
   "license": "ISC",
@@ -29,7 +29,9 @@
   "dependencies": {
     "express": "4.15.4",
     "morgan": "1.8.2",
+    "nib": "1.1.2",
     "nodemon": "1.11.0",
-    "pug": "2.0.0-rc.3"
+    "pug": "2.0.0-rc.3",
+    "stylus": "0.54.5"
   }
 }

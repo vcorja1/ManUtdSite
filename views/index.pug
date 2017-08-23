@@ -1,5 +1,26 @@
 html
-    head
-        title= title
-    body
-        h1= message
+	head
+		include ../partials/header.pug
+	body
+		header #{message}
+		#container_bg
+			#content
+				p 
+					| Welcome to the site!
+		include ../partials/footer.pug
+
+style.
+	body {
+		font-family: 'Quicksand';
+		color: #fff;
+	}
+	#container_bg {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	  background-color: rgb(75, 75, 75);
+	}
+	#content p {
+		text-align: center;
+		line-height: 2;
+	}
