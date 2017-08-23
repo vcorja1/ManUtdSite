@@ -7,7 +7,9 @@
   "license": "ISC",
   "homepage": "https://github.com/vcorja1/ManUtdSite#readme",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "watch": "nodemon server.js -e js,pug",
+    "start": "node server.js"
   },
   "engines": {
     "node": "4.1.1"
@@ -23,5 +25,11 @@
     "Manchester United",
     "Man Utd",
     "ManUtd"
-  ]
+  ],
+  "dependencies": {
+    "express": "4.15.4",
+    "morgan": "1.8.2",
+    "nodemon": "1.11.0",
+    "pug": "2.0.0-rc.3"
+  }
 }
