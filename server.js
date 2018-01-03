@@ -1,3 +1,8 @@
+// Load Environment Variables if necessary
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 // Require all dependencies
 var express = require('express');
 var app = express();
