@@ -10,6 +10,9 @@ var logger = require('morgan');
 var stylus = require('stylus');
 var nib = require('nib');
 
+// Get routes
+const routes = require('./routes');
+
 // Set up Stylus, and use Nib
 function compile(str, path) {
   return stylus(str)
@@ -26,33 +29,21 @@ app.set('views',  __dirname + '/views');
 app.set('view engine', 'pug');
 
 // Set middleware location to public folder
+const publicPath = __dirname + '/public';
 app.use(
   stylus.middleware(
     {
-      src: __dirname + '/public',
+      src: publicPath,
       compile: compile
     }
   )
 );
-app.use(express.static(__dirname + '/public'));
 
-// GET response for '/'
-app.get('/', function(req, res, next) {
+// Use public folder to serve all static files
+app.use(express.static( publicPath ));
 
-  try {
-    // Render the 'index' template, and pass in a few variables
-    res.render('index', {
-      title: 'Home Page',
-      message: 'Welcome to Manchester United Home Page!'
-    });
-
-  }
-  catch (e) {
-    // If there are any errors, send them off the the logger
-    next(e);
-  }
-
-});
+// Connect all routes to the application
+app.use('/', routes);
 
 // Start up the server
 app.listen(process.env.PORT || 3000, function() {
