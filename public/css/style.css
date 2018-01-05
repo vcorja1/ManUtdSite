@@ -1,4 +1,4 @@
-header {
+.header {
   padding: 50px 10px;
   background-color: rgb(240, 77, 77);
   color: #fff;
@@ -9,7 +9,7 @@ header {
   border-bottom: 1px solid #df1806;
 }
 
-footer {
+.footer {
 	position: fixed;
     bottom: 0;
     left: 0;
