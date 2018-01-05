@@ -28,19 +28,19 @@ app.use(logger('dev'));
 app.set('views',  __dirname + '/views');
 app.set('view engine', 'pug');
 
+// Use public folder to serve all static files
+const publicFolderPath = __dirname + '/public';
+app.use(express.static( publicFolderPath ));
+
 // Set middleware location to public folder
-const publicPath = __dirname + '/public';
 app.use(
   stylus.middleware(
     {
-      src: publicPath,
+      src: publicFolderPath,
       compile: compile
     }
   )
 );
-
-// Use public folder to serve all static files
-app.use(express.static( publicPath ));
 
 // Connect all routes to the application
 app.use('/', routes);

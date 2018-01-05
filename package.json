@@ -2,7 +2,7 @@
   "name": "man-utd-site",
   "version": "1.0.0",
   "main": "server.js",
-  "description": "Manchester United Website",
+  "description": "Manchester United Fan Website",
   "author": "Vladimir Corja",
   "license": "ISC",
   "homepage": "https://github.com/vcorja1/ManUtdSite#readme",
