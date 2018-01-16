@@ -2,16 +2,17 @@
 var express = require('express');
 var app = express();
 
-// Connect and use other routes
-const staff = require('./staff');
-app.use('/staff', staff);
+// Connect and use the middleware
+const staff = require('../middleware/staff');
+app.use('/', staff);
 
-// GET response for '/'
+// GET response for '/staff'
 app.get('/', function(req, res, next) {
 
 	try {
-		res.render('index', {
-			title: 'Home Page'
+		res.render('staff', {
+			title: 'Staff',
+			staffData: req.staffData
 		});
 	}
 	catch (e) {
