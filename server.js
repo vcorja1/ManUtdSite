@@ -21,6 +21,9 @@ function compile(str, path) {
   .use(nib());
 }
 
+// Global site name
+app.locals.siteName = 'Manchester United Fan Website';
+
 // Add logging and static middleware to express
 app.use(logger('dev'));
 
@@ -46,6 +49,7 @@ app.use(
 app.use('/', routes);
 
 // Start up the server
-app.listen(process.env.PORT || 3000, function() {
-  console.log('Listening on http://localhost:' + (process.env.PORT || 3000));
+const PORT = process.env.PORT || 3000
+app.listen(PORT, function() {
+  console.log(`Listening on http://localhost:${PORT}`);
 });

@@ -5,7 +5,34 @@ footer.footer.bg-light
 
 
 <!-- Link JavaScript at the end, so pages load faster -->
-<!-- Link JQuery, Popper JS, and Bootstrap JS -->
-script(src='/libs/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
-script(src='/libs/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
-script(src='/libs/bootstrap.min.js', integrity='sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4', crossorigin='anonymous')
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+script(src='/libs/jquery.min.js')
+<!-- Bootstrap's JS -->
+script(src='/libs/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS', crossorigin='anonymous')
+
+<!-- Custom scripts here -->
+script(type='text/javascript').
+	(function($) {
+		$(function() { // DOM Ready
+			// On resize, close dropdown menu
+			$(window).resize(function() {
+				if( $(window).width() > 767 ) {
+					$('.dropdown.open').removeClass('open');
+					$('.dropdown-toggle').blur();
+				}
+			});
+
+			// On hover, close open dropdowns
+			if( $(window).width() > 767 ) {
+				$('ul.nav li.dropdown').hover(
+					function() {	// On mouse enter
+						$(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(200);
+						$('.dropdown.open').removeClass('open');
+					}, function() {
+					// On mouse leave
+						$(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(200);
+					}
+				);
+			}
+		});
+	})(jQuery);
