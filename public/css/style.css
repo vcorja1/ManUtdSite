@@ -8,16 +8,23 @@
   width: 100%;      /* Full width */
 }
 
-.navbar-logo {
-  padding: 1%;
-}
-
-.nav-item.dropdown > a {
-  width: 85px;
+.navbar-brand > img {
+  height: 150%;
+  margin-top: -5px;
+  width: auto;
 }
 
 .nav-item:hover {
   background-color: #f1f1f1;
+}
+
+@media (min-width: 768px) {
+  .dropdown:hover {
+    background-color: #f1f1f1;
+  }
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 /* -------------------------------------------------------- */
@@ -26,6 +33,7 @@
 
 .main {
   margin-top: 70px;
+  margin-bottom: 70px;
 }
 
 .main.container > h1 {
@@ -44,4 +52,21 @@
   width: 100%;
   text-align: center;
   padding: 1%;
+}
+
+
+/* -------------------------------------------------------- */
+/* ----------------- BOOTSTRAP 4.0 THEMES ----------------- */
+/* -------------------------------------------------------- */
+.bg-light{
+    background-color:#f8f9fa!important
+}
+a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover{
+    background-color:#dae0e5!important
+}
+.bg-dark{
+    background-color:#343a40!important
+}
+a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{
+    background-color:#1d2124!important
 }
