@@ -1,23 +1,23 @@
 extends layout
 block content
-	.main.container
+	.main.container-fluid
 		h1 Welcome to the Manchester United Fan Site!
 		.row
-			.col-md-4
-				h2 Fixtures
-				p
-					| Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-				p
-					a.btn.btn-secondary(href='#', role='button') View details »
-			.col-md-4
-				h2 Players
-				p
-					| Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-				p
-					a.btn.btn-secondary(href='#', role='button') View details »
-			.col-md-4
-				h2 Staff
-				p
-					| Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-				p
-					a.btn.btn-secondary(href='#', role='button') View details »
+			.col-xs-12.col-ms-6.col-sm-6.col-md-4
+				h2.menu-title Fixtures
+				a.menu-container(href='/fixtures')
+					img.image.img-responsive(src='/img/menu/fixtures.jpg')
+					.overlay
+						.overlay-text View the club's schedule and results
+			.col-xs-12.col-ms-6.col-sm-6.col-md-4
+				h2.menu-title Players
+				a.menu-container(href='/players')
+					img.image(src='/img/menu/players.jpg')
+					.overlay
+						.overlay-text Get to know the club's Senior and Youth team players
+			.col-xs-12.col-ms-6.col-sm-6.col-md-4
+				h2.menu-title Staff
+				a.menu-container(href='/staff')
+					img.img-responsive.image(src='/img/menu/staff.jpg')
+					.overlay
+						.overlay-text Meet the club's coaching staff and board members
