@@ -14,16 +14,26 @@
   width: auto;
 }
 
-.nav-item > a, .dropdown > a {
-  font-variant: small-caps !important;
-  text-rendering: auto;
-}
-
 .nav-item:hover {
   background-color: #f1f1f1;
 }
 
+.dropdown-menu > li > a {
+  font-variant: small-caps !important;
+  text-rendering: auto;
+}
+
 @media (min-width: 768px) {
+  .dropdown-menu {
+    margin-left: -40%;
+    padding: 5%;
+    background-color: #fdfdfd;
+  }
+  .dropdown-menu > li > a {
+    text-align: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
   .dropdown:hover {
     background-color: #f1f1f1;
   }
@@ -51,7 +61,7 @@
 
 .menu-title {
   text-align: center;
-  font-variant: small-caps !important;
+  font-variant: caps !important;
   text-rendering: auto;
 }
 
@@ -63,6 +73,7 @@
 
 .overlay {
   background-color: rgba(80, 0, 0, 0.7);
+  border-left: 1px solid #1f1f1f;
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -74,13 +85,31 @@
 
 .overlay-text {
   color: white;
-  font-size: 17px;
+  font-size: 1.3em;
   position: absolute;
   top: 50%;
   left: 50%;
   text-align: center;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
+}
+
+@media (min-width: 480px) and (max-width: 540px) {
+  .overlay-text {
+    font-size: 0.9em;
+  }
+}
+
+@media (min-width: 540px) and (max-width: 600px) {
+  .overlay-text {
+    font-size: 1.05em;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .overlay-text {
+    font-size: 1.2em;
+  }
 }
 
 /* -------------------------------------------------------- */

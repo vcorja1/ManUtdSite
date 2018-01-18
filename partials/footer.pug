@@ -14,27 +14,9 @@ script(src='/libs/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrpr
 script(type='text/javascript').
 	(function($) {
 		$(function() { // DOM Ready
-			// On resize, close dropdown menu
-			$(window).resize(function() {
-				if( $(window).width() > 767 ) {
-					$('.dropdown.open').removeClass('open');
-					$('.dropdown-toggle').blur();
-				}
-			});
-
 			// On hover, close open dropdowns
-			$('ul.nav li.dropdown').hover(
-				function() {	// On mouse enter
-					if( $(window).width() > 767 ) {
-						$(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(200);
-						$('.dropdown.open').removeClass('open');
-					}
-				},
-				function() {	// On mouse leave
-					if( $(window).width() > 767 ) {
-						$(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(200);
-					}
-				}
-			);
+			$('.dropdown').on('mouseenter mouseleave click tap', function() {
+				$(this).toggleClass("open");
+			});
 		});
 	})(jQuery);
