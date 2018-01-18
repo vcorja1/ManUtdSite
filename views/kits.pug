@@ -1,0 +1,43 @@
+extends layout
+block customcss
+	style(type="text/css").
+		.col-md-7 {
+			padding-left: 20px;
+			padding-right: 0;
+		}
+		.col-md-5 {
+			padding-left: 2%;
+			padding-right: 20px;
+		}
+		.col-xs-12 {
+			padding-left: 5%;
+			padding-right: 5%;
+		}
+block content
+	.main.container-fluid
+		h1 HOME KIT 2017/18
+		.row
+			.col-xs-12.col-ms-12.col-sm-7.col-md-7
+				h2.small-caps.text-center Players
+				img.image(src='/img/kits/home.jpg')
+			.col-xs-12.col-ms-12.col-sm-5.col-md-5
+				h2.small-caps.text-center Goalkeepers
+				img.image(src='/img/kits/gk_home.jpg')
+		.pad-space
+		h1 AWAY KIT 2017/18
+		.row
+			.col-xs-12.col-ms-12.col-sm-7.col-md-7
+				h2.small-caps.text-center Players
+				img.image(src='/img/kits/away.jpg')
+			.col-xs-12.col-ms-12.col-sm-5.col-md-5
+				h2.small-caps.text-center Goalkeepers
+				img.image(src='/img/kits/gk_away.jpg')
+		.pad-space
+		h1 THIRD KIT 2017/18
+		.row
+			.col-xs-12.col-ms-12.col-sm-7.col-md-7
+				h2.small-caps.text-center Players
+				img.image(src='/img/kits/third.jpg')
+			.col-xs-12.col-ms-12.col-sm-5.col-md-5
+				h2.small-caps.text-center Goalkeepers
+				img.image(src='/img/kits/gk_third.jpg')

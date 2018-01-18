@@ -2,18 +2,12 @@
 var express = require('express');
 var app = express();
 
-// Connect and use other routes
-const staff = require('./staff');
-app.use('/staff', staff);
-const kits = require('./kits');
-app.use('/kits', kits);
-
-// GET response for '/'
+// GET response for '/staff'
 app.get('/', function(req, res, next) {
 
 	try {
-		res.render('index', {
-			title: 'Home Page'
+		res.render('kits', {
+			title: '2017/18 Kits'
 		});
 	}
 	catch (e) {

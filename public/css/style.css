@@ -14,13 +14,13 @@
   width: auto;
 }
 
-.nav-item:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown-menu > li > a {
+.small-caps {
   font-variant: small-caps !important;
   text-rendering: auto;
+}
+
+.nav-item:hover {
+  background-color: #f1f1f1;
 }
 
 @media (min-width: 768px) {
@@ -53,6 +53,10 @@
 
 .main.container-fluid > h1 {
   text-align: center;
+}
+
+.pad-space {
+  height: 40px;
 }
 
 /* -------------------------------------------------------- */
