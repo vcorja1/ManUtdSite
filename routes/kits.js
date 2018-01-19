@@ -2,7 +2,7 @@
 var express = require('express');
 var app = express();
 
-// GET response for '/staff'
+// GET response for '/kits'
 app.get('/', function(req, res, next) {
 
 	try {

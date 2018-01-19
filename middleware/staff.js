@@ -1,6 +1,3 @@
-// Require router dependencies
-var express = require('express');
-var app = express();
 // Connect to Heroku database
 const { Client } = require('pg');
 
