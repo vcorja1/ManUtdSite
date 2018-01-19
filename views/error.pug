@@ -1,0 +1,24 @@
+extends layout
+block customcss
+	style(type="text/css").
+		@media(min-width: 480px) and (max-width: 700px) {
+			.row {
+				display: flex;
+				align-items: center;
+			}
+		}
+block content
+	.main.container-fluid
+		h2.text-center Sorry, this page is currently unavailable...
+		.pad-space
+		.row
+			.hidden-xs.hidden-sm.col-md-3
+				img.image.image-responsive(src='/img/slide.gif')
+			.text-center.col-ms-6.col-sm-8.col-md-6
+				h4 Please try again later, or use the menu above to navigate to the page you want.
+				.pad-space
+				h4 To distract you from the inconvenience, let us remind you that Manchester United FC is England's most successful club ever!
+			.col-ms-6.col-sm-4.col-md-3
+				img.image.image-responsive(src='/img/slide.gif')
+		.pad-space
+		h4.text-center View the trophy room below to see every major trophy won by the club.

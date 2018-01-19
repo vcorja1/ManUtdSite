@@ -23,4 +23,17 @@ app.get('/', function(req, res, next) {
 
 });
 
+// The 404 route
+app.get('*', function(req, res, next) {
+
+	try {
+		res.render('error');
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 module.exports = app;
