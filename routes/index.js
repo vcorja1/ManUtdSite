@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 
 // Connect and use other routes
+const standings = require('./standings');
+app.use('/standings', standings);
 const staff = require('./staff');
 app.use('/staff', staff);
 const kits = require('./kits');
