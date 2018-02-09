@@ -17,12 +17,17 @@ block content
 							th.text-center.col-md-1.hidden-xs.hidden-sm Played
 							th.text-center.hidden-md.hidden-lg
 								abbr(title='Played') P
-							th.text-center.col-md-1.hidden-xs W
-							th.text-center.col-md-1.hidden-xs D
-							th.text-center.col-md-1.hidden-xs L
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Wins') W
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Draws') D
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Losses') L
 							th.text-center.hidden-xs
 								abbr(title='Goal Difference') GD
-							th.text-center Points
+							th.text-center.hidden-xs Points
+							th.text-center.hidden-sm.hidden-md.hidden-lg
+								abbr(title='Points') Pts
 					tbody
 						each team in epl
 							tr(style={'background-color': team.color})
@@ -52,12 +57,17 @@ block content
 							th.text-center.col-md-1.hidden-xs.hidden-sm Played
 							th.text-center.hidden-md.hidden-lg
 								abbr(title='Played') P
-							th.text-center.col-md-1.hidden-xs W
-							th.text-center.col-md-1.hidden-xs D
-							th.text-center.col-md-1.hidden-xs L
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Wins') W
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Draws') D
+							th.text-center.col-md-1.hidden-xs
+								abbr(title='Losses') L
 							th.text-center.hidden-xs
 								abbr(title='Goal Difference') GD
-							th.text-center Points
+							th.text-center.hidden-xs Points
+							th.text-center.hidden-sm.hidden-md.hidden-lg
+								abbr(title='Points') Pts
 					tbody
 						each team in ucl.standing
 							tr(style={'background-color': team.color})
