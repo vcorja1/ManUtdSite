@@ -3,9 +3,9 @@ block content
 	.main.container-fluid
 		.row
 		.col-sm-12.col-md-offset-2.col-md-8
-			h2.menu-title Premier League 2017/18 Live Standings
-			h3.text-center.small-caps(style={'margin-bottom': '20px'}) Current Position::
-				span(style={'color': 'red'}) #{'  2nd'}
+			h2.menu-title Champions League 2017/18
+			h3.text-center.small-caps(style={'margin-bottom': '20px'}) Current Position:
+				span(style={'color': 'red'}) #{'  Round of 16'}
 			table.table.table-bordered
 				thead
 					tr
@@ -27,7 +27,7 @@ block content
 							abbr(title='Goal Difference') GD
 						th.text-center Points
 				tbody
-					each team in epl
+					each team in ucl.standing
 						tr(style={'background-color': team.color})
 							td.text-center=team.position
 							td

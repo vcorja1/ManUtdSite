@@ -23,15 +23,34 @@ app.get('/premier-league', function(req, res, next) {
 
 });
 
+// GET response for '/standings/champions-league'
+app.use('/champions-league', standings.getUCLTable);
+
+app.get('/champions-league', function(req, res, next) {
+
+	try {
+		res.render('standings/cl_standings', {
+			title: 'Champions League Standings',
+			ucl: req.ucl
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/standings'
-app.use('/', standings.getEPLTable);
+app.use('/', [standings.getEPLTable, standings.getUCLTable]);
 
 app.get('/', function(req, res, next) {
 
 	try {
 		res.render('standings/standings', {
 			title: 'Standings',
-			epl: req.epl
+			epl: req.epl,
+			ucl: req.ucl
 		});
 	}
 	catch (e) {

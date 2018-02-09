@@ -71,7 +71,7 @@
 
 .menu-title {
   text-align: center;
-  font-variant: caps !important;
+  text-transform: uppercase;
   text-rendering: auto;
 }
 
@@ -79,6 +79,8 @@
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 20px;
+  border: 2px solid gray;
 }
 
 .overlay {
@@ -91,6 +93,7 @@
   right: 0;
   overflow: hidden;
   height: 35%;
+  border-radius: 20px;
 }
 
 .overlay-text {
@@ -120,6 +123,16 @@
   .overlay-text {
     font-size: 1.2em;
   }
+}
+
+/* -------------------------------------------------------- */
+/* ---------------------- STANDINGS ----------------------- */
+/* -------------------------------------------------------- */
+
+@media (min-width:992px){
+  .col-half {width: 44.33333334%;}
+  .col-half-offset-left {margin-left: 2.83333333%;}
+  .col-half-offset-right {margin-right: 2.83333333%;}
 }
 
 /* -------------------------------------------------------- */
