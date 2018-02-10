@@ -7,6 +7,8 @@ const standings = require('./standings');
 app.use('/standings', standings);
 const staff = require('./staff');
 app.use('/staff', staff);
+const trophy_room = require('./trophy_room');
+app.use('/trophy-room', trophy_room);
 const kits = require('./kits');
 app.use('/kits', kits);
 

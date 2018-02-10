@@ -69,6 +69,10 @@
   height: 40px;
 }
 
+.pad-space-small {
+  height: 20px;
+}
+
 /* -------------------------------------------------------- */
 /* --------------------- MENU OPTIONS --------------------- */
 /* -------------------------------------------------------- */
@@ -129,6 +133,12 @@
   }
 }
 
+@media (min-width: 992px) and (max-width: 1051px) {
+  .overlay-text {
+    font-size: 1.1em;
+  }
+}
+
 /* -------------------------------------------------------- */
 /* ---------------------- STANDINGS ----------------------- */
 /* -------------------------------------------------------- */
@@ -137,6 +147,46 @@
   .col-half {width: 44.33333334%;}
   .col-half-offset-left {margin-left: 2.83333333%;}
   .col-half-offset-right {margin-right: 2.83333333%;}
+}
+
+/* -------------------------------------------------------- */
+/* --------------------- TROPHY ROOM ---------------------- */
+/* -------------------------------------------------------- */
+
+.columns-2 {
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count:    2; /* Firefox */
+  column-count:         2;
+  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
+  -moz-column-gap:      20px; /* Firefox */
+  column-gap:           20px;
+  -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
+  -moz-column-rule: 1px double #ccc; /* Firefox */
+  column-rule: 1px double #ccc;
+}
+
+.columns-3 {
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+  -moz-column-count:    3; /* Firefox */
+  column-count:         3;
+  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
+  -moz-column-gap:      20px; /* Firefox */
+  column-gap:           20px;
+  -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
+  -moz-column-rule: 1px double #ccc; /* Firefox */
+  column-rule: 1px double #ccc;
+}
+
+.columns-4 {
+  -webkit-column-count: 4; /* Chrome, Safari, Opera */
+  -moz-column-count:    4; /* Firefox */
+  column-count:         4;
+  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
+  -moz-column-gap:      20px; /* Firefox */
+  column-gap:           20px;
+  -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
+  -moz-column-rule: 1px double #ccc; /* Firefox */
+  column-rule: 1px double #ccc;
 }
 
 /* -------------------------------------------------------- */
