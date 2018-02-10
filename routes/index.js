@@ -29,7 +29,9 @@ app.get('/', function(req, res, next) {
 app.get('*', function(req, res, next) {
 
 	try {
-		res.render('error');
+		res.render('error', {
+			title: 'Page Not Found - Manchester United Fan Website'
+		});
 	}
 	catch (e) {
 		// If there are any errors, send them off the the logger
