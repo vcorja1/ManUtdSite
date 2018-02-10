@@ -12,7 +12,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 			a.navbar-brand(href='/') Manchester United
 		#navbar.navbar-collapse.collapse
 			ul.nav.navbar-nav
-				li.nav-item
+				li.nav-item.hidden-sm
 					a(href='/') HOME
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
@@ -66,12 +66,22 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 						.divider
 						li
 							a.small-caps(href='/staff#academy') Academy Staff
-				li.nav-item
+				li.dropdown.hidden-xs.hidden-md.hidden-lg
+					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+						| OTHER
+						span.caret
+					ul.dropdown-menu
+						li
+							a.small-caps(href='/kits') Kits
+						.divider
+						li
+							a.small-caps(href='/staff#board') Trophy Room
+				li.nav-item.hidden-sm
 					a(href='/kits') KITS
-				li.nav-item
+				li.nav-item.hidden-sm
 					a(href='/trophy-room') TROPHY ROOM
 			ul.nav.navbar-right.hidden-xs.hidden-sm
-				a.navbar-brand(href='/')
+				a.navbar-brand.hidden-md(href='/')
 					|     Manchester United
 				a.navbar-brand(href='/')
 					img.img-responsive(src='/img/logos/light_logo.svg', alt='Logo')
