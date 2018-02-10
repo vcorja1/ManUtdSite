@@ -9,6 +9,7 @@ var app = express();
 var logger = require('morgan');
 var stylus = require('stylus');
 var nib = require('nib');
+var favicon = require('serve-favicon');
 
 // Get routes
 const routes = require('./routes');
@@ -34,6 +35,9 @@ app.set('view engine', 'pug');
 // Use public folder to serve all static files
 const publicFolderPath = __dirname + '/public';
 app.use(express.static( publicFolderPath ));
+
+// Set up favicon
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // Set middleware location to public folder
 app.use(
