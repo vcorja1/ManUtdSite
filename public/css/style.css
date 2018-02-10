@@ -8,10 +8,14 @@
   width: 100%;      /* Full width */
 }
 
+.navbar-brand {
+  padding: 10px 15px;
+  line-height: 30px;
+}
+
 .navbar-brand > img {
-  height: 150%;
-  margin-top: -15%;
-  width: auto;
+  height: auto;
+  width: 30px;
 }
 
 .small-caps {
