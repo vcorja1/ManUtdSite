@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // Require all dependencies
+var compression = require('compression');
 var express = require('express');
 var app = express();
 var logger = require('morgan');
@@ -21,6 +22,9 @@ function compile(str, path) {
 	.set('compress', true)
   .use(nib());
 }
+
+// Compress all responses
+app.use(compression());
 
 // Global site name
 app.locals.siteName = 'Manchester United Fan Website';
