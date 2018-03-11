@@ -1,5 +1,5 @@
 extends layout
-block customcss 
+block customcss
 	style(type="text/css").
 		.image {
 			height: 300px;
@@ -35,11 +35,19 @@ block customcss
 				font-size: 22px;
 			}
 		}
+		h1::before { /* For HTML ID to scroll to correct spot (not to the next child) */
+			display: block;
+			content: " ";
+			margin-top: -80px;
+			height: 80px;
+			visibility: hidden;
+			pointer-events: none
+		}
 block content
 	.main.container-fluid
-		h1(style={'color': 'red', 'font-weight': 'bold'}) TROPHY ROOM
+		h1.bold(style={'color': 'red'}) TROPHY ROOM
 		br
-		h1.text-center#english DOMESTIC TROPHIES
+		h1.bold.text-center(style={'color': 'blue'})#english DOMESTIC TROPHIES
 		.row.text-center
 			.col-ms-6.col-sm-6.col-md-3.large-height
 				.equal-height
@@ -78,7 +86,7 @@ block content
 					h3 RECORD 21 TITLES
 				h4.columns-4 1908 1911 1952 1956 1957 1965 1967 1977 1983 1990 1993 1994 1996 1997 2003 2007 2008 2010 2011 2013 2016
 		br
-		h1.text-center#european EUROPEAN TROPHIES
+		h1.bold.text-center(style={'color': 'blue'})#european EUROPEAN TROPHIES
 		.row.text-center
 			.col-ms-6.col-sm-6.col-md-3.small-height
 				.equal-height
@@ -115,7 +123,7 @@ block content
 					h3 1 TITLE
 				h4 1991
 		br
-		h1.text-center#international WORLDWIDE TROPHIES
+		h1.bold.text-center(style={'color': 'blue'})#international WORLDWIDE TROPHIES
 		.row.text-center
 			.col-ms-6.col-sm-6.col-md-offset-2.col-md-3.small-height
 				.equal-height

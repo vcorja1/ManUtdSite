@@ -13,9 +13,17 @@ block customcss
 			padding-left: 5%;
 			padding-right: 5%;
 		}
+		h1::before { /* For HTML ID to scroll to correct spot (not to the next child) */
+			display: block;
+			content: " ";
+			margin-top: -80px;
+			height: 80px;
+			visibility: hidden;
+			pointer-events: none;
+		}
 block content
 	.main.container-fluid
-		h1 HOME KIT 2017/18
+		h1#home HOME KIT 2017/18
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players
@@ -24,7 +32,7 @@ block content
 				h2.small-caps.text-center Goalkeepers
 				img.image(src='/img/kits/gk_home.jpg')
 		.pad-space
-		h1 AWAY KIT 2017/18
+		h1#away AWAY KIT 2017/18
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players
@@ -33,7 +41,7 @@ block content
 				h2.small-caps.text-center Goalkeepers
 				img.image(src='/img/kits/gk_away.jpg')
 		.pad-space
-		h1 THIRD KIT 2017/18
+		h1#third THIRD KIT 2017/18
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players

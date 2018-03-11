@@ -1,4 +1,43 @@
 extends layout
+block customcss
+	style(type="text/css").
+		.text-center .image {
+			height: 300px;
+		}
+		.large-height {
+			height: 620px;
+		}
+		.small-height {
+			height: 580px;
+		}
+		.equal-height {
+			margin-top: 15px;
+			height: 70px;
+			line-height: 70px;
+		}
+		.equal-height > h3, .equal-height > h4 {
+		    line-height: 1.2;
+		    display: inline-block;
+		    vertical-align: middle;
+			margin: 0px;
+		}
+		.equal-height > h4 {
+			padding-bottom: 10px;
+		}
+		@media (max-width: 479px) {
+			h5 {
+				font-size: 20px;
+			}
+			.text-center .image {
+				height: 270px;
+				width: 180px;
+			}
+		}
+		@media (min-width: 717px) and (max-width: 767px) {
+			h5 {
+				font-size: 18px;
+			}
+		}
 block content
 	.main.container-fluid
 		.row(style={'align-items': 'center'})
@@ -14,5 +53,94 @@ block content
 				.pad-space.hidden-md.hidden-lg
 				img.image.image-responsive(src='/img/404.jpg')
 		.pad-space
-		h4.text-center To distract you from this inconvenience, let us remind you that Manchester United is England's most successful club ever!
-		h4.text-center View the trophy room below to see every major trophy won by the club.
+		h4.text-center(style={'margin': '5%'}) To distract you from this inconvenience, let us remind you that Manchester United is England's most successful club ever!
+		h4.text-center(style={'margin': '5%'}) View the trophy room below to see every major trophy won by the club.
+		.pad-space-small
+		.row.text-center
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps Premier League
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/premier_league.jpg')
+				.equal-height
+					h4 RECORD 20 TITLES
+				h5.columns-4 1908 1911 1952 1956 1957 1965 1967 1993 1994 1996 1997 1999 2000 2001 2003 2007 2008 2009 2011 2013
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps FA Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/fa_cup.jpg')
+				.equal-height
+					h4 12 TITLES
+				h5.columns-4 1909 1948 1963 1977 1983 1985 1990 1994 1996 1999 2004 2016
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps League Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/league_cup.jpg')
+				.equal-height
+					h4 5 TITLES
+				h4(style={'margin-bottom': '0px'}) 1992
+				h4(style={'margin': '0px'}) 2006
+				h4(style={'margin': '0px'}) 2009
+				h4(style={'margin': '0px'}) 2010
+				h4(style={'margin-top': '0px'}) 2017
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps Community Shield
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/community_shield.jpg')
+				.equal-height
+					h4 RECORD 21 TITLES
+				h5.columns-4 1908 1911 1952 1956 1957 1965 1967 1977 1983 1990 1993 1994 1996 1997 2003 2007 2008 2010 2011 2013 2016
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps Champions League
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/champions_league.jpg')
+				.equal-height
+					h4 3 TITLES
+				h4 1968
+				h4 1999
+				h4 2008
+			.col-lg-offset-1
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps Europa League
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/europa_league.jpg')
+				.equal-height
+					h4 1 TITLE
+				h4 2017
+			.col-ms-6.col-sm-3.col-md-3.col-lg-offset-2.col-lg-2.large-height
+				.equal-height
+					h3.small-caps Cup Winners' Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/cup_winners_cup.jpg')
+				.equal-height
+					h4 1 TITLE
+				h4 1991
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.large-height
+				.equal-height
+					h3.small-caps UEFA Super Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/super_cup.jpg')
+				.equal-height
+					h4 1 TITLE
+				h4 1991
+			.col-ms-6.col-sm-offset-3.col-sm-3.col-md-offset-3.col-md-3.col-lg-offset-0.col-lg-2.small-height
+				.equal-height
+					h3.small-caps FIFA Club World Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/club_world_cup.jpg')
+				.equal-height
+					h4 1 TITLE
+				h4 2008
+			.col-ms-6.col-sm-3.col-md-3.col-lg-2.small-height
+				.equal-height
+					h3.small-caps Intercontinental Cup
+				.pad-space-small
+				img.image.image-responsive.center-block(src='img/trophies/intercontinental_cup.jpg')
+				.equal-height
+					h4 1 TITLE
+				h4 1999
