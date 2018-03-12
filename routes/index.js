@@ -3,6 +3,8 @@ var express = require('express');
 var app = express();
 
 // Connect and use other routes
+const fixtures = require('./fixtures/fixtures');
+app.use('/fixtures', fixtures);
 const standings = require('./standings');
 app.use('/standings', standings);
 const staff = require('./staff');

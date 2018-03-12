@@ -25,6 +25,6 @@ module.exports = (req, res, next) => {
 		client.end();
 
 		// Continue
-		next();
+		return next();
 	});
 };

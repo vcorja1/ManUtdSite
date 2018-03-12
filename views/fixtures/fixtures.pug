@@ -1,0 +1,20 @@
+extends ../layout
+block content
+	.main.container-fluid
+		//- Include fixture mixin
+		include ../../partials/fixtureMixin.pug
+		
+		h2.menu-title Schedule & Results
+		.pad-space
+		+recentFixtures(lastMatch, nextMatch)
+
+		.text-center.col-md-offset-1.col-md-10
+			h2.bold.small-caps Preseason & Friendlies
+		each match, index in fixtures.filter(match => match.competition > 7)
+			+fixture(match, index)
+
+		.text-center.col-md-offset-1.col-md-10
+			.pad-space
+			h2.bold.small-caps Regular Season
+		each match, index in fixtures.filter(match => match.competition < 8)
+			+fixture(match, index)

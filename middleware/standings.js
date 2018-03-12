@@ -15,8 +15,7 @@ exports.getEPLTable = (req, res, next) => {
 			resp.resume();
 
 			// Handle error here
-			// TO-DO: Redirect to error page
-			next();
+			return next();
 		}
 
 		resp.setEncoding('utf8');
@@ -42,17 +41,15 @@ exports.getEPLTable = (req, res, next) => {
 					}
 				});
 				// Continue
-				next();
+				return next();
 			} catch (e) {
 				// Handle error here
-				// TO-DO: Redirect to error page
-				next(e);
+				return next(e);
 			}
 		});
 	}).on('error', (e) => {
 		// Handle error here
-		// TO-DO: Redirect to error page
-		next(e);
+		return next(e);
 	});
 };
 
@@ -90,6 +87,6 @@ exports.getUCLTable = (req, res, next) => {
 		client.end();
 
 		// Continue
-		next();
+		return next();
 	});
 };
