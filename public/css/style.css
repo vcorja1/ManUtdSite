@@ -1,4 +1,49 @@
 /* -------------------------------------------------------- */
+/* -------------------- FONTS & STYLES -------------------- */
+/* -------------------------------------------------------- */
+
+.small-caps {
+  font-variant: small-caps !important;
+  text-rendering: auto;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+/* -------------------------------------------------------- */
+/* ------------------ MARGINS & PADDING ------------------- */
+/* -------------------------------------------------------- */
+
+.no-margin {
+  margin: 0px;
+}
+
+.pad-space {
+  height: 40px;
+}
+
+.pad-space-small {
+  height: 20px;
+}
+
+/* -------------------------------------------------------- */
+/* ------------------ CONTENT ALIGNMENT ------------------- */
+/* -------------------------------------------------------- */
+
+.align-items-center {
+  align-items: center;
+}
+
+/* -------------------------------------------------------- */
 /* ------------------------ NAVBAR ------------------------ */
 /* -------------------------------------------------------- */
 
@@ -16,11 +61,6 @@
 .navbar-brand > img {
   height: auto;
   width: 30px;
-}
-
-.small-caps {
-  font-variant: small-caps !important;
-  text-rendering: auto;
 }
 
 .nav-item:hover {
@@ -63,18 +103,6 @@
 
 .main.container-fluid > h1 {
   text-align: center;
-}
-
-.pad-space {
-  height: 40px;
-}
-
-.pad-space-small {
-  height: 20px;
-}
-
-.bold {
-  font-weight: bold;
 }
 
 /* -------------------------------------------------------- */
@@ -156,6 +184,20 @@
 /* -------------------------------------------------------- */
 /* --------------------- TROPHY ROOM ---------------------- */
 /* -------------------------------------------------------- */
+
+.large-height {   /* Trophy box height (large) */
+  height: 620px;
+}
+
+.small-height {   /* Trophy box height (small) */
+  height: 580px;
+}
+
+.content-equal-height {   /* Trophy box content height */
+  margin-top: 15px;
+  height: 70px;
+  line-height: 70px;
+}
 
 .columns-2 {
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
