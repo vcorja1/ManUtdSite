@@ -1,20 +1,57 @@
 extends ../layout
+block customcss
+	style(type="text/css").
+		.row {
+			margin: 0;
+		}
+		.image {
+			height: 70px;
+			border: none;
+		}
+		abbr {
+			border-bottom: 0 !important;
+			cursor: inherit !important;
+			text-decoration: none !important;
+		}
 block content
-	.main.container-fluid
+	.main.container-fluid.text-center
 		//- Include fixture mixin
 		include ../../partials/fixtureMixin.pug
 		
-		h2.menu-title Schedule & Results
+		h2.menu-title.bold.red Schedule & Results
+		.pad-space-small
+		+recentFixtures()
+
+		.pad-space-small
+		h2.bold.small-caps.blue Preseason & Friendlies
+		.pad-space-small
+		.panel.panel-default.align-items-center
+			.panel-heading
+				.row
+					.col-md-1
+						h4 VENUE
+					.col-md-8
+						h4 RESULT
+					.col-md-1
+						h4 ROUND
+					.col-md-2
+						h4 COMPETITION
+			each match, index in fixtures.filter(match => match.competition > 7)
+				+fixture(match, index)
+
 		.pad-space
-		+recentFixtures(lastMatch, nextMatch)
-
-		.text-center.col-md-offset-1.col-md-10
-			h2.bold.small-caps Preseason & Friendlies
-		each match, index in fixtures.filter(match => match.competition > 7)
-			+fixture(match, index)
-
-		.text-center.col-md-offset-1.col-md-10
-			.pad-space
-			h2.bold.small-caps Regular Season
-		each match, index in fixtures.filter(match => match.competition < 8)
-			+fixture(match, index)
+		h2.bold.small-caps.blue Regular Season
+		.pad-space-small
+		.panel.panel-default.align-items-center
+			.panel-heading
+				.row
+					.col-md-1
+						h4 VENUE
+					.col-md-8
+						h4 RESULT
+					.col-md-1
+						h4 ROUND
+					.col-md-2
+						h4 COMPETITION
+			each match, index in fixtures.filter(match => match.competition < 8)
+				+fixture(match, index)

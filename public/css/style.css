@@ -19,6 +19,14 @@
   color: blue;
 }
 
+.green {
+  color: green;
+}
+
+.blue-upcoming-match {
+  color: #009CDE;
+}
+
 /* -------------------------------------------------------- */
 /* ------------------ MARGINS & PADDING ------------------- */
 /* -------------------------------------------------------- */
@@ -41,6 +49,28 @@
 
 .align-items-center {
   align-items: center;
+}
+
+.flex-align-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.full-width {
+  width: 100%;
 }
 
 /* -------------------------------------------------------- */
@@ -169,6 +199,15 @@
   .overlay-text {
     font-size: 1.1em;
   }
+}
+
+/* -------------------------------------------------------- */
+/* ---------------------- FIXTURES ------------------------ */
+/* -------------------------------------------------------- */
+
+.panel-body {
+  border: 0.5px solid #F4F4F4;
+  height: 110px;
 }
 
 /* -------------------------------------------------------- */

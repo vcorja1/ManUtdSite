@@ -7,6 +7,8 @@ const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getFirstTeamFixtures);
 app.use('/', fixtures.getLiveScore);
 
+const helpers = require('../../helpers/fixtures');
+
 // GET response for '/fixtures'
 app.get('/', function(req, res, next) {
 
@@ -14,8 +16,9 @@ app.get('/', function(req, res, next) {
 		res.render('fixtures/fixtures', {
 			title: 'Schedule & Results',
 			fixtures: req.fixtures,
-			lastMatch: req.lastMatch,
-			nextMatch: req.nextMatch
+			lastMatchID: req.lastMatchID,
+			nextMatchID: req.nextMatchID,
+			helpers: helpers
 		});
 	}
 	catch (e) {

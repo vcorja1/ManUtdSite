@@ -16,25 +16,28 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query("SELECT * FROM FIXTURES WHERE team='0' ORDER BY matchDate;", (err, resp) => {
+	client.query("SELECT * FROM FIXTURES WHERE team='0' ORDER BY matchdate;", (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
 		}
 
 		// Save all fixtures
+		const dateNow = new Date();
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
-		req.fixtures.forEach(match => match.matchdate = new Date(match.matchdate));
+		req.fixtures.forEach( (match, index) => {
+			match.id = index;
+			match.matchdate = new Date(match.matchdate);
+			// Get next match ID
+			if(!req.nextMatchID && match.status < 5) // && dateNow < match.matchdate)
+				req.nextMatchID = index;
+		});
 
 		// Save last match and next match
-		const completed = req.fixtures.filter(match => match.status == 5);
-		const completedLen = completed.length;
-		req.lastMatch = completed[completedLen - 1];
-
-		// If not all matches are completed, get next match
-		if(completedLen < req.fixtures.length) {
-			req.nextMatch = req.fixtures[completedLen];
-		}
+		if(!req.nextMatchID)
+			req.lastMatchID = req.fixtures - 1;
+		else if(req.nextMatchID > 0)
+			req.lastMatchID = req.nextMatchID - 1;
 
 		// End connection
 		client.end();
@@ -46,16 +49,17 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 
 exports.getLiveScore = (req, res, next) => {
 	// Check that there is a next match
-	if(!req.nextMatch || !req.nextMatch.matchid)
+	const nextMatchID = req.nextMatchID;
+	if(!nextMatchID || !req.fixtures[nextMatchID].matchid)
 		return next();
 
 	// Ensure that the match has started
 	const dateNow = new Date();
-	if(dateNow < req.nextMatch.matchdate)
+	if(dateNow < req.fixtures[nextMatchID].matchdate)
 		return next();
 
 	// Get updated score
-	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.nextMatch.matchid}`;
+	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
 
 	http.get(fixtureURL, (resp) => {
 		const { statusCode } = resp;
@@ -79,14 +83,13 @@ exports.getLiveScore = (req, res, next) => {
 				const parsedData = JSON.parse(rawData);
 
 				// In case an error occurs, redefine the following
-				req.nextMatch = {};
-				req.nextMatch.hometeam = parsedData.fixture.homeTeamName;
-				req.nextMatch.awayteam = parsedData.fixture.awayTeamName;
-
-				// Now get the live results
-				req.nextMatch.status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
-				req.nextMatch.homegoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsHomeTeam);
-				req.nextMatch.awaygoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsAwayTeam);
+				req.fixtures[nextMatchID] = {
+					hometeam: parsedData.fixture.homeTeamName,
+					awayteam: parsedData.fixture.awayTeamName,
+					status: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status),
+					homegoals: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsHomeTeam),
+					awaygoals: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsAwayTeam)
+				};
 
 				// Continue
 				return next();
