@@ -1,7 +1,7 @@
 mixin recentFixtures()
 	.align-items-center.text-center
 		.row
-			if (nextMatch != null)
+			if (lastMatch != null && nextMatch != null)
 				.col-sm-6.col-md-6
 					.panel.panel-success
 						.panel-heading
@@ -20,26 +20,6 @@ mixin recentFixtures()
 						.hidden-ms.hidden-sm.hidden-md.hidden-lg
 							h5 #{helpers.convertDateShort(lastMatch.matchdate)}
 							h5.small-caps.bold #{helpers.getCompetitionName(lastMatch.competition)}
-			else if (lastMatch != null)
-				.col-sm-12.col-md-12
-					.panel.panel-success
-						.panel-heading
-							h3.bold LAST MATCH
-						.row.panel-body
-							.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
-								h4.full-width #{helpers.getTeamLong(lastMatch.hometeam)}
-							.col-ms-6.col-sm-6.col-md-4
-								h3.bold(style={ 'color': helpers.getResultColor(lastMatch), 'margin-top': 0 })
-									| #{lastMatch.homegoals + ' - ' + lastMatch.awaygoals}
-								.hidden-xs
-									h5 #{helpers.convertDateShort(lastMatch.matchdate)}
-									h5.small-caps.bold #{helpers.getCompetitionName(lastMatch.competition)}
-							.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
-								h4.full-width #{helpers.getTeamLong(lastMatch.awayteam)}
-						.hidden-ms.hidden-sm.hidden-md.hidden-lg
-							h5 #{helpers.convertDateShort(lastMatch.matchdate)}
-							h5.small-caps.bold #{helpers.getCompetitionName(lastMatch.competition)}
-			if (nextMatch != null)
 				.col-sm-6.col-md-6
 					.panel.panel-info
 						.panel-heading
@@ -61,7 +41,26 @@ mixin recentFixtures()
 						.hidden-ms.hidden-sm.hidden-md.hidden-lg
 							h5 #{helpers.convertDateShort(nextMatch.matchdate)}
 							h5.small-caps.bold #{helpers.getCompetitionName(nextMatch.competition)}
-			else if (lasttMatch != null)
+			else if (lastMatch != null)
+				.col-sm-12.col-md-12
+					.panel.panel-success
+						.panel-heading
+							h3.bold LAST MATCH
+						.row.panel-body
+							.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
+								h4.full-width #{helpers.getTeamLong(lastMatch.hometeam)}
+							.col-ms-6.col-sm-6.col-md-4
+								h3.bold(style={ 'color': helpers.getResultColor(lastMatch), 'margin-top': 0 })
+									| #{lastMatch.homegoals + ' - ' + lastMatch.awaygoals}
+								.hidden-xs
+									h5 #{helpers.convertDateShort(lastMatch.matchdate)}
+									h5.small-caps.bold #{helpers.getCompetitionName(lastMatch.competition)}
+							.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
+								h4.full-width #{helpers.getTeamLong(lastMatch.awayteam)}
+						.hidden-ms.hidden-sm.hidden-md.hidden-lg
+							h5 #{helpers.convertDateShort(lastMatch.matchdate)}
+							h5.small-caps.bold #{helpers.getCompetitionName(lastMatch.competition)}
+			else if (nextMatch != null)
 				.col-sm-12.col-md-12
 					.panel.panel-info
 						.panel-heading
