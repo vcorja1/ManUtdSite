@@ -57,6 +57,11 @@ exports.getLiveScore = (req, res, next) => {
 	const dateNow = new Date();
 	if(dateNow < req.fixtures[nextMatchID].matchdate)
 		return next();
+	console.log(dateNow);
+	console.log(typeof(dateNow));
+	console.log(req.fixtures[nextMatchID].matchdate);
+	console.log(typeof(req.fixtures[nextMatchID].matchdate));
+	console.log(dateNow < req.fixtures[nextMatchID].matchdate);
 
 	// Get updated score
 	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
