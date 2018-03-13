@@ -31,6 +31,8 @@ mixin recentFixtures()
 						.col-ms-6.col-sm-6.col-md-4
 							h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
 								if (nextMatch.status < 4)
+									-console.log(nextMatch);
+									-console.log(typeof(nextMatch.matchdate));
 									| #{helpers.convertMatchTime(nextMatch.matchdate)}
 								else
 									| LIVE:  #{nextMatch.homegoals + ' - ' + nextMatch.awaygoal}
@@ -59,6 +61,8 @@ mixin fixture(match, rowNum)
 			.col-xs-4.col-sm-4.col-md-4.full-height
 				if (match.homegoals === null)
 					//- Game Not Yet Played
+					-console.log(match);
+					-console.log(typeof(match.matchdate));
 					h4.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				else if (match.status === 4)
