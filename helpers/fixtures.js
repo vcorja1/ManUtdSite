@@ -33,7 +33,7 @@ exports.getCompetitionName = function getCompetitionName(competitionID) {
 		'Premier League', 'FA Cup', 'Carabao Cup', 'Community Shield', 'Champions League', 'Europa League',
 		'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly', 'Premier League 2',
 		'Premier League International Cup', 'Under-19 UEFA Youth League', 'Under-18 Premier League North',
-		'Premier League Cup', 'FA Youth Cup'
+		'Under-18 Premier League Cup', 'FA Youth Cup'
 	];
 
 	return competitions[competitionID];
@@ -42,20 +42,23 @@ exports.getCompetitionName = function getCompetitionName(competitionID) {
 // Returns the name of the competition round based on the ID
 exports.getCompetitionRound = function getCompetitionRound(competitionID, round) {
 	switch(competitionID) {
-		case 0:
-		case 10:
-		case 13:
+		case 0: 	// Premier League
+		case 10: 	// Premier League 2
+		case 13: 	// Under-18 Premier League North
 			return 'Week ' + round;
-		case 3:
-		case 6:
+		case 3: 	// Community Shield
+		case 6: 	// UEFA Super Cup
 			return 'Final';
-		case 8:
+		case 7: 	// FIFA Club World Cup
+			return round === 1 ? '1/2 Finals' : (round === 2 ? '3rd Place' : 'Final');
+		case 8: 	// International Champions Cup
 			return round === 4 ? 'Final' : 'Game ' + round;
-		case 9:
+		case 9: 	// Friendlies
 			return 'FR';
 	}
 
-	if(competitionID == 1) {
+	// FA Cup, or FA Youth Cup
+	if(competitionID == 1 || competitionID == 15) {
 		if(round < 6)
 			return 'Rd ' + round;
 		if(round == 6)
@@ -65,6 +68,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 		return 'Final';
 	}
 
+	// Carabao (EFL) Cup
 	if(competitionID == 2) {
 		if(round < 6)
 			return 'Rd ' + round;
@@ -73,6 +77,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 		return 'Final';
 	}
 
+	// Champions League
 	if(competitionID == 4) {
 		if(round < 7)
 			return 'Game ' + round;
@@ -81,6 +86,49 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 		if(round < 11)
 			return '1/4 Finals';
 		if(round < 13)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+	// Europa League
+	if(competitionID == 5) {
+		if(round < 7)
+			return 'Game ' + round;
+		if(round < 9)
+			return '1/16 Finals';
+		if(round < 11)
+			return '1/8 Finals';
+		if(round < 13)
+			return '1/4 Finals';
+		if(round < 15)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+	// Premier League International Cup, or Under-18 Premier League Cup
+	if(competitionID == 11 || competitionID == 14) {
+		if(round < 3)
+			return 'Game ' + round;
+		if(round == 4)
+			return '1/4 Finals';
+		if(round == 5)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+	// Under-19 UEFA Youth League
+	if(competitionID == 12) {
+		if(round < 7)
+			return 'Game ' + round;
+		if(round < 9)
+			return 'Qualif. ' + (round - 7);
+		if(round == 9)
+			return 'Playoff';
+		if(round == 10)
+			return '1/8 Finals';
+		if(round == 11)
+			return '1/4 Finals';
+		if(round = 12)
 			return '1/2 Finals';
 		return 'Final';
 	}

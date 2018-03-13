@@ -7,6 +7,7 @@ const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getFirstTeamFixtures);
 app.use('/', fixtures.getLiveScore);
 
+// Get helper functions
 const helpers = require('../../helpers/fixtures');
 
 // GET response for '/fixtures'
