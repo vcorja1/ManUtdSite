@@ -62,7 +62,19 @@ block content
 		
 		h2.menu-title.bold.red Schedule & Results
 		.pad-space-small
-		+recentFixtures()
+		.align-items-center.text-center
+			.row
+				if (lastMatch != null && nextMatch != null)
+					.col-sm-6.col-md-6
+						+quickMatchInfo(lastMatch, "LAST MATCH")
+					.col-sm-6.col-md-6
+						+quickMatchInfo(nextMatch, "NEXT MATCH")
+				else if (lastMatch != null)
+					.col-sm-12.col-md-12
+						+quickMatchInfo(lastMatch, "LAST MATCH")
+				else if (nextMatch != null)
+					.col-sm-12.col-md-12
+						+quickMatchInfo(nextMatch, "NEXT MATCH")
 
 		.pad-space-small
 		h2.bold.small-caps.blue Preseason & Friendlies

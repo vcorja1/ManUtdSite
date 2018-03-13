@@ -1,3 +1,11 @@
+mixin getMatchDate(match)
+	if (match.status == 4)
+		h5.bold.green LIVE
+	else
+		h5 #{helpers.convertDateShort(match.matchdate)}
+	h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
+
+
 mixin quickMatchInfo(match, heading)
 	.panel.panel-success
 		.panel-heading
@@ -6,41 +14,27 @@ mixin quickMatchInfo(match, heading)
 			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
 				h4.full-width #{helpers.getTeamLong(match.hometeam)}
 			.col-ms-6.col-sm-6.col-md-4
-				if (match.status < 5)
-					//- Game either scheduled or in play
+				if (match.status == 2)
+					//- Game postponed
+					h3.bold(style={'color': '#97999B'}) POSTPONED
+				else if (match.status == 4)
+					//- Game is currently in play
 					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
-						if (match.status < 4)
-							| #{helpers.convertMatchTime(match.matchdate)}
-						else
-							| LIVE:  #{match.homegoals + ' - ' + match.awaygoal}
-				else
+						| #{match.homegoals + ' - ' + match.awaygoals}
+				else if (match.status == 5)
 					//- Game completed
 					h3.bold(style={ 'color': helpers.getResultColor(match), 'margin-top': 0 })
 						| #{match.homegoals + ' - ' + match.awaygoals}
+				else
+					//- Game either scheduled or in play
+					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
+						| #{helpers.convertMatchTime(match.matchdate)}
 				.hidden-xs
-					h5 #{helpers.convertDateShort(match.matchdate)}
-					h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
+					+getMatchDate(match)
 			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
 				h4.full-width #{helpers.getTeamLong(match.awayteam)}
 		.hidden-ms.hidden-sm.hidden-md.hidden-lg
-			h5 #{helpers.convertDateShort(match.matchdate)}
-			h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
-
-
-mixin recentFixtures()
-	.align-items-center.text-center
-		.row
-			if (lastMatch != null && nextMatch != null)
-				.col-sm-6.col-md-6
-					+quickMatchInfo(lastMatch, "LAST MATCH")
-				.col-sm-6.col-md-6
-					+quickMatchInfo(nextMatch, "NEXT MATCH")
-			else if (lastMatch != null)
-				.col-sm-12.col-md-12
-					+quickMatchInfo(lastMatch, "LAST MATCH")
-			else if (nextMatch != null)
-				.col-sm-12.col-md-12
-					+quickMatchInfo(nextMatch, "NEXT MATCH")
+			+getMatchDate(match)
 
 
 mixin fixture(match, rowNum)
@@ -56,19 +50,23 @@ mixin fixture(match, rowNum)
 				.hidden-ms.hidden-sm.hidden-md.hidden-lg
 					h3.full-width #{helpers.getTeamShort(match.hometeam)}
 			.col-xs-4.col-sm-4.col-md-4.full-height
-				if (match.homegoals === null)
-					//- Game Not Yet Played
-					h4.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
+				if (match.status == 2)
+					//- Game postponed
+					h4.bold(style={'color': '#97999B'}) POSTPONED
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				else if (match.status === 4)
-					//- Game is In Progress
+					//- Game is currently in play
 					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
 						| #{match.homegoals + ' - ' + match.awaygoals}
 					h5.bold.green LIVE
-				else
+				else if (match.status == 5)
 					//- Game Completed
 					h3.bold(style={'color': helpers.getResultColor(match)})
 						| #{match.homegoals + ' - ' + match.awaygoals}
+					h5 #{helpers.convertDateShort(match.matchdate)}
+				else
+					//- Game Not Yet Played
+					h4.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				.hidden-sm.hidden-md.hidden-lg
 					h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}

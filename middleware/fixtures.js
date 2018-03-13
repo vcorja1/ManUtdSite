@@ -82,12 +82,18 @@ exports.getLiveScore = (req, res, next) => {
 				// Get the match score
 				const parsedData = JSON.parse(rawData);
 
-				// In case an error occurs, redefine the following
-				req.fixtures[nextMatchID].hometeam = parsedData.fixture.homeTeamName;
-				req.fixtures[nextMatchID].awayteam = parsedData.fixture.awayTeamName;
-				req.fixtures[nextMatchID].status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
-				req.fixtures[nextMatchID].homegoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsHomeTeam);
-				req.fixtures[nextMatchID].awaygoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsAwayTeam);
+				// Get live scores
+				const status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
+				if(status != 2) {
+					// Don't record postponed matches, will do this manually
+					req.fixtures[nextMatchID].status = status;
+				}
+				req.fixtures[nextMatchID].homegoals = parsedData.fixture.result.goalsHomeTeam;
+				req.fixtures[nextMatchID].awaygoals = parsedData.fixture.result.goalsAwayTeam;
+
+				// If game is completed, note so
+				req.lastMatchID = nextMatchID;
+				req.nextMatchID++;
 
 				// Continue
 				return next();
