@@ -139,6 +139,8 @@ exports.getTeamShort = function getTeamShort(team) {
 		case 'West Ham United':
 			return 'West Ham';
 
+		case 'Burton Albion':
+			return 'Burton';
 		case 'Derby County':
 			return 'Derby';
 		case 'Yeovil Town':

@@ -4,14 +4,56 @@ block customcss
 		.row {
 			margin: 0;
 		}
-		.image {
-			height: 70px;
-			border: none;
+		h3.full-width, h4.full-width {
+			margin-top: 10px;
 		}
 		abbr {
 			border-bottom: 0 !important;
 			cursor: inherit !important;
 			text-decoration: none !important;
+		}
+		@media(min-width: 992px) {
+			.image {
+				height: 65px;
+				border: none;
+			}
+		}
+		@media (min-width: 768px) and (max-width: 991px) {
+			.col-sm-3 {
+				padding: 0;
+			}
+			.image {
+				height: 50px;
+				border: none;
+			}
+		}
+		@media (max-width: 767px) {
+			h3 {
+				margin-top: 0;
+			}
+			.col-xs-12, .col-sm-6 {
+				padding: 0;
+			}
+			h3 {
+				font-size: 20px;
+			}
+		}
+		@media (max-width: 479px) {
+			.panel-body {
+				height: 120px;
+			}
+			h3 {
+				margin: 0;
+			}
+			.flex-align-center {
+				height: 100%;
+			}
+			.recent-match {
+				height: auto;
+			}
+			h3, h4 {
+				font-size: 15px;
+			}
 		}
 block content
 	.main.container-fluid.text-center
@@ -28,14 +70,17 @@ block content
 		.panel.panel-default.align-items-center
 			.panel-heading
 				.row
-					.col-md-1
+					.hidden-xs.hidden-ms.hidden-sm.col-md-1
 						h4 VENUE
-					.col-md-8
+					.col-xs-12.col-sm-9.col-md-8
 						h4 RESULT
-					.col-md-1
+					.hidden-xs.hidden-ms.col-sm-1.col-md-1
 						h4 ROUND
-					.col-md-2
+					.hidden-xs.hidden-ms.hidden-sm.col-md-2
 						h4 COMPETITION
+					.hidden-xs.hidden-ms.col-sm-2.hidden-md.hidden-lg
+						h4.float-right
+							abbr(title='COMPETITION') COMP.
 			each match, index in fixtures.filter(match => match.competition > 7)
 				+fixture(match, index)
 
@@ -45,13 +90,16 @@ block content
 		.panel.panel-default.align-items-center
 			.panel-heading
 				.row
-					.col-md-1
+					.hidden-xs.hidden-ms.hidden-sm.col-md-1
 						h4 VENUE
-					.col-md-8
+					.col-xs-12.col-sm-9.col-md-8
 						h4 RESULT
-					.col-md-1
+					.hidden-xs.hidden-ms.col-sm-1.col-md-1
 						h4 ROUND
-					.col-md-2
+					.hidden-xs.hidden-ms.hidden-sm.col-md-2
 						h4 COMPETITION
+					.hidden-xs.hidden-ms.col-sm-2.hidden-md.hidden-lg
+						h4.float-right
+							abbr(title='COMPETITION') COMP.
 			each match, index in fixtures.filter(match => match.competition < 8)
 				+fixture(match, index)

@@ -45,7 +45,7 @@
   .col-ms-9 {width:75%;}
   .col-ms-10 {width:83.33333333%;}
   .col-ms-11 {width:91.66666667%;}
-  .col-ms-12 {width:100%;}
+  .col-ms-12 {width:100% !important;}
   .col-ms-pull-0 {right:auto;}
   .col-ms-pull-1 {right:8.33333333%;}
   .col-ms-pull-2 {right:16.66666667%;}
@@ -85,4 +85,6 @@
   .col-ms-offset-10 {margin-left:83.33333333%;}
   .col-ms-offset-11 {margin-left:91.66666667%;}
   .col-ms-offset-12 {margin-left:100%;}
+  .hidden-xs {display:block!important;}
+  .hidden-ms {display:none!important;}
 }
