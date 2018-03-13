@@ -18,6 +18,9 @@ app.get('/', function(req, res, next) {
 			req.fixtures[req.lastMatchID] : null;
 		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
 			req.fixtures[req.nextMatchID] : null;
+		console.log(req);
+		console.log(lastMatch);
+		console.log(nextMatch);
 
 		res.render('fixtures/fixtures', {
 			title: 'Schedule & Results',
