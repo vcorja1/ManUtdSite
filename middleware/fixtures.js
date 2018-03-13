@@ -35,7 +35,7 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 
 		// Save last match and next match
 		if(!req.nextMatchID)
-			req.lastMatchID = req.fixtures - 1;
+			req.lastMatchID = req.fixtures.length - 1;
 		else if(req.nextMatchID > 0)
 			req.lastMatchID = req.nextMatchID - 1;
 

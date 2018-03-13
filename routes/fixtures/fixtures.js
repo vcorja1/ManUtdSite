@@ -13,11 +13,17 @@ const helpers = require('../../helpers/fixtures');
 app.get('/', function(req, res, next) {
 
 	try {
+		let fixturesCount = req.fixtures.length;
+		let lastMatch = (req.lastMatchID != null && req.lastMatchID >= 0 && req.lastMatchID < fixturesCount) ?
+			req.fixtures[req.lastMatchID] : null;
+		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
+			req.fixtures[req.nextMatchID] : null;
+
 		res.render('fixtures/fixtures', {
 			title: 'Schedule & Results',
 			fixtures: req.fixtures,
-			lastMatchID: req.lastMatchID,
-			nextMatchID: req.nextMatchID,
+			lastMatch: lastMatch,
+			nextMatch: nextMatch,
 			helpers: helpers
 		});
 	}
