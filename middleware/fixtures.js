@@ -83,13 +83,11 @@ exports.getLiveScore = (req, res, next) => {
 				const parsedData = JSON.parse(rawData);
 
 				// In case an error occurs, redefine the following
-				req.fixtures[nextMatchID] = {
-					hometeam: parsedData.fixture.homeTeamName,
-					awayteam: parsedData.fixture.awayTeamName,
-					status: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status),
-					homegoals: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsHomeTeam),
-					awaygoals: fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsAwayTeam)
-				};
+				req.fixtures[nextMatchID].hometeam = parsedData.fixture.homeTeamName;
+				req.fixtures[nextMatchID].awayteam = parsedData.fixture.awayTeamName;
+				req.fixtures[nextMatchID].status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
+				req.fixtures[nextMatchID].homegoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsHomeTeam);
+				req.fixtures[nextMatchID].awaygoals = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.result.goalsAwayTeam);
 
 				// Continue
 				return next();

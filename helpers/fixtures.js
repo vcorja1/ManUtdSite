@@ -13,6 +13,9 @@ exports.getFixtureStatus = function getFixtureStatus(status) {
 
 // Returns the status for the given fixture
 exports.convertFixtureStatusToID = function convertFixtureStatusToID(status) {
+	if(status == null)
+		return status;
+
 	const fixtureStatus = [
 		'SCHEDULED', 'TIMED', 'POSTPONED', 'CANCELED', 'IN_PLAY', 'FINISHED'
 	];
