@@ -25,19 +25,33 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 		// Save all fixtures
 		const dateNow = new Date();
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
+		const fixturesCount = req.fixtures.length;
+
+		// Assign an index and prep to get quick info (last and next matches)
 		req.fixtures.forEach( (match, index) => {
 			match.id = index;
 			match.matchdate = new Date(match.matchdate);
 			// Get next match ID
-			if(!req.nextMatchID && match.status < 5) // && dateNow < match.matchdate)
+			if(!req.nextMatchID && match.status < 5)
 				req.nextMatchID = index;
 		});
 
 		// Save last match and next match
-		if(!req.nextMatchID)
-			req.lastMatchID = req.fixtures.length - 1;
-		else if(req.nextMatchID > 0)
+		if(!req.nextMatchID) {
+			// Last match of the season was played
+			req.lastMatchID = fixturesCount - 1;
+		}
+		else if(req.nextMatchID > 0) {
 			req.lastMatchID = req.nextMatchID - 1;
+
+			// If the next game is postponed, look for an upcoming scheduled game
+			for(var i = req.nextMatchID; i < fixturesCount; i++) {
+				if(req.fixtures[i].status < 2) {
+					req.nextMatchID = i;
+					break;
+				}
+			}
+		}
 
 		// End connection
 		client.end();

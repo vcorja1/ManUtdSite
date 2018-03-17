@@ -1,4 +1,6 @@
 mixin getMatchDate(match)
+	if (match.status == 2)
+		h5 TBD
 	if (match.status == 4)
 		h5.bold.green LIVE
 	else
@@ -15,8 +17,8 @@ mixin quickMatchInfo(match, heading)
 				h4.full-width #{helpers.getTeamLong(match.hometeam)}
 			.col-ms-6.col-sm-6.col-md-4
 				if (match.status == 2)
-					//- Game postponed
-					h3.bold(style={'color': '#97999B'}) POSTPONED
+					//- Game postponed -> (shouldn't usually be the case though)
+					h3.bold.postponed-match(style={ 'margin-top': 0 }) POSTPONED
 				else if (match.status == 4)
 					//- Game is currently in play
 					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
@@ -52,11 +54,11 @@ mixin fixture(match, rowNum)
 			.col-xs-4.col-sm-4.col-md-4.full-height
 				if (match.status == 2)
 					//- Game postponed
-					h4.bold(style={'color': '#97999B'}) POSTPONED
-					h5 #{helpers.convertDateShort(match.matchdate)}
+					h4.bold.postponed-match POSTPONED
+					h5 TBD
 				else if (match.status === 4)
 					//- Game is currently in play
-					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
+					h3.bold.blue-upcoming-match
 						| #{match.homegoals + ' - ' + match.awaygoals}
 					h5.bold.green LIVE
 				else if (match.status == 5)
