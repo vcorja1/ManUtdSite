@@ -4,8 +4,8 @@ const { Client } = require('pg');
 // Get Fixture Status
 const fixtureHelper = require('../helpers/fixtures.js');
 
-// Get fixtures for the first team
-exports.getFirstTeamFixtures = (req, res, next) => {
+// Get fixtures for the given team
+function getTeamFixtures(team, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
@@ -16,8 +16,8 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query("SELECT * FROM FIXTURES WHERE team='0' ORDER BY matchdate;", (err, resp) => {
-		// Handle error
+	client.query(`SELECT * FROM FIXTURES WHERE team='${team}' ORDER BY matchdate;`, (err, resp) => {
+		// Handle error1
 		if (err) {
 			res.status(400);
 		}
@@ -61,6 +61,23 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 	});
 };
 
+// Get fixtures for the reserves team
+exports.getFirstTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(0, req, res, next);
+}
+
+// Get fixtures for the reserves team
+exports.getReservesTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(1, req,res,next);
+};
+
+// Get fixtures for the reserves team
+exports.getAcademyTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(2, req,res,next);
+};
+
+
+// Get live score, if possible
 exports.getLiveScore = (req, res, next) => {
 	// Check that there is a next match
 	const nextMatchID = req.nextMatchID;

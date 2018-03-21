@@ -32,8 +32,8 @@ exports.getCompetitionName = function getCompetitionName(competitionID) {
 	const competitions = [
 		'Premier League', 'FA Cup', 'Carabao Cup', 'Community Shield', 'Champions League', 'Europa League',
 		'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly', 'Premier League 2',
-		'Premier League International Cup', 'Under-19 UEFA Youth League', 'Under-18 Premier League North',
-		'Under-18 Premier League Cup', 'FA Youth Cup'
+		'PL International Cup', 'Under-19 UEFA Youth League', 'U18 Premier League North',
+		'U18 Premier League Cup', 'FA Youth Cup'
 	];
 
 	return competitions[competitionID];
@@ -121,7 +121,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 		if(round < 7)
 			return 'Game ' + round;
 		if(round < 9)
-			return 'Qualif. ' + (round - 7);
+			return 'Qualif. ' + (round - 6);
 		if(round == 9)
 			return 'Playoff';
 		if(round == 10)
@@ -151,8 +151,18 @@ exports.getCompetitionLogo = function getCompetitionLogo(competitionID) {
 			return '/img/logos/super_cup.png';
 		case 8:
 			return '/img/logos/icc.png';
-		default:
-			return '';
+		case 10:
+			return '/img/logos/pl2.jpg';
+		case 11:
+			return '/img/logos/plic.png';
+		case 12:
+			return '/img/logos/uefa_youth_league.png';
+		case 13:
+			return '/img/logos/u18_pl.jpg';
+		case 14:
+			return '/img/logos/u18_pl_cup.jpg';
+		case 15:
+			return '/img/logos/fa_youth_cup.png';
 	}
 }
 
@@ -160,61 +170,103 @@ exports.getCompetitionLogo = function getCompetitionLogo(competitionID) {
 /* --------------------- TEAM NAMES ----------------------- */
 /* -------------------------------------------------------- */
 
+// Removes tags like 'FC' from the name
+function removeTeamNameAbbr(teamName) {
+	const ending = teamName.substr(-3);
+	if(ending === ' FC' || ending === ' CF')
+		return teamName.slice(0, -3);
+	if(teamName.substr(-4) === ' AFC')
+		return teamName.slice(0, -4);
+
+	const start = teamName.substr(0,3);
+	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ')
+		return teamName.substr(3);
+	if(teamName.substr(0,4) === 'AFC ')
+		return teamName.substr(4);
+
+	// Special cases below
+	if(teamName === 'Valerenga Fotball')
+		return 'Valerenga';
+
+	return teamName;
+}
+
+// Gets the proper team ending
+function getTeamNameEnding(team, competition) {
+	if(team === 1)
+		return competition === 12 ? ' U19' : ' U23';
+	if(team === 2)
+		return ' U18';
+	return '';
+}
+
 // Get Short Team Name
-exports.getTeamShort = function getTeamShort(team) {
+exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 	// First shorten to a long name
-	team = this.getTeamLong(team);
+	teamName = removeTeamNameAbbr(teamName);
 
 	// Now see if any further adjustments are necessary
-	switch(team) {
+	switch(teamName) {
 		case 'Manchester United':
-			return 'Man Utd';
+			teamName = 'Man Utd';
+			break;
 		case 'Brighton & Hove Albion':
-			return 'Brighton';
+			teamName = 'Brighton';
+			break;
 		case 'Huddersfield Town':
-			return 'Huddersfield';
+			teamName = 'Huddersfield';
+			break;
 		case 'Leicester City':
-			return 'Leicester';
+			teamName = 'Leicester';
+			break;
 		case 'Manchester City':
-			return 'Man City';
+			teamName = 'Man City';
+			break;
 		case 'Newcastle United':
-			return 'Newcastle';
+			teamName = 'Newcastle';
+			break;
 		case 'Stoke City':
-			return 'Stoke';
+			teamName = 'Stoke';
+			break;
 		case 'Swansea City':
-			return 'Swansea';
+			teamName = 'Swansea';
+			break;
 		case 'Tottenham Hotspur':
-			return 'Tottenham';
+			teamName = 'Tottenham';
+			break;
 		case 'West Bromwich Albion':
-			return 'West Brom';
+			teamName = 'West Brom';
+			break;
 		case 'West Ham United':
-			return 'West Ham';
+			teamName = 'West Ham';
+			break;
 
 		case 'Burton Albion':
-			return 'Burton';
+			teamName = 'Burton';
+			break;
 		case 'Derby County':
-			return 'Derby';
+			teamName = 'Derby';
+			break;
 		case 'Yeovil Town':
-			return 'Yeovil';
-
-		default:
-			return team;
+			teamName = 'Yeovil';
+			break;
+		case 'Athletic Club':
+			teamName = 'Athletic';
+			break;
+		case 'Wolverhampton Wanderers':
+			teamName = 'Wolves';
+			break;
+		case 'Blackburn Rovers':
+			teamName = 'Blackburn';
+			break;
 	}
+
+	return teamName + getTeamNameEnding(team, competition);
 }
 
 // Get Long Team Name
-exports.getTeamLong = function getTeamLong(team) {
-	if(team.substr(-3) === ' FC')
-		return team.slice(0, -3);
-	if(team.substr(0,4) === 'AFC ')
-		return team.substr(4);
-	// Special cases below
-	const substr = team.substr(0,3);
-	if(substr === 'UC ' || substr === 'SL ')
-		return team.substr(3);
-	if(team === 'Valerenga Fotball')
-		return 'Valerenga';
-	return team;
+exports.getTeamLong = function getTeamLong(team, competition, teamName) {
+	return removeTeamNameAbbr(teamName) + getTeamNameEnding(team, competition);
 }
 
 /* -------------------------------------------------------- */

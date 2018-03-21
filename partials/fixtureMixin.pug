@@ -13,8 +13,10 @@ mixin quickMatchInfo(match, heading)
 		.panel-heading
 			h3.bold #{heading}
 		.row.panel-body
-			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
-				h4.full-width #{helpers.getTeamLong(match.hometeam)}
+			//- Home Team
+			.col-ms-3.col-sm-3.col-md-4.flex-align-center.recent-match
+				h4.full-width #{helpers.getTeamLong(match.team, match.competition, match.hometeam)}
+			//- Match Status
 			.col-ms-6.col-sm-6.col-md-4
 				if (match.status == 2)
 					//- Game postponed -> (shouldn't usually be the case though)
@@ -33,24 +35,27 @@ mixin quickMatchInfo(match, heading)
 						| #{helpers.convertMatchTime(match.matchdate)}
 				.hidden-xs
 					+getMatchDate(match)
+			//- Away Team
 			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
-				h4.full-width #{helpers.getTeamLong(match.awayteam)}
+				h4.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
 		.hidden-ms.hidden-sm.hidden-md.hidden-lg
 			+getMatchDate(match)
 
 
 mixin fixture(match, rowNum)
 	.panel-body
+		//- Match Stadium
 		.hidden-xs.hidden-ms.hidden-sm.col-md-1.flex-align-center
 			h4.full-width
 				abbr(title=`${match.stadium}`)
 					| #{match.neutral ? 'N' : (match.hometeam == 'Manchester United FC' ? 'H' : 'A')}
+		//- Teams and Match Status
 		.col-xs-12.col-sm-9.col-md-8.full-height
 			.col-xs-4.col-sm-4.col-md-4.flex-align-center
 				.hidden-xs
-					h3.full-width #{helpers.getTeamLong(match.hometeam)}
+					h3.full-width #{helpers.getTeamLong(match.team, match.competition, match.hometeam)}
 				.hidden-ms.hidden-sm.hidden-md.hidden-lg
-					h3.full-width #{helpers.getTeamShort(match.hometeam)}
+					h3.full-width #{helpers.getTeamShort(match.team, match.competition, match.hometeam)}
 			.col-xs-4.col-sm-4.col-md-4.full-height
 				if (match.status == 2)
 					//- Game postponed
@@ -74,11 +79,13 @@ mixin fixture(match, rowNum)
 					h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
 			.col-xs-4.col-sm-4.col-md-4.flex-align-center
 				.hidden-xs
-					h3.full-width #{helpers.getTeamLong(match.awayteam)}
+					h3.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
 				.hidden-ms.hidden-sm.hidden-md.hidden-lg
-					h3.full-width.float-right #{helpers.getTeamShort(match.awayteam)}
+					h3.full-width.float-right #{helpers.getTeamShort(match.team, match.competition, match.awayteam)}
+		//- Competition
 		.hidden-xs.hidden-ms.col-sm-1.col-md-1.flex-align-center
 			h5.full-width.small-caps #{helpers.getCompetitionRound(match.competition, match.round)}
+		//- Competition Logo
 		.hidden-xs.hidden-ms.col-sm-2.col-md-2.flex-align-center
 			if match.competition === 9
 				h4.full-width.small-caps Friendly

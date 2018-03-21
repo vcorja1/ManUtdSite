@@ -4,8 +4,9 @@ block customcss
 		.row {
 			margin: 0;
 		}
-		h3.full-width, h4.full-width {
-			margin-top: 10px;
+		h3, h4 {
+			margin-top: 0px;
+			padding: 1%;
 		}
 		abbr {
 			cursor: inherit !important;
@@ -27,9 +28,6 @@ block customcss
 			}
 		}
 		@media (max-width: 767px) {
-			h3 {
-				margin-top: 0;
-			}
 			.col-xs-12, .col-sm-6 {
 				padding: 0;
 			}
@@ -37,13 +35,9 @@ block customcss
 				font-size: 20px;
 			}
 		}
-		@media (max-width: 490px) {
+		@media (max-width: 479px) {
 			.panel-body {
 				height: 125px;
-			}
-			h3 {
-				margin: 0;
-				padding: 1%;
 			}
 			.flex-align-center {
 				height: 100%;
@@ -64,7 +58,7 @@ block content
 		include ../../partials/fixtureMixin.pug
 
 		//- Title
-		h2.menu-title.bold.red Schedule & Results
+		h2.menu-title.bold.red #{title}
 
 		.pad-space-small
 		//- Last and Next matches info
@@ -82,29 +76,8 @@ block content
 					.col-sm-12.col-md-12
 						+quickMatchInfo(nextMatch, "NEXT MATCH")
 
-		.pad-space-small
-		//- Schedule and results (Preseason)
-		h2.bold.small-caps.blue Preseason & Friendlies
-		.pad-space-small
-		.panel.panel-default.align-items-center
-			.panel-heading
-				.row
-					.hidden-xs.hidden-ms.hidden-sm.col-md-1
-						h4 VENUE
-					.col-xs-12.col-sm-9.col-md-8
-						h4 RESULT
-					.hidden-xs.hidden-ms.col-sm-1.col-md-1
-						h4 ROUND
-					.hidden-xs.hidden-ms.hidden-sm.col-md-2
-						h4 COMPETITION
-					.hidden-xs.hidden-ms.col-sm-2.hidden-md.hidden-lg
-						h4.float-right
-							abbr(title='COMPETITION') COMP.
-			each match, index in fixtures.filter(match => match.competition > 7)
-				+fixture(match, index)
-
 		.pad-space
-		//- Schedule and results (Regular Season)
+		//- Schedule and results
 		h2.bold.small-caps.blue Regular Season
 		.pad-space-small
 		.panel.panel-default.align-items-center
@@ -121,5 +94,5 @@ block content
 					.hidden-xs.hidden-ms.col-sm-2.hidden-md.hidden-lg
 						h4.float-right
 							abbr(title='COMPETITION') COMP.
-			each match, index in fixtures.filter(match => match.competition < 8)
+			each match, index in fixtures
 				+fixture(match, index)
