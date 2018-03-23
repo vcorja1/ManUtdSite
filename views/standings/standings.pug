@@ -6,26 +6,26 @@ block content
 				h2.menu-title#premier-league
 					a(href='/standings/premier-league') Premier League 2017/18
 				h3.text-center.small-caps(style={'margin-bottom': '20px'}) Current Position:
-					span(style={'color': 'red'}) #{'  2nd'}
+					span(style={'color': 'red'}) #{'  ' + helpers.getTeamPosition(epl.map(team => team.teamName))}
 				table.table.table-bordered
 					thead
 						tr
-							th.text-center.hidden-xs
+							th.text-center.hidden-xs.hidden-ms
 								abbr(title='Position') Pos
 							th.text-center.hidden-sm.hidden-md.hidden-lg #
 							th.text-center Team
-							th.text-center.col-md-1.hidden-xs.hidden-sm Played
+							th.text-center.col-md-1.hidden-xs.hidden-ms.hidden-sm Played
 							th.text-center.hidden-md.hidden-lg
 								abbr(title='Played') P
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Wins') W
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Draws') D
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Losses') L
-							th.text-center.hidden-xs
+							th.text-center.hidden-xs.hidden-ms
 								abbr(title='Goal Difference') GD
-							th.text-center.hidden-xs Points
+							th.text-center.hidden-xs.hidden-ms Points
 							th.text-center.hidden-sm.hidden-md.hidden-lg
 								abbr(title='Points') Pts
 					tbody
@@ -34,14 +34,15 @@ block content
 								td.text-center=team.position
 								td
 									img(src=team.crestURI, height='20', width='20')
-									| #{' ' + team.teamName}
+									| #{' ' + helpers.getTeamLong(0, 0, team.teamName)}
 								td.text-center=team.playedGames
-								td.text-center.hidden-xs=team.wins
-								td.text-center.hidden-xs=team.draws
-								td.text-center.hidden-xs=team.losses
-								td.text-center.hidden-xs=team.goalDifference
+								td.text-center.hidden-xs.hidden-ms=team.wins
+								td.text-center.hidden-xs.hidden-ms=team.draws
+								td.text-center.hidden-xs.hidden-ms=team.losses
+								td.text-center.hidden-xs.hidden-ms=team.goalDifference
 								td.text-center
 									strong=team.points
+
 			.col-sm-12.col-half-offset-left.col-half-offset-right.col-half
 				h2.menu-title#champions-league
 					a(href='/standings/champions-league') Champions League 2017/18
@@ -50,22 +51,22 @@ block content
 				table.table.table-bordered
 					thead
 						tr
-							th.text-center.hidden-xs
+							th.text-center.hidden-xs.hidden-ms
 								abbr(title='Position') Pos
 							th.text-center.hidden-sm.hidden-md.hidden-lg #
 							th.text-center Team
-							th.text-center.col-md-1.hidden-xs.hidden-sm Played
+							th.text-center.col-md-1.hidden-xs.hidden-ms.hidden-sm Played
 							th.text-center.hidden-md.hidden-lg
 								abbr(title='Played') P
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Wins') W
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Draws') D
-							th.text-center.col-md-1.hidden-xs
+							th.text-center.col-md-1.hidden-xs.hidden-ms
 								abbr(title='Losses') L
-							th.text-center.hidden-xs
+							th.text-center.hidden-xs.hidden-ms
 								abbr(title='Goal Difference') GD
-							th.text-center.hidden-xs Points
+							th.text-center.hidden-xs.hidden-ms Points
 							th.text-center.hidden-sm.hidden-md.hidden-lg
 								abbr(title='Points') Pts
 					tbody
@@ -74,11 +75,11 @@ block content
 								td.text-center=team.position
 								td
 									img(src=team.crestURI, height='20', width='20')
-									| #{' ' + team.teamName}
+									| #{' ' + helpers.getTeamLong(0, 1, team.teamName)}
 								td.text-center=team.playedGames
-								td.text-center.hidden-xs=team.wins
-								td.text-center.hidden-xs=team.draws
-								td.text-center.hidden-xs=team.losses
-								td.text-center.hidden-xs=team.goalDifference
+								td.text-center.hidden-xs.hidden-ms=team.wins
+								td.text-center.hidden-xs.hidden-ms=team.draws
+								td.text-center.hidden-xs.hidden-ms=team.losses
+								td.text-center.hidden-xs.hidden-ms=team.goalDifference
 								td.text-center
 									strong=team.points

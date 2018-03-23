@@ -2,6 +2,16 @@
 /* ------------------- FIXTURE STATUS --------------------- */
 /* -------------------------------------------------------- */
 
+exports.getTeamPosition = function getTeamPosition(standings) {
+	const position = standings.indexOf('Manchester United FC') + 1;
+	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
+	return `${position}${suffix}`;
+}
+
+/* -------------------------------------------------------- */
+/* ------------------- FIXTURE STATUS --------------------- */
+/* -------------------------------------------------------- */
+
 // Returns the status for the given fixture
 exports.getFixtureStatus = function getFixtureStatus(status) {
 	const fixtureStatus = [
