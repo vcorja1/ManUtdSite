@@ -73,7 +73,7 @@ mixin fixture(match, rowNum)
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				else
 					//- Game Not Yet Played
-					h4.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
+					h3.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				.hidden-sm.hidden-md.hidden-lg
 					h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}

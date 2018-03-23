@@ -33,7 +33,7 @@ exports.getCompetitionName = function getCompetitionName(competitionID) {
 		'Premier League', 'FA Cup', 'Carabao Cup', 'Community Shield', 'Champions League', 'Europa League',
 		'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly', 'Premier League 2',
 		'PL International Cup', 'Under-19 UEFA Youth League', 'U18 Premier League North',
-		'U18 Premier League Cup', 'FA Youth Cup'
+		'U18 Premier League Cup', 'FA Youth Cup', 'Otten Cup', 'Sparkasse & VGH Cup', 'Dallas Cup'
 	];
 
 	return competitions[competitionID];
@@ -128,7 +128,40 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 			return '1/8 Finals';
 		if(round == 11)
 			return '1/4 Finals';
-		if(round = 12)
+		if(round == 12)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+	// Otten Cup
+	if(competitionID == 16) {
+		if(round < 4)
+			return 'Game ' + round;
+		if(round == 4)
+			return '7th/8th Place';
+		if(round == 5)
+			return '5th/6th Place';
+		if(round == 6)
+			return '3rd/4th Place';
+		return 'Final';
+	}
+
+	// 5-a-side Sparkasse & VGH Cup
+	if(competitionID == 17) {
+		if(round < 9)
+			return 'Game ' + round;
+		if(round == 9)
+			return '1/4 Finals';
+		if(round == 10)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+	// Dallas Cup
+	if(competitionID == 18) {
+		if(round < 3)
+			return 'Game ' + round;
+		if(round == 3)
 			return '1/2 Finals';
 		return 'Final';
 	}
@@ -163,6 +196,12 @@ exports.getCompetitionLogo = function getCompetitionLogo(competitionID) {
 			return '/img/logos/u18_pl_cup.jpg';
 		case 15:
 			return '/img/logos/fa_youth_cup.png';
+		case 16:
+			return '/img/logos/otten_cup.png';
+		case 17:
+			return '/img/logos/vgh_cup.png';
+		case 18:
+			return '/img/logos/dallas_cup.png';
 	}
 }
 
@@ -172,21 +211,31 @@ exports.getCompetitionLogo = function getCompetitionLogo(competitionID) {
 
 // Removes tags like 'FC' from the name
 function removeTeamNameAbbr(teamName) {
+	// Keep some names as they are
+	if (teamName === 'Toronto FC') {
+		return teamName;
+	}
+
+	// Otherwise remove ending
 	const ending = teamName.substr(-3);
 	if(ending === ' FC' || ending === ' CF')
 		return teamName.slice(0, -3);
 	if(teamName.substr(-4) === ' AFC')
 		return teamName.slice(0, -4);
 
-	const start = teamName.substr(0,3);
+	// Or remove beginning
+	var start = teamName.substr(0,3);
 	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ')
 		return teamName.substr(3);
-	if(teamName.substr(0,4) === 'AFC ')
+	start = teamName.substr(0,4);
+	if(start === 'AFC ' || start === 'RSC ')
 		return teamName.substr(4);
 
 	// Special cases below
 	if(teamName === 'Valerenga Fotball')
 		return 'Valerenga';
+	if(teamName === '1.FSV Mainz 05')
+		return 'Mainz 05';
 
 	return teamName;
 }
@@ -258,6 +307,12 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 			break;
 		case 'Blackburn Rovers':
 			teamName = 'Blackburn';
+			break;
+		case 'Borussia Monchengladbach':
+			teamName = 'Gladbach';
+			break;
+		case 'Eintracht Braunschweig':
+			teamName = 'BTSV';
 			break;
 	}
 

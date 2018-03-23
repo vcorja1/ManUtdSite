@@ -19,7 +19,7 @@ app.get('/', function(req, res, next) {
 		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
 			req.fixtures[req.nextMatchID] : null;
 
-		res.render('fixtures/reserves_fixtures', {
+		res.render('fixtures/academy_fixtures', {
 			title: 'Academy Team Schedule & Results',
 			fixtures: req.fixtures,
 			lastMatch: lastMatch,

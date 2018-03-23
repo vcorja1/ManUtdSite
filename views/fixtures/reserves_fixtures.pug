@@ -5,7 +5,6 @@ block customcss
 			margin: 0;
 		}
 		h3, h4 {
-			margin-top: 0px;
 			padding: 1%;
 		}
 		abbr {
@@ -32,6 +31,7 @@ block customcss
 				padding: 0;
 			}
 			h3 {
+				margin-top: 0px;
 				font-size: 20px;
 			}
 		}
@@ -75,6 +75,27 @@ block content
 				else if (nextMatch != null)
 					.col-sm-12.col-md-12
 						+quickMatchInfo(nextMatch, "NEXT MATCH")
+
+		.pad-space-small
+		//- Schedule and results (Preseason)
+		h2.bold.small-caps.blue Preseason & Friendlies
+		.pad-space-small
+		.panel.panel-default.align-items-center
+			.panel-heading
+				.row
+					.hidden-xs.hidden-ms.hidden-sm.col-md-1
+						h4 VENUE
+					.col-xs-12.col-sm-9.col-md-8
+						h4 RESULT
+					.hidden-xs.hidden-ms.col-sm-1.col-md-1
+						h4 ROUND
+					.hidden-xs.hidden-ms.hidden-sm.col-md-2
+						h4 COMPETITION
+					.hidden-xs.hidden-ms.col-sm-2.hidden-md.hidden-lg
+						h4.float-right
+							abbr(title='COMPETITION') COMP.
+			each match, index in fixtures.filter(match => match.competition == 9)
+				+fixture(match, index)
 
 		.pad-space
 		//- Schedule and results
