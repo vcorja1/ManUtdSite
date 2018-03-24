@@ -3,10 +3,15 @@ var express = require('express');
 var app = express();
 
 // Require the middleware
-const standings = require('../middleware/standings');
+const standings = require('../../middleware/standings');
+
+// Also require the fixtures middleware
+const fixtures = require('../../middleware/fixtures');
+app.use('/', fixtures.getFirstTeamFixtures);
+app.use('/', fixtures.getLiveScore);
 
 // Get helper functions
-const helpers = require('../helpers/fixtures');
+const helpers = require('../../helpers/fixtures');
 
 // GET response for '/standings/premier-league'
 app.use('/premier-league', standings.getEPLTable);
@@ -35,7 +40,9 @@ app.get('/champions-league', function(req, res, next) {
 	try {
 		res.render('standings/cl_standings', {
 			title: 'Champions League Standings',
-			ucl: req.ucl
+			fixtures: req.fixtures,
+			ucl: req.ucl,
+			helpers: helpers
 		});
 	}
 	catch (e) {
@@ -53,6 +60,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings/standings', {
 			title: 'Standings',
+			fixtures: req.fixtures,
 			epl: req.epl,
 			ucl: req.ucl,
 			helpers: helpers

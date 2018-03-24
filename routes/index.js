@@ -12,8 +12,12 @@ const academy_fixtures = require('./fixtures/academy_fixtures');
 app.use('/academy-fixtures', academy_fixtures);
 
 /* ----  STANDINGS  ---- */
-const standings = require('./standings');
+const standings = require('./standings/standings');
 app.use('/standings', standings);
+// const reserves_standings = require('./standings/reserves_standings');
+// app.use('/reserves-standings', reserves_standings);
+const academy_standings = require('./standings/academy_standings');
+app.use('/academy-standings', academy_standings);
 
 /* ----  STAFF  ---- */
 const staff = require('./staff');

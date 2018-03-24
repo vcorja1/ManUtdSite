@@ -5,6 +5,9 @@ const MANCHESTER_UNITED_FC = 'Manchester United FC';
 /* -------------------------------------------------------- */
 
 exports.getTeamPosition = function getTeamPosition(standings) {
+	if(standings == null || standings == [])
+		return '';
+
 	const position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
 	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
 	return `${position}${suffix}`;

@@ -74,7 +74,8 @@ exports.getUCLTable = (req, res, next) => {
 		// Save relevant Data
 		req.ucl = resp.rows[0];
 		req.ucl = JSON.parse(req.ucl.data);
-		req.ucl.standing.forEach(function(team) {
+		req.ucl = req.ucl.standing;
+		req.ucl.forEach(function(team) {
 			if(team.position < 3) {
 				team.color = 'rgba(30, 240, 30, 0.5)';
 			}
@@ -89,4 +90,39 @@ exports.getUCLTable = (req, res, next) => {
 		// Continue
 		return next();
 	});
+};
+
+// Get the Premier League 2 Standings
+exports.getPL2Table = (req, res, next) => {
+	// TO-DO !!!
+	req.pl2 = [];
+	return next();
+};
+
+// Get the PL International Cup Standings
+exports.getPLInternationalCupTable = (req, res, next) => {
+	// TO-DO !!!
+	req.pl_int_cup = [];
+	return next();
+};
+
+// Get the Under-19 UEFA Youth League Standings
+exports.getYouthLeagueTable = (req, res, next) => {
+	// TO-DO !!!
+	req.youth_league = [];
+	return next();
+};
+
+// Get the U18 Premier League North Standings
+exports.getU18PLTable = (req, res, next) => {
+	// TO-DO !!!
+	req.u18_pl = [];
+	return next();
+};
+
+// Get the U18 Premier League Cup Standings
+exports.getU18PLCupTable = (req, res, next) => {
+	// TO-DO !!!
+	req.u18_pl_cup = [];
+	return next();
 };
