@@ -1,0 +1,29 @@
+.row {
+	margin: 0;
+}
+h5.full-width {
+	margin-top: 10px;
+}
+h4.bold {
+	margin-top: 0;
+}
+.panel-body {
+	height: 100px;
+}
+@media (max-width: 479px) {
+	.panel-body {
+		height: 120px;
+	}
+	.flex-align-center {
+		height: 100%;
+	}
+	.recent-match {
+		height: auto;
+	}
+	h3, h4 {
+		font-size: 15px;
+	}
+	h3.bold {
+		margin-top: 10px;
+	}
+}
