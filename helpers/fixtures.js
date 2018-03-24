@@ -1,9 +1,11 @@
+const MANCHESTER_UNITED_FC = 'Manchester United FC';
+
 /* -------------------------------------------------------- */
 /* ------------------- FIXTURE STATUS --------------------- */
 /* -------------------------------------------------------- */
 
 exports.getTeamPosition = function getTeamPosition(standings) {
-	const position = standings.indexOf('Manchester United FC') + 1;
+	const position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
 	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
 	return `${position}${suffix}`;
 }
@@ -338,16 +340,52 @@ exports.getTeamLong = function getTeamLong(team, competition, teamName) {
 /* ---------------------- RESULTS ------------------------- */
 /* -------------------------------------------------------- */
 
+// Convert result to string
+exports.getResultString = function getResultString(matchData) {
+	// If no penalty shootout, just return result
+	if(matchData.note == null)
+		return matchData.homegoals + ' - ' + matchData.awaygoals;
+	// Otherwise return with penalties result
+	return '(' + matchData.note.split("-")[0] + ') '
+			+ matchData.homegoals + ' - ' + matchData.awaygoals
+			+ ' (' + matchData.note.split("-")[1] + ')';
+}
+
+// Get penalty result string
+exports.getPenaltyResultString = function getResultString(matchData) {
+	const homePens = matchData.note.split("-")[0];
+	const awayPens = matchData.note.split("-")[1];
+	const isManUtdHome = matchData.hometeam == MANCHESTER_UNITED_FC;
+	if(homePens > awayPens)
+		return 'Manchester United' + (isManUtdHome ? ' wins ' : ' loses ') +
+			(isManUtdHome ? matchData.note : awayPens + '-' + homePens) + ' on penalty kicks.';
+	// Otherwise, Manchester United is the away team
+	return 'Manchester United' + (isManUtdHome ? ' loses ' : ' wins ') +
+		(isManUtdHome ? matchData.note : awayPens + '-' + homePens) + ' on penalty kicks.';
+}
+
 // Get color based on result
 exports.getResultColor = function getResultColor(matchData) {
-	// If draw, return gray
-	if(matchData.homegoals == matchData.awaygoals)
-		return '#97999B';
+	const GREEN = '#00cc00';
+	const GRAY = '#97999B';
+	const RED = '#D50032';
+
+	// If draw, return gray, unless there was a penalty shootout
+	if(matchData.homegoals == matchData.awaygoals) {
+		if(matchData.note == null)
+			return GRAY;
+		// Otherwise, analyze the shootout
+		// If win, return green
+		if(matchData.note.split("-")[0] > matchData.note.split("-")[1])
+			return matchData.hometeam == MANCHESTER_UNITED_FC ? GREEN : RED;
+		// If loss, return red
+		return matchData.awayteam == MANCHESTER_UNITED_FC ? GREEN : RED;
+	}
 	// If win, return green
 	if(matchData.homegoals > matchData.awaygoals)
-		return matchData.hometeam == 'Manchester United FC' ? '#00cc00' : '#D50032';
+		return matchData.hometeam == MANCHESTER_UNITED_FC ? GREEN : RED;
 	// If loss, return red
-	return matchData.awayteam == 'Manchester United FC' ? '#00cc00' : '#D50032';
+	return matchData.awayteam == MANCHESTER_UNITED_FC ? GREEN : RED;
 }
 
 /* -------------------------------------------------------- */

@@ -38,6 +38,10 @@ mixin quickMatchInfo(match, heading)
 			//- Away Team
 			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
 				h4.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
+		if (match.note != null)
+			.bg-light
+				h5(style={ 'margin': 0, 'padding': '5px', 'color': helpers.getResultColor(match), 'border-bottom': '1px solid #d3d3d3' })
+					| #{helpers.getPenaltyResultString(match)}
 		.hidden-ms.hidden-sm.hidden-md.hidden-lg
 			+getMatchDate(match)
 
@@ -69,7 +73,7 @@ mixin fixture(match, rowNum)
 				else if (match.status == 5)
 					//- Game Completed
 					h3.bold(style={'color': helpers.getResultColor(match)})
-						| #{match.homegoals + ' - ' + match.awaygoals}
+						| #{helpers.getResultString(match)}
 					h5 #{helpers.convertDateShort(match.matchdate)}
 				else
 					//- Game Not Yet Played
@@ -91,3 +95,7 @@ mixin fixture(match, rowNum)
 				h4.full-width.small-caps Friendly
 			else
 				img.image.image-responsive(src=`${helpers.getCompetitionLogo(match.competition)}`)
+	if (match.note != null)
+		.bg-light
+			h5(style={ 'margin': 0, 'padding': '5px', 'color': helpers.getResultColor(match), 'border-bottom': '1px solid #d3d3d3' })
+				| #{helpers.getPenaltyResultString(match)}
