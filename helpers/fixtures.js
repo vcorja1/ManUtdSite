@@ -122,7 +122,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Premier League International Cup, or Under-18 Premier League Cup
 	if(competitionID == 11 || competitionID == 14) {
-		if(round < 3)
+		if(round < 4)
 			return 'Game ' + round;
 		if(round == 4)
 			return '1/4 Finals';
@@ -174,9 +174,9 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Dallas Cup
 	if(competitionID == 18) {
-		if(round < 3)
+		if(round < 4)
 			return 'Game ' + round;
-		if(round == 3)
+		if(round == 4)
 			return '1/2 Finals';
 		return 'Final';
 	}
