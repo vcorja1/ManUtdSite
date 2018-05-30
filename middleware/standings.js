@@ -2,7 +2,7 @@ const http = require('http');
 // Connect to Heroku database
 const { Client } = require('pg');
 
-const eplTableURL = 'http://api.football-data.org/v1/competitions/445/leagueTable';
+const eplTableURL = 'http://api.football-data.org/v1/competitions/445/leagueTable/?matchday=38';
 
 // Get the Premier League Standings
 exports.getEPLTable = (req, res, next) => {

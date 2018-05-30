@@ -31,27 +31,18 @@ function getTeamFixtures(team, req, res, next) {
 		req.fixtures.forEach( (match, index) => {
 			match.id = index;
 			match.matchdate = new Date(match.matchdate);
-			// Get next match ID
-			if(!req.nextMatchID && match.status < 5)
-				req.nextMatchID = index;
 		});
 
-		// Save last match and next match
-		if(!req.nextMatchID) {
-			// Last match of the season was played
-			req.lastMatchID = fixturesCount - 1;
-		}
-		else if(req.nextMatchID > 0) {
-			req.lastMatchID = req.nextMatchID - 1;
+		// Get last match ID
+		const completedMatches = req.fixtures.filter(match => match.status == 5);
+		const length = completedMatches.length;
+		if(length > 0)
+			req.lastMatchID = completedMatches[length - 1].id;
 
-			// If the next game is postponed, look for an upcoming scheduled game
-			for(var i = req.nextMatchID; i < fixturesCount; i++) {
-				if(req.fixtures[i].status < 2) {
-					req.nextMatchID = i;
-					break;
-				}
-			}
-		}
+		// Get next match ID
+		const nextMatches = req.fixtures.filter(match => match.status < 2);
+		if(nextMatches.length > 0)
+			req.nextMatchID = nextMatches[0].id;
 
 		// End connection
 		client.end();
@@ -124,7 +115,8 @@ exports.getLiveScore = (req, res, next) => {
 
 				// If game is completed, note so
 				req.lastMatchID = nextMatchID;
-				req.nextMatchID++;
+				const nextMatches = req.fixtures.filter(match => match.status < 2);
+				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
 
 				// Continue
 				return next();

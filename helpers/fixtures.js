@@ -400,7 +400,7 @@ exports.convertDateShort = function convertDateShort(date) {
 	if(date === '')
 		return 'TBD';
 
-	const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
+	const options = { year: 'numeric', month: 'short', day: 'numeric' };
 	return date.toLocaleDateString("en-US", options);
 }
 
