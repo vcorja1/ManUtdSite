@@ -13,7 +13,7 @@
   },
   "engines": {
     "node": "6.11.2",
-    "npm": "5.7.1"
+    "npm": "6.1.0"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,10 @@
   "dependencies": {
     "compression": "1.7.2",
     "dotenv": "4.0.0",
-    "express": "4.15.4",
-    "morgan": "1.8.2",
+    "express": "4.16.3",
+    "morgan": "1.9.0",
     "nib": "1.1.2",
-    "nodemon": "1.11.0",
+    "nodemon": "1.17.5",
     "pg": "7.4.1",
     "pug": "2.0.0-rc.3",
     "serve-favicon": "2.4.5",
