@@ -3,16 +3,16 @@ var express = require('express');
 var app = express();
 
 // Connect and use the middleware
-const staff = require('../middleware/staff');
-app.use('/', staff);
+const staff = require('../../middleware/staff');
+app.use('/', staff.getClubStaff);
 
-// GET response for '/staff'
+// GET response for '/club-staff'
 app.get('/', function(req, res, next) {
 
 	try {
-		res.render('staff', {
-			title: 'Staff',
-			staffData: req.staffData
+		res.render('staff/clubStaff', {
+			title: 'Senior Club Staff',
+			clubStaffData: req.clubStaffData
 		});
 	}
 	catch (e) {

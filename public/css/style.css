@@ -2,6 +2,10 @@
 /* -------------------- FONTS & STYLES -------------------- */
 /* -------------------------------------------------------- */
 
+.all-caps {
+  text-transform: uppercase;
+}
+
 .small-caps {
   font-variant: small-caps !important;
   text-rendering: auto;
@@ -9,6 +13,10 @@
 
 .bold {
   font-weight: bold;
+}
+
+.italics {
+  font-style: italic;
 }
 
 .red {
@@ -208,15 +216,6 @@
   .overlay-text {
     font-size: 1.1em;
   }
-}
-
-/* -------------------------------------------------------- */
-/* ---------------------- FIXTURES ------------------------ */
-/* -------------------------------------------------------- */
-
-.panel-body {
-  border: 0.5px solid #F4F4F4;
-  height: 120px;
 }
 
 /* -------------------------------------------------------- */

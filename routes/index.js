@@ -20,8 +20,16 @@ app.use('/standings', standings);
 // app.use('/academy-standings', academy_standings);
 
 /* ----  STAFF  ---- */
-const staff = require('./staff');
-app.use('/staff', staff);
+const coachingStaff = require('./staff/coachingStaff');
+app.use('/staff', coachingStaff);
+const boardStaff = require('./staff/boardStaff');
+app.use('/board-members', boardStaff);
+const medicalStaff = require('./staff/medicalStaff');
+app.use('/medical-team', medicalStaff);
+const scoutingStaff = require('./staff/scoutingStaff');
+app.use('/scouting-team', scoutingStaff);
+const clubStaff = require('./staff/clubStaff');
+app.use('/club-staff', clubStaff);
 
 /* ----  TROPY ROOM  ---- */
 const trophy_room = require('./trophy_room');

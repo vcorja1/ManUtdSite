@@ -1,0 +1,13 @@
+extends ../layout
+block customcss
+	style(type="text/css").
+block content
+	.main.container-fluid
+		//- Include staff mixin
+		include ../../partials/staffMixin.pug
+
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Board Members & Club Officials
+		.pad-space-small
+		each member in boardData
+			+staffMixin(member)
+			

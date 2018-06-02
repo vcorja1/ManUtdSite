@@ -1,0 +1,19 @@
+extends ../layout
+block customcss
+	style(type="text/css").
+block content
+	.main.container-fluid
+		//- Include staff mixin
+		include ../../partials/staffMixin.pug
+
+		h2.menu-title Meet the Coaching Staff!
+		h3.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team Coaching Staff
+		each member in staffData
+			+staffMixin(member)
+
+		.col-lg-12.col-md-12.col-sm-12
+			.pad-space-small
+			h3.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Coaching Staff
+		each member in academyData
+			+staffMixin(member)
+			
