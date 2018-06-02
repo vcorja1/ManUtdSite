@@ -35,7 +35,7 @@ function getFullCountryName(member) {
 	}
 	else if(member.country in byAlpha2) {
 		member.countryName = byAlpha2[member.country].name;
-		member.flagImg = FLAG_IMG_FOLDER + member.country + '.svg';
+		member.flagImg = FLAG_IMG_FOLDER + member.country.toLowerCase() + '.svg';
 
 		if(member.countryName.endsWith(' (the)')) {
 			member.countryName = member.countryName.slice(0, -6);
