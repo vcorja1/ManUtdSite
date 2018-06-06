@@ -1,0 +1,23 @@
+mixin playerTransferMixin(playersInfo, incoming)
+	.panel.panel-default.align-items-center.text-center
+		.panel-heading(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'height': '50px'})
+			.col-lg-2.col-md-2.col-sm-2.col-ms-2.col-xs-2
+				.hidden-xs
+					h5.text-center Position
+				.hidden-lg.hidden-md.hidden-sm.hidden-ms
+					h5.text-center Pos
+			.col-lg-6.col-md-6.col-sm-6.col-ms-6.col-xs-6
+				h5 Player Name
+			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4
+				h5=(incoming ? 'Previous Club' : 'Next Club')
+		.panel-body
+			each player in playersInfo
+				.col-lg-2.col-md-2.col-sm-2.col-ms-2.col-xs-2
+					h5=player.position
+				.col-lg-6.col-md-6.col-sm-6.col-ms-6.col-xs-6
+					h5.all-caps.bold=player.name
+				.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4
+					if incoming
+						h5=player.prevClub
+					else
+						h5=(player.nextClub || player.reason)

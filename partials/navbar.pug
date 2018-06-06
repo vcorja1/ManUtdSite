@@ -12,8 +12,8 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 			a.navbar-brand(href='/') Manchester United
 		#navbar.navbar-collapse.collapse
 			ul.nav.navbar-nav
-				li.nav-item.hidden-sm
-					a(href='/') HOME
+				li.nav-item
+					a(href='/news') NEWS
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 						| FIXTURES
@@ -55,7 +55,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 						.divider
 						li
 							a.small-caps(href='/academy-players') Academy Players
-				li.dropdown
+				li.dropdown.hidden-case-1
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 						| STAFF
 						span.caret
@@ -74,11 +74,26 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 						.divider
 						li
 							a.small-caps(href='/club-staff') Senior Club Staff
-				li.dropdown.hidden-xs.hidden-md.hidden-lg
+				li.dropdown.hidden-mobile.hidden-md.hidden-lg
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 						| OTHER
 						span.caret
 					ul.dropdown-menu
+						li.hidden-case-2
+							a.small-caps(href='/staff') Coaching Staff
+						.divider.hidden-case-2
+						li.hidden-case-2
+							a.small-caps(href='/board-members') Board Members
+						.divider.hidden-case-2
+						li.hidden-case-2
+							a.small-caps(href='/medical-team') Medical Team
+						.divider.hidden-case-2
+						li.hidden-case-2
+							a.small-caps(href='/scouting-team') Scouting Team
+						.divider.hidden-case-2
+						li.hidden-case-2
+							a.small-caps(href='/club-staff') Senior Club Staff
+						.divider.hidden-case-2
 						li
 							a.small-caps(href='/kits') Kits
 						.divider
@@ -88,7 +103,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 					a(href='/kits') KITS
 				li.nav-item.hidden-sm
 					a(href='/trophy-room') TROPHY ROOM
-			ul.nav.navbar-right.hidden-xs.hidden-sm
+			ul.nav.navbar-right.hidden-xs.hidden-ms.hidden-sm
 				a.navbar-brand.hidden-md(href='/')
 					|     Manchester United
 				a.navbar-brand(href='/')

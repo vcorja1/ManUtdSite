@@ -1,0 +1,192 @@
+extends layout
+block customcss
+	style(type="text/css").
+		.row {
+			display: flex;
+			align-items: center;
+			padding: 10px;
+		}
+		.container {
+			display: flex;
+			align-items: center;
+			width: 100%;
+		}
+		.container > p {
+			float: left;
+			height: 20px;
+			width: 30px;
+			margin: 10px 10px 10px 0px;
+		}
+		.container > p > img {
+			height: 20px;
+			width: 30px;
+		}
+		.container > h5 {
+			vertical-align: center;
+			padding: 5px;
+		}
+		@media(max-width: 480px) {
+			.container, .col-md-6 {
+				padding: 0;
+			}
+			.container > p > img {
+				margin: 0;
+			}
+		}
+block content
+	.main.container-fluid
+		//- Include player mixin
+		include ../partials/playerMixin.pug
+
+		h1.bold.red LATEST NEWS
+		.col-lg-6.col-md-6
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
+			+playerTransferMixin(incomingPlayers, true)
+
+		.col-lg-6.col-md-6
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Departures
+			+playerTransferMixin(departingPlayers, false)
+
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Professional Women's Team
+		.row.table-bordered
+			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
+				.hidden-xs
+					h5.text-center.red March 21
+				.hidden-lg.hidden-md.hidden-sm.hidden-ms
+					h5.text-center.red Mar 21
+			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
+				h5 Manchester United has applied to the FA to establish the club's first-ever professional women's team.
+		.row
+			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
+				h5.text-center.red May 28
+			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
+				h5 The Football Association has approved Manchester United’s application. The team will be called ‘Manchester United Women’ and will be based at The Cliff, the club’s historic training ground in Salford, once redevelopment work has been completed.
+		.row.table-bordered
+			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
+				.hidden-xs
+					h5.text-center.red June 2
+				.hidden-lg.hidden-md.hidden-sm.hidden-ms
+					h5.text-center.red Jun 2
+			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
+				h5 Manchester United Women will enter into Women's Super League 2 next season with ex-England captain Casey Stoney as their manager.
+
+		.pad-space-small
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) World Cup Participants
+		.text-center
+			h4 The following club players have been selected to represent their respective national teams at the 2018 World Cup:
+			.pad-space-small
+			table.table.table-bordered
+				tbody
+					each player in worldCupParticipants
+						tr
+							td.col-lg-4.col-md-4
+								.container(style={'justify-content': 'center'})
+									p
+										img(src=player.flagImg)
+									h5.bold.all-caps=player.country
+							td.col-lg-8.col-md-8
+								h5=player.playerNames
+			.pad-space-small
+			h4 Additionally, Sergio Romero was selected to represent Argentina, but he will miss the World Cup after sustaining a knee injury.
+
+		br
+		h1.bold.red 2017/18 SEASON OVERVIEW
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
+		table.table.table-bordered
+			tbody
+				tr
+					td.col-lg-3
+						h5.text-center.bold Premier League
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.progressIcon)
+							h5 Finished second with a total of 81 points, 68 goals scored, 28 goals allowed, and 18 clean sheats (all highest since the retirement of Sir Alex Ferguson).
+						.container
+							p
+								img(src=icons.progressIcon)
+							h5 Recorded wins over all 19 teams in the league.
+						.container
+							p
+								img(src=icons.gloveIcon)
+							h5 David de Gea received his first Premier League Golden Glove after keeping league-high 18 clean sheets and achieving the highest save percentage, stopping 80% of the shots he faced.
+						.container
+							p
+								img(src=icons.gloveIcon)
+							h5 David de Gea was also named in the PFA Team of the Year. It is his fourth appearance in the Team of the Year over the past 5 years.
+				tr
+					td.col-lg-3
+						h5.text-center.bold FA Cup
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.cupIcon)
+							h5 Manchester United are the second team in history after Arsenal to reach the FA Cup final on 20 occasions.
+						.container
+							p
+								img(src=icons.cupIcon)
+							h5 Manchester United have reached their 29th major domestic cup final (20 in FA Cup, 9 in League Cup), more than any other side in English football.
+
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U23 Reserves Team
+		table.table.table-bordered
+			tbody
+				tr
+					td.col-lg-3
+						h5.text-center.bold Premier League 2
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.crossIcon)
+							h5 Manchester United's under 23 team were relegated to the Second Division after finishing bottom of the table with just 4 wins out of 22 games.
+
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U19 Academy Team
+		table.table.table-bordered
+			tbody
+				tr
+					td.col-lg-3
+						h5.text-center.bold U18 Premier League North
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.trophyIcon)
+							h5 Manchester United became the Northern Champions after winning 15 of the 22 matches to finish the season with 48 points, 6 more than the second-place Liverpool.
+						.container
+							p
+								img(src=icons.ballIcon)
+							h5 Scored league-high 65 goals.
+						.container
+							p
+								img(src=icons.ballIcon)
+							h5 Mason Greenwood lead all scorers with 16 goals.
+				tr
+					td.col-lg-3
+						h5.text-center.bold Sparkasse & VGH Cup
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.trophyIcon)
+							h5 Manchester United defeated Austria Vienna's youth team 4-3 on penalties in the final to win all 11 of their tournament games and clinch a deserved victory in the Sparkasse & VGH Cup.
+						.container
+							p
+								img(src=icons.ballIcon)
+							h5 Over the course of those 11 games, the team scored 46 goals and kept 5 clean sheets.
+				tr
+					td.col-lg-3
+						h5.text-center.bold ICGT Competition
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.trophyIcon)
+							h5 Manchester United won the ICGT tournament created for players aged 16-19 after beating Real Madrid 1-0 in the final.
+
+		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U16 Girls Team
+		table.table.table-bordered
+			tbody
+				tr
+					td.col-lg-3
+						h5.text-center.bold U16 Girls' Premier League
+					td.col-lg-9
+						.container
+							p
+								img(src=icons.trophyIcon)
+							h5 Manchester United's under 16 girls team have been crowned league champions.

@@ -114,6 +114,10 @@
   background-color: #f1f1f1;
 }
 
+.navbar-fixed-top .navbar-collapse {
+  max-height: none;
+}
+
 @media (min-width: 768px) {
   .dropdown-menu {
     margin-left: -40%;
@@ -133,6 +137,34 @@
 @media (max-width: 480px) {
   .navbar-fixed-top .navbar-collapse {
     max-height: 100%;
+  }
+}
+
+.hidden-mobile, .hidden-case-1 {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  .hidden-case-2 {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 825px) {
+  .hidden-case-1 {
+    display: none !important;
+  }
+  .hidden-case-2 {
+    display: block;
+  }
+}
+
+@media (min-width: 826px) {
+  .hidden-case-2 {
+    display: none !important;
   }
 }
 

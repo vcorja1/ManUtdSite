@@ -3,6 +3,10 @@ var express = require('express');
 var app = express();
 
 // Connect and use other routes
+/* ----  NEWS  ---- */
+const news = require('./news');
+app.use('/news', news);
+
 /* ----  FIXTURES  ---- */
 const fixtures = require('./fixtures/fixtures');
 app.use('/fixtures', fixtures);
