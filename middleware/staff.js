@@ -68,7 +68,12 @@ exports.getCoachingStaff = (req, res, next) => {
 		const allStaff = JSON.parse(JSON.stringify(resp.rows));
 		allStaff.forEach((member) => {
 			// Get the full job title
-			member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+			if(member.title < 15 || member.title == 21) {
+				member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+			}
+			else {
+				member.job_title = staffHelper.getStaffTitle(member.title);
+			}
 
 			// Get the full country name
 			getFullCountryName(member);
