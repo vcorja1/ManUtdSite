@@ -128,9 +128,6 @@
   .dropdown:hover {
     background-color: #f1f1f1;
   }
-  .dropdown:hover .dropdown-menu {
-    display: block;
-  }
 }
 
 @media (max-width: 480px) {

@@ -14,13 +14,37 @@ script(src='/libs/bootstrap.min.js', integrity='sha384-0mSbJDEHialfmuBBQP6A4Qrpr
 script(type='text/javascript').
 	(function($) {
 		$(function() { // DOM Ready
+
+			// Check if on mobile device
+			var isMobile;
+
 			// On hover, close open dropdowns
-			$('.dropdown').on('mouseenter mouseleave click tap', function() {
-				$(this).toggleClass("open");
+			$('.dropdown').mouseenter(function() {
+				isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+				if(!isMobile) { // disable for mobile view
+			        if(!$(this).hasClass('open')) { // Keeps it open when hover it again
+						$(this).toggleClass("open");
+			        }
+			    }
 			});
-			// On click, close navbar
-			$('.navbar-collapse ul li a:not(.dropdown-toggle)').bind('click touchstart', function () {
-				$('.navbar-toggle:visible').click();
+			$('.dropdown').mouseleave(function() {
+				isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
+				if(!isMobile) { // disable for mobile view
+			        if($(this).hasClass('open')) { // Keeps it open when hover it again
+						$(this).toggleClass("open");
+			        }
+			    }
+			});
+
+			// On click outside navbar, close navbar
+			jQuery('body').bind('click', function(e) {
+			    if(jQuery(e.target).closest('.navbar').length == 0) {
+			        // click happened outside of .navbar, so hide
+			        var opened = jQuery('.navbar-collapse').hasClass('collapse in');
+			        if ( opened === true ) {
+			            jQuery('.navbar-collapse').collapse('hide');
+			        }
+			    }
 			});
 		});
 	})(jQuery);
