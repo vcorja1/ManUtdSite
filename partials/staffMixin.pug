@@ -1,11 +1,11 @@
 mixin staffMixin(staff)
 	.col-lg-4.col-md-4.col-sm-6
 		.panel.panel-default.align-items-center
-			.panel-heading(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'height': '79px'})
+			.panel-heading
 				h4.text-center.all-caps.bold=staff.job_title
 			.panel-body
 				h5.text-center=staff.name
-				.container(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'width': '100%'})
+				.container
 					p(style={'float': 'left', 'height': '20px', 'width': '30px', 'margin-top': '8px'})
 						img(src=staff.flagImg, style={'height': '100%', 'width': '100%'}, align="left")
 					h6(style={'vertical-align': 'center', 'padding': '5px', 'height': '20px'})=staff.countryName
@@ -13,11 +13,11 @@ mixin staffMixin(staff)
 mixin scoutingTeamMixin(staff)
 	.col-lg-4.col-md-4.col-sm-6
 		.panel.panel-default.align-items-center
-			.panel-heading(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'height': '79px'})
+			.panel-heading
 				h4.text-center.all-caps.bold=staff.job_title
 			.panel-body
 				h5.text-center=staff.name
-				.container(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'width': '100%'})
+				.container
 					p(style={'float': 'left', 'height': '20px', 'width': '30px', 'margin-top': '8px'})
 						img(src=staff.flagImg, style={'height': '100%', 'width': '100%'}, align="left")
 					h6(style={'vertical-align': 'center', 'padding': '5px', 'height': '20px'})=staff.countryName

@@ -267,6 +267,20 @@
   }
 }
 
+.staff .panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.staff .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 /* -------------------------------------------------------- */
 /* --------------------- TROPHY ROOM ---------------------- */
 /* -------------------------------------------------------- */
