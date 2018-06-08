@@ -8,8 +8,14 @@ let incomingPlayers = [
 	{ name: 'Diogo Dalot', position: 'RB', prevClub: 'FC Porto' }
 ];
 let departingPlayers = [
+	{ name: 'Michael Carrick', position: 'CM', reason: 'Retired' },
 	{ name: 'Joe Riley', position: 'RB', nextClub: 'Bradford City' },
-	{ name: 'Michael Carrick', position: 'CM', reason: 'Retired' }
+	{ name: 'Max Johnstone', position: 'GK', reason: 'Released' },
+	{ name: 'Ilias Moutha-Sebtaoui', position: 'GK', reason: 'Released' },
+	{ name: 'Theo Richardson', position: 'GK', reason: 'Released' },
+	{ name: 'Devonte Redmond', position: 'CM', reason: 'Released' },
+	{ name: 'Jake Kenyon', position: 'CM', reason: 'Released' },
+	{ name: 'Charlie Scott', position: 'CM', reason: 'Released' }
 ];
 
 // Country flag images location
