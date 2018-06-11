@@ -6,10 +6,7 @@ var app = express();
 const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getReservesTeamFixtures);
 
-// Get helper functions
-const helpers = require('../../helpers/fixtures');
-
-// GET response for '/fixtures'
+// GET response for '/reserves-fixtures'
 app.get('/', function(req, res, next) {
 
 	try {
@@ -19,12 +16,12 @@ app.get('/', function(req, res, next) {
 		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
 			req.fixtures[req.nextMatchID] : null;
 
-		res.render('fixtures/reserves_fixtures', {
+		res.render('fixtures', {
 			title: 'Reserves Team Schedule & Results',
-			fixtures: req.fixtures,
+			preseason: req.fixtures.filter(match => match.competition == 9),
+			regularSeason: req.fixtures.filter(match => match.competition > 9),
 			lastMatch: lastMatch,
-			nextMatch: nextMatch,
-			helpers: helpers
+			nextMatch: nextMatch
 		});
 	}
 	catch (e) {

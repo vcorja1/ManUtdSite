@@ -27,10 +27,29 @@ function getTeamFixtures(team, req, res, next) {
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
 		const fixturesCount = req.fixtures.length;
 
-		// Assign an index and prep to get quick info (last and next matches)
 		req.fixtures.forEach( (match, index) => {
+			// Assign an index and prep to get quick info (last and next matches)
 			match.id = index;
 			match.matchdate = new Date(match.matchdate);
+			// Store full team name
+			match.hometeamNameShort = fixtureHelper.getTeamShort(match.team, match.competition, match.hometeam);
+			match.hometeamNameLong = fixtureHelper.getTeamLong(match.team, match.competition, match.hometeam);
+			match.awayteamNameShort = fixtureHelper.getTeamShort(match.team, match.competition, match.awayteam);
+			match.awayteamNameLong = fixtureHelper.getTeamLong(match.team, match.competition, match.awayteam);
+			// Store competition name and round
+			match.competitionName = fixtureHelper.getCompetitionName(match.competition);
+			match.roundName = fixtureHelper.getCompetitionRound(match.competition, match.round);
+			// Store date short and match time
+			match.matchdateShort = fixtureHelper.convertDateShort(match.matchdate);
+			match.matchTime = fixtureHelper.convertMatchTime(match.matchdate);
+			// Store club and competition logo source
+			match.homeClubLogoSrc = fixtureHelper.getClubLogoSrc(match.hometeam);
+			match.awayClubLogoSrc = fixtureHelper.getClubLogoSrc(match.awayteam);
+			match.competitionLogoSrc = fixtureHelper.getCompetitionLogoSrc(match.competition);
+			// Store result string and color (to be used in fixtureMixin.pug)
+			match.resultString = fixtureHelper.getResultString(match);
+			match.penaltyResultsString = fixtureHelper.getPenaltyResultString(match);
+			match.resultColor = fixtureHelper.getResultColor(match);
 		});
 
 		// Get last match ID

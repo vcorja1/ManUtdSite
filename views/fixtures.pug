@@ -1,0 +1,44 @@
+extends layout
+block content
+	.main.container-fluid.text-center.fixtures
+		//- Include fixture mixin
+		include ../partials/fixtureMixin.pug
+
+		//- Title
+		h2.menu-title.bold.red #{title}
+
+		.pad-space-small
+		//- Last and Next matches info
+		.align-items-center.text-center
+			if (lastMatch != null && nextMatch != null)
+				.col-lg-6.col-md-6.col-sm-6.quick-match-info
+					+quickMatchInfo(lastMatch, "LAST MATCH")
+				.col-lg-6.col-md-6.col-sm-6.quick-match-info
+					+quickMatchInfo(nextMatch, "NEXT MATCH")
+			else if (lastMatch != null)
+				.col-lg-12.col-md-12.col-sm-12.quick-match-info
+					+quickMatchInfo(lastMatch, "LAST MATCH")
+			else if (nextMatch != null)
+				.col-lg-12.col-md-12.col-sm-12.quick-match-info
+					+quickMatchInfo(nextMatch, "NEXT MATCH")
+
+		if(!!preseason && preseason != [])
+			.pad-space-small
+			//- Schedule and results (Preseason)
+			h2.bold.small-caps.blue Preseason & Friendlies
+			.pad-space-small
+			+fixtures(preseason)
+
+		if(!!regularSeason && regularSeason != [])
+			.pad-space
+			//- Schedule and results (Regular Season)
+			h2.bold.small-caps.blue Regular Season
+			.pad-space-small
+			+fixtures(regularSeason)
+
+		if(!!otherCups && otherCups != [])
+			.pad-space
+			//- Schedule and results (Other Cups)
+			h2.bold.small-caps.blue Other Cups
+			.pad-space-small
+			+fixtures(otherCups)

@@ -7,9 +7,6 @@ const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getFirstTeamFixtures);
 app.use('/', fixtures.getLiveScore);
 
-// Get helper functions
-const helpers = require('../../helpers/fixtures');
-
 // GET response for '/fixtures'
 app.get('/', function(req, res, next) {
 
@@ -20,12 +17,12 @@ app.get('/', function(req, res, next) {
 		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
 			req.fixtures[req.nextMatchID] : null;
 
-		res.render('fixtures/fixtures', {
+		res.render('fixtures', {
 			title: 'Schedule & Results',
-			fixtures: req.fixtures,
+			preseason: req.fixtures.filter(match => match.competition > 7),
+			regularSeason: req.fixtures.filter(match => match.competition < 8),
 			lastMatch: lastMatch,
-			nextMatch: nextMatch,
-			helpers: helpers
+			nextMatch: nextMatch
 		});
 	}
 	catch (e) {

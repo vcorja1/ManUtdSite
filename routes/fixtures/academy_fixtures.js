@@ -6,10 +6,7 @@ var app = express();
 const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getAcademyTeamFixtures);
 
-// Get helper functions
-const helpers = require('../../helpers/fixtures');
-
-// GET response for '/fixtures'
+// GET response for '/academy-fixtures'
 app.get('/', function(req, res, next) {
 
 	try {
@@ -19,12 +16,13 @@ app.get('/', function(req, res, next) {
 		let nextMatch = (req.nextMatchID != null && req.nextMatchID >= 0 && req.nextMatchID < fixturesCount) ?
 			req.fixtures[req.nextMatchID] : null;
 
-		res.render('fixtures/academy_fixtures', {
+		res.render('fixtures', {
 			title: 'Academy Team Schedule & Results',
-			fixtures: req.fixtures,
+			preseason: req.fixtures.filter(match => match.competition == 9 || match.competition == 16),
+			regularSeason: req.fixtures.filter(match => match.competition > 12 && match.competition < 16),
+			otherCups: req.fixtures.filter(match => match.competition > 16),
 			lastMatch: lastMatch,
-			nextMatch: nextMatch,
-			helpers: helpers
+			nextMatch: nextMatch
 		});
 	}
 	catch (e) {

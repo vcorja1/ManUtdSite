@@ -185,38 +185,39 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 }
 
 // Returns the competition logo based on the ID
-exports.getCompetitionLogo = function getCompetitionLogo(competitionID) {
+exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
+	const LOGOS_FOLDER = '/img/logos/';
 	switch(competitionID) {
 		case 0:
-			return '/img/logos/epl.png';
+			return LOGOS_FOLDER + 'epl.png';
 		case 1:
-			return '/img/logos/fa.png';
+			return LOGOS_FOLDER + 'fa.png';
 		case 2:
-			return '/img/logos/carabao.jpg';
+			return LOGOS_FOLDER + 'carabao.jpg';
 		case 4:
-			return '/img/logos/ucl.png';
+			return LOGOS_FOLDER + 'ucl.png';
 		case 6:
-			return '/img/logos/super_cup.png';
+			return LOGOS_FOLDER + 'super_cup.png';
 		case 8:
-			return '/img/logos/icc.png';
+			return LOGOS_FOLDER + 'icc.png';
 		case 10:
-			return '/img/logos/pl2.jpg';
+			return LOGOS_FOLDER + 'pl2.jpg';
 		case 11:
-			return '/img/logos/plic.png';
+			return LOGOS_FOLDER + 'plic.png';
 		case 12:
-			return '/img/logos/uefa_youth_league.png';
+			return LOGOS_FOLDER + 'uefa_youth_league.png';
 		case 13:
-			return '/img/logos/u18_pl.jpg';
+			return LOGOS_FOLDER + 'u18_pl.jpg';
 		case 14:
-			return '/img/logos/u18_pl_cup.jpg';
+			return LOGOS_FOLDER + 'u18_pl_cup.jpg';
 		case 15:
-			return '/img/logos/fa_youth_cup.png';
+			return LOGOS_FOLDER + 'fa_youth_cup.png';
 		case 16:
-			return '/img/logos/otten_cup.png';
+			return LOGOS_FOLDER + 'otten_cup.png';
 		case 17:
-			return '/img/logos/vgh_cup.png';
+			return LOGOS_FOLDER + 'vgh_cup.png';
 		case 18:
-			return '/img/logos/dallas_cup.png';
+			return LOGOS_FOLDER + 'dallas_cup.png';
 	}
 }
 
@@ -356,6 +357,11 @@ exports.getResultString = function getResultString(matchData) {
 
 // Get penalty result string
 exports.getPenaltyResultString = function getResultString(matchData) {
+	if(matchData.note == null) {
+		return;
+	}
+
+	// Get penalty results
 	const homePens = matchData.note.split("-")[0];
 	const awayPens = matchData.note.split("-")[1];
 	const isManUtdHome = matchData.hometeam == MANCHESTER_UNITED_FC;
@@ -411,4 +417,17 @@ exports.convertMatchTime = function convertMatchTime(date) {
 
 	const options = { hour: 'numeric', minute: '2-digit', hour12: true };
 	return date.toLocaleTimeString("en-US", options);
+}
+
+/* -------------------------------------------------------- */
+/* --------------------- CLUB LOGOS ----------------------- */
+/* -------------------------------------------------------- */
+
+// Convert date to short format
+exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
+	const CLUB_LOGOS_FOLDER = '/img/clubLogos/';
+	switch(teamName) {
+		default:
+			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
+	}
 }

@@ -1,11 +1,195 @@
+//--------------------------------------------------------------------
+//- ----------------------- FOR FIXTURES PAGES -----------------------
+//--------------------------------------------------------------------
+
 mixin getMatchDateWithCompetition(match)
 	if (match.status == 2)
-		h5 TBD
+		h5='TBD'
 	if (match.status == 4)
-		h5.bold.green LIVE
+		h5.bold.green='LIVE'
 	else
-		h5 #{helpers.convertDateShort(match.matchdate)}
-	h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
+		h5=match.matchdateShort
+	h5.bold.small-caps=match.competitionName
+
+
+mixin quickMatchInfoMobile(match)
+	.col-ms-12.col-xs-12(style={'padding': '0', 'height': '109px'})
+		.col-ms-8.col-xs-8.recent-match-mobile
+			//- Home Team Name
+			.container
+				p
+					img(src=match.homeClubLogoSrc)
+				.hidden-xs
+					h4.force-font-15(style={'padding-top': '5px'})=match.hometeamNameLong
+				.hidden-ms
+					h4.force-font-15(style={'padding-top': '5px'})=match.hometeamNameShort
+			//- Away Team Name
+			.container
+				p
+					img(src=match.awayClubLogoSrc)
+				.hidden-xs
+					h4.force-font-15(style={'padding-top': '5px'})=match.awayteamNameLong
+				.hidden-ms
+					h4.force-font-15(style={'padding-top': '5px'})=match.awayteamNameShort
+		//- Match Status
+		if (match.status == 2)
+			//- Game postponed -> (shouldn't usually be the case though)
+			.col-ms-4.col-xs-4.match-status-mobile(style={'align-items': 'center'})
+				h5.bold.postponed-match='POSTPONED'
+		else if (match.status == 4)
+			//- Game is currently in play
+			.col-ms-4.col-xs-4.match-status-mobile
+				.col-ms-12.col-xs-12
+					h4.bold.blue-upcoming-match=match.homegoals
+						if(match.note != null)
+							span=` (${match.note.split("-")[0]})`
+				.col-ms-12.col-xs-12
+					h4.bold.blue-upcoming-match=match.awaygoals
+						if(match.note != null)
+							span=` (${match.note.split("-")[1]})`
+		else if (match.status == 5)
+			//- Game completed
+			.col-ms-4.col-xs-4.match-status-mobile
+				.col-ms-12.col-xs-12(style={'padding-top': '5px'})
+					h4.bold(style={ 'color': match.resultColor })=match.homegoals
+						if(match.note != null)
+							span=` (${match.note.split("-")[0]})`
+				.col-ms-12.col-xs-12(style={'padding-top': '5px'})
+					h4.bold(style={ 'color': match.resultColor })=match.awaygoals
+						if(match.note != null)
+							span=` (${match.note.split("-")[1]})`
+		else
+			//- Game either scheduled or in play
+			.col-ms-4.col-xs-4.match-status-mobile(style={'align-items': 'center', 'justify-content': 'center'})
+				h4.bold.blue-upcoming-match=match.matchTime
+	//- Match Date & Competition
+	.col-ms-12.col-xs-12.bg-light(style={'border-top': '1px solid #d3d3d3'})
+		+getMatchDateWithCompetition(match)
+
+
+mixin quickMatchInfo(match, heading)
+	.panel.panel-success.align-items-center
+		.panel-heading
+			h3.bold #{heading}
+		.panel-body
+			//- Mobile View
+			.hidden-lg.hidden-md.hidden-sm.col-ms-12.col-xs-12(style={'padding': '0'})
+				+quickMatchInfoMobile(match)
+			//- Large View
+			.col-lg-12.col-md-12.col-sm-12.hidden-ms.hidden-xs(style={'height': '86px'})
+				//- Home Team
+				.col-lg-4.col-md-4.col-sm-4.recent-match
+					.container(style={'height': '86px'})
+						p
+							img(src=match.homeClubLogoSrc)
+						h4(style={'padding-left': '15px'})=match.hometeamNameLong
+				//- Match Status
+				.col-lg-4.col-md-4.col-sm-4
+					if (match.status == 2)
+						//- Game postponed -> (shouldn't usually be the case though)
+						h3.bold.postponed-match='POSTPONED'
+					else if (match.status == 4)
+						//- Game is currently in play
+						h3.bold.blue-upcoming-match
+							| #{match.homegoals + ' - ' + match.awaygoals}
+					else if (match.status == 5)
+						//- Game completed
+						h3.bold(style={ 'color': match.resultColor })=match.resultString
+					else
+						//- Game either scheduled or in play
+						h3.bold.blue-upcoming-match=match.matchTime
+					//- Match data & Competition
+					+getMatchDateWithCompetition(match)
+				//- Away Team
+				.col-lg-4.col-md-4.col-sm-4.recent-match
+					.container(style={'height': '86px'})
+						h4(style={'padding-right': '15px'})=match.awayteamNameLong
+						p
+							img(src=match.awayClubLogoSrc)
+		if (match.note != null)
+			.bg-light.match-penalty-result
+				h5(style={ 'color': match.resultColor })=match.penaltyResultsString
+
+
+mixin fixtures(matchList)
+	.panel.panel-info.align-items-center.fixtures-container
+		.panel-heading
+			.hidden-xs.hidden-ms.hidden-sm.col-md-1.col-lg-1
+				h4 VENUE
+			.col-xs-12.col-sm-9.col-md-8.col-lg-8
+				h4 RESULT
+			.hidden-xs.hidden-ms.hidden-sm.col-md-1.col-lg-1
+				h4 ROUND
+			.hidden-xs.hidden-ms.col-sm-3.col-md-2.col-lg-2
+				h4 COMPETITION
+		each match in matchList
+			.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
+				//- Mobile View
+				.hidden-lg.hidden-md.hidden-sm.col-ms-12.col-xs-12(style={'padding': '0'})
+					+quickMatchInfoMobile(match)
+				//- Large View
+				.col-lg-12.col-md-12.col-sm-12.hidden-ms.hidden-xs.fixtures-large-view
+					//- Match Stadium
+					.col-lg-1.col-md-1.hidden-sm
+						h5=match.stadium
+						h4
+							if (match.neutral)
+								abbr(title='Neutral')='(N)'
+							else if (match.hometeam == 'Manchester United FC')
+								abbr(title='Home')='(H)'
+							else
+								abbr(title='Away')='(A)'
+					//- Teams and Match Status
+					.col-lg-8.col-md-8.col-sm-9
+						//- Home Team
+						.col-lg-4.col-md-4.col-sm-4.main-score-status
+							p
+								img(src=match.homeClubLogoSrc)
+							h4(style={'padding-left': '15px'})=match.hometeamNameLong
+						//- Match Status
+						.col-lg-4.col-md-4.col-sm-4(style={'padding-top': '10px'})
+							if (match.status == 2)
+								//- Game postponed
+								h4.bold.postponed-match POSTPONED
+								h5 TBD
+							else if (match.status === 4)
+								//- Game is currently in play
+								h3.bold.blue-upcoming-match
+									| #{match.homegoals + ' - ' + match.awaygoals}
+								h5.bold.green LIVE
+							else if (match.status == 5)
+								//- Game Completed
+								h3.bold(style={'color': match.resultColor})=match.resultString
+								h5=match.matchdateShort
+							else
+								//- Game Not Yet Played
+								h3.bold.blue-upcoming-match=match.matchTime
+								h5=match.matchdateShort
+							.hidden-sm.hidden-md.hidden-lg
+								h5.small-caps.bold=match.competitionName
+						//- Away Team
+						.col-lg-4.col-md-4.col-sm-4.main-score-status
+							h4(style={'padding-right': '15px'})=match.awayteamNameLong
+							p
+								img(src=match.awayClubLogoSrc)
+					//- Competition & Logo
+					if (match.competition === 9)
+						.col-lg-3.col-md-3.col-sm-3
+							h5.small-caps='FRIENDLY'
+					else
+						.col-lg-1.col-md-1.hidden-sm
+							h5.small-caps=match.roundName
+						.col-lg-2.col-md-2.col-sm-3.image-container
+							img.image.image-responsive(src=match.competitionLogoSrc)
+			//- If the game went to penalties
+			if (match.note != null)
+				.bg-light.match-penalty-result
+					h5(style={ 'color': match.resultColor })=match.penaltyResultsString
+
+
+//--------------------------------------------------------------------
+//- ----------------------- FOR STANDINGS PAGES ----------------------
+//--------------------------------------------------------------------
 
 mixin getMatchDateWithRound(match)
 	if (match.status == 2)
@@ -13,107 +197,16 @@ mixin getMatchDateWithRound(match)
 	if (match.status == 4)
 		h5.bold.green LIVE
 	else
-		h5 #{helpers.convertDateShort(match.matchdate)}
-	h5.small-caps.bold #{helpers.getCompetitionRound(match.competition, match.round)}
+		h5=match.matchdateShort
+	h5.small-caps.bold=match.roundName
 
-mixin quickMatchInfo(match, heading)
-	.panel.panel-success
-		.panel-heading
-			h3.bold #{heading}
-		.row.panel-body
-			//- Home Team
-			.col-ms-3.col-sm-3.col-md-4.flex-align-center.recent-match
-				h4.full-width #{helpers.getTeamLong(match.team, match.competition, match.hometeam)}
-			//- Match Status
-			.col-ms-6.col-sm-6.col-md-4
-				if (match.status == 2)
-					//- Game postponed -> (shouldn't usually be the case though)
-					h3.bold.postponed-match(style={ 'margin-top': 0 }) POSTPONED
-				else if (match.status == 4)
-					//- Game is currently in play
-					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
-						| #{match.homegoals + ' - ' + match.awaygoals}
-				else if (match.status == 5)
-					//- Game completed
-					h3.bold(style={ 'color': helpers.getResultColor(match), 'margin-top': 0 })
-						| #{helpers.getResultString(match)}
-				else
-					//- Game either scheduled or in play
-					h3.bold.blue-upcoming-match(style={ 'margin-top': 0 })
-						| #{helpers.convertMatchTime(match.matchdate)}
-				.hidden-xs
-					+getMatchDateWithCompetition(match)
-			//- Away Team
-			.recent-match.col-ms-3.col-sm-3.col-md-4.flex-align-center
-				h4.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
-		if (match.note != null)
-			.bg-light
-				h5(style={ 'margin': 0, 'padding': '5px', 'color': helpers.getResultColor(match), 'border-bottom': '1px solid #d3d3d3' })
-					| #{helpers.getPenaltyResultString(match)}
-		.hidden-ms.hidden-sm.hidden-md.hidden-lg
-			+getMatchDateWithCompetition(match)
-
-
-mixin fixture(match)
-	.panel-body
-		//- Match Stadium
-		.hidden-xs.hidden-ms.hidden-sm.col-md-1.flex-align-center
-			h4.full-width
-				abbr(title=`${match.stadium}`)
-					| #{match.neutral ? 'N' : (match.hometeam == 'Manchester United FC' ? 'H' : 'A')}
-		//- Teams and Match Status
-		.col-xs-12.col-sm-9.col-md-8.full-height
-			.col-xs-4.col-sm-4.col-md-4.flex-align-center
-				.hidden-xs
-					h3.full-width #{helpers.getTeamLong(match.team, match.competition, match.hometeam)}
-				.hidden-ms.hidden-sm.hidden-md.hidden-lg
-					h3.full-width #{helpers.getTeamShort(match.team, match.competition, match.hometeam)}
-			.col-xs-4.col-sm-4.col-md-4.full-height
-				if (match.status == 2)
-					//- Game postponed
-					h4.bold.postponed-match POSTPONED
-					h5 TBD
-				else if (match.status === 4)
-					//- Game is currently in play
-					h3.bold.blue-upcoming-match
-						| #{match.homegoals + ' - ' + match.awaygoals}
-					h5.bold.green LIVE
-				else if (match.status == 5)
-					//- Game Completed
-					h3.bold(style={'color': helpers.getResultColor(match)})
-						| #{helpers.getResultString(match)}
-					h5 #{helpers.convertDateShort(match.matchdate)}
-				else
-					//- Game Not Yet Played
-					h3.bold.blue-upcoming-match #{helpers.convertMatchTime(match.matchdate)}
-					h5 #{helpers.convertDateShort(match.matchdate)}
-				.hidden-sm.hidden-md.hidden-lg
-					h5.small-caps.bold #{helpers.getCompetitionName(match.competition)}
-			.col-xs-4.col-sm-4.col-md-4.flex-align-center
-				.hidden-xs
-					h3.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
-				.hidden-ms.hidden-sm.hidden-md.hidden-lg
-					h3.full-width.float-right #{helpers.getTeamShort(match.team, match.competition, match.awayteam)}
-		//- Competition
-		.hidden-xs.hidden-ms.col-sm-1.col-md-1.flex-align-center
-			h5.full-width.small-caps #{helpers.getCompetitionRound(match.competition, match.round)}
-		//- Competition Logo
-		.hidden-xs.hidden-ms.col-sm-2.col-md-2.flex-align-center
-			if match.competition === 9
-				h4.full-width.small-caps Friendly
-			else
-				img.image.image-responsive(src=`${helpers.getCompetitionLogo(match.competition)}`)
-	if (match.note != null)
-		.bg-light
-			h5(style={ 'margin': 0, 'padding': '5px', 'color': helpers.getResultColor(match), 'border-bottom': '1px solid #d3d3d3' })
-				| #{helpers.getPenaltyResultString(match)}
 
 mixin standingsMatchInfo(match, heading)
 	.text-center
 		.row.panel-body
 			//- Home Team
 			.col-ms-4.col-sm-4.col-md-4.flex-align-center.recent-match
-				h5.full-width #{helpers.getTeamLong(match.team, match.competition, match.hometeam)}
+				h5.full-width=match.hometeamNameLong
 			//- Match Status
 			.col-ms-4.col-sm-4.col-md-4
 				if (match.status == 2)
@@ -125,20 +218,16 @@ mixin standingsMatchInfo(match, heading)
 						| #{match.homegoals + ' - ' + match.awaygoals}
 				else if (match.status == 5)
 					//- Game completed
-					h4.bold(style={ 'color': helpers.getResultColor(match)})
-						| #{helpers.getResultString(match)}
+					h4.bold(style={ 'color': match.resultColor})=match.resultString
 				else
 					//- Game either scheduled or in play
-					h4.bold.blue-upcoming-match(style={ 'margin-top': 0 })
-						| #{helpers.convertMatchTime(match.matchdate)}
+					h4.bold.blue-upcoming-match(style={ 'margin-top': 0 })=match.matchTime
 				.hidden-xs
 					+getMatchDateWithRound(match)
 			//- Away Team
 			.recent-match.col-ms-4.col-sm-4.col-md-4.flex-align-center
-				h5.full-width #{helpers.getTeamLong(match.team, match.competition, match.awayteam)}
+				h5.full-width=match.awayteamNameLong
 		if (match.note != null)
 			.bg-light
-				h5(style={ 'margin': 0, 'padding': '5px', 'color': helpers.getResultColor(match), 'border-bottom': '1px solid #d3d3d3' })
-					| #{helpers.getPenaltyResultString(match)}
-		.hidden-ms.hidden-sm.hidden-md.hidden-lg
+				h5(style={ 'margin': 0, 'padding': '5px', 'color': match.resultColor, 'border-bottom': '1px solid #d3d3d3' })=match.penaltyResultsString
 			+getMatchDateWithRound(match)

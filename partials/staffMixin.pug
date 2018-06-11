@@ -6,9 +6,9 @@ mixin staffMixin(staff)
 			.panel-body
 				h5.text-center=staff.name
 				.container
-					p(style={'float': 'left', 'height': '20px', 'width': '30px', 'margin-top': '8px'})
-						img(src=staff.flagImg, style={'height': '100%', 'width': '100%'}, align="left")
-					h6(style={'vertical-align': 'center', 'padding': '5px', 'height': '20px'})=staff.countryName
+					p
+						img(src=staff.flagImg)
+					h6=staff.countryName
 
 mixin scoutingTeamMixin(staff)
 	.col-lg-4.col-md-4.col-sm-6
@@ -18,9 +18,9 @@ mixin scoutingTeamMixin(staff)
 			.panel-body
 				h5.text-center=staff.name
 				.container
-					p(style={'float': 'left', 'height': '20px', 'width': '30px', 'margin-top': '8px'})
-						img(src=staff.flagImg, style={'height': '100%', 'width': '100%'}, align="left")
-					h6(style={'vertical-align': 'center', 'padding': '5px', 'height': '20px'})=staff.countryName
+					p
+						img(src=staff.flagImg)
+					h6=staff.countryName
 				if(staff.note != null)
 					.pad-space-small
 						h5.text-center.italics='Responsible for '

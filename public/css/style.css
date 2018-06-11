@@ -105,6 +105,12 @@
   line-height: 30px;
 }
 
+@media (max-width: 767px) {
+  .navbar-brand {
+    padding: 10px;
+  }
+}
+
 .navbar-brand > img {
   height: auto;
   width: 30px;
@@ -248,10 +254,110 @@
 }
 
 /* -------------------------------------------------------- */
+/* ---------------------- FIXTURES ------------------------ */
+/* -------------------------------------------------------- */
+
+.quick-match-info {
+  padding: 0;
+}
+
+.quick-match-info .panel-heading, .fixtures-container .panel-heading, .fixtures-container .main-score-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.quick-match-info .panel-body, .fixtures-container .panel-body, .fixtures-large-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  width: 100%;
+}
+
+.quick-match-info h3, .fixtures-container h3 {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .quick-match-info .panel-body, .fixtures-container .panel-body {
+    height: 180px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .force-font-15 {
+    font-size: 15px;
+  }
+}
+
+.match-penalty-result > h5 {
+  margin: 0;
+  padding: 5px;
+  border-bottom: 2px solid #d3d3d3;
+}
+
+.recent-match .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+
+.recent-match .container > p, .recent-match-mobile .container > p, .main-score-status > p {
+  float: left;
+  height: 30px;
+  width: 30px;
+  margin-top: 8px;
+}
+
+.recent-match .container > p > img, .recent-match-mobile .container > p > img, .main-score-status > p > img {
+  height: 100%;
+  width: 100%;
+}
+
+.recent-match-mobile {
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.recent-match-mobile > .container {
+  height: 55px;
+}
+
+.recent-match-mobile > .container h4 {
+  text-align: left;
+  padding-left: 50px;
+}
+
+.match-status-mobile {
+  display: flex;
+  flex-wrap: wrap;
+  height: 109px;
+}
+
+.fixtures-container .image-container {
+  padding: 15px;
+}
+
+.fixtures-container .image {
+  height: 70px;
+}
+
+abbr {
+  cursor: inherit !important;
+  text-decoration: none !important;
+}
+
+/* -------------------------------------------------------- */
 /* ---------------------- STANDINGS ----------------------- */
 /* -------------------------------------------------------- */
 
-@media (min-width:992px){
+@media (min-width:992px) {
   .col-half {width: 44.33333334%;}
   .col-half-offset-left {margin-left: 2.83333333%;}
   .col-half-offset-right {margin-right: 2.83333333%;}
@@ -279,6 +385,24 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.staff .container > p {
+  float: left;
+  height: 20px;
+  width: 30px;
+  margin-top: 8px;
+}
+
+.staff .container > p > img {
+  height: 100%;
+  width: 100%;
+}
+
+.staff .container > h6 {
+  vertical-align: center;
+  height: 20px;
+  padding: 5px;
 }
 
 /* -------------------------------------------------------- */
@@ -356,15 +480,21 @@ footer {
 /* -------------------------------------------------------- */
 /* ----------------- BOOTSTRAP 4.0 THEMES ----------------- */
 /* -------------------------------------------------------- */
-.bg-light{
-    background-color:#f8f9fa!important
+.bg-light {
+  background-color: #f8f9fa!important;
 }
-a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover{
-    background-color:#dae0e5!important
+a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover {
+  background-color: #dae0e5!important;
 }
-.bg-dark{
-    background-color:#343a40!important
+.bg-dark {
+  background-color: #343a40!important;
 }
-a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{
-    background-color:#1d2124!important
+a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover {
+  background-color: #1d2124!important;
+}
+.bg-info{
+  background-color: #d9edf7!important;
+}
+a.bg-info:focus,a.bg-info:hover,button.bg-info:focus,button.bg-info:hover {
+  background-color: #afd9ee!important;
 }
