@@ -1,3 +1,4 @@
+// Store Manchester United name
 const MANCHESTER_UNITED_FC = 'Manchester United FC';
 
 /* -------------------------------------------------------- */
@@ -341,6 +342,45 @@ exports.getTeamLong = function getTeamLong(team, competition, teamName) {
 }
 
 /* -------------------------------------------------------- */
+/* --------------------- TEAM LOGOS ----------------------- */
+/* -------------------------------------------------------- */
+
+// Convert date to short format
+exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
+	const CLUB_LOGOS_FOLDER = '/img/clubLogos/';
+	switch(teamName) {
+		case MANCHESTER_UNITED_FC:
+			return CLUB_LOGOS_FOLDER + 'Manchester_United_FC.svg';
+		case 'AFC Bournemouth':
+		case 'Arsenal FC':
+		case 'Brighton & Hove Albion':
+		case 'Burnley FC':
+		case 'Cardiff City FC':
+		case 'Chelsea FC':
+		case 'Crystal Palace FC':
+		case 'Everton FC':
+		case 'Fulham FC':
+		case 'Huddersfield Town':
+		case 'Leicester City FC':
+		case 'Liverpool FC':
+		case 'Manchester City FC':
+		case 'Newcastle United FC':
+		case 'Southampton FC':
+		case 'Stoke City FC':
+		case 'Swansea City FC':
+		case 'Tottenham Hotspur FC':
+		case 'Watford FC':
+		case 'West Bromwich Albion FC':
+		case 'West Ham United FC':
+		case 'Wolverhampton Wanderers FC':
+		case 'Real Madrid CF'
+			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
+		default:
+			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
+	}
+}
+
+/* -------------------------------------------------------- */
 /* ---------------------- RESULTS ------------------------- */
 /* -------------------------------------------------------- */
 
@@ -417,17 +457,4 @@ exports.convertMatchTime = function convertMatchTime(date) {
 
 	const options = { hour: 'numeric', minute: '2-digit', hour12: true };
 	return date.toLocaleTimeString("en-US", options);
-}
-
-/* -------------------------------------------------------- */
-/* --------------------- CLUB LOGOS ----------------------- */
-/* -------------------------------------------------------- */
-
-// Convert date to short format
-exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
-	const CLUB_LOGOS_FOLDER = '/img/clubLogos/';
-	switch(teamName) {
-		default:
-			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
-	}
 }
