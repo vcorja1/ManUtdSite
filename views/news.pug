@@ -43,6 +43,10 @@ block content
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
 			+playerTransferMixin(incomingPlayers, true)
 
+			.pad-space-small
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Loaned Out
+			+playerTransferMixin(loanedPlayers, false)
+
 		.col-lg-6.col-md-6
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Departures
 			+playerTransferMixin(departingPlayers, false)

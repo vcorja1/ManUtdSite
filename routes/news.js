@@ -7,6 +7,9 @@ let incomingPlayers = [
 	{ name: 'Fred', position: 'CM', prevClub: 'Shakhtar Donetsk' },
 	{ name: 'Diogo Dalot', position: 'RB', prevClub: 'FC Porto' }
 ];
+let loanedPlayers = [
+	{ name: 'Dean Henderson', position: 'GK', nextClub: 'Sheffield United' }
+];
 let departingPlayers = [
 	{ name: 'Michael Carrick', position: 'CM', reason: 'Retired' },
 	{ name: 'Indy Boonen', position: 'RW', nextClub: 'KV Oostende' },
@@ -56,6 +59,7 @@ app.get('/', function(req, res, next) {
 				gloveIcon: gloveIcon
 			},
 			incomingPlayers: incomingPlayers,
+			loanedPlayers: loanedPlayers,
 			departingPlayers: departingPlayers,
 			worldCupParticipants: worldCupParticipants
 		});
