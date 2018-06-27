@@ -50,11 +50,11 @@ mixin quickMatchInfoMobile(match)
 		else if (match.status == 5)
 			//- Game completed
 			.col-ms-4.col-xs-4.match-status-mobile
-				.col-ms-12.col-xs-12(style={'padding-top': '5px'})
+				.col-ms-12.col-xs-12(style={'padding': '5px 0px 0px 0px'})
 					h4.bold(style={ 'color': match.resultColor })=match.homegoals
 						if(match.note != null)
 							span=` (${match.note.split("-")[0]})`
-				.col-ms-12.col-xs-12(style={'padding-top': '5px'})
+				.col-ms-12.col-xs-12(style={'padding': '5px 0px 0px 0px'})
 					h4.bold(style={ 'color': match.resultColor })=match.awaygoals
 						if(match.note != null)
 							span=` (${match.note.split("-")[1]})`
