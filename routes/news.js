@@ -9,6 +9,7 @@ let incomingPlayers = [
 ];
 let departingPlayers = [
 	{ name: 'Michael Carrick', position: 'CM', reason: 'Retired' },
+	{ name: 'Indy Boonen', position: 'RW', nextClub: 'KV Oostende' },
 	{ name: 'Joe Riley', position: 'RB', nextClub: 'Bradford City' },
 	{ name: 'Max Johnstone', position: 'GK', reason: 'Released' },
 	{ name: 'Ilias Moutha-Sebtaoui', position: 'GK', reason: 'Released' },
