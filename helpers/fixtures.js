@@ -373,7 +373,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'West Bromwich Albion FC':
 		case 'West Ham United FC':
 		case 'Wolverhampton Wanderers FC':
-		case 'Real Madrid CF'
+		case 'Real Madrid CF':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		default:
 			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
