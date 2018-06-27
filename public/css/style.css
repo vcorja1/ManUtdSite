@@ -111,6 +111,12 @@
   }
 }
 
+@media (max-width: 300px) {
+  .navbar-brand {
+    font-size: 14px;
+  }
+}
+
 .navbar-brand > img {
   height: auto;
   width: 30px;
