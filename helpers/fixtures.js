@@ -187,7 +187,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 // Returns the competition logo based on the ID
 exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
-	const LOGOS_FOLDER = '/img/logos/';
+	const LOGOS_FOLDER = '/img/competitionLogos/';
 	switch(competitionID) {
 		case 0:
 			return LOGOS_FOLDER + 'epl.png';
