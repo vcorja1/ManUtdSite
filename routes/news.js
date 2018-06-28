@@ -2,28 +2,28 @@
 var express = require('express');
 var app = express();
 
-// Recent transfers
-let incomingPlayers = [
-	{ name: 'Fred', position: 'CM', prevClub: 'Shakhtar Donetsk' },
-	{ name: 'Diogo Dalot', position: 'RB', prevClub: 'FC Porto' }
-];
-let loanedPlayers = [
-	{ name: 'Dean Henderson', position: 'GK', nextClub: 'Sheffield United' }
-];
-let departingPlayers = [
-	{ name: 'Michael Carrick', position: 'CM', reason: 'Retired' },
-	{ name: 'Indy Boonen', position: 'RW', nextClub: 'KV Oostende' },
-	{ name: 'Joe Riley', position: 'RB', nextClub: 'Bradford City' },
-	{ name: 'Max Johnstone', position: 'GK', reason: 'Released' },
-	{ name: 'Ilias Moutha-Sebtaoui', position: 'GK', reason: 'Released' },
-	{ name: 'Theo Richardson', position: 'GK', reason: 'Released' },
-	{ name: 'Devonte Redmond', position: 'CM', reason: 'Released' },
-	{ name: 'Jake Kenyon', position: 'CM', reason: 'Released' },
-	{ name: 'Charlie Scott', position: 'CM', reason: 'Released' }
-];
-
 // Country flag images location
 const FLAG_IMG_FOLDER = 'img/flags/';
+
+// Recent transfers
+let incomingPlayers = [
+	{ name: 'Fred', flagImg: FLAG_IMG_FOLDER + 'br.svg', position: 'CM', prevClub: 'Shakhtar Donetsk' },
+	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto' }
+];
+let loanedPlayers = [
+	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United' }
+];
+let departingPlayers = [
+	{ name: 'Michael Carrick', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Retired' },
+	{ name: 'Indy Boonen', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'RW', nextClub: 'KV Oostende' },
+	{ name: 'Joe Riley', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'RB', nextClub: 'Bradford City' },
+	{ name: 'Max Johnstone', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', reason: 'Released' },
+	{ name: 'Ilias Moutha-Sebtaoui', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'GK', reason: 'Released' },
+	{ name: 'Theo Richardson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', reason: 'Released' },
+	{ name: 'Devonte Redmond', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' },
+	{ name: 'Jake Kenyon', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' },
+	{ name: 'Charlie Scott', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' }
+];
 // World Cup participants
 let worldCupParticipants = [
 	{ country: 'Argentina', flagImg: FLAG_IMG_FOLDER + 'ar.svg', playerNames: 'Marcos Rojo' },
