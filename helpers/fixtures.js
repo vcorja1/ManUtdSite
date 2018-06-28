@@ -47,8 +47,9 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 	switch(competitionID) {
 		case 0: 	// Premier League
 		case 10: 	// Premier League 2
-		case 13: 	// Under-18 Premier League North
 			return 'Week ' + round;
+		case 13: 	// Under-18 Premier League North
+			return round === 23 ? 'Final' : ('Week ' + round);
 		case 3: 	// Community Shield
 		case 6: 	// UEFA Super Cup
 			return 'Final';
