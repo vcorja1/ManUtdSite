@@ -44,7 +44,11 @@
 /* -------------------------------------------------------- */
 
 .no-margin {
-  margin: 0px;
+  margin: 0;
+}
+
+.no-padding {
+  padding: 0;
 }
 
 .pad-space {
@@ -262,10 +266,6 @@
 /* -------------------------------------------------------- */
 /* ---------------------- FIXTURES ------------------------ */
 /* -------------------------------------------------------- */
-
-.quick-match-info {
-  padding: 0;
-}
 
 .quick-match-info .panel-heading, .fixtures-container .panel-heading, .fixtures-container .main-score-status {
   display: flex;

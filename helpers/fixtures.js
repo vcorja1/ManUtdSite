@@ -5,19 +5,6 @@ const MANCHESTER_UNITED_FC = 'Manchester United FC';
 /* ------------------- FIXTURE STATUS --------------------- */
 /* -------------------------------------------------------- */
 
-exports.getTeamPosition = function getTeamPosition(standings) {
-	if(standings == null || standings == [])
-		return '';
-
-	const position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
-	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
-	return `${position}${suffix}`;
-}
-
-/* -------------------------------------------------------- */
-/* ------------------- FIXTURE STATUS --------------------- */
-/* -------------------------------------------------------- */
-
 // Returns the status for the given fixture
 exports.getFixtureStatus = function getFixtureStatus(status) {
 	const fixtureStatus = [
@@ -183,6 +170,45 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 	}
 
 	return 'Rd ' + round;
+}
+
+// Returns the maximum round number based on the competition
+function getMaxRound(competitionID) {
+	switch(competitionID) {
+		case 0: 		// Premier League
+			return 38;
+		case 1: 		// FA Cup
+		case 15: 		// FA Youth Cup
+			return 8;
+		case 2: 		// Carabao (EFL) Cup
+		case 16: 		// Otten Cup
+			return 7;
+		case 3: 		// Community Shield
+		case 6: 		// UEFA Super Cup
+			return 1;
+		case 4: 		// Champions League
+			return 14;
+		case 5: 		// Europa League
+			return 16;
+		case 7: 		// FIFA Club World Cup
+			return 3;
+		case 8: 		// International Champions Cup
+			return 4;
+		case 10: 		// Premier League 2
+		case 13: 		// U18 Premier League North
+			return 22;
+		case 11: 		// Premier League International Cup
+		case 14: 		// Under-18 Premier League Cup
+			return 6;
+		case 12: 		// Under-19 UEFA Youth League
+			return 13;
+		case 17: 		// 5-a-side Sparkasse & VGH Cup
+			return 11;
+		case 18: 		// Dallas Cup
+			return 5;
+		default:
+			return -1;
+	}
 }
 
 // Returns the competition logo based on the ID
@@ -384,6 +410,27 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 /* ---------------------- RESULTS ------------------------- */
 /* -------------------------------------------------------- */
 
+const WIN = 0, DRAW = 1, LOSS = 2;
+
+function getMatchResult(matchData) {
+	// If same score, return DRAW, unless there was a penalty shootout
+	if(matchData.homegoals == matchData.awaygoals) {
+		if(matchData.note == null)
+			return DRAW;
+		// Otherwise, analyze the shootout
+		if(matchData.note.split("-")[0] > matchData.note.split("-")[1])
+			// Home Team Won the Shootout
+			return matchData.hometeam == MANCHESTER_UNITED_FC ? WIN : LOSS;
+		// Away Team Won the Shootout
+		return matchData.awayteam == MANCHESTER_UNITED_FC ? WIN : LOSS;
+	}
+	// Home Team Won
+	if(matchData.homegoals > matchData.awaygoals)
+		return matchData.hometeam == MANCHESTER_UNITED_FC ? WIN : LOSS;
+	// Away Team Won
+	return matchData.awayteam == MANCHESTER_UNITED_FC ? WIN : LOSS;
+}
+
 // Convert result to string
 exports.getResultString = function getResultString(matchData) {
 	// If no penalty shootout, just return result
@@ -419,22 +466,100 @@ exports.getResultColor = function getResultColor(matchData) {
 	const GRAY = '#97999B';
 	const RED = '#D50032';
 
-	// If draw, return gray, unless there was a penalty shootout
-	if(matchData.homegoals == matchData.awaygoals) {
-		if(matchData.note == null)
-			return GRAY;
-		// Otherwise, analyze the shootout
-		// If win, return green
-		if(matchData.note.split("-")[0] > matchData.note.split("-")[1])
-			return matchData.hometeam == MANCHESTER_UNITED_FC ? GREEN : RED;
-		// If loss, return red
-		return matchData.awayteam == MANCHESTER_UNITED_FC ? GREEN : RED;
+	// Get result
+	const result = getMatchResult(matchData);
+
+	// Return appropriate color
+	if(result == WIN) {
+		return GREEN;
 	}
-	// If win, return green
-	if(matchData.homegoals > matchData.awaygoals)
-		return matchData.hometeam == MANCHESTER_UNITED_FC ? GREEN : RED;
-	// If loss, return red
-	return matchData.awayteam == MANCHESTER_UNITED_FC ? GREEN : RED;
+	return result == DRAW ? GRAY : RED;
+}
+
+/* -------------------------------------------------------- */
+/* ----------------- STANDINGS STATUS --------------------- */
+/* -------------------------------------------------------- */
+
+// Get team position from the table
+exports.getTeamPosition = function getTeamPosition(standings) {
+	if(standings == null || standings == [])
+		return '';
+
+	const position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
+	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
+	return `${position}${suffix}`;
+}
+
+// Get a stub fixture for the future match that has not yet been drawn
+function getStubFixture(team, competition, competitionStatus) {
+	const TBD = 'TBD';
+	const stubFixture = {
+		matchdate: TBD,
+		hometeam: MANCHESTER_UNITED_FC,
+		awayteam: TBD,
+		// Store full team name
+		hometeamNameShort: fixtureHelper.getTeamShort(team, competition, MANCHESTER_UNITED_FC),
+		hometeamNameLong: fixtureHelper.getTeamLong(team, competition, MANCHESTER_UNITED_FC),
+		awayteamNameShort: TBD,
+		awayteamNameLong: TBD,
+		// Store competition name and round
+		competitionName: competition,
+		roundName: competitionStatus,
+		// Store date short and match time
+		matchdateShort: TBD,
+		matchTime: TBD,
+		// Store club and competition logo source
+		homeClubLogoSrc: fixtureHelper.getClubLogoSrc(MANCHESTER_UNITED_FC),
+		awayClubLogoSrc: fixtureHelper.getClubLogoSrc(TBD),
+		competitionLogoSrc: fixtureHelper.getCompetitionLogoSrc(competition)
+	};
+}
+
+// Update status and add fixture stubs if needed
+exports.getCompetitionStatus = function getCompetitionStatus(team, competitionID, competitionData) {
+	// Mixed competitions have to be treated separately if they aren't in knockout stage yet
+	if(competitionID == 4 || competitionID == 5) {
+		// Champions League & Europa League -> Check if group stage isn't yet completed
+		if(competitionData.competitionTable[0].playedGames < 6) {
+			return competitionData.groupStagePosition;
+		}
+		// Otherwise analyze position in the table
+		const position = competitionData.competitionTable.indexOf(MANCHESTER_UNITED_FC) + 1;
+		if(position > 2) {
+			return (competitionID == 4 && position == 3) ? 'EUROPA LEAGUE' : 'OUT';
+		}
+		// In this case, reached the knockout stages
+		if(competitionData.fixtures == null || competitionData.fixtures.length == 0) {
+			// If no fixtures yet, add a stub
+			competitionData.competitionStatus = getCompetitionRound(competitionID, 7);
+			competitionData.fixtures = [];
+			competitionData.fixtures.insert(getStubFixture(team, competitionID, competitionData.competitionStatus));
+			return competitionData;
+		}
+	}
+
+	// If the last match has not yet been completed, simply return the round information
+	const lastMatch = competitionData.fixtures[0];
+	if(lastMatch.status < 5) {
+		competitionData.competitionStatus = lastMatch.roundName;
+		return competitionData;
+	}
+	// Otherwise need to analyze the result of the last match
+	const maxRound = getMaxRound(lastMatch.competition);
+	const result = getMatchResult(lastMatch);
+	if(result == LOSS) {
+		competitionData.competitionStatus = (lastMatch.round == maxRound ? 'RUNNERS-UP' : 'OUT');
+		return competitionData;
+	}
+	// Now it is necessary to check whether the competition is won
+	if(lastMatch.round >= maxRound) {
+		competitionData.competitionStatus = 'CHAMPIONS';
+		return competitionData;
+	}
+	// Now need to add a stub for the future match that has not yet been drawn
+	competitionData.competitionStatus = getCompetitionRound(lastMatch.competition, lastMatch.round + 1);
+	competitionData.fixtures.unshift(getStubFixture(team, lastMatch.competition, competitionData.competitionStatus));
+	return competitionData;
 }
 
 /* -------------------------------------------------------- */
