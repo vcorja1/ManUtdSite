@@ -29,15 +29,15 @@
   ],
   "dependencies": {
     "compression": "1.7.2",
-    "dotenv": "4.0.0",
+    "dotenv": "6.0.0",
     "express": "4.16.3",
     "iso-country-codes": "0.0.5",
     "morgan": "1.9.0",
     "nib": "1.1.2",
     "nodemon": "1.17.5",
-    "pg": "7.4.1",
-    "pug": "2.0.0-rc.3",
-    "serve-favicon": "2.4.5",
+    "pg": "7.4.3",
+    "pug": "2.0.3",
+    "serve-favicon": "2.5.0",
     "stylus": "0.54.5"
   }
 }
