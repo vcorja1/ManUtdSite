@@ -46,7 +46,7 @@ mixin tableStandingsMixin(competitionData)
 					td.text-center=team.position
 					td
 						img(src=team.crestURI, height='20', width='20')
-						if(team.teamName == 'Manchester United FC')
+						if(team.teamName == 'Manchester United FC' || team.teamName == 'Manchester United')
 							span.bold #{' ' + team.teamNameLong}
 						else
 							span #{' ' + team.teamNameLong}

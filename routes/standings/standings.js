@@ -34,7 +34,7 @@ app.get('/fa-cup', function(req, res, next) {
 
 	try {
 		res.render('standings', {
-			title: 'FA Cup Standings',
+			title: 'FA Cup Results',
 			faCupData: req.faCupData,
 			isSingleCompetition: true
 		});
@@ -52,7 +52,7 @@ app.get('/carabao-cup', function(req, res, next) {
 
 	try {
 		res.render('standings', {
-			title: 'Carabao Cup Standings',
+			title: 'Carabao Cup Results',
 			carabaoCupData: req.carabaoCupData,
 			isSingleCompetition: true
 		});
@@ -136,8 +136,44 @@ app.get('/super-cup', function(req, res, next) {
 
 });
 
+// GET response for '/standings/club-world-cup'
+app.use('/club-world-cup', standings.processStandingsData);
+app.get('/club-world-cup', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'FIFA Club World Cup Results',
+			clubWorldCupData: req.clubWorldCupData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
+// GET response for '/standings/international-champions-cup'
+app.use('/international-champions-cup', [standings.getICCTable, standings.processStandingsData]);
+app.get('/international-champions-cup', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'International Champions Cup Standings',
+			iccData: req.iccData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/standings'
-app.use('/', [standings.getEPLTable, standings.getUCLTable, standings.getEuropaLeagueTable, standings.processStandingsData]);
+app.use('/', [standings.getEPLTable, standings.getUCLTable, standings.getEuropaLeagueTable, standings.getICCTable, standings.processStandingsData]);
 app.get('/', function(req, res, next) {
 
 	try {
@@ -150,6 +186,8 @@ app.get('/', function(req, res, next) {
 			uclData: req.uclData,
 			europaLeagueData: req.europaLeagueData,
 			superCupData: req.superCupData,
+			clubWorldCupData: req.clubWorldCupData,
+			iccData: req.iccData,
 			isSingleCompetition: false
 		});
 	}

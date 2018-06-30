@@ -54,6 +54,9 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 				if(curTeamData.teamName == 'Wolves') {
 					curTeamData.teamName = 'Wolverhampton Wanderers';
 				}
+				else if(curTeamData.teamName == 'Atlético Madrid') {
+					curTeamData.teamName == 'Atletico Madrid';
+				}
 				// Store Appropriate Color Based On The Table Position
 				curTeamData.color = fixtureHelper.getPositionColorByCompetitionID(competitionID, curTeamData.position);
 				// Store Club Logo
@@ -73,6 +76,9 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 					break;
 				case 5: 	// Europa League
 					req.europaLeagueTable = standings;
+					break;
+				case 8: 	// Premier League 2
+					req.iccTable = standings;
 					break;
 				case 10: 	// Premier League 2
 					req.pl2Table = standings;
@@ -195,6 +201,13 @@ exports.getU18PLCupTable = (req, res, next) => {
 	return getTableStandings(15, tableURL, tableID, req, res, next);
 };
 
+// Get the International Champions Cup Standings
+exports.getICCTable = (req, res, next) => {
+	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2018/china-pr/r43217/';
+	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
+	return getTableStandings(8, tableURL, tableID, req, res, next);
+};
+
 // Process Standings Data
 exports.processStandingsData = (req, res, next) => {
 	/* ---------------- TABLE COMPETITION ---------------- */
@@ -223,6 +236,15 @@ exports.processStandingsData = (req, res, next) => {
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'premier-league-north',
 			competitionStatus: fixtureHelper.getTeamPosition(req.plNorthTable.map(team => team.teamName)),
 			competitionTable: req.plNorthTable
+		};
+	}
+	if(req.iccTable != null) {
+		// International Champions Cup
+		req.iccData = {
+			competitionName: 'International Champions Cup ' + CURRENT_SEASON,
+			competitionLink: STANDINGS_LOCATION + 'international-champions-cup',
+			competitionStatus: fixtureHelper.getTeamPosition(req.iccTable.map(team => team.teamName)),
+			competitionTable: req.iccTable
 		};
 	}
 	/* ---------------- MIXED COMPETITION ---------------- */
@@ -358,6 +380,16 @@ exports.processStandingsData = (req, res, next) => {
 				fixtures: superCupFixtures.reverse()
 			};
 			req.superCupData = fixtureHelper.getCompetitionStatus(6, req.superCupData);
+		}
+		// FIFA Club World Cup
+		const clubWorldCupFixtures = req.fixtures.filter(match => match.competition == 7);
+		if(clubWorldCupFixtures != null && clubWorldCupFixtures.length > 0) {
+			req.clubWorldCupData = {
+				competitionName: 'FIFA CLUB WORLD CUP ' + CURRENT_SEASON,
+				competitionLink: STANDINGS_LOCATION + 'club-world-cup',
+				fixtures: clubWorldCupFixtures.reverse()
+			};
+			req.clubWorldCupData = fixtureHelper.getCompetitionStatus(6, req.clubWorldCupData);
 		}
 		// FA Youth Cup
 		const faYouthCupFixtures = req.fixtures.filter(match => match.competition == 15);
