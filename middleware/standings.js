@@ -66,7 +66,7 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 				else if(curTeamData.teamName == 'Milan') {
 					curTeamData.teamName = 'AC Milan';
 				}
-				else if(curTeamData.teamName == 'PSG')
+				else if(curTeamData.teamName == 'PSG') {
 					curTeamData.teamName = 'Paris Saint-Germain';
 				}
 				// Store Appropriate Color Based On The Table Position
