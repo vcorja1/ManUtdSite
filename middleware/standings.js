@@ -57,6 +57,18 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 				else if(curTeamData.teamName == 'Atlético Madrid') {
 					curTeamData.teamName == 'Atletico Madrid';
 				}
+				else if(curTeamData.teamName == 'Bayern München') {
+					curTeamData.teamName = 'Bayern Munich';
+				}
+				else if(curTeamData.teamName == 'Internazionale') {
+					curTeamData.teamName = 'Inter Milan';
+				}
+				else if(curTeamData.teamName == 'Milan') {
+					curTeamData.teamName = 'AC Milan';
+				}
+				else if(curTeamData.teamName == 'PSG')
+					curTeamData.teamName = 'Paris Saint-Germain';
+				}
 				// Store Appropriate Color Based On The Table Position
 				curTeamData.color = fixtureHelper.getPositionColorByCompetitionID(competitionID, curTeamData.position);
 				// Store Club Logo

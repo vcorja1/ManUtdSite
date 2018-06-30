@@ -282,7 +282,7 @@ function removeTeamNameAbbr(teamName) {
 
 	// Or remove beginning
 	var start = teamName.substr(0,3);
-	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ')
+	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ')
 		return teamName.substr(3);
 	start = teamName.substr(0,4);
 	if(start === 'AFC ' || start === 'RSC ')
@@ -347,29 +347,38 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 			teamName = 'West Ham';
 			break;
 
+		case 'Blackburn Rovers':
+			teamName = 'Blackburn';
+			break;
 		case 'Burton Albion':
 			teamName = 'Burton';
 			break;
 		case 'Derby County':
 			teamName = 'Derby';
 			break;
-		case 'Yeovil Town':
-			teamName = 'Yeovil';
-			break;
-		case 'Athletic Club':
-			teamName = 'Athletic';
-			break;
 		case 'Wolverhampton Wanderers':
 			teamName = 'Wolves';
 			break;
-		case 'Blackburn Rovers':
-			teamName = 'Blackburn';
+		case 'Yeovil Town':
+			teamName = 'Yeovil';
+			break;
+		case 'Atletico Madrid':
+			teamName = 'Atletico';
 			break;
 		case 'Borussia Monchengladbach':
 			teamName = 'Gladbach';
 			break;
 		case 'Eintracht Braunschweig':
 			teamName = 'BTSV';
+			break;
+		case 'Inter Milan':
+			teamName = 'Inter';
+			break;
+		case 'Olympique Lyonnais':
+			teamName = 'Lyon';
+			break;
+		case 'Paris Saint-Germain':
+			teamName = 'PSG';
 			break;
 	}
 
@@ -392,6 +401,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 	switch(teamName) {
 		case MANCHESTER_UNITED:
 			return CLUB_LOGOS_FOLDER + 'Manchester_United.svg';
+		// England
 		case 'Arsenal':
 		case 'Bournemouth':
 		case 'Brighton & Hove Albion':
@@ -414,7 +424,23 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'West Bromwich Albion':
 		case 'West Ham United':
 		case 'Wolverhampton Wanderers':
+		// Spain
+		case 'Atletico Madrid':
+		case 'Barcelona':
 		case 'Real Madrid':
+		// Germany
+		case 'Bayern Munich':
+		case 'Borussia Dortmund':
+		// Italy
+		case 'AC Milan':
+		case 'Inter Milan':
+		case 'Juventus':
+		case 'Roma':
+		// France
+		case 'Olympique Lyonnais':
+		case 'PSG':
+		// Portugal
+		case 'Benfica':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		default:
 			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
