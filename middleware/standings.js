@@ -161,8 +161,8 @@ exports.getUCLTable = (req, res, next) => {
 	if(req.uclData != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/europe/uefa-champions-league/20172018/group-stage/r42384/';
-	const tableID = '#page_competition_1_block_competition_tables_group_8_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getTableStandings(4, tableURL, tableID, req, res, next);
 };
 
@@ -201,8 +201,8 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 	if(req.plIntlCupData != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/international/europe/premier-league-international-cup/20172018/group-stage/r41461/';
-	const tableID = '#page_competition_1_block_competition_tables_group_10_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getTableStandings(11, tableURL, tableID, req, res, next);
 };
 
@@ -211,8 +211,8 @@ exports.getYouthLeagueTable = (req, res, next) => {
 	if(req.youthLeagueData != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/international/europe/uefa-youth-league/20172018/group-stage/r40845/';
-	const tableID = '#page_competition_1_block_competition_tables_group_7_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getTableStandings(12, tableURL, tableID, req, res, next);
 };
 
@@ -231,8 +231,8 @@ exports.getU18PLCupTable = (req, res, next) => {
 	if(req.plCupData != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/national/england/u18-premier-league-cup/20172018/group-stage/r43297/';
-	const tableID = '#page_competition_1_block_competition_tables_group_12_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getTableStandings(15, tableURL, tableID, req, res, next);
 };
 
