@@ -8,7 +8,7 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 				span.icon-bar
 				span.icon-bar
 			a.navbar-brand(href='/')
-				img.img-responsive(src='/img/clubLogos/Manchester_United_FC.svg', alt='Logo')
+				img.img-responsive(src='/img/clubLogos/Manchester_United.svg', alt='Logo')
 			a.navbar-brand(href='/') Manchester United
 		#navbar.navbar-collapse.collapse
 			ul.nav.navbar-nav
@@ -27,21 +27,19 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 						.divider
 						li
 							a.small-caps(href='/academy-fixtures') Academy Fixtures
-				li.nav-item
-					a(href='/standings') STANDINGS
-				//- li.dropdown
-				//- 	a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-				//- 		| STANDINGS
-				//- 		span.caret
-				//- 	ul.dropdown-menu
-				//- 		li
-				//- 			a.small-caps(href='/standings') First Team Standings
-				//- 		.divider
-				//- 		li
-				//- 			a.small-caps(href='/reserves-standings') Reserves Standings
-				//- 		.divider
-				//- 		li
-				//- 			a.small-caps(href='/academy-standings') Academy Standings
+				li.dropdown
+					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+						| STANDINGS
+						span.caret
+					ul.dropdown-menu
+						li
+							a.small-caps(href='/standings') First Team Standings
+						.divider
+						li
+							a.small-caps(href='/reserves-standings') Reserves Standings
+						.divider
+						li
+							a.small-caps(href='/academy-standings') Academy Standings
 				li.dropdown
 					a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
 						| PLAYERS
@@ -107,4 +105,4 @@ nav.navbar.navbar-default.navbar-fixed-top.navbar-light.bg-light
 				a.navbar-brand.hidden-md(href='/')
 					|     Manchester United
 				a.navbar-brand(href='/')
-					img.img-responsive(src='/img/clubLogos/Manchester_United_FC.svg', alt='Logo')
+					img.img-responsive(src='/img/clubLogos/Manchester_United.svg', alt='Logo')

@@ -1,5 +1,6 @@
 // Store Manchester United name
 const MANCHESTER_UNITED_FC = 'Manchester United FC';
+const MANCHESTER_UNITED = 'Manchester United';
 
 /* -------------------------------------------------------- */
 /* ------------------- FIXTURE STATUS --------------------- */
@@ -42,6 +43,18 @@ exports.getCompetitionName = function getCompetitionName(competitionID) {
 	return competitions[competitionID];
 }
 
+// Get the team by competition ID
+exports.getTeamByCompetitionID = function getTeamByCompetitionID(competitionID) {
+	// Return friendlies as first team
+	if(competitionID < 10) {
+		return 0;
+	}
+	if(competitionID < 13) {
+		return 1;
+	}
+	return 2;
+}
+
 // Returns the name of the competition round based on the ID
 exports.getCompetitionRound = function getCompetitionRound(competitionID, round) {
 	switch(competitionID) {
@@ -63,7 +76,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// FA Cup, or FA Youth Cup
 	if(competitionID == 1 || competitionID == 15) {
-		if(round < 6)
+		if(round <=  5)
 			return 'Rd ' + round;
 		if(round == 6)
 			return '1/4 Finals';
@@ -74,7 +87,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Carabao (EFL) Cup
 	if(competitionID == 2) {
-		if(round < 6)
+		if(round <= 5)
 			return 'Rd ' + round;
 		if(round == 6)
 			return '1/2 Finals';
@@ -83,35 +96,35 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Champions League
 	if(competitionID == 4) {
-		if(round < 7)
+		if(round <= 6)
 			return 'Game ' + round;
-		if(round < 9)
+		if(round <= 8)
 			return '1/8 Finals';
-		if(round < 11)
+		if(round <= 10)
 			return '1/4 Finals';
-		if(round < 13)
+		if(round <= 12)
 			return '1/2 Finals';
 		return 'Final';
 	}
 
 	// Europa League
 	if(competitionID == 5) {
-		if(round < 7)
+		if(round <= 6)
 			return 'Game ' + round;
-		if(round < 9)
+		if(round <= 8)
 			return '1/16 Finals';
-		if(round < 11)
+		if(round <= 10)
 			return '1/8 Finals';
-		if(round < 13)
+		if(round <= 12)
 			return '1/4 Finals';
-		if(round < 15)
+		if(round <= 14)
 			return '1/2 Finals';
 		return 'Final';
 	}
 
 	// Premier League International Cup, or Under-18 Premier League Cup
 	if(competitionID == 11 || competitionID == 14) {
-		if(round < 4)
+		if(round <= 3)
 			return 'Game ' + round;
 		if(round == 4)
 			return '1/4 Finals';
@@ -122,9 +135,9 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Under-19 UEFA Youth League
 	if(competitionID == 12) {
-		if(round < 7)
+		if(round <= 6)
 			return 'Game ' + round;
-		if(round < 9)
+		if(round <= 8)
 			return 'Qualif. ' + (round - 6);
 		if(round == 9)
 			return 'Playoff';
@@ -139,7 +152,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Otten Cup
 	if(competitionID == 16) {
-		if(round < 4)
+		if(round <= 3)
 			return 'Game ' + round;
 		if(round == 4)
 			return '7th/8th Place';
@@ -152,7 +165,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// 5-a-side Sparkasse & VGH Cup
 	if(competitionID == 17) {
-		if(round < 9)
+		if(round <= 8)
 			return 'Game ' + round;
 		if(round == 9)
 			return '1/4 Finals';
@@ -163,7 +176,7 @@ exports.getCompetitionRound = function getCompetitionRound(competitionID, round)
 
 	// Dallas Cup
 	if(competitionID == 18) {
-		if(round < 4)
+		if(round <= 3)
 			return 'Game ' + round;
 		if(round == 4)
 			return '1/2 Finals';
@@ -375,32 +388,33 @@ exports.getTeamLong = function getTeamLong(team, competition, teamName) {
 // Convert date to short format
 exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 	const CLUB_LOGOS_FOLDER = '/img/clubLogos/';
+	teamName = this.getTeamLong(0, 0, teamName);
 	switch(teamName) {
-		case MANCHESTER_UNITED_FC:
-			return CLUB_LOGOS_FOLDER + 'Manchester_United_FC.svg';
-		case 'AFC Bournemouth':
-		case 'Arsenal FC':
+		case MANCHESTER_UNITED:
+			return CLUB_LOGOS_FOLDER + 'Manchester_United.svg';
+		case 'Arsenal':
+		case 'Bournemouth':
 		case 'Brighton & Hove Albion':
-		case 'Burnley FC':
-		case 'Cardiff City FC':
-		case 'Chelsea FC':
-		case 'Crystal Palace FC':
-		case 'Everton FC':
-		case 'Fulham FC':
+		case 'Burnley':
+		case 'Cardiff City':
+		case 'Chelsea':
+		case 'Crystal Palace':
+		case 'Everton':
+		case 'Fulham':
 		case 'Huddersfield Town':
-		case 'Leicester City FC':
-		case 'Liverpool FC':
-		case 'Manchester City FC':
-		case 'Newcastle United FC':
-		case 'Southampton FC':
-		case 'Stoke City FC':
-		case 'Swansea City FC':
-		case 'Tottenham Hotspur FC':
-		case 'Watford FC':
-		case 'West Bromwich Albion FC':
-		case 'West Ham United FC':
-		case 'Wolverhampton Wanderers FC':
-		case 'Real Madrid CF':
+		case 'Leicester City':
+		case 'Liverpool':
+		case 'Manchester City':
+		case 'Newcastle United':
+		case 'Southampton':
+		case 'Stoke City':
+		case 'Swansea City':
+		case 'Tottenham Hotspur':
+		case 'Watford':
+		case 'West Bromwich Albion':
+		case 'West Ham United':
+		case 'Wolverhampton Wanderers':
+		case 'Real Madrid':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		default:
 			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
@@ -486,38 +500,40 @@ exports.getTeamPosition = function getTeamPosition(standings) {
 	if(standings == null || standings == [])
 		return '';
 
-	const position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
+	let position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
+	if(!position || position == 0) {
+		position = standings.indexOf(MANCHESTER_UNITED) + 1;
+	}
 	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
 	return `${position}${suffix}`;
 }
 
-// Get a stub fixture for the future match that has not yet been drawn
-function getStubFixture(team, competition, competitionStatus) {
+// Update status and add fixture stubs if needed
+exports.getCompetitionStatus = function getCompetitionStatus(competitionID, competitionData) {
+	// Get the team by competition
+	const team = this.getTeamByCompetitionID(competitionID);
+	// Create a stub fixture data to be used later
 	const TBD = 'TBD';
-	const stubFixture = {
+	let stubFixture = {
 		matchdate: TBD,
 		hometeam: MANCHESTER_UNITED_FC,
 		awayteam: TBD,
 		// Store full team name
-		hometeamNameShort: fixtureHelper.getTeamShort(team, competition, MANCHESTER_UNITED_FC),
-		hometeamNameLong: fixtureHelper.getTeamLong(team, competition, MANCHESTER_UNITED_FC),
+		hometeamNameShort: this.getTeamShort(team, competitionID, MANCHESTER_UNITED_FC),
+		hometeamNameLong: this.getTeamLong(team, competitionID, MANCHESTER_UNITED_FC),
 		awayteamNameShort: TBD,
 		awayteamNameLong: TBD,
 		// Store competition name and round
-		competitionName: competition,
-		roundName: competitionStatus,
+		competitionName: this.getCompetitionName(competitionID),
 		// Store date short and match time
 		matchdateShort: TBD,
 		matchTime: TBD,
 		// Store club and competition logo source
-		homeClubLogoSrc: fixtureHelper.getClubLogoSrc(MANCHESTER_UNITED_FC),
-		awayClubLogoSrc: fixtureHelper.getClubLogoSrc(TBD),
-		competitionLogoSrc: fixtureHelper.getCompetitionLogoSrc(competition)
+		homeClubLogoSrc: this.getClubLogoSrc(MANCHESTER_UNITED_FC),
+		awayClubLogoSrc: this.getClubLogoSrc(TBD),
+		competitionLogoSrc: this.getCompetitionLogoSrc(competitionID)
 	};
-}
 
-// Update status and add fixture stubs if needed
-exports.getCompetitionStatus = function getCompetitionStatus(team, competitionID, competitionData) {
 	// Mixed competitions have to be treated separately if they aren't in knockout stage yet
 	if(competitionID == 4 || competitionID == 5) {
 		// Champions League & Europa League -> Check if group stage isn't yet completed
@@ -532,9 +548,10 @@ exports.getCompetitionStatus = function getCompetitionStatus(team, competitionID
 		// In this case, reached the knockout stages
 		if(competitionData.fixtures == null || competitionData.fixtures.length == 0) {
 			// If no fixtures yet, add a stub
-			competitionData.competitionStatus = getCompetitionRound(competitionID, 7);
+			competitionData.competitionStatus = this.getCompetitionRound(competitionID, 7);
+			stubFixture.competitionStatus = competitionData.competitionStatus;
 			competitionData.fixtures = [];
-			competitionData.fixtures.insert(getStubFixture(team, competitionID, competitionData.competitionStatus));
+			competitionData.fixtures.push(stubFixture);
 			return competitionData;
 		}
 	}
@@ -557,10 +574,97 @@ exports.getCompetitionStatus = function getCompetitionStatus(team, competitionID
 		competitionData.competitionStatus = 'CHAMPIONS';
 		return competitionData;
 	}
+	// In special cases there might be no more next game (i.e. 5th/6th place)
+	if((competitionID == 7 && lastMatch.round == 2) || (competitionID == 16 && lastMatch.round >= 4)) {
+		competitionData.competitionStatus = lastMatch.roundName;
+		return competitionData;
+	}
 	// Now need to add a stub for the future match that has not yet been drawn
-	competitionData.competitionStatus = getCompetitionRound(lastMatch.competition, lastMatch.round + 1);
-	competitionData.fixtures.unshift(getStubFixture(team, lastMatch.competition, competitionData.competitionStatus));
+	competitionData.competitionStatus = this.getCompetitionRound(lastMatch.competition, lastMatch.round + 1);
+	stubFixture.roundName = competitionData.competitionStatus;
+	competitionData.fixtures.unshift(stubFixture);
 	return competitionData;
+}
+
+// Store Appropriate Color Based On The Table Position
+exports.getPositionColorByCompetitionID = function getPositionColorByCompetitionID(competitionID, position) {
+	const CHAMPIONS_COLOR = 'rgba(0, 180, 50, 0.5)';
+	const CHAMPIONS_LEAGUE_GROUP_COLOR = 'rgba(50, 218, 255, 0.5)';
+	const CHAMPIONS_LEAGUE_QUALIFYING_COLOR = 'rgba(187, 243, 255, 0.5)';
+	const EUROPA_LEAGUE_COLOR = 'rgba(187, 243, 187, 0.5)';
+	const RELEGATION_COLOR = 'rgba(255, 187, 187, 0.5)';
+	const UCL_GROUP_WINNERS = 'rgba(36, 255, 63, 0.5)';
+
+	switch(competitionID) {
+		case 0: 	// Premier League
+    		if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			if(position <= 3) {
+				return CHAMPIONS_LEAGUE_GROUP_COLOR;
+			}
+			if(position == 4) {
+				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
+			}
+			if(position == 5) {
+				return EUROPA_LEAGUE_COLOR;
+			}
+			if(position >= 18) {
+				return RELEGATION_COLOR;
+			}
+			break;
+		case 4: 	// Champions League
+    		if(position <= 2) {
+				return UCL_GROUP_WINNERS;
+			}
+			if(position == 3) {
+				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
+			}
+			break;
+		case 5: 	// Europa League
+    		if(position <= 2) {
+				return UCL_GROUP_WINNERS;
+			}
+			break;
+		case 10: 	// Premier League 2
+    		if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			if(position >= 11) {
+				return RELEGATION_COLOR;
+			}
+			break;
+		case 11: 	// Premier League International Cup
+    		if(position == 1) {
+				return UCL_GROUP_WINNERS;
+			}
+			if(position == 2) {
+				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
+			}
+			break;
+		case 12: 	// Under-19 UEFA Youth League
+    		if(position == 1) {
+				return UCL_GROUP_WINNERS;
+			}
+			if(position == 2) {
+				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
+			}
+			break;
+		case 13: 	// U18 Premier League North
+    		if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			break;
+		case 15: 	// U18 Premier League Cup
+    		if(position <= 2) {
+				return UCL_GROUP_WINNERS;
+			}
+			if(position == 3) {
+				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
+			}
+			break;
+	}
+	return null;
 }
 
 /* -------------------------------------------------------- */

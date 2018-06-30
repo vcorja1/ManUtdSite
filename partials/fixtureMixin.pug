@@ -2,17 +2,24 @@
 //- ----------------------- FOR FIXTURES PAGES -----------------------
 //--------------------------------------------------------------------
 
-mixin getMatchDateWithCompetition(match)
-	if (match.status == 2)
+mixin getMatchDateWithCompetition(match, standingsView)
+	if(standingsView)
+		h5.bold.small-caps #{match.competitionName + ' - ' + match.roundName}
+	if(match.status == 2)
 		h5='TBD'
-	if (match.status == 4)
+	if(match.status == 4)
 		h5.bold.green='LIVE'
 	else
 		h5=match.matchdateShort
-	h5.bold.small-caps=`${match.competitionName} - ${match.roundName}`
+	if(!standingsView)
+		h5.bold.small-caps #{match.competitionName + ' - ' + match.roundName}
 
 
-mixin quickMatchInfoMobile(match)
+mixin quickMatchInfoMobile(match, standingsView)
+	if(standingsView)
+		//- Match Date & Competition
+		.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.bg-light(style={'border-bottom': '1px solid #d3d3d3', 'margin-bottom': '10px'})
+			+getMatchDateWithCompetition(match)
 	.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12(style={'padding': '0', 'height': '109px'})
 		.col-lg-8.col-md-8.col-sm-8.col-ms-8.col-xs-8.recent-match-mobile
 			//- Home Team Name
@@ -62,9 +69,10 @@ mixin quickMatchInfoMobile(match)
 			//- Game either scheduled or in play
 			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4.match-status-mobile(style={'align-items': 'center', 'justify-content': 'center'})
 				h4.bold.blue-upcoming-match=match.matchTime
-	//- Match Date & Competition
-	.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.bg-light(style={'border-top': '1px solid #d3d3d3'})
-		+getMatchDateWithCompetition(match)
+	if(!standingsView)
+		//- Match Date & Competition
+		.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.bg-light(style={'border-top': '1px solid #d3d3d3'})
+			+getMatchDateWithCompetition(match)
 
 
 mixin quickMatchInfo(match, heading)
@@ -74,7 +82,7 @@ mixin quickMatchInfo(match, heading)
 		.panel-body
 			//- Mobile View
 			.hidden-lg.hidden-md.hidden-sm.col-ms-12.col-xs-12(style={'padding': '0'})
-				+quickMatchInfoMobile(match)
+				+quickMatchInfoMobile(match, false)
 			//- Large View
 			.col-lg-12.col-md-12.col-sm-12.hidden-ms.hidden-xs(style={'height': '86px'})
 				//- Home Team
@@ -126,7 +134,7 @@ mixin fixtures(matchList)
 			.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
 				//- Mobile View
 				.hidden-lg.hidden-md.hidden-sm.col-ms-12.col-xs-12(style={'padding': '0'})
-					+quickMatchInfoMobile(match)
+					+quickMatchInfoMobile(match, false)
 				//- Large View
 				.col-lg-12.col-md-12.col-sm-12.hidden-ms.hidden-xs.fixtures-large-view
 					//- Match Stadium
@@ -185,49 +193,3 @@ mixin fixtures(matchList)
 			if (match.note != null)
 				.bg-light.match-penalty-result
 					h5(style={ 'color': match.resultColor })=match.penaltyResultsString
-
-
-//--------------------------------------------------------------------
-//- ----------------------- FOR STANDINGS PAGES ----------------------
-//--------------------------------------------------------------------
-
-mixin getMatchDateWithRound(match)
-	if (match.status == 2)
-		h5 TBD
-	if (match.status == 4)
-		h5.bold.green LIVE
-	else
-		h5=match.matchdateShort
-	h5.small-caps.bold=match.roundName
-
-
-mixin standingsMatchInfo(match, heading)
-	.text-center
-		.row.panel-body
-			//- Home Team
-			.col-ms-4.col-sm-4.col-md-4.flex-align-center.recent-match
-				h5.full-width=match.hometeamNameLong
-			//- Match Status
-			.col-ms-4.col-sm-4.col-md-4
-				if (match.status == 2)
-					//- Game postponed -> (shouldn't usually be the case though)
-					h4.bold.postponed-match POSTPONED
-				else if (match.status == 4)
-					//- Game is currently in play
-					h4.bold.blue-upcoming-match
-						| #{match.homegoals + ' - ' + match.awaygoals}
-				else if (match.status == 5)
-					//- Game completed
-					h4.bold(style={ 'color': match.resultColor})=match.resultString
-				else
-					//- Game either scheduled or in play
-					h4.bold.blue-upcoming-match(style={ 'margin-top': 0 })=match.matchTime
-				.hidden-xs
-					+getMatchDateWithRound(match)
-			//- Away Team
-			.recent-match.col-ms-4.col-sm-4.col-md-4.flex-align-center
-				h5.full-width=match.awayteamNameLong
-		if (match.note != null)
-			.bg-light
-				h5(style={ 'margin': 0, 'padding': '5px', 'color': match.resultColor, 'border-bottom': '1px solid #d3d3d3' })=match.penaltyResultsString
-			+getMatchDateWithRound(match)

@@ -101,7 +101,7 @@ app.get('/champions-league', function(req, res, next) {
 });
 
 // GET response for '/standings/europa-league'
-app.use('/europa-league', [standings.getUCLTable, standings.processStandingsData]);
+app.use('/europa-league', [standings.getEuropaLeagueTable, standings.processStandingsData]);
 app.get('/europa-league', function(req, res, next) {
 
 	try {
@@ -137,7 +137,7 @@ app.get('/super-cup', function(req, res, next) {
 });
 
 // GET response for '/standings'
-app.use('/', [standings.getEPLTable, standings.getUCLTable, standings.processStandingsData]);
+app.use('/', [standings.getEPLTable, standings.getUCLTable, standings.getEuropaLeagueTable, standings.processStandingsData]);
 app.get('/', function(req, res, next) {
 
 	try {
