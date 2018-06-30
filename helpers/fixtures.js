@@ -313,11 +313,15 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 
 	// Now see if any further adjustments are necessary
 	switch(teamName) {
+		// Premier League
 		case 'Manchester United':
 			teamName = 'Man Utd';
 			break;
 		case 'Brighton & Hove Albion':
 			teamName = 'Brighton';
+			break;
+		case 'Cardiff City':
+			teamName = 'Cardiff';
 			break;
 		case 'Huddersfield Town':
 			teamName = 'Huddersfield';
@@ -331,22 +335,17 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 		case 'Newcastle United':
 			teamName = 'Newcastle';
 			break;
-		case 'Stoke City':
-			teamName = 'Stoke';
-			break;
-		case 'Swansea City':
-			teamName = 'Swansea';
-			break;
 		case 'Tottenham Hotspur':
 			teamName = 'Tottenham';
-			break;
-		case 'West Bromwich Albion':
-			teamName = 'West Brom';
 			break;
 		case 'West Ham United':
 			teamName = 'West Ham';
 			break;
+		case 'Wolverhampton Wanderers':
+			teamName = 'Wolves';
+			break;
 
+		// England
 		case 'Blackburn Rovers':
 			teamName = 'Blackburn';
 			break;
@@ -356,14 +355,25 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 		case 'Derby County':
 			teamName = 'Derby';
 			break;
-		case 'Wolverhampton Wanderers':
-			teamName = 'Wolves';
+		case 'Stoke City':
+			teamName = 'Stoke';
+			break;
+		case 'Swansea City':
+			teamName = 'Swansea';
+			break;
+		case 'West Bromwich Albion':
+			teamName = 'West Brom';
 			break;
 		case 'Yeovil Town':
 			teamName = 'Yeovil';
 			break;
+		// Spain
 		case 'Atletico Madrid':
 			teamName = 'Atletico';
+			break;
+		// Germany
+		case 'Bayern Munich':
+			teamName = 'Bayern';
 			break;
 		case 'Borussia Monchengladbach':
 			teamName = 'Gladbach';
@@ -371,9 +381,11 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 		case 'Eintracht Braunschweig':
 			teamName = 'BTSV';
 			break;
+		// Italy
 		case 'Inter Milan':
 			teamName = 'Inter';
 			break;
+		// France
 		case 'Olympique Lyonnais':
 			teamName = 'Lyon';
 			break;
@@ -401,7 +413,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 	switch(teamName) {
 		case MANCHESTER_UNITED:
 			return CLUB_LOGOS_FOLDER + 'Manchester_United.svg';
-		// England
+		// Premier League
 		case 'Arsenal':
 		case 'Bournemouth':
 		case 'Brighton & Hove Albion':
@@ -417,17 +429,21 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Manchester City':
 		case 'Newcastle United':
 		case 'Southampton':
-		case 'Stoke City':
-		case 'Swansea City':
 		case 'Tottenham Hotspur':
 		case 'Watford':
-		case 'West Bromwich Albion':
 		case 'West Ham United':
 		case 'Wolverhampton Wanderers':
+		// England
+		case 'Blackburn Rovers':
+		case 'Derby County':
+		case 'Stoke City':
+		case 'Swansea City':
+		case 'West Bromwich Albion':
 		// Spain
 		case 'Atletico Madrid':
 		case 'Barcelona':
 		case 'Real Madrid':
+		case 'Sevilla':
 		// Germany
 		case 'Bayern Munich':
 		case 'Borussia Dortmund':
@@ -438,7 +454,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Roma':
 		// France
 		case 'Olympique Lyonnais':
-		case 'PSG':
+		case 'Paris Saint-Germain':
 		// Portugal
 		case 'Benfica':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';

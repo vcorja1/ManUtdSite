@@ -55,7 +55,7 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 					curTeamData.teamName = 'Wolverhampton Wanderers';
 				}
 				else if(curTeamData.teamName == 'Atlético Madrid') {
-					curTeamData.teamName == 'Atletico Madrid';
+					curTeamData.teamName = 'Atletico Madrid';
 				}
 				else if(curTeamData.teamName == 'Bayern München') {
 					curTeamData.teamName = 'Bayern Munich';
