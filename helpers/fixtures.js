@@ -597,7 +597,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 
 	switch(competitionID) {
 		case 0: 	// Premier League
-    		if(position == 1) {
+			if(position == 1) {
 				return CHAMPIONS_COLOR;
 			}
 			if(position <= 3) {
@@ -614,7 +614,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 		case 4: 	// Champions League
-    		if(position <= 2) {
+			if(position <= 2) {
 				return UCL_GROUP_WINNERS;
 			}
 			if(position == 3) {
@@ -622,12 +622,17 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 		case 5: 	// Europa League
-    		if(position <= 2) {
+			if(position <= 2) {
 				return UCL_GROUP_WINNERS;
 			}
 			break;
+		case 8: 	// International Champions Cup
+			if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			break;
 		case 10: 	// Premier League 2
-    		if(position == 1) {
+			if(position == 1) {
 				return CHAMPIONS_COLOR;
 			}
 			if(position >= 11) {
@@ -635,7 +640,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 		case 11: 	// Premier League International Cup
-    		if(position == 1) {
+			if(position == 1) {
 				return UCL_GROUP_WINNERS;
 			}
 			if(position == 2) {
@@ -643,7 +648,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 		case 12: 	// Under-19 UEFA Youth League
-    		if(position == 1) {
+			if(position == 1) {
 				return UCL_GROUP_WINNERS;
 			}
 			if(position == 2) {
@@ -651,12 +656,12 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 		case 13: 	// U18 Premier League North
-    		if(position == 1) {
+			if(position == 1) {
 				return CHAMPIONS_COLOR;
 			}
 			break;
 		case 15: 	// U18 Premier League Cup
-    		if(position <= 2) {
+			if(position <= 2) {
 				return UCL_GROUP_WINNERS;
 			}
 			if(position == 3) {

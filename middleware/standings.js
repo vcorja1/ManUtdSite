@@ -109,6 +109,10 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 
 // Get the Premier League Standings
 exports.getEPLTable = (req, res, next) => {
+	if(req.eplData != null) {
+		return next();
+	}
+
 	const tableURL = 'http://api.football-data.org/v1/competitions/445/leagueTable/?matchday=38';
 
 	http.get(tableURL, (resp) => {
@@ -154,6 +158,9 @@ exports.getEPLTable = (req, res, next) => {
 
 // Get the Champions League standings
 exports.getUCLTable = (req, res, next) => {
+	if(req.uclData != null) {
+		return next();
+	}
 	const tableURL = 'https://us.soccerway.com/international/europe/uefa-champions-league/20172018/group-stage/r42384/';
 	const tableID = '#page_competition_1_block_competition_tables_group_8_block_competition_league_table_1_table';
 	return getTableStandings(4, tableURL, tableID, req, res, next);
@@ -161,13 +168,29 @@ exports.getUCLTable = (req, res, next) => {
 
 // Get the Europa League standings
 exports.getEuropaLeagueTable = (req, res, next) => {
+	if(req.europaLeagueData != null) {
+		return next();
+	}
 	const tableURL = '';
 	const tableID = '';
 	return getTableStandings(5, tableURL, tableID, req, res, next);
 };
 
+// Get the International Champions Cup Standings
+exports.getICCTable = (req, res, next) => {
+	if(req.iccData != null) {
+		return next();
+	}
+	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2018/china-pr/r43217/';
+	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
+	return getTableStandings(8, tableURL, tableID, req, res, next);
+};
+
 // Get the Premier League 2 Standings
 exports.getPL2Table = (req, res, next) => {
+	if(req.pl2Data != null) {
+		return next();
+	}
 	const tableURL = 'https://uk.soccerway.com/national/england/premier-league-2-division-one/20172018/regular-season/r43195/';
 	const tableID = '#page_competition_1_block_competition_tables_6_block_competition_league_table_1_table';
 	return getTableStandings(10, tableURL, tableID, req, res, next);
@@ -175,6 +198,9 @@ exports.getPL2Table = (req, res, next) => {
 
 // Get the PL International Cup Standings
 exports.getPLInternationalCupTable = (req, res, next) => {
+	if(req.plIntlCupData != null) {
+		return next();
+	}
 	const tableURL = 'https://uk.soccerway.com/international/europe/premier-league-international-cup/20172018/group-stage/r41461/';
 	const tableID = '#page_competition_1_block_competition_tables_group_10_block_competition_league_table_1_table';
 	return getTableStandings(11, tableURL, tableID, req, res, next);
@@ -182,6 +208,9 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 
 // Get the Under-19 UEFA Youth League Standings
 exports.getYouthLeagueTable = (req, res, next) => {
+	if(req.youthLeagueData != null) {
+		return next();
+	}
 	const tableURL = 'https://uk.soccerway.com/international/europe/uefa-youth-league/20172018/group-stage/r40845/';
 	const tableID = '#page_competition_1_block_competition_tables_group_7_block_competition_league_table_1_table';
 	return getTableStandings(12, tableURL, tableID, req, res, next);
@@ -189,6 +218,9 @@ exports.getYouthLeagueTable = (req, res, next) => {
 
 // Get the U18 Premier League North Standings
 exports.getU18PLTable = (req, res, next) => {
+	if(req.plNorthData != null) {
+		return next();
+	}
 	const tableURL = 'https://uk.soccerway.com/national/england/premier-academy-league/20172018/north/r43221/';
 	const tableID = '#page_competition_1_block_competition_tables_6_block_competition_league_table_1_table';
 	return getTableStandings(13, tableURL, tableID, req, res, next);
@@ -196,22 +228,80 @@ exports.getU18PLTable = (req, res, next) => {
 
 // Get the U18 Premier League Cup Standings
 exports.getU18PLCupTable = (req, res, next) => {
+	if(req.plCupData != null) {
+		return next();
+	}
 	const tableURL = 'https://uk.soccerway.com/national/england/u18-premier-league-cup/20172018/group-stage/r43297/';
 	const tableID = '#page_competition_1_block_competition_tables_group_12_block_competition_league_table_1_table';
 	return getTableStandings(15, tableURL, tableID, req, res, next);
 };
 
-// Get the International Champions Cup Standings
-exports.getICCTable = (req, res, next) => {
-	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2018/china-pr/r43217/';
-	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
-	return getTableStandings(8, tableURL, tableID, req, res, next);
-};
+// Process Cups That Haven't Been Drawn Yet
+exports.processCupsNotDrawn = (req, res, next) => {
+	const NOT_PARTICIPATING = 'Manchester United will not play in this competition this season.';
+
+	// FA Cup
+	req.faCupData = {
+		specialNote: 'Manchester United will enter in the Third Round. The draw will take place in late 2018.',
+		shouldDisplayInSummary: true
+	};
+	// Carabao Cup
+	req.carabaoCupData = {
+		specialNote: 'Manchester United will enter in the Third Round. The draw will take place later in 2018.',
+		shouldDisplayInSummary: true
+	};
+	// Community Shield
+	req.communityShieldData = {
+		specialNote: NOT_PARTICIPATING,
+		shouldDisplayInSummary: false
+	};
+	// Champions League
+	req.uclData = {
+		specialNote: 'Manchester United will enter in the Group Stage round. The draw will take place in Monaco on August 30, 2018.',
+		shouldDisplayInSummary: true
+	};
+	// Europa League
+	req.europaLeagueData = {
+		specialNote: NOT_PARTICIPATING,
+		shouldDisplayInSummary: false
+	};
+	// UEFA Super Cup
+	req.superCupData = {
+		specialNote: NOT_PARTICIPATING,
+		shouldDisplayInSummary: false
+	};
+	// FIFA Club World Cup
+	req.clubWorldCupData = {
+		specialNote: NOT_PARTICIPATING,
+		shouldDisplayInSummary: false
+	};
+	// Premier League International Cup
+	req.plIntlCupData = {
+		specialNote: NOT_PARTICIPATING,
+		shouldDisplayInSummary: false
+	};
+	// Under-19 UEFA Youth League
+	req.youthLeagueData = {
+		specialNote: 'Manchester United will enter in the Group Stage round. The draw will take place in Monaco on August 30, 2018.',
+		shouldDisplayInSummary: true
+	};
+	// FA Youth Cup
+	req.faYouthCupData = {
+		specialNote: 'Manchester United will enter in the Third Round. The draw will take place in late 2018.',
+		shouldDisplayInSummary: true
+	};
+	return next();
+}
 
 // Process Standings Data
 exports.processStandingsData = (req, res, next) => {
 	/* ---------------- TABLE COMPETITION ---------------- */
-	if(req.eplTable != null) {
+	if(req.eplData != null) {
+		// Premier League
+		req.eplData.competitionName = 'Premier League ' + CURRENT_SEASON;
+		req.eplData.competitionLink = STANDINGS_LOCATION + 'premier-league';
+	}
+	else if(req.eplTable != null) {
 		// Premier League
 		req.eplData = {
 			competitionName: 'Premier League ' + CURRENT_SEASON,
@@ -220,7 +310,12 @@ exports.processStandingsData = (req, res, next) => {
 			competitionTable: req.eplTable
 		};
 	}
-	if(req.pl2Table != null) {
+	if(req.pl2Data != null) {
+		// Premier League 2
+		req.pl2Data.competitionName = 'Premier League 2 ' + CURRENT_SEASON;
+		req.pl2Data.competitionLink = RESERVES_STANDINGS_LOCATION + 'premier-league-2';
+	}
+	else if(req.pl2Table != null) {
 		// Premier League 2
 		req.pl2Data = {
 			competitionName: 'Premier League 2 ' + CURRENT_SEASON,
@@ -229,7 +324,12 @@ exports.processStandingsData = (req, res, next) => {
 			competitionTable: req.pl2Table
 		};
 	}
-	if(req.plNorthTable != null) {
+	if(req.plNorthData != null) {
+		// U18 Premier League North
+		req.plNorthData.competitionName = 'U18 Premier League North ' + CURRENT_SEASON;
+		req.plNorthData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'premier-league-north';
+	}
+	else if(req.plNorthTable != null) {
 		// U18 Premier League North
 		req.plNorthData = {
 			competitionName: 'U18 Premier League North ' + CURRENT_SEASON,
@@ -238,7 +338,12 @@ exports.processStandingsData = (req, res, next) => {
 			competitionTable: req.plNorthTable
 		};
 	}
-	if(req.iccTable != null) {
+	if(req.iccData != null) {
+		// International Champions Cup
+		req.iccData.competitionName = 'International Champions Cup ' + CURRENT_SEASON;
+		req.iccData.competitionLink = STANDINGS_LOCATION + 'international-champions-cup';
+	}
+	else if(req.iccTable != null) {
 		// International Champions Cup
 		req.iccData = {
 			competitionName: 'International Champions Cup ' + CURRENT_SEASON,
@@ -248,7 +353,12 @@ exports.processStandingsData = (req, res, next) => {
 		};
 	}
 	/* ---------------- MIXED COMPETITION ---------------- */
-	if(req.uclTable != null) {
+	if(req.uclData != null) {
+		// Champions League
+		req.uclData.competitionName = 'Champions League ' + CURRENT_SEASON;
+		req.uclData.competitionLink = STANDINGS_LOCATION + 'champions-league';
+	}
+	else if(req.uclTable != null) {
 		// Champions League
 		// First store group stage standings results
 		req.uclData = {
@@ -266,7 +376,12 @@ exports.processStandingsData = (req, res, next) => {
 			}
 		}
 	}
-	if(req.europaLeagueTable != null) {
+	if(req.europaLeagueData != null) {
+		// Europa League
+		req.europaLeagueData.competitionName = 'Europa League ' + CURRENT_SEASON;
+		req.europaLeagueData.competitionLink = STANDINGS_LOCATION + 'europa-league';
+	}
+	else if(req.europaLeagueTable != null) {
 		// Europa League
 		// First store group stage standings results
 		req.europaLeagueData = {
@@ -284,7 +399,12 @@ exports.processStandingsData = (req, res, next) => {
 			}
 		}
 	}
-	if(req.plIntlCupTable != null) {
+	if(req.plIntlCupData != null) {
+		// Premier League International Cup
+		req.plIntlCupData.competitionName = 'Premier League International Cup ' + CURRENT_SEASON;
+		req.plIntlCupData.competitionLink = RESERVES_STANDINGS_LOCATION + 'pl-international-cup';
+	}
+	else if(req.plIntlCupTable != null) {
 		// Premier League International Cup
 		// First store group stage standings results
 		req.plIntlCupData = {
@@ -302,7 +422,12 @@ exports.processStandingsData = (req, res, next) => {
 			}
 		}
 	}
-	if(req.youthLeagueTable != null) {
+	if(req.youthLeagueData != null) {
+		// Under-19 UEFA Youth League
+		req.youthLeagueData.competitionName = 'UEFA Youth League ' + CURRENT_SEASON;
+		req.youthLeagueData.competitionLink = RESERVES_STANDINGS_LOCATION + 'youth-league';
+	}
+	else if(req.youthLeagueTable != null) {
 		// Under-19 UEFA Youth League
 		// First store group stage standings results
 		req.youthLeagueData = {
@@ -320,7 +445,12 @@ exports.processStandingsData = (req, res, next) => {
 			}
 		}
 	}
-	if(req.plCupTable != null) {
+	if(req.plCupData != null) {
+		// U18 Premier League Cup
+		req.plCupData.competitionName = 'U18 Premier League Cup ' + CURRENT_SEASON;
+		req.plCupData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'premier-league-cup';
+	}
+	else if(req.plCupTable != null) {
 		// U18 Premier League Cup
 		// First store group stage standings results
 		req.plCupData = {
@@ -341,96 +471,151 @@ exports.processStandingsData = (req, res, next) => {
 	/* ------------- KNOCKOUT COMPETITION ------------- */
 	if(req.fixtures != null) {
 		// FA Cup
-		const faCupFixtures = req.fixtures.filter(match => match.competition == 1);
-		if(faCupFixtures != null && faCupFixtures.length > 0) {
-			req.faCupData = {
-				competitionName: 'FA CUP ' + CURRENT_SEASON,
-				competitionLink: STANDINGS_LOCATION + 'fa-cup',
-				fixtures: faCupFixtures.reverse()
-			};
-			req.faCupData = fixtureHelper.getCompetitionStatus(1, req.faCupData);
+		if(req.faCupData != null) {
+			req.faCupData.competitionName = 'FA CUP ' + CURRENT_SEASON;
+			req.faCupData.competitionLink = STANDINGS_LOCATION + 'fa-cup';
+		}
+		else {
+			const faCupFixtures = req.fixtures.filter(match => match.competition == 1);
+			if(faCupFixtures != null && faCupFixtures.length > 0) {
+				req.faCupData = {
+					competitionName: 'FA CUP ' + CURRENT_SEASON,
+					competitionLink: STANDINGS_LOCATION + 'fa-cup',
+					fixtures: faCupFixtures.reverse()
+				};
+				req.faCupData = fixtureHelper.getCompetitionStatus(1, req.faCupData);
+			}
 		}
 		// Carabao Cup
-		const carabaoCupFixtures = req.fixtures.filter(match => match.competition == 2);
-		if(carabaoCupFixtures != null && carabaoCupFixtures.length > 0) {
-			req.carabaoCupData = {
-				competitionName: 'CARABAO CUP ' + CURRENT_SEASON,
-				competitionLink: STANDINGS_LOCATION + 'carabao-cup',
-				fixtures: carabaoCupFixtures.reverse()
-			};
-			req.carabaoCupData = fixtureHelper.getCompetitionStatus(2, req.carabaoCupData);
+		if(req.carabaoCupData != null) {
+			req.carabaoCupData.competitionName = 'CARABAO CUP ' + CURRENT_SEASON;
+			req.carabaoCupData.competitionLink = STANDINGS_LOCATION + 'carabao-cup';
+		}
+		else {
+			const carabaoCupFixtures = req.fixtures.filter(match => match.competition == 2);
+			if(carabaoCupFixtures != null && carabaoCupFixtures.length > 0) {
+				req.carabaoCupData = {
+					competitionName: 'CARABAO CUP ' + CURRENT_SEASON,
+					competitionLink: STANDINGS_LOCATION + 'carabao-cup',
+					fixtures: carabaoCupFixtures.reverse()
+				};
+				req.carabaoCupData = fixtureHelper.getCompetitionStatus(2, req.carabaoCupData);
+			}
 		}
 		// Community Shield
-		const communityShieldFixtures = req.fixtures.filter(match => match.competition == 3);
-		if(communityShieldFixtures != null && communityShieldFixtures.length > 0) {
-			console.log(communityShieldFixtures);
-			req.communityShieldData = {
-				competitionName: 'COMMUNITY SHIELD ' + CURRENT_SEASON,
-				competitionLink: STANDINGS_LOCATION + 'community-shield',
-				fixtures: communityShieldFixtures.reverse()
-			};
-			req.communityShieldData = fixtureHelper.getCompetitionStatus(3, req.communityShieldData);
+		if(req.communityShieldData != null) {
+			req.communityShieldData.competitionName = 'COMMUNITY SHIELD ' + CURRENT_SEASON;
+			req.communityShieldData.competitionLink = STANDINGS_LOCATION + 'community-shield';
+		}
+		else {
+			const communityShieldFixtures = req.fixtures.filter(match => match.competition == 3);
+			if(communityShieldFixtures != null && communityShieldFixtures.length > 0) {
+				req.communityShieldData = {
+					competitionName: 'COMMUNITY SHIELD ' + CURRENT_SEASON,
+					competitionLink: STANDINGS_LOCATION + 'community-shield',
+					fixtures: communityShieldFixtures.reverse()
+				};
+				req.communityShieldData = fixtureHelper.getCompetitionStatus(3, req.communityShieldData);
+			}
 		}
 		// UEFA Super Cup
-		const superCupFixtures = req.fixtures.filter(match => match.competition == 6);
-		if(superCupFixtures != null && superCupFixtures.length > 0) {
-			req.superCupData = {
-				competitionName: 'UEFA SUPER CUP ' + CURRENT_SEASON,
-				competitionLink: STANDINGS_LOCATION + 'super-cup',
-				fixtures: superCupFixtures.reverse()
-			};
-			req.superCupData = fixtureHelper.getCompetitionStatus(6, req.superCupData);
+		if(req.superCupData != null) {
+			req.superCupData.competitionName = 'UEFA SUPER CUP ' + CURRENT_SEASON;
+			req.superCupData.competitionLink = STANDINGS_LOCATION + 'super-cup';
+		}
+		else {
+			const superCupFixtures = req.fixtures.filter(match => match.competition == 6);
+			if(superCupFixtures != null && superCupFixtures.length > 0) {
+				req.superCupData = {
+					competitionName: 'UEFA SUPER CUP ' + CURRENT_SEASON,
+					competitionLink: STANDINGS_LOCATION + 'super-cup',
+					fixtures: superCupFixtures.reverse()
+				};
+				req.superCupData = fixtureHelper.getCompetitionStatus(6, req.superCupData);
+			}
 		}
 		// FIFA Club World Cup
-		const clubWorldCupFixtures = req.fixtures.filter(match => match.competition == 7);
-		if(clubWorldCupFixtures != null && clubWorldCupFixtures.length > 0) {
-			req.clubWorldCupData = {
-				competitionName: 'FIFA CLUB WORLD CUP ' + CURRENT_SEASON,
-				competitionLink: STANDINGS_LOCATION + 'club-world-cup',
-				fixtures: clubWorldCupFixtures.reverse()
-			};
-			req.clubWorldCupData = fixtureHelper.getCompetitionStatus(6, req.clubWorldCupData);
+		if(req.clubWorldCupData != null) {
+			req.clubWorldCupData.competitionName = 'FIFA CLUB WORLD CUP ' + CURRENT_SEASON;
+			req.clubWorldCupData.competitionLink = STANDINGS_LOCATION + 'club-world-cup';
+		}
+		else {
+			const clubWorldCupFixtures = req.fixtures.filter(match => match.competition == 7);
+			if(clubWorldCupFixtures != null && clubWorldCupFixtures.length > 0) {
+				req.clubWorldCupData = {
+					competitionName: 'FIFA CLUB WORLD CUP ' + CURRENT_SEASON,
+					competitionLink: STANDINGS_LOCATION + 'club-world-cup',
+					fixtures: clubWorldCupFixtures.reverse()
+				};
+				req.clubWorldCupData = fixtureHelper.getCompetitionStatus(6, req.clubWorldCupData);
+			}
 		}
 		// FA Youth Cup
-		const faYouthCupFixtures = req.fixtures.filter(match => match.competition == 15);
-		if(faYouthCupFixtures != null && faYouthCupFixtures.length > 0) {
-			req.faYouthCupData = {
-				competitionName: 'FA YOUTH CUP ' + CURRENT_SEASON,
-				competitionLink: ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup',
-				fixtures: faYouthCupFixtures.reverse()
-			};
-			req.faYouthCupData = fixtureHelper.getCompetitionStatus(15, req.faYouthCupData);
+		if(req.faYouthCupData != null) {
+			req.faYouthCupData.competitionName = 'FA YOUTH CUP ' + CURRENT_SEASON;
+			req.faYouthCupData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup';
+		}
+		else {
+			const faYouthCupFixtures = req.fixtures.filter(match => match.competition == 15);
+			if(faYouthCupFixtures != null && faYouthCupFixtures.length > 0) {
+				req.faYouthCupData = {
+					competitionName: 'FA YOUTH CUP ' + CURRENT_SEASON,
+					competitionLink: ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup',
+					fixtures: faYouthCupFixtures.reverse()
+				};
+				req.faYouthCupData = fixtureHelper.getCompetitionStatus(15, req.faYouthCupData);
+			}
 		}
 		// Otten Cup
-		const ottenCupFixtures = req.fixtures.filter(match => match.competition == 16);
-		if(ottenCupFixtures != null && ottenCupFixtures.length > 0) {
-			req.ottenCupData = {
-				competitionName: 'OTTEN CUP ' + CURRENT_SEASON,
-				competitionLink: ACADEMY_STANDINGS_LOCATION + 'otten-cup',
-				fixtures: ottenCupFixtures.reverse()
-			};
-			req.ottenCupData = fixtureHelper.getCompetitionStatus(16, req.ottenCupData);
+		if(req.ottenCupData != null) {
+			req.ottenCupData.competitionName = 'OTTEN CUP ' + CURRENT_SEASON;
+			req.ottenCupData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'otten-cup';
+		}
+		else {
+			const ottenCupFixtures = req.fixtures.filter(match => match.competition == 16);
+			if(ottenCupFixtures != null && ottenCupFixtures.length > 0) {
+				req.ottenCupData = {
+					competitionName: 'OTTEN CUP ' + CURRENT_SEASON,
+					competitionLink: ACADEMY_STANDINGS_LOCATION + 'otten-cup',
+					fixtures: ottenCupFixtures.reverse()
+				};
+				req.ottenCupData = fixtureHelper.getCompetitionStatus(16, req.ottenCupData);
+			}
 		}
 		// Sparkasse & VGH Cup
-		const vghCupFixtures = req.fixtures.filter(match => match.competition == 17);
-		if(vghCupFixtures != null && vghCupFixtures.length > 0) {
-			req.vghCupData = {
-				competitionName: 'SPARKASSE & VGH CUP ' + CURRENT_SEASON,
-				competitionLink: ACADEMY_STANDINGS_LOCATION + 'vgh-cup',
-				fixtures: vghCupFixtures.reverse()
-			};
-			req.vghCupData = fixtureHelper.getCompetitionStatus(17, req.vghCupData);
+		if(req.vghCupData != null) {
+			req.vghCupData.competitionName = 'SPARKASSE & VGH CUP ' + CURRENT_SEASON;
+			req.vghCupData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'vgh-cup';
+		}
+		else {
+			const vghCupFixtures = req.fixtures.filter(match => match.competition == 17);
+			if(vghCupFixtures != null && vghCupFixtures.length > 0) {
+				req.vghCupData = {
+					competitionName: 'SPARKASSE & VGH CUP ' + CURRENT_SEASON,
+					competitionLink: ACADEMY_STANDINGS_LOCATION + 'vgh-cup',
+					fixtures: vghCupFixtures.reverse()
+				};
+				req.vghCupData = fixtureHelper.getCompetitionStatus(17, req.vghCupData);
+			}
 		}
 		// Dallas Cup
-		const dallasCupFixtures = req.fixtures.filter(match => match.competition == 18);
-		if(dallasCupFixtures != null && dallasCupFixtures.length > 0) {
-			req.dallasCupData = {
-				competitionName: 'DALLAS CUP ' + CURRENT_SEASON,
-				competitionLink: ACADEMY_STANDINGS_LOCATION + 'dallas-cup',
-				fixtures: dallasCupFixtures.reverse()
-			};
-			req.dallasCupData = fixtureHelper.getCompetitionStatus(18, req.dallasCupData);
+		if(req.dallasCupData != null) {
+			req.dallasCupData.competitionName = 'DALLAS CUP ' + CURRENT_SEASON;
+			req.dallasCupData.competitionLink = ACADEMY_STANDINGS_LOCATION + 'dallas-cup';
+		}
+		else {
+			const dallasCupFixtures = req.fixtures.filter(match => match.competition == 18);
+			if(dallasCupFixtures != null && dallasCupFixtures.length > 0) {
+				req.dallasCupData = {
+					competitionName: 'DALLAS CUP ' + CURRENT_SEASON,
+					competitionLink: ACADEMY_STANDINGS_LOCATION + 'dallas-cup',
+					fixtures: dallasCupFixtures.reverse()
+				};
+				req.dallasCupData = fixtureHelper.getCompetitionStatus(18, req.dallasCupData);
+			}
 		}
 	}
+
+	// Continue
 	return next();
 };

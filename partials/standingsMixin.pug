@@ -2,20 +2,27 @@
 //- ----------------------- FOR STANDINGS PAGES ----------------------
 //--------------------------------------------------------------------
 
-//- For competitions that are completely of knockout style
-mixin knockoutCompetitionMixin(competitionData, isSingleCompetition)
+//- Mixin to get the properly-styled team name
+mixin styledTeamName(competitionData, isSingleCompetition)
 	if(isSingleCompetition)
 		h2.menu-title.blue=competitionData.competitionName
 	else
 		h2.menu-title
 			a(href=competitionData.competitionLink)=competitionData.competitionName
-	h3.text-center.small-caps='Current Status:   '
-		span(style={'color': 'red'})=competitionData.competitionStatus
-	.pad-space-small
-	.panel.panel-default.align-items-center.text-center
-		each match in competitionData.fixtures
-			.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-					+quickMatchInfoMobile(match, true)
+
+//- For competitions that are completely of knockout style
+mixin knockoutCompetitionMixin(competitionData, isSingleCompetition)
+	+styledTeamName(competitionData, isSingleCompetition)
+	if(competitionData.specialNote != null)
+		h3.text-center.small-caps=competitionData.specialNote
+	else
+		h3.text-center.small-caps='Current Status:   '
+			span(style={'color': 'red'})=competitionData.competitionStatus
+		.pad-space-small
+		.panel.panel-default.align-items-center.text-center
+			each match in competitionData.fixtures
+				.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
+						+quickMatchInfoMobile(match, true)
 
 //- Generates a table with all the standings
 mixin tableStandingsMixin(competitionData)
@@ -60,37 +67,35 @@ mixin tableStandingsMixin(competitionData)
 
 //- For competitions that are completely based on table
 mixin tableCompetitionMixin(competitionData, isSingleCompetition)
-	if(isSingleCompetition)
-		h2.menu-title.blue=competitionData.competitionName
+	+styledTeamName(competitionData, isSingleCompetition)
+	if(competitionData.specialNote != null)
+		h3.text-center.small-caps=competitionData.specialNote
 	else
-		h2.menu-title
-			a(href=competitionData.competitionLink)=competitionData.competitionName
-	h3.text-center.small-caps='Current Position:   '
-		span(style={'color': 'red'})=competitionData.competitionStatus
-	.pad-space-small
-	+tableStandingsMixin(competitionData)
+		h3.text-center.small-caps='Current Position:   '
+			span(style={'color': 'red'})=competitionData.competitionStatus
+		.pad-space-small
+		+tableStandingsMixin(competitionData)
 
 //- For competitions that are a mix of knockout stages and group play
 mixin mixedCompetitionMixin(competitionData, isSingleCompetition)
-	if(isSingleCompetition)
-		h2.menu-title.blue=competitionData.competitionName
+	+styledTeamName(competitionData, isSingleCompetition)
+	if(competitionData.specialNote != null)
+		h3.text-center.small-caps=competitionData.specialNote
 	else
-		h2.menu-title
-			a(href=competitionData.competitionLink)=competitionData.competitionName
-	h3.text-center.small-caps='Current Status:   '
-		span(style={'color': 'red'})=competitionData.competitionStatus
-	.pad-space-small
-	//- Playoffs Section (if applicable)
-	if(competitionData.fixtures != null && competitionData.fixtures != [])
-		h4.blue.text-center.small-caps Playoffs Results
+		h3.text-center.small-caps='Current Status:   '
+			span(style={'color': 'red'})=competitionData.competitionStatus
 		.pad-space-small
-		.panel.panel-default.align-items-center.text-center
-			each match in competitionData.fixtures
-				.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-						+quickMatchInfoMobile(match)
+		//- Playoffs Section (if applicable)
+		if(competitionData.fixtures != null && competitionData.fixtures != [])
+			h4.blue.text-center.small-caps Playoffs Results
+			.pad-space-small
+			.panel.panel-default.align-items-center.text-center
+				each match in competitionData.fixtures
+					.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
+							+quickMatchInfoMobile(match)
 
-	//- Group Stage Section
-	.pad-space-small
-	h4.blue.text-center.small-caps Group Stage Standings
-	.pad-space-small
-	+tableStandingsMixin(competitionData)
+		//- Group Stage Section
+		.pad-space-small
+		h4.blue.text-center.small-caps Group Stage Standings
+		.pad-space-small
+		+tableStandingsMixin(competitionData)

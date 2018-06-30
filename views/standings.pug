@@ -11,71 +11,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league
 					+tableCompetitionMixin(eplData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league
-					+tableCompetitionMixin(eplData, isSingleCompetition)
-
-		//- UEFA Super Cup Standings
-		if(superCupData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#super-cup
-					+knockoutCompetitionMixin(superCupData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#super-cup
-					+knockoutCompetitionMixin(superCupData, isSingleCompetition)
-
-		//- carabao Cup Standings
-		if(carabaoCupData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#carabao-cup
-					+knockoutCompetitionMixin(carabaoCupData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#carabao-cup
-					+knockoutCompetitionMixin(carabaoCupData, isSingleCompetition)
-
-		//- FA Cup Standings
-		if(faCupData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-cup
-					+knockoutCompetitionMixin(faCupData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-cup
-					+knockoutCompetitionMixin(faCupData, isSingleCompetition)
-
-		//- Champions League Standings
-		if(uclData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#champions-league
-					+mixedCompetitionMixin(uclData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#champions-league
-					+mixedCompetitionMixin(uclData, isSingleCompetition)
-
-		//- Europa League Standings
-		if(europaLeagueData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#europa-league
-					+mixedCompetitionMixin(europaLeagueData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#europa-league
-					+mixedCompetitionMixin(europaLeagueData, isSingleCompetition)
-
-		//- Community Shield Standings
-		if(communityShieldData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#community-shield
-					+knockoutCompetitionMixin(communityShieldData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#community-shield
-					+knockoutCompetitionMixin(communityShieldData, isSingleCompetition)
-
-		//- FIFA Club World Cup Standings
-		if(clubWorldCupData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#club-world-cup
-					+knockoutCompetitionMixin(clubWorldCupData, isSingleCompetition)
-			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#club-world-cup
-					+knockoutCompetitionMixin(clubWorldCupData, isSingleCompetition)
+				unless(eplData.shouldDisplayInSummary != null && !eplData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league
+						+tableCompetitionMixin(eplData, isSingleCompetition)
 
 		//- International Champions Cup Standings
 		if(iccData != null)
@@ -83,8 +21,79 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
 					+tableCompetitionMixin(iccData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
-					+tableCompetitionMixin(iccData, isSingleCompetition)
+				unless(iccData.shouldDisplayInSummary != null && !iccData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
+						+tableCompetitionMixin(iccData, isSingleCompetition)
+
+		//- Champions League Standings
+		if(uclData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#champions-league
+					+mixedCompetitionMixin(uclData, isSingleCompetition)
+			else
+				unless(uclData.shouldDisplayInSummary != null && !uclData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#champions-league
+						+mixedCompetitionMixin(uclData, isSingleCompetition)
+
+		//- Carabao Cup Standings
+		if(carabaoCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#carabao-cup
+					+knockoutCompetitionMixin(carabaoCupData, isSingleCompetition)
+			else
+				unless(carabaoCupData.shouldDisplayInSummary != null && !carabaoCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#carabao-cup
+						+knockoutCompetitionMixin(carabaoCupData, isSingleCompetition)
+
+		//- FA Cup Standings
+		if(faCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-cup
+					+knockoutCompetitionMixin(faCupData, isSingleCompetition)
+			else
+				unless(faCupData.shouldDisplayInSummary != null && !faCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-cup
+						+knockoutCompetitionMixin(faCupData, isSingleCompetition)
+
+		//- Community Shield Standings
+		if(communityShieldData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#community-shield
+					+knockoutCompetitionMixin(communityShieldData, isSingleCompetition)
+			else
+				unless(communityShieldData.shouldDisplayInSummary != null && !communityShieldData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#community-shield
+						+knockoutCompetitionMixin(communityShieldData, isSingleCompetition)
+
+		//- UEFA Super Cup Standings
+		if(superCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#super-cup
+					+knockoutCompetitionMixin(superCupData, isSingleCompetition)
+			else
+				unless(superCupData.shouldDisplayInSummary != null && !superCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#super-cup
+						+knockoutCompetitionMixin(superCupData, isSingleCompetition)
+
+		//- Europa League Standings
+		if(europaLeagueData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#europa-league
+					+mixedCompetitionMixin(europaLeagueData, isSingleCompetition)
+			else
+				unless(europaLeagueData.shouldDisplayInSummary != null && !europaLeagueData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#europa-league
+						+mixedCompetitionMixin(europaLeagueData, isSingleCompetition)
+
+		//- FIFA Club World Cup Standings
+		if(clubWorldCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#club-world-cup
+					+knockoutCompetitionMixin(clubWorldCupData, isSingleCompetition)
+			else
+				unless(clubWorldCupData.shouldDisplayInSummary != null && !clubWorldCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#club-world-cup
+						+knockoutCompetitionMixin(clubWorldCupData, isSingleCompetition)
 
 		//- Premier League 2 Standings
 		if(pl2Data != null)
@@ -92,8 +101,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2
 					+tableCompetitionMixin(pl2Data, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2
-					+tableCompetitionMixin(pl2Data, isSingleCompetition)
+				unless(pl2Data.shouldDisplayInSummary != null && !pl2Data.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2
+						+tableCompetitionMixin(pl2Data, isSingleCompetition)
 
 		//- Premier League International Cup Standings
 		if(plIntlCupData != null)
@@ -101,8 +111,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-international-cup
 					+mixedCompetitionMixin(plIntlCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-international-cup
-					+mixedCompetitionMixin(plIntlCupData, isSingleCompetition)
+				unless(plIntlCupData.shouldDisplayInSummary != null && !plIntlCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-international-cup
+						+mixedCompetitionMixin(plIntlCupData, isSingleCompetition)
 
 		//- UEFA Youth League Standings
 		if(youthLeagueData != null)
@@ -110,8 +121,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#youth-league
 					+mixedCompetitionMixin(youthLeagueData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#youth-league
-					+mixedCompetitionMixin(youthLeagueData, isSingleCompetition)
+				unless(youthLeagueData.shouldDisplayInSummary != null && !youthLeagueData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#youth-league
+						+mixedCompetitionMixin(youthLeagueData, isSingleCompetition)
 
 		//- U18 Premier League North Standings
 		if(plNorthData != null)
@@ -119,8 +131,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-north
 					+tableCompetitionMixin(plNorthData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-north
-					+tableCompetitionMixin(plNorthData, isSingleCompetition)
+				unless(plNorthData.shouldDisplayInSummary != null && !plNorthData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-north
+						+tableCompetitionMixin(plNorthData, isSingleCompetition)
 
 		//- U18 Premier League Cup Standings
 		if(plCupData != null)
@@ -128,8 +141,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-cup
 					+mixedCompetitionMixin(plCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-cup
-					+mixedCompetitionMixin(plCupData, isSingleCompetition)
+				unless(plCupData.shouldDisplayInSummary != null && !plCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-cup
+						+mixedCompetitionMixin(plCupData, isSingleCompetition)
 
 		//- FA Youth Cup Standings
 		if(faYouthCupData != null)
@@ -137,8 +151,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-youth-cup
 					+knockoutCompetitionMixin(faYouthCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-youth-cup
-					+knockoutCompetitionMixin(faYouthCupData, isSingleCompetition)
+				unless(faYouthCupData.shouldDisplayInSummary != null && !faYouthCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-youth-cup
+						+knockoutCompetitionMixin(faYouthCupData, isSingleCompetition)
 
 		//- Otten Cup Standings
 		if(ottenCupData != null)
@@ -146,8 +161,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#otten-cup
 					+knockoutCompetitionMixin(ottenCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#otten-cup
-					+knockoutCompetitionMixin(ottenCupData, isSingleCompetition)
+				unless(ottenCupData.shouldDisplayInSummary != null && !ottenCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#otten-cup
+						+knockoutCompetitionMixin(ottenCupData, isSingleCompetition)
 
 		//- Sparkasse & VGH Cup Standings
 		if(vghCupData != null)
@@ -155,8 +171,9 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#vgh-cup
 					+knockoutCompetitionMixin(vghCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#vgh-cup
-					+knockoutCompetitionMixin(vghCupData, isSingleCompetition)
+				unless(vghCupData.shouldDisplayInSummary != null && !vghCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#vgh-cup
+						+knockoutCompetitionMixin(vghCupData, isSingleCompetition)
 
 		//- Dallas Cup Standings
 		if(dallasCupData != null)
@@ -164,5 +181,6 @@ block content
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
 					+knockoutCompetitionMixin(dallasCupData, isSingleCompetition)
 			else
-				.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
-					+knockoutCompetitionMixin(dallasCupData, isSingleCompetition)
+				unless(dallasCupData.shouldDisplayInSummary != null && !dallasCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
+						+knockoutCompetitionMixin(dallasCupData, isSingleCompetition)

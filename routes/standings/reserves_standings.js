@@ -7,7 +7,8 @@ const standings = require('../../middleware/standings');
 
 // Also require the fixtures middleware
 const fixtures = require('../../middleware/fixtures');
-app.use('/', fixtures.getReservesTeamFixtures);
+// Get the fixtures and the information for cups not yet drawn
+app.use('/', [fixtures.getReservesTeamFixtures, standings.processCupsNotDrawn]);
 
 // GET response for '/reserves-standings/premier-league-2'
 app.use('/premier-league-2', [standings.getPL2Table, standings.processStandingsData]);

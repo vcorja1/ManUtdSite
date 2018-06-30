@@ -7,7 +7,8 @@ const standings = require('../../middleware/standings');
 
 // Also require the fixtures middleware
 const fixtures = require('../../middleware/fixtures');
-app.use('/', fixtures.getAcademyTeamFixtures);
+// Get the fixtures and the information for cups not yet drawn
+app.use('/', [fixtures.getAcademyTeamFixtures, standings.processCupsNotDrawn]);
 
 // GET response for '/academy-standings/premier-league-north'
 app.use('/premier-league-north', [standings.getU18PLTable, standings.processStandingsData]);
