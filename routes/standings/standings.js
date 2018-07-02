@@ -2,13 +2,17 @@
 var express = require('express');
 var app = express();
 
+// Run middleware in parallel where possible
+const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');
+
 // Require the standings middleware
 const standings = require('../../middleware/standings');
-
 // Also require the fixtures middleware
 const fixtures = require('../../middleware/fixtures');
+
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', [fixtures.getFirstTeamFixtures, fixtures.getLiveScore, standings.processCupsNotDrawn]);
+app.use('/', parallelMiddlewares([fixtures.getFirstTeamFixtures, standings.processCupsNotDrawn]));
+app.use('/', fixtures.getLiveScore);
 
 // GET response for '/standings/premier-league'
 app.use('/premier-league', [standings.getEPLTable, standings.processStandingsData]);
@@ -173,7 +177,8 @@ app.get('/international-champions-cup', function(req, res, next) {
 });
 
 // GET response for '/standings'
-app.use('/', [standings.getEPLTable, standings.getUCLTable, standings.getEuropaLeagueTable, standings.getICCTable, standings.processStandingsData]);
+app.use('/', parallelMiddlewares([standings.getEPLTable, standings.getUCLTable, standings.getEuropaLeagueTable, standings.getICCTable]));
+app.use('/', standings.processStandingsData);
 app.get('/', function(req, res, next) {
 
 	try {

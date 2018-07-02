@@ -2,11 +2,14 @@
 var express = require('express');
 var app = express();
 
-// Require the middleware
-const standings = require('../../middleware/standings');
+// Run middleware in parallel where possible
+const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');
 
+// Require the standings middleware
+const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
 const fixtures = require('../../middleware/fixtures');
+
 // Get the fixtures and the information for cups not yet drawn
 app.use('/', [fixtures.getReservesTeamFixtures, standings.processCupsNotDrawn]);
 
@@ -65,7 +68,8 @@ app.get('/youth-league', function(req, res, next) {
 });
 
 // GET response for '/reserves-standings'
-app.use('/', [standings.getPL2Table, standings.getPLInternationalCupTable, standings.getYouthLeagueTable, standings.processStandingsData]);
+app.use('/', parallelMiddlewares([standings.getPL2Table, standings.getPLInternationalCupTable, standings.getYouthLeagueTable]));
+app.use('/', standings.processStandingsData);
 app.get('/', function(req, res, next) {
 
 	try {

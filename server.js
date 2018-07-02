@@ -23,6 +23,10 @@ function compile(str, path) {
   .use(nib());
 }
 
+// Use public folder to serve all static files
+const publicFolderPath = __dirname + '/public';
+app.use(express.static( publicFolderPath ));
+
 // Compress all responses
 app.use(compression());
 
@@ -35,10 +39,6 @@ app.use(logger('dev'));
 // Set up the template engine
 app.set('views',  __dirname + '/views');
 app.set('view engine', 'pug');
-
-// Use public folder to serve all static files
-const publicFolderPath = __dirname + '/public';
-app.use(express.static( publicFolderPath ));
 
 // Set up favicon
 app.use(favicon(__dirname + '/public/img/favicon.ico'));
