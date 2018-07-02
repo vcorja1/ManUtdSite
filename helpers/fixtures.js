@@ -435,14 +435,12 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Wolverhampton Wanderers':
 		// England
 		case 'Blackburn Rovers':
-		case 'Derby County':
 		case 'Stoke City':
 		case 'Swansea City':
 		case 'West Bromwich Albion':
 		// Spain
 		case 'Atletico Madrid':
 		case 'Barcelona':
-		case 'Real Madrid':
 		case 'Sevilla':
 		// Germany
 		case 'Bayern Munich':
@@ -458,6 +456,11 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		// Portugal
 		case 'Benfica':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
+		// Use PNG files for the following club logos
+		case 'Derby County':
+		case 'Real Madrid':
+			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.png';
+		// Otherwise return the default crest
 		default:
 			return CLUB_LOGOS_FOLDER + 'defaultCrest.png';
 	}
