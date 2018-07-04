@@ -17,9 +17,11 @@ function getTeamFixtures(team, req, res, next) {
 
 	// Get Staff Data
 	client.query(`SELECT * FROM FIXTURES WHERE team='${team}' ORDER BY matchdate;`, (err, resp) => {
-		// Handle error1
-		if (err) {
+		// Handle error
+		if (err || !resp) {
+			req.loadedData = false;
 			res.status(400);
+			return next();
 		}
 
 		// Save all fixtures
@@ -78,12 +80,12 @@ exports.getFirstTeamFixtures = (req, res, next) => {
 
 // Get fixtures for the reserves team
 exports.getReservesTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(1, req,res,next);
+	return getTeamFixtures(1, req, res, next);
 };
 
 // Get fixtures for the reserves team
 exports.getAcademyTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(2, req,res,next);
+	return getTeamFixtures(2, req, res, next);
 };
 
 
