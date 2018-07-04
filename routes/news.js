@@ -4,19 +4,24 @@ var app = express();
 
 // Country flag images location
 const FLAG_IMG_FOLDER = 'img/flags/';
+// Club logo images location
+const CLUB_LOGO_FOLDER = 'img/clubLogos/';
 
 // Recent transfers
 let incomingPlayers = [
-	{ name: 'Fred', flagImg: FLAG_IMG_FOLDER + 'br.svg', position: 'CM', prevClub: 'Shakhtar Donetsk' },
-	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto' }
+	{ name: 'Lee Grant', flagImg: FLAG_IMG_FOLDER + 'eg.svg', position: 'GK', prevClub: 'Stoke City', crestURI: CLUB_LOGO_FOLDER + 'Stoke_City.svg' },
+	{ name: 'Harvey Neville', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Valencia', crestURI: CLUB_LOGO_FOLDER + 'Valencia.svg' },
+	{ name: 'Fred', flagImg: FLAG_IMG_FOLDER + 'br.svg', position: 'CM', prevClub: 'Shakhtar Donetsk', crestURI: CLUB_LOGO_FOLDER + 'Shakhtar_Donetsk.png' },
+	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto', crestURI: CLUB_LOGO_FOLDER + 'Porto.png' }
 ];
 let loanedPlayers = [
-	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United' }
+	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United', crestURI: CLUB_LOGO_FOLDER + 'Sheffield_United.png' }
 ];
 let departingPlayers = [
 	{ name: 'Michael Carrick', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Retired' },
-	{ name: 'Indy Boonen', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'RW', nextClub: 'KV Oostende' },
-	{ name: 'Joe Riley', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'RB', nextClub: 'Bradford City' },
+	{ name: 'Sam Johnstone', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'West Bromwich Albion', crestURI: CLUB_LOGO_FOLDER + 'West_Bromwich_Albion.svg' },
+	{ name: 'Indy Boonen', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'RW', nextClub: 'KV Oostende', crestURI: CLUB_LOGO_FOLDER + 'Oostende.png' },
+	{ name: 'Joe Riley', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'RB', nextClub: 'Bradford City', crestURI: CLUB_LOGO_FOLDER + 'Bradford_City.png' },
 	{ name: 'Max Johnstone', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', reason: 'Released' },
 	{ name: 'Ilias Moutha-Sebtaoui', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'GK', reason: 'Released' },
 	{ name: 'Theo Richardson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', reason: 'Released' },

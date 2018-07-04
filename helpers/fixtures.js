@@ -282,7 +282,7 @@ function removeTeamNameAbbr(teamName) {
 
 	// Or remove beginning
 	var start = teamName.substr(0,3);
-	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ')
+	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ' || start === 'KV ')
 		return teamName.substr(3);
 	start = teamName.substr(0,4);
 	if(start === 'AFC ' || start === 'RSC ')
@@ -442,6 +442,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Atletico Madrid':
 		case 'Barcelona':
 		case 'Sevilla':
+		case 'Valencia':
 		// Germany
 		case 'Bayern Munich':
 		case 'Borussia Dortmund':
@@ -457,8 +458,18 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Benfica':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		// Use PNG files for the following club logos
+		// England
+		case 'Bradford City':
 		case 'Derby County':
+		case 'Sheffield United':
+		// Spain
 		case 'Real Madrid':
+		// Portugal
+		case 'Porto':
+		// Belgium
+		case 'Oostende':
+		// Ukraine
+		case 'Shakhtar Donetsk':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.png';
 		// Otherwise return the default crest
 		default:

@@ -12,7 +12,7 @@ mixin playerTransferMixin(playersInfo, incoming)
 				h5=(incoming ? 'Previous Club' : 'Next Club')
 		.panel-body
 			each player in playersInfo
-				.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12
+				.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.no-padding.flex-align-center
 					.col-lg-2.col-md-2.col-sm-2.col-ms-2.col-xs-2
 						h5=player.position
 					.col-lg-6.col-md-6.col-sm-6.col-ms-6.col-xs-6
@@ -21,6 +21,12 @@ mixin playerTransferMixin(playersInfo, incoming)
 							| #{' ' + player.name}
 					.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4
 						if(incoming)
-							h5=player.prevClub
+							h5
+								img(src=player.crestURI, height='20', width='20')
+								| #{' ' + player.prevClub}
+						else if(player.nextClub)
+							h5
+								img(src=player.crestURI, height='20', width='20')
+								| #{' ' + player.nextClub}
 						else
-							h5=(player.nextClub || player.reason)
+							h5=player.reason
