@@ -9,10 +9,10 @@ const CLUB_LOGO_FOLDER = 'img/clubLogos/';
 
 // Recent transfers
 let incomingPlayers = [
-	{ name: 'Lee Grant', flagImg: FLAG_IMG_FOLDER + 'eg.svg', position: 'GK', prevClub: 'Stoke City', crestURI: CLUB_LOGO_FOLDER + 'Stoke_City.svg' },
-	{ name: 'Harvey Neville', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Valencia', crestURI: CLUB_LOGO_FOLDER + 'Valencia.svg' },
+	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto', crestURI: CLUB_LOGO_FOLDER + 'Porto.png' },
 	{ name: 'Fred', flagImg: FLAG_IMG_FOLDER + 'br.svg', position: 'CM', prevClub: 'Shakhtar Donetsk', crestURI: CLUB_LOGO_FOLDER + 'Shakhtar_Donetsk.png' },
-	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto', crestURI: CLUB_LOGO_FOLDER + 'Porto.png' }
+	{ name: 'Harvey Neville', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Valencia', crestURI: CLUB_LOGO_FOLDER + 'Valencia.svg' },
+	{ name: 'Lee Grant', flagImg: FLAG_IMG_FOLDER + 'eg.svg', position: 'GK', prevClub: 'Stoke City', crestURI: CLUB_LOGO_FOLDER + 'Stoke_City.svg' }
 ];
 let loanedPlayers = [
 	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United', crestURI: CLUB_LOGO_FOLDER + 'Sheffield_United.png' }
