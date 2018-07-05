@@ -23,6 +23,14 @@ app.use('/reserves-standings', reserves_standings);
 const academy_standings = require('./standings/academy_standings');
 app.use('/academy-standings', academy_standings);
 
+/* ----  PLAYERS  ---- */
+const players = require('./players/first_team');
+app.use('/first-team', players);
+const reserves_team = require('./players/reserves_team');
+app.use('/reserves-team', reserves_team);
+const academy_team = require('./players/academy_team');
+app.use('/academy-team', academy_team);
+
 /* ----  STAFF  ---- */
 const coachingStaff = require('./staff/coachingStaff');
 app.use('/staff', coachingStaff);

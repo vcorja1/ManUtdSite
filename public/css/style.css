@@ -65,6 +65,7 @@
 
 .align-items-center {
   align-items: center;
+  justify-content: center;
 }
 
 .flex-align-center {
@@ -169,7 +170,7 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 825px) {
+@media (min-width: 768px) and (max-width: 838px) {
   .hidden-case-1 {
     display: none !important;
   }
@@ -178,7 +179,7 @@
   }
 }
 
-@media (min-width: 826px) {
+@media (min-width: 839px) {
   .hidden-case-2 {
     display: none !important;
   }
@@ -367,6 +368,14 @@ abbr {
   .col-half {width: 44.33333334%;}
   .col-half-offset-left {margin-left: 2.83333333%;}
   .col-half-offset-right {margin-right: 2.83333333%;}
+}
+
+/* -------------------------------------------------------- */
+/* ----------------------- PLAYERS ------------------------ */
+/* -------------------------------------------------------- */
+
+.players-panel > .panel-heading {
+  height: 60px;
 }
 
 /* -------------------------------------------------------- */

@@ -1,3 +1,9 @@
+// Get Country Name
+const { byAlpha2 } = require('iso-country-codes');
+
+// Flag image location
+const FLAG_IMG_FOLDER = 'img/flags/';
+
 // Returns the job title for the corresponding ID
 exports.getStaffTitle = function getStaffTitle(titleID) {
 	const staffTitles = [
@@ -35,4 +41,40 @@ exports.getTeamPrefix = function getTeamPrefix(team) {
 	if(team === 7)
 		return 'U9 ';
 	return '';
+}
+
+// Store the full country name and its flag location
+exports.getFullCountryName = function getFullCountryName(member) {
+	if(member.country == 'UK') {
+		member.countryName = 'England';
+		member.flagImg = FLAG_IMG_FOLDER + 'england.svg';
+	}
+	else if(member.country == '01') {
+		member.countryName = 'Northern Ireland';
+		member.flagImg = FLAG_IMG_FOLDER + 'northern_ireland.svg';
+	}
+	else if(member.country == '02') {
+		member.countryName = 'Scotland';
+		member.flagImg = FLAG_IMG_FOLDER + 'scotland.svg';
+	}
+	else if(member.country == '03') {
+		member.countryName = 'Wales';
+		member.flagImg = FLAG_IMG_FOLDER + 'wales.svg';
+	}
+	else if(member.country == 'KR') {
+		member.countryName = 'South Korea';
+		member.flagImg = FLAG_IMG_FOLDER + 'kr.svg';
+	}
+	else if(member.country == 'VE') {
+		member.countryName = 'Venezuela';
+		member.flagImg = FLAG_IMG_FOLDER + 've.svg';
+	}
+	else if(member.country in byAlpha2) {
+		member.countryName = byAlpha2[member.country].name;
+		member.flagImg = FLAG_IMG_FOLDER + member.country.toLowerCase() + '.svg';
+
+		if(member.countryName.endsWith(' (the)')) {
+			member.countryName = member.countryName.slice(0, -6);
+		}
+	}
 }

@@ -1,0 +1,27 @@
+extends layout
+block content
+	.main.container-fluid.text-center
+		//- Include players mixin
+		include ../partials/playerMixin.pug
+
+		if(goalkeepers != null && goalkeepers != [])
+			h2.blue.small-caps Goalkeepers
+			.pad-space-small
+			+playerInfoMixin(goalkeepers)
+			.pad-space-small
+		if(defenders != null && defenders != [])
+			h2.blue.small-caps Defenders
+			.pad-space-small
+			+playerInfoMixin(defenders)
+			.pad-space-small
+		if(midfielders != null && midfielders != [])
+			h2.blue.small-caps Midfielders
+			.pad-space-small
+			+playerInfoMixin(midfielders)
+			.pad-space-small
+		if(strikers != null && strikers != [])
+			h2.blue.small-caps Strikers
+			.pad-space-small
+			+playerInfoMixin(strikers)
+			.pad-space-small
+		h6 Note: * = There is a club option to extend the player's contract by one more year.
