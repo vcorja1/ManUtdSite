@@ -108,6 +108,7 @@
 .navbar-brand {
   padding: 10px 15px;
   line-height: 30px;
+  color: #575757 !important;
 }
 
 @media (max-width: 767px) {

@@ -8,7 +8,7 @@ mixin staffMixin(staff)
 				h5.text-center=staff.name
 				.container
 					p
-						img(src=staff.flagImg)
+						img(src=staff.flagImg, alt=`Flag of ${staff.countryName}`)
 					h6=staff.countryName
 
 //- Mixin with scouting info
@@ -21,7 +21,7 @@ mixin scoutingTeamMixin(staff)
 				h5.text-center=staff.name
 				.container
 					p
-						img(src=staff.flagImg)
+						img(src=staff.flagImg, alt=`Flag of ${staff.countryName}`)
 					h6=staff.countryName
 				if(staff.note != null)
 					.pad-space-small

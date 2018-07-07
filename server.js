@@ -23,15 +23,18 @@ function compile(str, path) {
   .use(nib());
 }
 
-// Use public folder to serve all static files
-const publicFolderPath = __dirname + '/public';
-app.use(express.static( publicFolderPath ));
-
 // Compress all responses
 app.use(compression());
 
 // Global site name
 app.locals.siteName = 'Manchester United Fan Website';
+
+// Use public folder to serve all static files
+const publicFolderPath = __dirname + '/public';
+app.use(express.static( publicFolderPath ));
+
+// Set up favicon
+app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // Add logging and static middleware to express
 app.use(logger('dev'));
@@ -39,9 +42,6 @@ app.use(logger('dev'));
 // Set up the template engine
 app.set('views',  __dirname + '/views');
 app.set('view engine', 'pug');
-
-// Set up favicon
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
 
 // Set middleware location to public folder
 app.use(
