@@ -34,7 +34,7 @@ const publicFolderPath = __dirname + '/public';
 app.use(express.static( publicFolderPath ));
 
 // Set up favicon
-app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(favicon(__dirname + '/public/img/icons/favicon.ico'));
 
 // Add logging and static middleware to express
 app.use(logger('dev'));

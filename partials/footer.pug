@@ -15,6 +15,11 @@ script(type='text/javascript').
 	(function($) {
 		$(function() { // DOM Ready
 
+			// Add a service worker
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js');
+			}
+
 			// Check if on mobile device
 			var isMobile;
 
