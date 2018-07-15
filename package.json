@@ -9,6 +9,7 @@
   "scripts": {
     "test": "npm test",
     "watch": "nodemon server.js -e js,pug",
+    "checkLatestPackageVersions": "npm outdated",
     "start": "node server.js"
   },
   "engines": {
@@ -30,13 +31,13 @@
   "dependencies": {
     "async": "2.6.1",
     "cheerio": "1.0.0-rc.2",
-    "compression": "1.7.2",
+    "compression": "1.7.3",
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "iso-country-codes": "0.0.5",
     "morgan": "1.9.0",
     "nib": "1.1.2",
-    "nodemon": "1.17.5",
+    "nodemon": "1.18.2",
     "pg": "7.4.3",
     "pug": "2.0.3",
     "request": "2.87.0",
