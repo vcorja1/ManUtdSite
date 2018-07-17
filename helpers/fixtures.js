@@ -282,7 +282,7 @@ function removeTeamNameAbbr(teamName) {
 
 	// Or remove beginning
 	var start = teamName.substr(0,3);
-	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ' || start === 'KV ')
+	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ' || start === 'KV ' || start === 'SV ')
 		return teamName.substr(3);
 	start = teamName.substr(0,4);
 	if(start === 'AFC ' || start === 'RSC ')
@@ -436,6 +436,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		// England
 		case 'Blackburn Rovers':
 		case 'Coventry City':
+		case 'Northampton Town':
 		case 'Stoke City':
 		case 'Swansea City':
 		case 'West Bromwich Albion':
@@ -461,6 +462,11 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Benfica':
 		// Czech Republic
 		case 'Vysocina Jihlava':
+		// Austria
+		case 'Ried':
+		// United States
+		case 'Club America':
+		case 'San Jose Earthquakes':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		// Use PNG files for the following club logos
 		// England
