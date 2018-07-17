@@ -22,21 +22,21 @@ block content
 				.col-lg-12.col-md-12.col-sm-12.no-padding.quick-match-info
 					+quickMatchInfo(nextMatch, "NEXT MATCH")
 
-		if(!!preseason && preseason != [])
+		if(preseason != null && preseason.length > 0)
 			.pad-space-small
 			//- Schedule and results (Preseason)
 			h2.bold.small-caps.blue Preseason & Friendlies
 			.pad-space-small
 			+fixtures(preseason)
 
-		if(!!regularSeason && regularSeason != [])
+		if(regularSeason != null && regularSeason.length > 0)
 			.pad-space
 			//- Schedule and results (Regular Season)
 			h2.bold.small-caps.blue Regular Season
 			.pad-space-small
 			+fixtures(regularSeason)
 
-		if(!!otherCups && otherCups != [])
+		if(otherCups != null && otherCups.length > 0)
 			.pad-space
 			//- Schedule and results (Other Cups)
 			h2.bold.small-caps.blue Other Cups
