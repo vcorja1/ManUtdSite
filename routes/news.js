@@ -11,14 +11,16 @@ const CLUB_LOGO_FOLDER = 'img/clubLogos/';
 let incomingPlayers = [
 	{ name: 'Diogo Dalot', flagImg: FLAG_IMG_FOLDER + 'pt.svg', position: 'RB', prevClub: 'FC Porto', crestURI: CLUB_LOGO_FOLDER + 'Porto.png' },
 	{ name: 'Fred', flagImg: FLAG_IMG_FOLDER + 'br.svg', position: 'CM', prevClub: 'Shakhtar Donetsk', crestURI: CLUB_LOGO_FOLDER + 'Shakhtar_Donetsk.png' },
-	{ name: 'Harvey Neville', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Valencia', crestURI: CLUB_LOGO_FOLDER + 'Valencia.svg' },
 	{ name: 'Lee Grant', flagImg: FLAG_IMG_FOLDER + 'eg.svg', position: 'GK', prevClub: 'Stoke City', crestURI: CLUB_LOGO_FOLDER + 'Stoke_City.svg' }
 ];
-let loanedPlayers = [
-	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United', crestURI: CLUB_LOGO_FOLDER + 'Sheffield_United.png' }
+let academySignings = [
+	{ name: 'Ondrej Mastny', flagImg: FLAG_IMG_FOLDER + 'cz.svg', position: 'GK', prevClub: 'FC Vysocina Jihlava', crestURI: CLUB_LOGO_FOLDER + 'Vysocina_Jihlava.svg' },
+	{ name: 'Harvey Neville', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Valencia', crestURI: CLUB_LOGO_FOLDER + 'Valencia.svg' },
+	{ name: 'Charlie McCann', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', prevClub: 'Coventry City', crestURI: CLUB_LOGO_FOLDER + 'Coventry_City.svg' },
 ];
 let departingPlayers = [
 	{ name: 'Michael Carrick', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Retired' },
+	{ name: 'Daley Blind', flagImg: FLAG_IMG_FOLDER + 'nl.svg', position: 'LB', nextClub: 'AFC Ajax', crestURI: CLUB_LOGO_FOLDER + 'Ajax.svg' },
 	{ name: 'Sam Johnstone', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'West Bromwich Albion', crestURI: CLUB_LOGO_FOLDER + 'West_Bromwich_Albion.svg' },
 	{ name: 'Indy Boonen', flagImg: FLAG_IMG_FOLDER + 'be.svg', position: 'RW', nextClub: 'KV Oostende', crestURI: CLUB_LOGO_FOLDER + 'Oostende.png' },
 	{ name: 'Joe Riley', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'RB', nextClub: 'Bradford City', crestURI: CLUB_LOGO_FOLDER + 'Bradford_City.png' },
@@ -28,6 +30,9 @@ let departingPlayers = [
 	{ name: 'Devonte Redmond', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' },
 	{ name: 'Jake Kenyon', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' },
 	{ name: 'Charlie Scott', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'CM', reason: 'Released' }
+];
+let loanedPlayers = [
+	{ name: 'Dean Henderson', flagImg: FLAG_IMG_FOLDER + 'england.svg', position: 'GK', nextClub: 'Sheffield United', crestURI: CLUB_LOGO_FOLDER + 'Sheffield_United.png' }
 ];
 // World Cup participants
 let worldCupParticipants = [
@@ -64,6 +69,7 @@ app.get('/', function(req, res, next) {
 				gloveIcon: gloveIcon
 			},
 			incomingPlayers: incomingPlayers,
+			academySignings: academySignings,
 			loanedPlayers: loanedPlayers,
 			departingPlayers: departingPlayers,
 			worldCupParticipants: worldCupParticipants

@@ -435,6 +435,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Wolverhampton Wanderers':
 		// England
 		case 'Blackburn Rovers':
+		case 'Coventry City':
 		case 'Stoke City':
 		case 'Swansea City':
 		case 'West Bromwich Albion':
@@ -454,8 +455,12 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		// France
 		case 'Olympique Lyonnais':
 		case 'Paris Saint-Germain':
+		// Netherlands
+		case 'Ajax':
 		// Portugal
 		case 'Benfica':
+		// Czech Republic
+		case 'Vysocina Jihlava':
 			return CLUB_LOGOS_FOLDER + teamName.replace(/ /g, '_') + '.svg';
 		// Use PNG files for the following club logos
 		// England

@@ -40,16 +40,22 @@ block content
 
 		h1.bold.red LATEST NEWS
 		.col-lg-6.col-md-6
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
+			h2.blue.text-center.small-caps Summer Signings
 			+playerTransferMixin(incomingPlayers, true)
-
 			.pad-space-small
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Loaned Out
-			+playerTransferMixin(loanedPlayers, false)
+
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
+			+playerTransferMixin(academySignings, true)
+			.pad-space-small
 
 		.col-lg-6.col-md-6
+			h2.blue.text-center.small-caps Loaned Out
+			+playerTransferMixin(loanedPlayers, false)
+			.pad-space-small
+
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Departures
 			+playerTransferMixin(departingPlayers, false)
+			.pad-space-small
 
 		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Professional Women's Team
 		.row.table-bordered
@@ -89,6 +95,14 @@ block content
 					h5.text-center.red Jun 28
 			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
 				h5 Willie Kirk is officially named as Manchester United Women's assistant coach. Kirk spent the last three seasons as the head coach of Bristol City's Women's team before stepping down at the end of the 2017/18 season.
+		.row.table-bordered(style={'border-top': 'none'})
+			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
+				.hidden-xs
+					h5.text-center.red July 13
+				.hidden-lg.hidden-md.hidden-sm.hidden-ms
+					h5.text-center.red Jul 13
+			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
+				h5 The squad for the 2018/19 season has been unveiled, headlined by the experienced goalkeeper Siobhan Chamberlain and the English international defender Alex Greenwood. Alex Greenwood was also named as the captain of the club.
 
 		.pad-space-small
 		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) World Cup Participants
