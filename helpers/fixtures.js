@@ -392,6 +392,9 @@ exports.getTeamShort = function getTeamShort(team, competition, teamName) {
 		case 'Paris Saint-Germain':
 			teamName = 'PSG';
 			break;
+		case 'PSV Eindhoven':
+			teamName = 'PSV';
+			break;
 	}
 
 	return teamName + getTeamNameEnding(team, competition);
@@ -437,6 +440,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Blackburn Rovers':
 		case 'Coventry City':
 		case 'Northampton Town':
+		case 'Sheffield United':
 		case 'Stoke City':
 		case 'Swansea City':
 		case 'West Bromwich Albion':
@@ -458,6 +462,7 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Paris Saint-Germain':
 		// Netherlands
 		case 'Ajax':
+		case 'PSV Eindhoven':
 		// Portugal
 		case 'Benfica':
 		// Czech Republic
@@ -472,7 +477,6 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		// England
 		case 'Bradford City':
 		case 'Derby County':
-		case 'Sheffield United':
 		// Spain
 		case 'Real Madrid':
 		// Portugal
