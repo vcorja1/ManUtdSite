@@ -8,7 +8,7 @@ mixin getMatchDateWithCompetition(match, standingsView)
 	if(match.status == 2)
 		h5='TBD'
 	if(match.status == 4)
-		h5.bold.green='LIVE'
+		h5.bold.green #{'LIVE (' + match.gameMinute + ')'}
 	else
 		h5=match.matchdateShort
 	if(!standingsView)

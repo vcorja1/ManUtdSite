@@ -1,6 +1,9 @@
 const http = require('http');
 // Connect to Heroku database
 const { Client } = require('pg');
+// To scrape score using Cheerio
+const rp = require('request-promise');
+const cheerio = require('cheerio');
 // Get Fixture Status
 const fixtureHelper = require('../helpers/fixtures.js');
 
@@ -93,62 +96,130 @@ exports.getAcademyTeamFixtures = (req, res, next) => {
 exports.getLiveScore = (req, res, next) => {
 	// Check that there is a next match
 	const nextMatchID = req.nextMatchID;
-	if(!nextMatchID || !req.fixtures[nextMatchID].matchid)
+	if(nextMatchID == null) 
 		return next();
 
-	// Ensure that the match has started
-	const dateNow = new Date();
-	if(dateNow < req.fixtures[nextMatchID].matchdate)
-		return next();
-
-	// Get updated score
-	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
-
-	http.get(fixtureURL, (resp) => {
-		const { statusCode } = resp;
-		const contentType = resp.headers['content-type'];
-
-		if (statusCode !== 200 || !/^application\/json/.test(contentType)) {
-			// Consume response data to free up memory
-			resp.resume();
-
-			// Handle error here
+	if(req.fixtures[nextMatchID].matchid != null) {
+		// Ensure that the match has started
+		const dateNow = new Date();
+		if(dateNow < req.fixtures[nextMatchID].matchdate)
 			return next();
-		}
 
-		resp.setEncoding('utf8');
-		let rawData = '';
-		resp.on('data', (chunk) => { rawData += chunk; });
-		resp.on('end', () => {
-			try {
+		// Get updated score
+		const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
 
-				// Get the match score
-				const parsedData = JSON.parse(rawData);
+		http.get(fixtureURL, (resp) => {
+			const { statusCode } = resp;
+			const contentType = resp.headers['content-type'];
 
-				// Get live scores
-				const status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
-				if(status != 2) {
-					// Don't record postponed matches, will do this manually
-					req.fixtures[nextMatchID].status = status;
-				}
-				req.fixtures[nextMatchID].homegoals = parsedData.fixture.result.goalsHomeTeam;
-				req.fixtures[nextMatchID].awaygoals = parsedData.fixture.result.goalsAwayTeam;
+			if (statusCode !== 200 || !/^application\/json/.test(contentType)) {
+				// Consume response data to free up memory
+				resp.resume();
 
-				// If game is completed, note so
-				req.lastMatchID = nextMatchID;
-				const nextMatches = req.fixtures.filter(match => match.status < 2);
-				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
-
-				// Continue
-				return next();
-
-			} catch (e) {
 				// Handle error here
-				return next(e);
+				return next();
 			}
+
+			resp.setEncoding('utf8');
+			let rawData = '';
+			resp.on('data', (chunk) => { rawData += chunk; });
+			resp.on('end', () => {
+				try {
+
+					// Get the match score
+					const parsedData = JSON.parse(rawData);
+
+					// Get live scores
+					const status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
+					if(status != 2) {
+						// Don't record postponed matches, will do this manually
+						req.fixtures[nextMatchID].status = status;
+					}
+					req.fixtures[nextMatchID].homegoals = parsedData.fixture.result.goalsHomeTeam;
+					req.fixtures[nextMatchID].awaygoals = parsedData.fixture.result.goalsAwayTeam;
+
+					// If game is completed, note so
+					req.lastMatchID = nextMatchID;
+					const nextMatches = req.fixtures.filter(match => match.status < 2);
+					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+
+					// Continue
+					return next();
+
+				} catch (e) {
+					// Handle error here
+					return next(e);
+				}
+			});
+		}).on('error', (e) => {
+			// Handle error here
+			return next(e);
 		});
-	}).on('error', (e) => {
-		// Handle error here
-		return next(e);
-	});
+	}
+	else if(req.fixtures[nextMatchID].soccerwayurl != null) {
+		// Ensure that the match has started
+		const dateNow = new Date();
+		if(dateNow < req.fixtures[nextMatchID].matchdate)
+			return next();
+
+		// Get updated score
+		const OPTIONS = {
+			uri: `https://us.soccerway.com${req.fixtures[nextMatchID].soccerwayurl}`,
+			transform: function (body) {
+				return cheerio.load(body);
+			}
+		};
+
+		rp(OPTIONS)
+		.then( ($) => {
+			// REQUEST SUCCEEDED: SCRAPE STANDINGS
+			let gameTime = $('#page_match_1_block_match_info_4 .game-minute');
+			if(gameTime != null && gameTime.length > 0) {
+				let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
+				req.fixtures[nextMatchID].status = 4;
+				req.fixtures[nextMatchID].gameMinute = $(gameTime).text().trim();
+
+				if(liveScore == '-') {
+					// TO-DO: Process unavailable result
+					req.fixtures[nextMatchID].homegoals = '??';
+					req.fixtures[nextMatchID].awaygoals = '??';
+				}
+				else {
+					req.fixtures[nextMatchID].homegoals = parseInt(liveScore.split('-')[0].trim());
+					req.fixtures[nextMatchID].awaygoals = parseInt(liveScore.split('-')[1].trim());
+					req.fixtures[nextMatchID].resultString = liveScore;
+				}
+			}
+			else {
+				let finalScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime').text().trim();
+				if(finalScore.includes('-')) {
+					req.fixtures[nextMatchID].status = 5;
+					req.fixtures[nextMatchID].homegoals = parseInt(finalScore.split('-')[0].trim());
+					req.fixtures[nextMatchID].awaygoals = parseInt(finalScore.split('-')[1].trim());
+					req.fixtures[nextMatchID].resultString = finalScore;
+
+					// Store result string and color (to be used in fixtureMixin.pug)
+					req.fixtures[nextMatchID].penaltyResultsString = fixtureHelper.getPenaltyResultString(req.fixtures[nextMatchID]);
+					req.fixtures[nextMatchID].resultColor = fixtureHelper.getResultColor(req.fixtures[nextMatchID]);
+
+					// If game is completed, note so
+					req.lastMatchID = nextMatchID;
+					const nextMatches = req.fixtures.filter(match => match.status < 2);
+					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+				}
+			}
+			// Continue
+			return next();
+
+		})
+	    .catch(function (err) {
+	        // REQUEST FAILED: IGNORE THIS REQUEST
+			console.log(err);
+	        return next();
+	    });
+	}
+	else {
+		// Otherwise continue
+		return next();
+	}
 };
