@@ -8,7 +8,9 @@ mixin getMatchDateWithCompetition(match, standingsView)
 	if(match.status == 2)
 		h5='TBD'
 	if(match.status == 4)
-		h5.bold.green #{'LIVE (' + match.gameMinute + ')'}
+		h5.bold.green='LIVE'
+			if(match.gameMinute != null)
+				span #{' (' + match.gameMinute + ')'}
 	else
 		h5=match.matchdateShort
 	if(!standingsView)
@@ -25,7 +27,7 @@ mixin quickMatchInfoMobile(match, standingsView)
 			//- Home Team Name
 			.container
 				p
-					img(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
+					img.full-height(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
 				.hidden-xs
 					h4.force-font-15(style={'padding-top': '5px'})=match.hometeamNameLong
 				.hidden-lg.hidden-md.hidden-sm.hidden-ms
@@ -89,7 +91,7 @@ mixin quickMatchInfo(match, heading)
 				.col-lg-4.col-md-4.col-sm-4.recent-match
 					.container(style={'height': '86px'})
 						p
-							img(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
+							img.full-height(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
 						h4(style={'padding-left': '15px'})=match.hometeamNameLong
 				//- Match Status
 				.col-lg-4.col-md-4.col-sm-4
@@ -113,7 +115,7 @@ mixin quickMatchInfo(match, heading)
 					.container(style={'height': '86px'})
 						h4(style={'padding-right': '15px'})=match.awayteamNameLong
 						p
-							img(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
+							img.full-height(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
 		if (match.note != null)
 			.bg-light.match-penalty-result
 				h5(style={ 'color': match.resultColor })=match.penaltyResultsString
@@ -152,7 +154,7 @@ mixin fixtures(matchList)
 						//- Home Team
 						.col-lg-4.col-md-4.col-sm-4.main-score-status
 							p
-								img(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
+								img.full-height(src=match.homeClubLogoSrc, alt=`Club Logo of ${match.homeTeamName}`)
 							h4(style={'padding-left': '15px'})=match.hometeamNameLong
 						//- Match Status
 						.col-lg-4.col-md-4.col-sm-4(style={'padding-top': '10px'})
@@ -179,7 +181,7 @@ mixin fixtures(matchList)
 						.col-lg-4.col-md-4.col-sm-4.main-score-status
 							h4(style={'padding-right': '15px'})=match.awayteamNameLong
 							p
-								img(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
+								img.full-height(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
 					//- Competition & Logo
 					if (match.competition === 9)
 						.col-lg-3.col-md-3.col-sm-3

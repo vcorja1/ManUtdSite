@@ -64,7 +64,7 @@ function getTeamFixtures(team, req, res, next) {
 			req.lastMatchID = completedMatches[length - 1].id;
 
 		// Get next match ID
-		const nextMatches = req.fixtures.filter(match => match.status < 2);
+		const nextMatches = req.fixtures.filter(match => match.status < 5);
 		if(nextMatches.length > 0)
 			req.nextMatchID = nextMatches[0].id;
 

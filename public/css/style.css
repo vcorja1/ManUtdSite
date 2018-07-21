@@ -322,11 +322,6 @@
   margin-top: 8px;
 }
 
-.recent-match .container > p > img, .recent-match-mobile .container > p > img, .main-score-status > p > img {
-  height: 100%;
-  width: 100%;
-}
-
 .recent-match-mobile {
   align-items: center;
   justify-content: center;
