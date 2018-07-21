@@ -444,6 +444,8 @@ exports.getClubLogoSrc = function getClubLogoSrc(teamName) {
 		case 'Stoke City':
 		case 'Swansea City':
 		case 'West Bromwich Albion':
+		// Scotland
+		case 'Celtic':
 		// Spain
 		case 'Atletico Madrid':
 		case 'Barcelona':
