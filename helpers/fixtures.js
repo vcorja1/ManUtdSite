@@ -235,10 +235,16 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 			return LOGOS_FOLDER + 'fa.png';
 		case 2:
 			return LOGOS_FOLDER + 'carabao.jpg';
+		case 3:
+			return LOGOS_FOLDER + 'community_shield.png';
 		case 4:
 			return LOGOS_FOLDER + 'ucl.png';
+		case 5:
+			return LOGOS_FOLDER + 'europa_league.jpg';
 		case 6:
 			return LOGOS_FOLDER + 'super_cup.png';
+		case 7:
+			return LOGOS_FOLDER + 'fifa_club_world_cup.jpg';
 		case 8:
 			return LOGOS_FOLDER + 'icc.png';
 		case 10:
