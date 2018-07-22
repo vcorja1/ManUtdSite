@@ -1,11 +1,10 @@
-const http = require('http');
 // To scrape table using Cheerio
 const rp = require('request-promise');
 const cheerio = require('cheerio');
 // Get Fixture Status
 const fixtureHelper = require('../helpers/fixtures.js');
 // Define Constants
-const CURRENT_SEASON = '2017/18';
+const CURRENT_SEASON = '2018/19';
 const STANDINGS_LOCATION = '/standings/';
 const RESERVES_STANDINGS_LOCATION = '/reserves-standings/';
 const ACADEMY_STANDINGS_LOCATION = '/academy-standings/';
@@ -32,7 +31,7 @@ function getTableStandings(competitionID, tableURL, tableID, req, res, next) {
 			$(table).children().map( (i, teamData) => {
 				// Scrape data for each team in the table
 				let curTeamData = {
-					teamNameLong: $(teamData).children('.text.team.large-link').children('a').attr('title'),
+					teamNameLong: $(teamData).children('.text.team.large-link').find('a[title]').attr('title'),
 					position: i + 1,
 					playedGames: $(teamData).children('.number.total.mp').text(),
 					wins: $(teamData).children('.number.total.won.total_won').text(),
@@ -124,48 +123,9 @@ exports.getEPLTable = (req, res, next) => {
 	if(req.eplData != null) {
 		return next();
 	}
-
-	const tableURL = 'http://api.football-data.org/v1/competitions/445/leagueTable/?matchday=38';
-
-	http.get(tableURL, (resp) => {
-		const { statusCode } = resp;
-		const contentType = resp.headers['content-type'];
-
-		if (statusCode !== 200 || !/^application\/json/.test(contentType)) {
-			// Consume response data to free up memory
-			resp.resume();
-
-			// Handle error here
-			return next();
-		}
-
-		resp.setEncoding('utf8');
-		let rawData = '';
-		resp.on('data', (chunk) => { rawData += chunk; });
-		resp.on('end', () => {
-			try {
-				// Get the EPL Table Standings
-				const parsedData = JSON.parse(rawData);
-				req.eplTable = parsedData.standing;
-				req.eplTable.forEach(function(team) {
-					// Store Long Name
-					team.teamNameLong = fixtureHelper.getTeamLong(0, 0, team.teamName);
-					// Store Appropriate Color Based On The Table Position
-					team.color = fixtureHelper.getPositionColorByCompetitionID(0, team.position);
-					// Store Our Own Crest URI
-					team.crestURI = fixtureHelper.getClubLogoSrc(team.teamName);
-				});
-				// Continue
-				return next();
-			} catch (e) {
-				// Handle error here
-				return next(e);
-			}
-		});
-	}).on('error', (e) => {
-		// Handle error here
-		return next(e);
-	});
+	const tableURL = 'https://uk.soccerway.com/national/england/premier-league/20182019/regular-season/r48730/';
+	const tableID = '#page_competition_1_block_competition_tables_6_block_competition_league_table_1_table';
+	return getTableStandings(0, tableURL, tableID, req, res, next);
 };
 
 // Get the Champions League standings
@@ -213,8 +173,8 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 	if(req.plIntlCupData != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
+	const tableURL = 'https://us.soccerway.com/international/europe/premier-league-international-cup/20182019/group-stage/r47607/';
+	const tableID = '#page_competition_1_block_competition_tables_group_13_block_competition_league_table_1_table';
 	return getTableStandings(11, tableURL, tableID, req, res, next);
 };
 
@@ -289,8 +249,8 @@ exports.processCupsNotDrawn = (req, res, next) => {
 	};
 	// Premier League International Cup
 	req.plIntlCupData = {
-		specialNote: NOT_PARTICIPATING,
-		shouldDisplayInSummary: false
+		specialNote: 'Manchester United has been drawn in the same group (Group F) as Paris Saint-Germain, PSV Eidenhoven, and Derby County.',
+		shouldDisplayInSummary: true
 	};
 	// Under-19 UEFA Youth League
 	req.youthLeagueData = {
