@@ -35,7 +35,7 @@ mixin quickMatchInfoMobile(match, standingsView)
 			//- Away Team Name
 			.container
 				p
-					img(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
+					img.full-height(src=match.awayClubLogoSrc, alt=`Club Logo of ${match.awayTeamName}`)
 				.hidden-xs
 					h4.force-font-15(style={'padding-top': '5px'})=match.awayteamNameLong
 				.hidden-lg.hidden-md.hidden-sm.hidden-ms
