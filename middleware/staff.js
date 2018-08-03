@@ -2,7 +2,9 @@
 const { Client } = require('pg');
 
 // Get Staff helper functions
-const staffHelper = require('../helpers/staff.js');
+const { TEAMS } = require('../helpers/teams');
+const { getTeamPrefix, getStaffTitle, getFullCountryName } = require('../helpers/staff');
+
 
 exports.getCoachingStaff = (req, res, next) => {
 	// Get Client
@@ -30,17 +32,17 @@ exports.getCoachingStaff = (req, res, next) => {
 		allStaff.forEach((member) => {
 			// Get the full job title
 			if(member.title < 15 || member.title == 21) {
-				member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+				member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 			}
 			else {
-				member.job_title = staffHelper.getStaffTitle(member.title);
+				member.job_title = getStaffTitle(member.title);
 			}
 
 			// Get the full country name
-			staffHelper.getFullCountryName(member);
+			getFullCountryName(member);
 
 			// Place it into an appropriate list
-			if(member.title < 15 && member.team == 0) {
+			if(member.title < 15 && member.team == TEAMS.SENIOR) {
 				req.staffData.push(member);
 			}
 			else {
@@ -82,10 +84,10 @@ exports.getBoardMembers = (req, res, next) => {
 		req.boardData = JSON.parse(JSON.stringify(resp.rows));
 		req.boardData.forEach((member) => {
 			// Get the full job title
-			member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+			member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 
 			// Get the full country name
-			staffHelper.getFullCountryName(member);
+			getFullCountryName(member);
 		});
 
 		// End connection
@@ -118,14 +120,14 @@ exports.getMedicalTeam = (req, res, next) => {
 		req.medicalData.forEach((member) => {
 			// Get the full job title
 			if(member.note != null) {
-				member.job_title = staffHelper.getTeamPrefix(member.team) + member.note;
+				member.job_title = getTeamPrefix(member.team) + member.note;
 			}
 			else {
-				member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+				member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 			}
 
 			// Get the full country name
-			staffHelper.getFullCountryName(member);
+			getFullCountryName(member);
 		});
 
 		// End connection
@@ -157,10 +159,10 @@ exports.getScoutingTeam = (req, res, next) => {
 		req.scoutData = JSON.parse(JSON.stringify(resp.rows));
 		req.scoutData.forEach((member) => {
 			// Get the full job title
-			member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+			member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 
 			// Get the full country name
-			staffHelper.getFullCountryName(member);
+			getFullCountryName(member);
 		});
 
 		// End connection
@@ -192,10 +194,10 @@ exports.getClubStaff = (req, res, next) => {
 		req.clubStaffData = JSON.parse(JSON.stringify(resp.rows));
 		req.clubStaffData.forEach((member) => {
 			// Get the full job title
-			member.job_title = staffHelper.getTeamPrefix(member.team) + staffHelper.getStaffTitle(member.title);
+			member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 
 			// Get the full country name
-			staffHelper.getFullCountryName(member);
+			getFullCountryName(member);
 		});
 
 		// End connection

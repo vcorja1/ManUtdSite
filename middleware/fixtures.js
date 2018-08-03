@@ -1,14 +1,72 @@
-const http = require('http');
 // Connect to Heroku database
 const { Client } = require('pg');
+// To get live score
+const http = require('http');
 // To scrape score using Cheerio
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-// Get Fixture Status
-const fixtureHelper = require('../helpers/fixtures.js');
+
+// Get Helper Functions
+const { TEAMS } = require('../helpers/teams');
+const { getClubData } = require('../helpers/clubs');
+const { COMPETITIONS, getCompetitionName, getCompetitionRoundName, getCompetitionLogoSrc } = require('../helpers/competitions');
+const { getFormattedMatchDate, getResultData, getLiveScoreResult } = require('../helpers/fixtures');
+
+
+// Store fixture statuses
+const FIXTURE_STATUS = {
+	SCHEDULED: 0,
+	POSTPONED: 1,
+	CANCELED: 2,
+	IN_PLAY: 3,
+	PAUSED: 4,
+	FINISHED: 5,
+	SUSPENDED: 6,
+	AWARDED: 7
+};
+Object.freeze(FIXTURE_STATUS);
+
+// Store fixture names
+const FIXTURE_STATUS_NAMES = [
+	'SCHEDULED', 'POSTPONED', 'CANCELED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED', 'AWARDED'
+];
+Object.freeze(FIXTURE_STATUS_NAMES);
+
+
+
+
+// Get fixtures for the reserves team
+exports.getFirstTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(TEAMS.SENIOR, '', req, res, next);
+}
+exports.getFirstTeamCupFixtures = (req, res, next) => {
+	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_CUP} AND competition <= ${COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP}`;
+	return getTeamFixtures(TEAMS.SENIOR, cupConditional, req, res, next);
+}
+
+// Get fixtures for the reserves team
+exports.getReservesTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(TEAMS.RESERVES, '', req, res, next);
+};
+exports.getReservesTeamCupFixtures = (req, res, next) => {
+	const cupConditional = ` AND competition >= ${COMPETITIONS.PL_INTERNATIONAL_CUP} AND competition <= ${COMPETITIONS.U19_UEFA_YOUTH_LEAGUE}`;
+	return getTeamFixtures(TEAMS.RESERVES, cupConditional, req, res, next);
+}
+
+// Get fixtures for the reserves team
+exports.getAcademyTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(TEAMS.ACADEMY, '', req, res, next);
+};
+exports.getAcademyTeamCupFixtures = (req, res, next) => {
+	const cupConditional = ` AND competition >= ${COMPETITIONS.U18_PREMIER_LEAGUE_CUP} AND competition <= ${COMPETITIONS.ICGT_TOURNAMENT}`;
+	return getTeamFixtures(TEAMS.ACADEMY, cupConditional, req, res, next);
+}
+
+
+
 
 // Get fixtures for the given team
-function getTeamFixtures(team, req, res, next) {
+function getTeamFixtures(team, cupConditional, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
@@ -18,8 +76,8 @@ function getTeamFixtures(team, req, res, next) {
 	// Connect
 	client.connect();
 
-	// Get Staff Data
-	client.query(`SELECT * FROM FIXTURES WHERE team='${team}' ORDER BY matchdate;`, (err, resp) => {
+	// Get All Fixtures
+	client.query(`SELECT * FROM FIXTURES WHERE team='${team}${cupConditional}' ORDER BY matchdate;`, (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;
@@ -28,198 +86,184 @@ function getTeamFixtures(team, req, res, next) {
 		}
 
 		// Save all fixtures
-		const dateNow = new Date();
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
 		const fixturesCount = req.fixtures.length;
 
 		req.fixtures.forEach( (match, index) => {
 			// Assign an index and prep to get quick info (last and next matches)
 			match.id = index;
-			match.matchdate = new Date(match.matchdate);
-			// Store full team name
-			match.hometeamNameShort = fixtureHelper.getTeamShort(match.team, match.competition, match.hometeam);
-			match.hometeamNameLong = fixtureHelper.getTeamLong(match.team, match.competition, match.hometeam);
-			match.awayteamNameShort = fixtureHelper.getTeamShort(match.team, match.competition, match.awayteam);
-			match.awayteamNameLong = fixtureHelper.getTeamLong(match.team, match.competition, match.awayteam);
-			// Store competition name and round
-			match.competitionName = fixtureHelper.getCompetitionName(match.competition);
-			match.roundName = fixtureHelper.getCompetitionRound(match.competition, match.round);
-			// Store date short and match time
-			match.matchdateShort = fixtureHelper.convertDateShort(match.matchdate);
-			match.matchTime = fixtureHelper.convertMatchTime(match.matchdate);
-			// Store club and competition logo source
-			match.homeClubLogoSrc = fixtureHelper.getClubLogoSrc(match.hometeam);
-			match.awayClubLogoSrc = fixtureHelper.getClubLogoSrc(match.awayteam);
-			match.competitionLogoSrc = fixtureHelper.getCompetitionLogoSrc(match.competition);
+
+			// Get match date info
+			match.matchDate = getFormattedMatchDate(match.matchdate);
+
+			// Store team data
+			match.homeTeam = getClubData(match.hometeam, match.team);
+			match.awayTeam = getClubData(match.awayteam, match.team);
+
+			// Store competition data
+			match.competitionName = getCompetitionName(match.competition);
+			match.roundName = getCompetitionRoundName(match.competition, match.round);
+			match.competitionLogoSrc = getCompetitionLogoSrc(match.competition);
+
 			// Store result string and color (to be used in fixtureMixin.pug)
-			match.resultString = fixtureHelper.getResultString(match);
-			match.penaltyResultsString = fixtureHelper.getPenaltyResultString(match);
-			match.resultColor = fixtureHelper.getResultColor(match);
+			if(match.status == FIXTURE_STATUS.FINISHED) {
+				match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
+			}
 		});
 
 		// Get last match ID
-		const completedMatches = req.fixtures.filter(match => match.status == 5);
+		const completedMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.FINISHED);
 		const length = completedMatches.length;
 		if(length > 0)
 			req.lastMatchID = completedMatches[length - 1].id;
 
 		// Get next match ID
-		const nextMatches = req.fixtures.filter(match => match.status < 5);
+		const nextMatches = req.fixtures.filter(match => match.status < FIXTURE_STATUS.FINISHED);
 		if(nextMatches.length > 0)
 			req.nextMatchID = nextMatches[0].id;
 
 		// End connection
 		client.end();
 
+
+		// ---------------------------- Get live score for the next match, if possible ----------------------------
+
+		// Check that there is a next match
+		if(req.nextMatchID != null) {
+			// Check that the next match has begun
+			const date = req.fixtures[req.nextMatchID].matchDate.date;
+			if(date != null && date != 'TBD' && (new Date()) >= date) {
+
+				// Scrape soccerway
+				if(req.fixtures[req.nextMatchID].soccerwayurl != null) {
+					return getLiveScoreSoccerway(req, res, next);
+				}
+				// Get score from football-data
+				else if(req.fixtures[req.nextMatchID].matchid != null) {
+					return getLiveScoreFootballData(req, res, next);
+				}
+
+			}
+		}
+
 		// Continue
 		return next();
 	});
 };
 
-// Get fixtures for the reserves team
-exports.getFirstTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(0, req, res, next);
+// Get live score from football-data
+function getLiveScoreFootballData(req, res, next) {
+	const nextMatchID = req.nextMatchID;
+	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
+
+	http.get(fixtureURL, (resp) => {
+		const { statusCode } = resp;
+		const contentType = resp.headers['content-type'];
+
+		if (statusCode !== 200 || !/^application\/json/.test(contentType)) {
+			// Consume response data to free up memory
+			resp.resume();
+
+			// Handle error here
+			return next();
+		}
+
+		resp.setEncoding('utf8');
+		let rawData = '';
+		resp.on('data', (chunk) => { rawData += chunk; });
+		resp.on('end', () => {
+			try {
+
+				// Get the data
+				const parsedData = JSON.parse(rawData);
+
+				// Get live scores
+				const status = FIXTURE_STATUS_NAMES.indexOf(parsedData.fixture.status);
+				req.fixtures[nextMatchID].status = status;
+
+				// Process score, if applicable
+				if(status >= FIXTURE_STATUS.LIVE) {
+					let match = req.fixtures[nextMatchID];
+					match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
+				}
+
+				// If the game is over, note so
+				if(status == FIXTURE_STATUS.POSTPONED || status == FIXTURE_STATUS.CANCELED || status >= FIXTURE_STATUS.FINISHED) {
+					req.lastMatchID = nextMatchID;
+					const nextMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.SCHEDULED);
+					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+				}
+
+				// Continue
+				return next();
+
+			} catch (e) {
+				// Handle error here
+				return next(e);
+			}
+		});
+	}).on('error', (e) => {
+		// Handle error here
+		return next(e);
+	});
 }
 
-// Get fixtures for the reserves team
-exports.getReservesTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(1, req, res, next);
-};
+// Get live score from soccerway
+function getLiveScoreSoccerway(req, res, next) {
+	let nextMatch = req.fixtures[req.nextMatchID];
 
-// Get fixtures for the reserves team
-exports.getAcademyTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(2, req, res, next);
-};
+	// Get updated score
+	const OPTIONS = {
+		uri: `https://us.soccerway.com${nextMatch.soccerwayurl}`,
+		transform: function (body) {
+			return cheerio.load(body);
+		}
+	};
 
+	rp(OPTIONS)
+	.then( ($) => {
+		// REQUEST SUCCEEDED: SCRAPE STANDINGS
+		let gameTime = $('#page_match_1_block_match_info_4 .game-minute');
 
-// Get live score, if possible
-exports.getLiveScore = (req, res, next) => {
-	// Check that there is a next match
-	const nextMatchID = req.nextMatchID;
-	if(nextMatchID == null) 
-		return next();
+		if(gameTime != null && gameTime.length > 0) {
+			// Game is live
+			nextMatch.status = FIXTURE_STATUS.IN_PLAY;
+			nextMatch.gameMinute = $(gameTime).text().trim();
 
-	if(req.fixtures[nextMatchID].matchid != null) {
-		// Ensure that the match has started
-		const dateNow = new Date();
-		if(dateNow < req.fixtures[nextMatchID].matchdate)
-			return next();
-
-		// Get updated score
-		const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
-
-		http.get(fixtureURL, (resp) => {
-			const { statusCode } = resp;
-			const contentType = resp.headers['content-type'];
-
-			if (statusCode !== 200 || !/^application\/json/.test(contentType)) {
-				// Consume response data to free up memory
-				resp.resume();
-
-				// Handle error here
-				return next();
-			}
-
-			resp.setEncoding('utf8');
-			let rawData = '';
-			resp.on('data', (chunk) => { rawData += chunk; });
-			resp.on('end', () => {
-				try {
-
-					// Get the match score
-					const parsedData = JSON.parse(rawData);
-
-					// Get live scores
-					const status = fixtureHelper.convertFixtureStatusToID(parsedData.fixture.status);
-					if(status != 2) {
-						// Don't record postponed matches, will do this manually
-						req.fixtures[nextMatchID].status = status;
-					}
-					req.fixtures[nextMatchID].homegoals = parsedData.fixture.result.goalsHomeTeam;
-					req.fixtures[nextMatchID].awaygoals = parsedData.fixture.result.goalsAwayTeam;
-
-					// If game is completed, note so
-					req.lastMatchID = nextMatchID;
-					const nextMatches = req.fixtures.filter(match => match.status < 2);
-					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
-
-					// Continue
-					return next();
-
-				} catch (e) {
-					// Handle error here
-					return next(e);
-				}
-			});
-		}).on('error', (e) => {
-			// Handle error here
-			return next(e);
-		});
-	}
-	else if(req.fixtures[nextMatchID].soccerwayurl != null) {
-		// Ensure that the match has started
-		const dateNow = new Date();
-		if(dateNow < req.fixtures[nextMatchID].matchdate)
-			return next();
-
-		// Get updated score
-		const OPTIONS = {
-			uri: `https://us.soccerway.com${req.fixtures[nextMatchID].soccerwayurl}`,
-			transform: function (body) {
-				return cheerio.load(body);
-			}
-		};
-
-		rp(OPTIONS)
-		.then( ($) => {
-			// REQUEST SUCCEEDED: SCRAPE STANDINGS
-			let gameTime = $('#page_match_1_block_match_info_4 .game-minute');
-			if(gameTime != null && gameTime.length > 0) {
-				let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
-				req.fixtures[nextMatchID].status = 4;
-				req.fixtures[nextMatchID].gameMinute = $(gameTime).text().trim();
-
-				if(liveScore == '-') {
-					// TO-DO: Process unavailable result
-					req.fixtures[nextMatchID].homegoals = '??';
-					req.fixtures[nextMatchID].awaygoals = '??';
-				}
-				else {
-					req.fixtures[nextMatchID].homegoals = parseInt(liveScore.split('-')[0].trim());
-					req.fixtures[nextMatchID].awaygoals = parseInt(liveScore.split('-')[1].trim());
-					req.fixtures[nextMatchID].resultString = liveScore;
-				}
+			let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
+			if(liveScore == '-') {
+				nextMatch.result = getLiveScoreResult('??', '??', null);
 			}
 			else {
-				let finalScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime').text().trim();
-				if(finalScore.includes('-')) {
-					req.fixtures[nextMatchID].status = 5;
-					req.fixtures[nextMatchID].homegoals = parseInt(finalScore.split('-')[0].trim());
-					req.fixtures[nextMatchID].awaygoals = parseInt(finalScore.split('-')[1].trim());
-					req.fixtures[nextMatchID].resultString = finalScore;
-
-					// Store result string and color (to be used in fixtureMixin.pug)
-					req.fixtures[nextMatchID].penaltyResultsString = fixtureHelper.getPenaltyResultString(req.fixtures[nextMatchID]);
-					req.fixtures[nextMatchID].resultColor = fixtureHelper.getResultColor(req.fixtures[nextMatchID]);
-
-					// If game is completed, note so
-					req.lastMatchID = nextMatchID;
-					const nextMatches = req.fixtures.filter(match => match.status < 2);
-					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
-				}
+				const homegoals = parseInt(liveScore.split('-')[0].trim());
+				const awaygoals = parseInt(liveScore.split('-')[1].trim());
+				nextMatch.result = getLiveScoreResult(homegoals, awaygoals, null);
 			}
-			// Continue
-			return next();
+		}
+		else {
+			let finalScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime').text().trim();
+			if(finalScore.includes('-')) {
+				// Game is completed
+				nextMatch.status = FIXTURE_STATUS.FINISHED;
 
-		})
-	    .catch(function (err) {
-	        // REQUEST FAILED: IGNORE THIS REQUEST
-			console.log(err);
-	        return next();
-	    });
-	}
-	else {
-		// Otherwise continue
+				// Store result data
+				nextMatch.homegoals = parseInt(finalScore.split('-')[0].trim());
+				nextMatch.awaygoals = parseInt(finalScore.split('-')[1].trim());
+				nextMatch.result = getResultData(nextMatch.hometeam, nextMatch.homegoals, nextMatch.awaygoals, null);
+
+				// Since the game is completed, note so
+				req.lastMatchID = req.nextMatchID;
+				const nextMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.SCHEDULED);
+				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+			}
+		}
+		// Continue
 		return next();
-	}
-};
+
+	})
+    .catch(function (err) {
+        // REQUEST FAILED: IGNORE THIS REQUEST
+		console.log(err);
+        return next(err);
+    });
+}

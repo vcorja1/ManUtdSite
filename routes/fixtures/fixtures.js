@@ -3,9 +3,12 @@ var express = require('express');
 var app = express();
 
 // Connect and use the middleware
-const fixtures = require('../../middleware/fixtures');
-app.use('/', fixtures.getFirstTeamFixtures);
-app.use('/', fixtures.getLiveScore);
+const { getFirstTeamFixtures } = require('../../middleware/fixtures');
+app.use('/', getFirstTeamFixtures);
+
+// Get Helper Functions
+const { COMPETITIONS } = require('../../helpers/competitions.js');
+
 
 // GET response for '/fixtures'
 app.get('/', function(req, res, next) {
@@ -19,8 +22,8 @@ app.get('/', function(req, res, next) {
 
 		res.render('fixtures', {
 			title: 'Schedule & Results',
-			preseason: req.fixtures.filter(match => match.competition > 7),
-			regularSeason: req.fixtures.filter(match => match.competition < 8),
+			preseason: req.fixtures.filter(match => match.competition >= COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP && match.competition <= COMPETITIONS.FRIENDLY),
+			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.PREMIER_LEAGUE && match.competition <= COMPETITIONS.FIFA_CLUB_WORLD_CUP),
 			lastMatch: lastMatch,
 			nextMatch: nextMatch
 		});

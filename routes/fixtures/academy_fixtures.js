@@ -6,6 +6,10 @@ var app = express();
 const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getAcademyTeamFixtures);
 
+// Get Helper Functions
+const { COMPETITIONS } = require('../../helpers/competitions.js');
+
+
 // GET response for '/academy-fixtures'
 app.get('/', function(req, res, next) {
 
@@ -18,9 +22,9 @@ app.get('/', function(req, res, next) {
 
 		res.render('fixtures', {
 			title: 'Academy Team Schedule & Results',
-			preseason: req.fixtures.filter(match => match.competition == 9 || match.competition == 16),
-			regularSeason: req.fixtures.filter(match => match.competition > 12 && match.competition < 16),
-			otherCups: req.fixtures.filter(match => match.competition > 16),
+			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY),
+			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.U18_PREMIER_LEAGUE_NORTH && match.competition <= COMPETITIONS.FA_YOUTH_CUP),
+			otherCups: req.fixtures.filter(match => match.competition >= COMPETITIONS.OTTEN_CUP && match.competition <= COMPETITIONS.ICGT_TOURNAMENT),
 			lastMatch: lastMatch,
 			nextMatch: nextMatch
 		});

@@ -105,6 +105,16 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2
 						+tableCompetitionMixin(pl2Data, isSingleCompetition)
 
+		//- Premier League 2 Division 2 Standings
+		if(pl2Div2Data != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2-div-2
+					+tableCompetitionMixin(pl2Div2Data, isSingleCompetition)
+			else
+				unless(pl2Div2Data.shouldDisplayInSummary != null && !pl2Div2Data.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-2-div-2
+						+tableCompetitionMixin(pl2Div2Data, isSingleCompetition)
+
 		//- Premier League International Cup Standings
 		if(plIntlCupData != null)
 			if(isSingleCompetition)
@@ -126,14 +136,14 @@ block content
 						+mixedCompetitionMixin(youthLeagueData, isSingleCompetition)
 
 		//- U18 Premier League North Standings
-		if(plNorthData != null)
+		if(u18PlNorthData != null)
 			if(isSingleCompetition)
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-north
-					+tableCompetitionMixin(plNorthData, isSingleCompetition)
+					+tableCompetitionMixin(u18PlNorthData, isSingleCompetition)
 			else
-				unless(plNorthData.shouldDisplayInSummary != null && !plNorthData.shouldDisplayInSummary)
+				unless(u18PlNorthData.shouldDisplayInSummary != null && !u18PlNorthData.shouldDisplayInSummary)
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league-north
-						+tableCompetitionMixin(plNorthData, isSingleCompetition)
+						+tableCompetitionMixin(u18PlNorthData, isSingleCompetition)
 
 		//- U18 Premier League Cup Standings
 		if(plCupData != null)

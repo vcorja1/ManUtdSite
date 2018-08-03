@@ -6,6 +6,10 @@ var app = express();
 const fixtures = require('../../middleware/fixtures');
 app.use('/', fixtures.getReservesTeamFixtures);
 
+// Get Helper Functions
+const { COMPETITIONS } = require('../../helpers/competitions.js');
+
+
 // GET response for '/reserves-fixtures'
 app.get('/', function(req, res, next) {
 
@@ -18,8 +22,8 @@ app.get('/', function(req, res, next) {
 
 		res.render('fixtures', {
 			title: 'Reserves Team Schedule & Results',
-			preseason: req.fixtures.filter(match => match.competition == 9),
-			regularSeason: req.fixtures.filter(match => match.competition > 9),
+			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY),
+			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.PREMIER_LEAGUE_2 && match.competition <= COMPETITIONS.U19_UEFA_YOUTH_LEAGUE),
 			lastMatch: lastMatch,
 			nextMatch: nextMatch
 		});

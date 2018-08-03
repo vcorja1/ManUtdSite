@@ -5,13 +5,15 @@ var app = express();
 // Run middleware in parallel where possible
 const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');
 
-// Require the standings middleware
+// Require the standings preprocessing middleware
+const { preprocessStandings } = require('../../middleware/preprocessStandings');
+// Also require the standings middleware
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
-const fixtures = require('../../middleware/fixtures');
+const { getAcademyTeamCupFixtures } = require('../../middleware/fixtures');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', [fixtures.getAcademyTeamFixtures, standings.processCupsNotDrawn]);
+app.use('/', parallelMiddlewares([getAcademyTeamCupFixtures, preprocessStandings]));
 
 // GET response for '/academy-standings/premier-league-north'
 app.use('/premier-league-north', [standings.getU18PLTable, standings.processStandingsData]);
@@ -20,7 +22,7 @@ app.get('/premier-league-north', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'U18 Premier League North Standings',
-			plNorthData: req.plNorthData,
+			u18PlNorthData: req.u18PlNorthData,
 			isSingleCompetition: true
 		});
 	}
@@ -129,7 +131,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Academy Standings',
-			plNorthData: req.plNorthData,
+			u18PlNorthData: req.u18PlNorthData,
 			plCupData: req.plCupData,
 			faYouthCupData: req.faYouthCupData,
 			ottenCupData: req.ottenCupData,

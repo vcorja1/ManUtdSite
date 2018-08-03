@@ -2,8 +2,33 @@
 const { Client } = require('pg');
 
 // Get helper functions
-const { getPositionAbbr } = require('../helpers/players');
+const { TEAMS } = require('../helpers/teams');
 const { getFullCountryName } = require('../helpers/staff');
+
+// Store positions abbreviations
+const POSITIONS = [
+	'GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'RW', 'LW', 'ST'
+];
+Object.freeze(POSITIONS);
+
+
+
+// Get fixtures for the reserves team
+exports.getFirstTeamPlayers = (req, res, next) => {
+	return getTeamPlayers(TEAMS.SENIOR, req, res, next);
+}
+
+// Get fixtures for the reserves team
+exports.getReservesTeamPlayers = (req, res, next) => {
+	return getTeamPlayers(TEAMS.RESERVES, req, res, next);
+};
+
+// Get fixtures for the reserves team
+exports.getAcademyTeamPlayers = (req, res, next) => {
+	return getTeamPlayers(TEAMS.ACADEMY, req, res, next);
+};
+
+
 
 // Get fixtures for the given team
 function getTeamPlayers(team, req, res, next) {
@@ -37,7 +62,7 @@ function getTeamPlayers(team, req, res, next) {
 
 			req.players.forEach( (player) => {
 				// Store position abbreviation
-				player.positionAbbr = getPositionAbbr(player.position);
+				player.positionAbbr = POSITIONS[player.position];
 				// Store full country name and its flag image
 				getFullCountryName(player);
 
@@ -63,19 +88,4 @@ function getTeamPlayers(team, req, res, next) {
 		// Continue
 		return next();
 	});
-};
-
-// Get fixtures for the reserves team
-exports.getFirstTeamPlayers = (req, res, next) => {
-	return getTeamPlayers(0, req, res, next);
-}
-
-// Get fixtures for the reserves team
-exports.getReservesTeamPlayers = (req, res, next) => {
-	return getTeamPlayers(1, req, res, next);
-};
-
-// Get fixtures for the reserves team
-exports.getAcademyTeamPlayers = (req, res, next) => {
-	return getTeamPlayers(2, req, res, next);
 };

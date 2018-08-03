@@ -5,14 +5,15 @@ var app = express();
 // Run middleware in parallel where possible
 const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');
 
-// Require the standings middleware
+// Require the standings preprocessing middleware
+const { preprocessStandings } = require('../../middleware/preprocessStandings');
+// Also require the standings middleware
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
-const fixtures = require('../../middleware/fixtures');
+const { getFirstTeamCupFixtures } = require('../../middleware/fixtures');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', parallelMiddlewares([fixtures.getFirstTeamFixtures, standings.processCupsNotDrawn]));
-app.use('/', fixtures.getLiveScore);
+app.use('/', parallelMiddlewares([getFirstTeamCupFixtures, preprocessStandings]));
 
 // GET response for '/standings/premier-league'
 app.use('/premier-league', [standings.getEPLTable, standings.processStandingsData]);

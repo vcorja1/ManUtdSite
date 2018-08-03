@@ -1,3 +1,6 @@
+// Get Helper Functions
+const { TEAMS } = require('./teams');
+
 // Get Country Name
 const { byAlpha2 } = require('iso-country-codes');
 
@@ -26,19 +29,19 @@ exports.getStaffTitle = function getStaffTitle(titleID) {
 
 // Gets the proper team ending
 exports.getTeamPrefix = function getTeamPrefix(team) {
-	if(team === 1)
+	if(team === TEAMS.RESERVES)
 		return 'U23 ';
-	if(team === 2)
+	if(team === TEAMS.ACADEMY)
 		return 'U18 ';
-	if(team === 3)
+	if(team === TEAMS.U16_TEAM)
 		return 'U16 ';
-	if(team === 4)
+	if(team === TEAMS.U14_TEAM)
 		return 'U14 ';
-	if(team === 5)
+	if(team === TEAMS.U12_TEAM)
 		return 'U12 ';
-	if(team === 6)
+	if(team === TEAMS.U10_TEAM)
 		return 'U10 ';
-	if(team === 7)
+	if(team === TEAMS.U9_TEAM)
 		return 'U9 ';
 	return '';
 }

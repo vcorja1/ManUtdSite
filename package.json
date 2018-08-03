@@ -9,12 +9,12 @@
   "scripts": {
     "test": "npm test",
     "watch": "nodemon server.js -e js,pug",
-    "checkLatestPackageVersions": "npm outdated",
+    "outdated": "npm outdated",
     "start": "node server.js"
   },
   "engines": {
     "node": "6.11.2",
-    "npm": "6.1.0"
+    "npm": "6.2.0"
   },
   "repository": {
     "type": "git",
@@ -37,7 +37,7 @@
     "iso-country-codes": "0.0.5",
     "morgan": "1.9.0",
     "nib": "1.1.2",
-    "nodemon": "1.18.2",
+    "nodemon": "1.18.3",
     "pg": "7.4.3",
     "pug": "2.0.3",
     "request": "2.87.0",

@@ -5,13 +5,15 @@ var app = express();
 // Run middleware in parallel where possible
 const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');
 
-// Require the standings middleware
+// Require the standings preprocessing middleware
+const { preprocessStandings } = require('../../middleware/preprocessStandings');
+// Also require the standings middleware
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
-const fixtures = require('../../middleware/fixtures');
+const { getReservesTeamCupFixtures } = require('../../middleware/fixtures');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', [fixtures.getReservesTeamFixtures, standings.processCupsNotDrawn]);
+app.use('/', parallelMiddlewares([getReservesTeamCupFixtures, preprocessStandings]));
 
 // GET response for '/reserves-standings/premier-league-2'
 app.use('/premier-league-2', [standings.getPL2Table, standings.processStandingsData]);
@@ -21,6 +23,24 @@ app.get('/premier-league-2', function(req, res, next) {
 		res.render('standings', {
 			title: 'Premier League 2 Standings',
 			pl2Data: req.pl2Data,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
+// GET response for '/reserves-standings/premier-league-2-div-2'
+app.use('/premier-league-2-div-2', [standings.getPL2Div2Table, standings.processStandingsData]);
+app.get('/premier-league-2-div-2', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'Premier League 2 Division II Standings',
+			pl2Div2Data: req.pl2Div2Data,
 			isSingleCompetition: true
 		});
 	}
@@ -68,7 +88,7 @@ app.get('/youth-league', function(req, res, next) {
 });
 
 // GET response for '/reserves-standings'
-app.use('/', parallelMiddlewares([standings.getPL2Table, standings.getPLInternationalCupTable, standings.getYouthLeagueTable]));
+app.use('/', parallelMiddlewares([standings.getPL2Table, standings.getPL2Div2Table, standings.getPLInternationalCupTable, standings.getYouthLeagueTable]));
 app.use('/', standings.processStandingsData);
 app.get('/', function(req, res, next) {
 
@@ -76,6 +96,7 @@ app.get('/', function(req, res, next) {
 		res.render('standings', {
 			title: 'Standings - Reserves Team',
 			pl2Data: req.pl2Data,
+			pl2Div2Data: req.pl2Div2Data,
 			plIntlCupData: req.plIntlCupData,
 			youthLeagueData: req.youthLeagueData,
 			isSingleCompetition: false
