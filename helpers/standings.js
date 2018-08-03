@@ -121,6 +121,30 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
 			}
 			break;
+
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
+			if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			if(position == 2) {
+				return QUALIFICATION_COLOR;
+			}
+			if(position == 10) {
+				return RELEGATION_COLOR;
+			}
+
+		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
+			if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			if(position == 11) {
+				return RELEGATION_COLOR;
+			}
+
+		case COMPETITIONS.FA_WSL_CUP:
+			if(position <= 2) {
+				return GROUP_WINNERS;
+			}
 	}
 	return null;
 }
@@ -192,5 +216,12 @@ exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(com
 	stubFixture.roundName = competitionData.competitionStatus;
 
 	competitionData.fixtures.unshift(stubFixture);
+	return competitionData;
+}
+
+// Update Mixed Competition Status And Add Fixture Stubs If Needed
+exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competitionID, competitionData) {
+	// TO-DO
+	competitionData.competitionStatus = competitionData.groupStagePosition;
 	return competitionData;
 }

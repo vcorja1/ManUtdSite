@@ -3,8 +3,8 @@ var express = require('express');
 var app = express();
 
 // Connect and use the middleware
-const players = require('../../middleware/players');
-app.use('/', players.getFirstTeamPlayers);
+const { getFirstTeamPlayers } = require('../../middleware/players');
+app.use('/', getFirstTeamPlayers);
 
 // GET response for '/first-team'
 app.get('/', function(req, res, next) {

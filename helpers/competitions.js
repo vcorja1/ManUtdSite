@@ -23,7 +23,9 @@ const COMPETITIONS = {
 	OTTEN_CUP: 17,
 	VGH_CUP: 18,
 	DALLAS_CUP: 19,
-	ICGT_TOURNAMENT: 20
+	ICGT_TOURNAMENT: 20,
+	FA_WOMEN_CHAMPIONSHIP: 21,
+	FA_WSL_CUP: 22
 };
 Object.freeze(COMPETITIONS);
 
@@ -34,7 +36,8 @@ const COMPETITION_NAMES = [
 	'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly',
 	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'Under-19 UEFA Youth League',
 	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Otten Cup',
-	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament'
+	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
+	'FA Women\'s Championship', 'FA WSL Cup'
 ];
 Object.freeze(COMPETITION_NAMES);
 
@@ -55,7 +58,10 @@ exports.getTeamByCompetitionID = function getTeamByCompetitionID(competitionID) 
 	if(competitionID <= COMPETITIONS.U19_UEFA_YOUTH_LEAGUE) {
 		return TEAMS.RESERVES;
 	}
-	return TEAMS.ACADEMY;
+	if(competitionID <= COMPETITIONS.ICGT_TOURNAMENT) {
+		return TEAMS.ACADEMY;
+	}
+	return TEAMS.WOMEN;
 }
 
 
@@ -67,6 +73,8 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 		case COMPETITIONS.PREMIER_LEAGUE:
 		case COMPETITIONS.PREMIER_LEAGUE_2:
 		case COMPETITIONS.PREMIER_LEAGUE_2_DIV_2:
+		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
+			return 'Week ' + round;
 
 		case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
 			return round === 23 ? 'Final' : ('Week ' + round);
@@ -253,6 +261,13 @@ function getNoNextRound(competitionID) {
 			return 5;
 
 
+		/************* WOMEN'S TEAM *************/
+		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
+			return 22;
+		case COMPETITIONS.FA_WSL_CUP:
+			return 7;
+
+
 
 		case COMPETITIONS.CHAMPIONS_LEAGUE:
 		case COMPETITIONS.EUROPA_LEAGUE:
@@ -317,6 +332,13 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 			return LOGOS_FOLDER + 'dallas_cup.png';
 		case COMPETITIONS.ICGT_TOURNAMENT:
 			return LOGOS_FOLDER + 'icgt.jpg';
+
+
+		/************* WOMEN'S TEAM *************/
+		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
+			return LOGOS_FOLDER + 'fa_women_championship.jpg';
+		case COMPETITIONS.FA_WSL_CUP:
+			return LOGOS_FOLDER + 'fa_wsl_cup.png';
 
 
 		default:

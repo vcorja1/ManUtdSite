@@ -31,7 +31,7 @@ function removeTeamNameAbbr(teamName) {
 	const ending = teamName.substr(-3);
 	if(ending === ' FC' || ending === ' CF')
 		return teamName.slice(0, -3);
-	if(teamName.substr(-4) === ' AFC')
+	if(teamName.substr(-4) === ' AFC' || teamName.substr(-4) === ' LFC')
 		return teamName.slice(0, -4);
 
 	// Or remove beginning
@@ -165,6 +165,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Leicester' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Leicester_City.svg'
 			};
+		case 'Leicester City WFC':
+			return {
+				teamName: 'Leicester City WFC',
+				fullName: 'Leicester City WFC' + teamNameEnding,
+				displayName: 'Leicester City' + teamNameEnding,
+				displayNameShort: 'Leicester' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Leicester_City.svg'
+			};
 		case 'Liverpool':
 			return {
 				teamName: 'Liverpool FC',
@@ -268,6 +276,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Bradford' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bradford_City.svg'
 			};
+		case 'Charlton Athletic':
+			return {
+				teamName: 'Charlton Athletic FC',
+				fullName: 'Charlton Athletic FC' + teamNameEnding,
+				displayName: 'Charlton Athletic' + teamNameEnding,
+				displayNameShort: 'Charlton' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Charlton_Athletic.svg'
+			};
 		case 'Derby County':
 			return {
 				teamName: 'Derby County FC',
@@ -276,6 +292,31 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Derby' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Derby_County.svg'
 			};
+		case 'Durham City':
+		case 'Durham':
+			return {
+				teamName: 'Durham City AFC',
+				fullName: 'Durham City AFC' + teamNameEnding,
+				displayName: 'Durham City' + teamNameEnding,
+				displayNameShort: 'Durham' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Durham_City.png'
+			};
+		case 'Lewes':
+			return {
+				teamName: 'Lewes FC',
+				fullName: 'Lewes FC' + teamNameEnding,
+				displayName: 'Lewes' + teamNameEnding,
+				displayNameShort: 'Lewes' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lewes.png'
+			};
+		case 'London Bees':
+			return {
+				teamName: 'London Bees',
+				fullName: 'London Bees' + teamNameEnding,
+				displayName: 'London Bees' + teamNameEnding,
+				displayNameShort: 'Bees' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'London_Bees.png'
+			};
 		case 'Middlesbrough':
 			return {
 				teamName: 'Middlesbrough FC',
@@ -283,6 +324,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Middlesbrough' + teamNameEnding,
 				displayNameShort: 'Middlesbrough' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Middlesbrough.svg'
+			};
+		case 'Millwall Lionesses':
+			return {
+				teamName: 'Millwall Lionesses LFC',
+				fullName: 'Millwall Lionesses LFC' + teamNameEnding,
+				displayName: 'Millwall Lionesses' + teamNameEnding,
+				displayNameShort: 'Lionesses' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Millwall_Lionesses.png'
 			};
 		case 'Northampton Town':
 			return {

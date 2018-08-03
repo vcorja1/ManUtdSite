@@ -14,6 +14,8 @@ const reserves_fixtures = require('./fixtures/reserves_fixtures');
 app.use('/reserves-fixtures', reserves_fixtures);
 const academy_fixtures = require('./fixtures/academy_fixtures');
 app.use('/academy-fixtures', academy_fixtures);
+const women_fixtures = require('./fixtures/women_fixtures');
+app.use('/women-fixtures', women_fixtures);
 
 /* ----  STANDINGS  ---- */
 const standings = require('./standings/standings');
@@ -22,6 +24,8 @@ const reserves_standings = require('./standings/reserves_standings');
 app.use('/reserves-standings', reserves_standings);
 const academy_standings = require('./standings/academy_standings');
 app.use('/academy-standings', academy_standings);
+const women_standings = require('./standings/women_standings');
+app.use('/women-standings', women_standings);
 
 /* ----  PLAYERS  ---- */
 const players = require('./players/first_team');
@@ -30,6 +34,8 @@ const reserves_team = require('./players/reserves_team');
 app.use('/reserves-team', reserves_team);
 const academy_team = require('./players/academy_team');
 app.use('/academy-team', academy_team);
+const women_team = require('./players/women_team');
+app.use('/women-team', women_team);
 
 /* ----  STAFF  ---- */
 const coachingStaff = require('./staff/coachingStaff');

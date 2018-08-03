@@ -53,13 +53,22 @@ exports.getReservesTeamCupFixtures = (req, res, next) => {
 	return getTeamFixtures(TEAMS.RESERVES, cupConditional, req, res, next);
 }
 
-// Get fixtures for the reserves team
+// Get fixtures for the academy team
 exports.getAcademyTeamFixtures = (req, res, next) => {
 	return getTeamFixtures(TEAMS.ACADEMY, '', req, res, next);
 };
 exports.getAcademyTeamCupFixtures = (req, res, next) => {
 	const cupConditional = ` AND competition >= ${COMPETITIONS.U18_PREMIER_LEAGUE_CUP} AND competition <= ${COMPETITIONS.ICGT_TOURNAMENT}`;
 	return getTeamFixtures(TEAMS.ACADEMY, cupConditional, req, res, next);
+}
+
+// Get fixtures for the academy team
+exports.getWomenTeamFixtures = (req, res, next) => {
+	return getTeamFixtures(TEAMS.WOMEN, '', req, res, next);
+};
+exports.getWomenTeamCupFixtures = (req, res, next) => {
+	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_WSL_CUP} AND competition <= ${COMPETITIONS.FA_WSL_CUP}`;
+	return getTeamFixtures(TEAMS.WOMEN, cupConditional, req, res, next);
 }
 
 

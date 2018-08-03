@@ -3,15 +3,15 @@ var express = require('express');
 var app = express();
 
 // Connect and use the middleware
-const { getReservesTeamPlayers } = require('../../middleware/players');
-app.use('/', getReservesTeamPlayers);
+const { getWomenTeamPlayers } = require('../../middleware/players');
+app.use('/', getWomenTeamPlayers);
 
-// GET response for '/reserves-team'
+// GET response for '/first-team'
 app.get('/', function(req, res, next) {
 
 	try {
 		res.render('players', {
-			title: 'Reserves Team',
+			title: 'Women\'s Team',
 			goalkeepers: req.goalkeepers,
 			defenders: req.defenders,
 			midfielders: req.midfielders,

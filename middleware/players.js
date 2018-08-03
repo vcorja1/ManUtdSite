@@ -23,9 +23,14 @@ exports.getReservesTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.RESERVES, req, res, next);
 };
 
-// Get fixtures for the reserves team
+// Get fixtures for the academy team
 exports.getAcademyTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.ACADEMY, req, res, next);
+};
+
+// Get fixtures for the women's team
+exports.getWomenTeamPlayers = (req, res, next) => {
+	return getTeamPlayers(TEAMS.WOMEN, req, res, next);
 };
 
 

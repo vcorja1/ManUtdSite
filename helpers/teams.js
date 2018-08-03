@@ -6,7 +6,8 @@ const TEAMS = {
 	U14_TEAM: 4,
 	U12_TEAM: 5,
 	U10_TEAM: 6,
-	U9_TEAM: 7
+	U9_TEAM: 7,
+	WOMEN: 8
 };
 Object.freeze(TEAMS);
 

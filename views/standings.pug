@@ -194,3 +194,23 @@ block content
 				unless(dallasCupData.shouldDisplayInSummary != null && !dallasCupData.shouldDisplayInSummary)
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
 						+knockoutCompetitionMixin(dallasCupData, isSingleCompetition)
+
+		//- FA Women's Championship
+		if(faWomenChampionshipData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-women-championship
+					+tableCompetitionMixin(faWomenChampionshipData, isSingleCompetition)
+			else
+				unless(faWomenChampionshipData.shouldDisplayInSummary != null && !faWomenChampionshipData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-women-championship
+						+tableCompetitionMixin(faWomenChampionshipData, isSingleCompetition)
+
+		//- FA WSL Continental Tyres Cup
+		if(faWSLCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-wsl-cup
+					+mixedCompetitionMixin(faWSLCupData, isSingleCompetition)
+			else
+				unless(faWSLCupData.shouldDisplayInSummary != null && !faWSLCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-wsl-cup
+						+mixedCompetitionMixin(faWSLCupData, isSingleCompetition)
