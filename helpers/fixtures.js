@@ -24,6 +24,32 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 /* ---------------------- RESULTS ------------------------- */
 /* -------------------------------------------------------- */
 
+// Store fixture statuses
+const MATCH_STATUS = {
+	SCHEDULED: 0,
+	POSTPONED: 1,
+	CANCELED: 2,
+	IN_PLAY: 3,
+	PAUSED: 4,
+	FINISHED: 5,
+	SUSPENDED: 6,
+	AWARDED: 7
+};
+Object.freeze(MATCH_STATUS);
+exports.MATCH_STATUS = MATCH_STATUS;
+
+// Store fixture names
+const MATCH_STATUS_NAMES = [
+	'SCHEDULED', 'POSTPONED', 'CANCELED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED', 'AWARDED'
+];
+Object.freeze(MATCH_STATUS_NAMES);
+exports.MATCH_STATUS_NAMES = MATCH_STATUS_NAMES;
+
+
+/* -------------------------------------------------------- */
+/* ---------------------- RESULTS ------------------------- */
+/* -------------------------------------------------------- */
+
 const MATCH_RESULT = {
 	WIN: 0,
 	DRAW: 1,

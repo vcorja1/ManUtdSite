@@ -558,6 +558,19 @@ function processKnockoutCompetitions(req) {
 		getKnockoutCompetitionStatus(COMPETITIONS.FA_YOUTH_CUP, req.faYouthCupData);
 	}
 
+	// Ruhr Cup
+	const ruhrCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.RUHR_CUP).reverse();
+	if(ruhrCupFixtures != null && ruhrCupFixtures.length > 0) {
+		req.ruhrCupData = {
+			competitionName: 'RUHR CUP ' + CURRENT_SEASON,
+			competitionLink: ACADEMY_STANDINGS_LOCATION + 'ruhr-cup',
+			fixtures: ruhrCupFixtures
+		};
+
+		// Set competition status
+		getKnockoutCompetitionStatus(COMPETITIONS.RUHR_CUP, req.ruhrCupData);
+	}
+
 	// Otten Cup
 	const ottenCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.OTTEN_CUP).reverse();
 	if(ottenCupFixtures != null && ottenCupFixtures.length > 0) {

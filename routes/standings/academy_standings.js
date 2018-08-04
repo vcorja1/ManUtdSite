@@ -69,6 +69,24 @@ app.get('/fa-youth-cup', function(req, res, next) {
 
 });
 
+// GET response for '/academy-standings/ruhr-cup'
+app.use('/ruhr-cup', standings.processStandingsData);
+app.get('/ruhr-cup', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'Ruhr Cup Standings',
+			ruhrCupData: req.ruhrCupData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/academy-standings/otten-cup'
 app.use('/otten-cup', standings.processStandingsData);
 app.get('/otten-cup', function(req, res, next) {
@@ -134,6 +152,7 @@ app.get('/', function(req, res, next) {
 			u18PlNorthData: req.u18PlNorthData,
 			plCupData: req.plCupData,
 			faYouthCupData: req.faYouthCupData,
+			ruhrCupData: req.ruhrCupData,
 			ottenCupData: req.ottenCupData,
 			vghCupData: req.vghCupData,
 			dallasCupData: req.dallasCupData,

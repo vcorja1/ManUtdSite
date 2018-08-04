@@ -22,9 +22,9 @@ app.get('/', function(req, res, next) {
 
 		res.render('fixtures', {
 			title: 'Academy Team Schedule & Results',
-			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY),
+			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY || (match.competition >= COMPETITIONS.RUHR_CUP && match.competition <= COMPETITIONS.OTTEN_CUP)),
 			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.U18_PREMIER_LEAGUE_NORTH && match.competition <= COMPETITIONS.FA_YOUTH_CUP),
-			otherCups: req.fixtures.filter(match => match.competition >= COMPETITIONS.OTTEN_CUP && match.competition <= COMPETITIONS.ICGT_TOURNAMENT),
+			otherCups: req.fixtures.filter(match => match.competition >= COMPETITIONS.VGH_CUP && match.competition <= COMPETITIONS.ICGT_TOURNAMENT),
 			lastMatch: lastMatch,
 			nextMatch: nextMatch
 		});

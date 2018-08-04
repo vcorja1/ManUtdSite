@@ -6,6 +6,7 @@ const CURRENT_SEASON = ' 2018/19';
 const STANDINGS_LOCATION = '/standings/';
 const RESERVES_STANDINGS_LOCATION = '/reserves-standings/';
 const ACADEMY_STANDINGS_LOCATION = '/academy-standings/';
+const WOMEN_STANDINGS_LOCATION = '/women-standings/';
 
 
 // Helper function to process cups not drawn or ones MUFC is not participating in this season

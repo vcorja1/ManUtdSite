@@ -20,12 +20,13 @@ const COMPETITIONS = {
 	U18_PREMIER_LEAGUE_NORTH: 14,
 	U18_PREMIER_LEAGUE_CUP: 15,
 	FA_YOUTH_CUP: 16,
-	OTTEN_CUP: 17,
-	VGH_CUP: 18,
-	DALLAS_CUP: 19,
-	ICGT_TOURNAMENT: 20,
-	FA_WOMEN_CHAMPIONSHIP: 21,
-	FA_WSL_CUP: 22
+	RUHR_CUP: 17,
+	OTTEN_CUP: 18,
+	VGH_CUP: 19,
+	DALLAS_CUP: 20,
+	ICGT_TOURNAMENT: 21,
+	FA_WOMEN_CHAMPIONSHIP: 22,
+	FA_WSL_CUP: 23
 };
 Object.freeze(COMPETITIONS);
 
@@ -35,7 +36,7 @@ const COMPETITION_NAMES = [
 	'Premier League', 'FA Cup', 'Carabao Cup', 'Community Shield', 'Champions League', 'Europa League',
 	'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly',
 	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'Under-19 UEFA Youth League',
-	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Otten Cup',
+	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Ruhr Cup', 'Otten Cup',
 	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
 	'FA Women\'s Championship', 'FA WSL Cup'
 ];
@@ -151,6 +152,23 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 	}
 
 
+	if(competitionID == COMPETITIONS.RUHR_CUP) {
+		if(round <= 4)
+			return 'Game ' + round;
+		if(round == 5)
+			return '1/2 Finals';
+		if(round == 6)
+			return '9th/10th Place';
+		if(round == 7)
+			return '7th/8th Place';
+		if(round == 8)
+			return '5th/6th Place';
+		if(round == 9)
+			return '3rd/4th Place';
+		return 'Final';
+	}
+
+
 	if(competitionID == COMPETITIONS.OTTEN_CUP) {
 		if(round <= 3)
 			return 'Game ' + round;
@@ -252,6 +270,8 @@ function getNoNextRound(competitionID) {
 			return 6;
 		case COMPETITIONS.FA_YOUTH_CUP:
 			return 8;
+		case COMPETITIONS.RUHR_CUP:
+			return 6;
 		case COMPETITIONS.OTTEN_CUP:
 			return 4;
 		case COMPETITIONS.VGH_CUP:
@@ -324,6 +344,8 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 			return LOGOS_FOLDER + 'u18_pl_cup.jpg';
 		case COMPETITIONS.FA_YOUTH_CUP:
 			return LOGOS_FOLDER + 'fa_youth_cup.png';
+		case COMPETITIONS.RUHR_CUP:
+			return LOGOS_FOLDER + 'ruhr_cup.png';
 		case COMPETITIONS.OTTEN_CUP:
 			return LOGOS_FOLDER + 'otten_cup.png';
 		case COMPETITIONS.VGH_CUP:

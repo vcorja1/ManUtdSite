@@ -10,28 +10,13 @@ const cheerio = require('cheerio');
 const { TEAMS } = require('../helpers/teams');
 const { getClubData } = require('../helpers/clubs');
 const { COMPETITIONS, getCompetitionName, getCompetitionRoundName, getCompetitionLogoSrc } = require('../helpers/competitions');
-const { getFormattedMatchDate, getResultData, getLiveScoreResult } = require('../helpers/fixtures');
-
-
-// Store fixture statuses
-const FIXTURE_STATUS = {
-	SCHEDULED: 0,
-	POSTPONED: 1,
-	CANCELED: 2,
-	IN_PLAY: 3,
-	PAUSED: 4,
-	FINISHED: 5,
-	SUSPENDED: 6,
-	AWARDED: 7
-};
-Object.freeze(FIXTURE_STATUS);
-
-// Store fixture names
-const FIXTURE_STATUS_NAMES = [
-	'SCHEDULED', 'POSTPONED', 'CANCELED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED', 'AWARDED'
-];
-Object.freeze(FIXTURE_STATUS_NAMES);
-
+const {
+	MATCH_STATUS,
+	MATCH_STATUS_NAMES,
+	getFormattedMatchDate,
+	getResultData,
+	getLiveScoreResult
+} = require('../helpers/fixtures');
 
 
 
@@ -86,7 +71,7 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 	client.connect();
 
 	// Get All Fixtures
-	client.query(`SELECT * FROM FIXTURES WHERE team='${team}${cupConditional}' ORDER BY matchdate;`, (err, resp) => {
+	client.query(`SELECT * FROM FIXTURES WHERE team=${team}${cupConditional} ORDER BY matchdate;`, (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;
@@ -115,19 +100,19 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 			match.competitionLogoSrc = getCompetitionLogoSrc(match.competition);
 
 			// Store result string and color (to be used in fixtureMixin.pug)
-			if(match.status == FIXTURE_STATUS.FINISHED) {
+			if(match.status == MATCH_STATUS.FINISHED) {
 				match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
 			}
 		});
 
 		// Get last match ID
-		const completedMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.FINISHED);
+		const completedMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.FINISHED);
 		const length = completedMatches.length;
 		if(length > 0)
 			req.lastMatchID = completedMatches[length - 1].id;
 
 		// Get next match ID
-		const nextMatches = req.fixtures.filter(match => match.status < FIXTURE_STATUS.FINISHED);
+		const nextMatches = req.fixtures.filter(match => match.status < MATCH_STATUS.FINISHED);
 		if(nextMatches.length > 0)
 			req.nextMatchID = nextMatches[0].id;
 
@@ -187,19 +172,19 @@ function getLiveScoreFootballData(req, res, next) {
 				const parsedData = JSON.parse(rawData);
 
 				// Get live scores
-				const status = FIXTURE_STATUS_NAMES.indexOf(parsedData.fixture.status);
+				const status = MATCH_STATUS_NAMES.indexOf(parsedData.fixture.status);
 				req.fixtures[nextMatchID].status = status;
 
 				// Process score, if applicable
-				if(status >= FIXTURE_STATUS.LIVE) {
+				if(status >= MATCH_STATUS.LIVE) {
 					let match = req.fixtures[nextMatchID];
 					match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
 				}
 
 				// If the game is over, note so
-				if(status == FIXTURE_STATUS.POSTPONED || status == FIXTURE_STATUS.CANCELED || status >= FIXTURE_STATUS.FINISHED) {
+				if(status == MATCH_STATUS.POSTPONED || status == MATCH_STATUS.CANCELED || status >= MATCH_STATUS.FINISHED) {
 					req.lastMatchID = nextMatchID;
-					const nextMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.SCHEDULED);
+					const nextMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.SCHEDULED);
 					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
 				}
 
@@ -236,7 +221,7 @@ function getLiveScoreSoccerway(req, res, next) {
 
 		if(gameTime != null && gameTime.length > 0) {
 			// Game is live
-			nextMatch.status = FIXTURE_STATUS.IN_PLAY;
+			nextMatch.status = MATCH_STATUS.IN_PLAY;
 			nextMatch.gameMinute = $(gameTime).text().trim();
 
 			let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
@@ -253,7 +238,7 @@ function getLiveScoreSoccerway(req, res, next) {
 			let finalScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime').text().trim();
 			if(finalScore.includes('-')) {
 				// Game is completed
-				nextMatch.status = FIXTURE_STATUS.FINISHED;
+				nextMatch.status = MATCH_STATUS.FINISHED;
 
 				// Store result data
 				nextMatch.homegoals = parseInt(finalScore.split('-')[0].trim());
@@ -262,7 +247,7 @@ function getLiveScoreSoccerway(req, res, next) {
 
 				// Since the game is completed, note so
 				req.lastMatchID = req.nextMatchID;
-				const nextMatches = req.fixtures.filter(match => match.status == FIXTURE_STATUS.SCHEDULED);
+				const nextMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.SCHEDULED);
 				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
 			}
 		}
