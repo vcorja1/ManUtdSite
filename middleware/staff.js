@@ -26,6 +26,7 @@ exports.getCoachingStaff = (req, res, next) => {
 		// Initialize staff arrays
 		req.staffData = [];
 		req.academyData = [];
+		req.womenData = [];
 
 		// Save relevant Data
 		const allStaff = JSON.parse(JSON.stringify(resp.rows));
@@ -44,6 +45,9 @@ exports.getCoachingStaff = (req, res, next) => {
 			// Place it into an appropriate list
 			if(member.title < 15 && member.team == TEAMS.SENIOR) {
 				req.staffData.push(member);
+			}
+			else if(member.team == TEAMS.WOMEN) {
+				req.womenData.push(member);
 			}
 			else {
 				req.academyData.push(member);

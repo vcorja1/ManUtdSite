@@ -13,7 +13,8 @@ app.get('/', function(req, res, next) {
 		res.render('staff/coachingStaff', {
 			title: 'Coaching Staff',
 			staffData: req.staffData,
-			academyData: req.academyData
+			academyData: req.academyData,
+			womenData: req.womenData
 		});
 	}
 	catch (e) {
