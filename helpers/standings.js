@@ -133,6 +133,14 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 				return RELEGATION_COLOR;
 			}
 
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
+			if(position == 1) {
+				return CHAMPIONS_COLOR;
+			}
+			if(position == 11) {
+				return RELEGATION_COLOR;
+			}
+
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			if(position == 1) {
 				return CHAMPIONS_COLOR;

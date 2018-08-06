@@ -205,6 +205,16 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
 						+knockoutCompetitionMixin(dallasCupData, isSingleCompetition)
 
+		//- FA Women's Super League
+		if(faWomenSuperLeagueData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-women-super-league
+					+tableCompetitionMixin(faWomenSuperLeagueData, isSingleCompetition)
+			else
+				unless(faWomenSuperLeagueData.shouldDisplayInSummary != null && !faWomenSuperLeagueData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-women-super-league
+						+tableCompetitionMixin(faWomenSuperLeagueData, isSingleCompetition)
+
 		//- FA Women's Championship
 		if(faWomenChampionshipData != null)
 			if(isSingleCompetition)

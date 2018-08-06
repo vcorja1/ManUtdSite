@@ -101,6 +101,9 @@ function getSoccerwayTableStandings(competitionID, tableURL, tableID, req, res, 
 				case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
 					req.plCupTable = standings;
 					break;
+				case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
+					req.faWomenSuperLeagueTable = standings;
+					break;
 				case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 					req.faWomenChampionshipTable = standings;
 					break;
@@ -220,6 +223,16 @@ exports.getU18PLCupTable = (req, res, next) => {
 	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_CUP, tableURL, tableID, req, res, next);
 };
 
+// Get the FA Women's Super League Standings
+exports.getFAWomenSuperLeagueTable = (req, res, next) => {
+	if(req.faWomenSuperLeagueData != null) {
+		return next();
+	}
+	const tableURL = '';
+	const tableID = '';
+	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_SUPER_LEAGUE, tableURL, tableID, req, res, next);
+};
+
 // Get the FA Women's Championship Standings
 exports.getFAWomenChampionshipTable = (req, res, next) => {
 	if(req.faWomenChampionshipData != null) {
@@ -303,6 +316,16 @@ function processTableCompetitions(req) {
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'premier-league-north',
 			competitionStatus: getTeamPosition(req.u18PlNorthTable.map(team => team.teamData.teamName)),
 			competitionTable: req.u18PlNorthTable
+		};
+	}
+
+	// FA Women's Super League
+	if(req.faWomenSuperLeagueData == null && req.faWomeSuperLeagueTable != null) {
+		req.faWomenSuperLeagueData = {
+			competitionName: 'FA Women\'s Super League' + CURRENT_SEASON,
+			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
+			competitionStatus: getTeamPosition(req.faWomeSuperLeagueTable.map(team => team.teamData.teamName)),
+			competitionTable: req.faWomeSuperLeagueTable
 		};
 	}
 

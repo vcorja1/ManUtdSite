@@ -25,8 +25,9 @@ const COMPETITIONS = {
 	VGH_CUP: 19,
 	DALLAS_CUP: 20,
 	ICGT_TOURNAMENT: 21,
-	FA_WOMEN_CHAMPIONSHIP: 22,
-	FA_WSL_CUP: 23
+	FA_WOMEN_SUPER_LEAGUE: 22,
+	FA_WOMEN_CHAMPIONSHIP: 23,
+	FA_WSL_CUP: 24
 };
 Object.freeze(COMPETITIONS);
 
@@ -38,7 +39,7 @@ const COMPETITION_NAMES = [
 	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'Under-19 UEFA Youth League',
 	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Ruhr Cup', 'Otten Cup',
 	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
-	'FA Women\'s Championship', 'FA WSL Cup'
+	'FA Women\'s Super League', 'FA Women\'s Championship', 'FA WSL Cup'
 ];
 Object.freeze(COMPETITION_NAMES);
 
@@ -74,6 +75,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 		case COMPETITIONS.PREMIER_LEAGUE:
 		case COMPETITIONS.PREMIER_LEAGUE_2:
 		case COMPETITIONS.PREMIER_LEAGUE_2_DIV_2:
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			return 'Week ' + round;
 
@@ -282,6 +284,7 @@ function getNoNextRound(competitionID) {
 
 
 		/************* WOMEN'S TEAM *************/
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			return 22;
 		case COMPETITIONS.FA_WSL_CUP:
@@ -357,6 +360,8 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 
 
 		/************* WOMEN'S TEAM *************/
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
+			return LOGOS_FOLDER + 'fa_women_super_league.jpg';
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			return LOGOS_FOLDER + 'fa_women_championship.jpg';
 		case COMPETITIONS.FA_WSL_CUP:

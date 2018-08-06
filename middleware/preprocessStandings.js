@@ -59,6 +59,13 @@ exports.preprocessStandings = (req, res, next) => {
 		NOT_PARTICIPATING,
 		false);
 
+	// FA Women's Super League
+	req.faWomenSuperLeagueData = getUnavailableCupMessage(
+		'FA WOMEN\'S SUPER LEAGUE',
+		WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
+		NOT_PARTICIPATING,
+		false);
+
 
 
 
