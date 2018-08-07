@@ -9,6 +9,7 @@ const { COMPETITIONS, getTeamByCompetitionID } = require('../helpers/competition
 const {
 	getPositionColorByCompetitionID,
 	getTeamPosition,
+	getTableCompetitionStatus,
 	getKnockoutCompetitionStatus,
 	getMixedCompetitionStatus
  } = require('../helpers/standings');
@@ -117,7 +118,7 @@ function getSoccerwayTableStandings(competitionID, tableURL, tableID, req, res, 
 	    })
 	    .catch(function (err) {
 	        // REQUEST FAILED: IGNORE THIS REQUEST
-			console.log(err);
+			console.error(err);
 	        return next();
 	    });
 }
@@ -274,9 +275,11 @@ function processTableCompetitions(req) {
 		req.eplData = {
 			competitionName: 'Premier League ' + CURRENT_SEASON,
 			competitionLink: STANDINGS_LOCATION + 'premier-league',
-			competitionStatus: getTeamPosition(req.eplTable.map(team => team.teamData.teamName)),
 			competitionTable: req.eplTable
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.PREMIER_LEAGUE, req.eplData);
 	}
 
 	// International Champions Cup
@@ -284,9 +287,11 @@ function processTableCompetitions(req) {
 		req.iccData = {
 			competitionName: 'International Champions Cup ' + CURRENT_SEASON,
 			competitionLink: STANDINGS_LOCATION + 'international-champions-cup',
-			competitionStatus: getTeamPosition(req.iccTable.map(team => team.teamData.teamName)),
 			competitionTable: req.iccTable
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP, req.iccData);
 	}
 
 	// Premier League 2
@@ -294,9 +299,11 @@ function processTableCompetitions(req) {
 		req.pl2Data = {
 			competitionName: 'Premier League 2 ' + CURRENT_SEASON,
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'premier-league-2',
-			competitionStatus: getTeamPosition(req.pl2Table.map(team => team.teamData.teamName)),
 			competitionTable: req.pl2Table
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.PREMIER_LEAGUE_2, req.pl2Data);
 	}
 
 	// Premier League 2 Division 2
@@ -304,9 +311,11 @@ function processTableCompetitions(req) {
 		req.pl2Div2Data = {
 			competitionName: 'Premier League 2 Division II' + CURRENT_SEASON,
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'premier-league-2-div-2',
-			competitionStatus: getTeamPosition(req.pl2Div2Table.map(team => team.teamData.teamName)),
 			competitionTable: req.pl2Div2Table
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.PREMIER_LEAGUE_2_DIV_2, req.pl2Div2Data);
 	}
 
 	// U18 Premier League North
@@ -314,9 +323,11 @@ function processTableCompetitions(req) {
 		req.u18PlNorthData = {
 			competitionName: 'U18 Premier League North' + CURRENT_SEASON,
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'premier-league-north',
-			competitionStatus: getTeamPosition(req.u18PlNorthTable.map(team => team.teamData.teamName)),
 			competitionTable: req.u18PlNorthTable
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.U18_PREMIER_LEAGUE_NORTH, req.u18PlNorthData);
 	}
 
 	// FA Women's Super League
@@ -324,9 +335,11 @@ function processTableCompetitions(req) {
 		req.faWomenSuperLeagueData = {
 			competitionName: 'FA Women\'s Super League' + CURRENT_SEASON,
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
-			competitionStatus: getTeamPosition(req.faWomeSuperLeagueTable.map(team => team.teamData.teamName)),
 			competitionTable: req.faWomeSuperLeagueTable
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.FA_WOMEN_SUPER_LEAGUE, req.faWomenSuperLeagueData);
 	}
 
 	// FA Women's Championship
@@ -334,9 +347,11 @@ function processTableCompetitions(req) {
 		req.faWomenChampionshipData = {
 			competitionName: 'FA Women\'s Championship' + CURRENT_SEASON,
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-championship',
-			competitionStatus: getTeamPosition(req.faWomenChampionshipTable.map(team => team.teamData.teamName)),
 			competitionTable: req.faWomenChampionshipTable
 		};
+
+		// Set competition status
+		getTableCompetitionStatus(COMPETITIONS.FA_WOMEN_CHAMPIONSHIP, req.faWomenChampionshipData);
 	}
 }
 

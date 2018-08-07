@@ -257,7 +257,7 @@ function getLiveScoreSoccerway(req, res, next) {
 	})
     .catch(function (err) {
         // REQUEST FAILED: IGNORE THIS REQUEST
-		console.log(err);
+		console.error(err);
         return next(err);
     });
 }

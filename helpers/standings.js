@@ -1,7 +1,14 @@
 // Get Helper Functions
 const { getClubData } = require('./clubs');
-const { COMPETITIONS, getCompetitionData, getCompetitionRound, getTeamByCompetitionID } = require('./competitions');
-const { MATCH_STATUS, RESULTS } = require('./fixtures');
+const {
+	COMPETITIONS,
+	getCompetitionName,
+	getCompetitionRoundName,
+	getCompetitionLogoSrc,
+	getTeamByCompetitionID,
+	getCompetitionDetails
+} = require('./competitions');
+const { MATCH_STATUS, MATCH_RESULT, getFormattedMatchDate } = require('./fixtures');
 
 // Store Manchester United name
 const MANCHESTER_UNITED_FC = 'Manchester United FC';
@@ -9,7 +16,7 @@ const MANCHESTER_UNITED = 'Manchester United';
 
 
 // Get Team Position From The Table
-exports.getTeamPosition = function getTeamPosition(standings) {
+function getTeamPosition(standings) {
 	if(standings == null || standings == [])
 		return '';
 
@@ -20,6 +27,8 @@ exports.getTeamPosition = function getTeamPosition(standings) {
 	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
 	return `${position}${suffix}`;
 }
+
+exports.getTeamPosition = (standings) => getTeamPosition(standings);
 
 
 // Store Appropriate Color Based On The Table Position
@@ -183,14 +192,207 @@ exports.getDefaultTable = function getDefaultTable(teamNames, team, competitionI
 
 
 // Return Stub Fixture
-function getStubFixture(team, competitionID) {
-	const TBD = 'TBD';
-	let stubFixture = {
-		matchDate: getMatchDate(TBD),
-		hometeam: getClubData(team, competitionID, MANCHESTER_UNITED_FC),
-		awayteam: getClubData(team, competitionID, TBD),
-		competitionData: getCompetitionData(competitionID)
+function getStubFixture(team, competitionID, round) {
+	return {
+		matchDate: getFormattedMatchDate('TBD'),
+		homeTeam: getClubData(MANCHESTER_UNITED_FC, team, competitionID),
+		awayTeam: getClubData('TBD', team, competitionID),
+		competitionName: getCompetitionName(competitionID),
+		roundName: getCompetitionRoundName(competitionID, round),
+		competitionLogoSrc: getCompetitionLogoSrc(competitionID)
 	};
+}
+
+
+// Update Table Competition Status
+exports.getTableCompetitionStatus = function getTableCompetitionStatus(competitionID, competitionData) {
+	// Get competition details
+	const competitionDetails = getCompetitionDetails(competitionID);
+
+	// Get MUFC's table position
+	const table = competitionData.competitionTable.map(team => team.teamData.teamName);
+	let tablePosition = table.indexOf(MANCHESTER_UNITED_FC) + 1;
+	if(!tablePosition || tablePosition == 0) {
+		tablePosition = table.indexOf(MANCHESTER_UNITED) + 1;
+	}
+
+	competitionData.competitionEnded = (competitionData.competitionTable.playedGames == competitionDetails.finalRound);
+	if(competitionData.competitionEnded) {
+		if(tablePosition == 1) {
+			competitionData.competitionStatus = 'CHAMPIONS';
+		}
+		else if(tablePosition >= competitionDetails.relegationPlace) {
+			competitionData.competitionStatus = 'RELEGATED';
+		}
+		else {
+			competitionData.competitionStatus = getTeamPosition(table);
+		}
+	}
+	else {
+		competitionData.competitionStatus = getTeamPosition(table);
+	}
+	return competitionData;
+}
+
+// Update Mixed Competition Status And Add Fixture Stubs If Needed
+exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competitionID, competitionData) {
+	// Get competition details
+	const competitionDetails = getCompetitionDetails(competitionID);
+
+	// Filter out fixtures appropriately
+	let lastMatch, qualificationMatches, playoffMatches, isGroupStage = true;
+	if(competitionData.fixtures != null && competitionData.fixtures.length > 0) {
+		lastMatch = competitionData.fixtures[0];
+		qualificationMatches = competitionData.fixtures.filter(match => match.round < competitionDetails.groupStageMin);
+		playoffMatches = competitionData.fixtures.filter(match => match.round > competitionDetails.groupStageMax);
+		isGroupStage = competitionData.fixtures[0].round >= competitionDetails.groupStageMin || competitionData.fixtures[0].round <= competitionDetails.groupStageMax;
+	}
+
+	// Save fixtures
+	delete competitionData["fixtures"];
+	if(qualificationMatches != null && qualificationMatches.length > 0) {
+		competitionData.qualificationMatches = qualificationMatches;
+	}
+	if(playoffMatches != null && playoffMatches.length > 0) {
+		competitionData.playoffMatches = playoffMatches;
+	}
+
+	// If no matches have been played yet, then return default status
+	if(lastMatch == null) {
+		competitionData.competitionStatus = competitionData.groupStagePosition;
+		competitionData.competitionEnded = false;
+		return competitionData;
+	}
+
+	// If the last match has not yet been completed, simply return the round information
+	if(lastMatch.status < MATCH_STATUS.FINISHED) {
+		competitionData.competitionStatus = (isGroupStage ? competitionData.groupStagePosition : lastMatch.roundName);
+		competitionData.competitionEnded = false;
+		return competitionData;
+	}
+
+	if(!isGroupStage) {
+		// For playoffs, check special cases
+		const isPlayoffs = lastMatch.round > competitionDetails.groupStageMax;
+		if(isPlayoffs) {
+			// Playoffs
+			if(competitionDetails.isSingleRoundElim) {
+				return this.getKnockoutCompetitionStatus(competitionID, competitionData);
+			}
+
+			// Otherwise need to check if this is the final
+			if(lastMatch.round >= competitionDetails.finalRound) {
+				competitionData.competitionStatus = (lastMatch.result.result === MATCH_RESULT.WIN ? 'CHAMPIONS' : 'RUNNERS-UP');
+				competitionData.competitionEnded = true;
+				return competitionData;
+			}
+		}
+
+		// Process result -> First check if the two-match tie ended in penalties 
+		if(lastMatch.result.homePens != null) {
+			if(lastMatch.result.homePens > lastMatch.result.awayPens) {
+				competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+			else {
+				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+		}
+
+		// If didn't go to penalties, need to process the two last games
+		if(competitionData.competitionEnded == null) {
+			let prevMatch = playoffMatches[1];
+			const team1 = lastMatch.result.homeGoals + prevMatch.result.awayGoals;
+			const team2 = lastMatch.result.awayGoals + prevMatch.result.homeGoals;
+
+			if(team1 > team2) {
+				competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+			else if(team2 < team1) {
+				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+			else {
+				// Away-goal rule
+				if(prevMatch.result.awayGoals > lastMatch.result.awayGoals) {
+					competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+				}
+				else {
+					competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+				}
+			}
+		}
+
+		// Process competition status
+		if(!competitionData.competitionEnded) {
+			if(!isPlayoffs && competitionDetails.groupStageMin === lastMatch.round + 1) {
+				// Qualified to the group stage
+				competitionData.competitionStatus = 'GROUP STAGE';
+			}
+			else {
+				// Need to add a stub for the future match that has not yet been drawn
+				const team = getTeamByCompetitionID(competitionID);
+				let stubFixture = getStubFixture(team, competitionID, lastMatch.round + 1);
+				if(isPlayoffs) {
+					competitionData.playoffMatches.unshift(stubFixture);
+				}
+				else {
+					competitionData.qualificationMatches.unshift(stubFixture);
+				}
+
+				competitionData.competitionStatus = stubFixture.roundName;
+			}
+		}
+		else {
+			competitionData.competitionStatus = 'OUT';
+		}
+
+		return competitionData;
+	}
+
+	// Otherwise, this is the group stage, get MUFC's table position
+	if(competitionData.competitionTable != null) {
+		const table = competitionData.competitionTable.map(team => team.teamData.teamName);
+		let tablePosition = table.indexOf(MANCHESTER_UNITED_FC) + 1;
+		if(!tablePosition || tablePosition == 0) {
+			tablePosition = table.indexOf(MANCHESTER_UNITED) + 1;
+		}
+
+		// If the group stage is over, check if qualified to the next round
+		if(lastMatch.round === competitionDetails.groupStageMax) {
+			if(competitionID == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE && tablePosition == 1) {
+				// Special case -> UEFA Youth League
+				const team = getTeamByCompetitionID(competitionID);
+				let stubFixture = getStubFixture(team, competitionID, lastMatch.round + 2);
+				competitionData.playoffMatches = [stubFixture];
+
+				competitionData.competitionStatus = stubFixture.roundName;
+				competitionData.competitionEnded = false;
+			}
+			else if(tablePosition <= competitionDetails.groupStageAdvance) {
+				// Need to add a stub for the future match that has not yet been drawn
+				const team = getTeamByCompetitionID(competitionID);
+				let stubFixture = getStubFixture(team, competitionID, lastMatch.round + 1);
+				competitionData.playoffMatches = [stubFixture];
+
+				competitionData.competitionStatus = stubFixture.roundName;
+				competitionData.competitionEnded = false;
+			}
+			else if(competitionID == COMPETITIONS.CHAMPIONS_LEAGUE && tablePosition == 3) {
+				// Special case -> Champions League
+				competitionData.competitionStatus = 'TRANSFER TO EUROPA LEAGUE';
+				competitionData.competitionEnded = true;
+			}
+			else {
+				competitionData.competitionStatus = 'OUT';
+				competitionData.competitionEnded = true;
+			}
+		}
+		return competitionData;
+	}
+
+	// Return group stage position
+	competitionData.competitionStatus = competitionData.groupStagePosition;
+	competitionData.competitionEnded = false;
+	return competitionData;
 }
 
 // Update Knockout Competition Status And Add Fixture Stubs If Needed
@@ -199,37 +401,45 @@ exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(com
 	const lastMatch = competitionData.fixtures[0];
 	if(lastMatch.status < MATCH_STATUS.FINISHED) {
 		competitionData.competitionStatus = lastMatch.roundName;
+		competitionData.competitionEnded = false;
 		return competitionData;
 	}
 
 	// Otherwise need to analyze the result of the last match
-	const maxRound = getNoNextRound(lastMatch.competition);
-	const result = lastMatch.resultData.result;
-	if(result == RESULTS.LOSS) {
-		competitionData.competitionStatus = (lastMatch.round == maxRound ? 'RUNNERS-UP' : 'OUT');
+	const competitionDetails = getCompetitionDetails(competitionID);
+	const result = lastMatch.result.result;
+	if(result == MATCH_RESULT.LOSS) {
+		if(lastMatch.round >= competitionDetails.finalRound) {
+			competitionData.competitionStatus = 'RUNNERS-UP';
+		}
+		else if(competitionDetails.finalRound != competitionDetails.noNextRound) {
+			competitionData.competitionStatus = lastMatch.roundName.split('/')[1];
+		}
+		else {
+			competitionData.competitionStatus = 'OUT';
+		}
+		competitionData.competitionEnded = true;
 		return competitionData;
 	}
 
-	// Now it is necessary to check whether the competition is won
-	if(lastMatch.round >= maxRound) {
+	// Now it is necessary to check whether the competition is won or over
+	if(lastMatch.round >= competitionDetails.finalRound) {
 		competitionData.competitionStatus = 'CHAMPIONS';
+		competitionData.competitionEnded = true;
+		return competitionData;
+	}
+	else if(lastMatch.round >= competitionDetails.noNextRound) {
+		competitionData.competitionStatus = lastMatch.roundName.split('/')[0] + ' Place';
+		competitionData.competitionEnded = true;
 		return competitionData;
 	}
 
 	// Now need to add a stub for the future match that has not yet been drawn
 	const team = getTeamByCompetitionID(competitionID);
-	let stubFixture = getStubFixture(team, competitionID);
-
-	competitionData.competitionStatus = getCompetitionRound(lastMatch.competition, lastMatch.round + 1);
-	stubFixture.roundName = competitionData.competitionStatus;
-
+	let stubFixture = getStubFixture(team, competitionID, lastMatch.round + 1);
 	competitionData.fixtures.unshift(stubFixture);
-	return competitionData;
-}
 
-// Update Mixed Competition Status And Add Fixture Stubs If Needed
-exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competitionID, competitionData) {
-	// TO-DO
-	competitionData.competitionStatus = competitionData.groupStagePosition;
+	competitionData.competitionStatus = stubFixture.roundName;
+	competitionData.competitionEnded = false;
 	return competitionData;
 }

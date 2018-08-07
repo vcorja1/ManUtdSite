@@ -92,9 +92,9 @@ mixin mixedCompetitionMixin(competitionData, isSingleCompetition)
 			h4.blue.text-center.small-caps Playoffs Results
 			.pad-space-small
 			.panel.panel-default.align-items-center.text-center
-				each match in competitionData.fixtures
+				each match in competitionData.playoffMatches
 					.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-							+quickMatchInfoMobile(match)
+						+quickMatchInfoMobile(match)
 			.pad-space-small
 
 		//- Group Stage Section

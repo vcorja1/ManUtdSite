@@ -72,6 +72,19 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Manchester_United.svg'
 			}
 
+		/***************************************************/
+		/***************** TBD Stub Fixture ****************/
+		/***************************************************/
+
+		case 'TBD':
+			return {
+				teamName: 'TBD',
+				fullName: 'TBD',
+				displayName: 'TBD',
+				displayNameShort: 'TBD',
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'defaultCrest.png'
+			}
+
 
 		/***************************************************/
 		/***************** Premier League ******************/

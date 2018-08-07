@@ -43,6 +43,15 @@ const COMPETITION_NAMES = [
 ];
 Object.freeze(COMPETITION_NAMES);
 
+const COMPETITION_TYPE = {
+	TABLE: 1,
+	MIXED: 2,
+	KNOCKOUT: 3
+};
+Object.freeze(COMPETITION_TYPE);
+
+exports.COMPETITION_TYPE = COMPETITION_TYPE;
+
 
 
 // Returns the name of the competition based on the ID
@@ -87,7 +96,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 			return 'Final';
 
 		case COMPETITIONS.FIFA_CLUB_WORLD_CUP:
-			return round === 1 ? '1/2 Finals' : (round === 2 ? '3rd Place' : 'Final');
+			return round === 1 ? '1/2 Finals' : (round === 2 ? '3rd/4th Place' : 'Final');
 
 		case COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP:
 			return round === 4 ? 'Final' : 'Game ' + round;
@@ -99,7 +108,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.FA_CUP || competitionID == COMPETITIONS.FA_YOUTH_CUP) {
-		if(round <=  5)
+		if(round <= 5)
 			return 'Rd ' + round;
 		if(round == 6)
 			return '1/4 Finals';
@@ -110,10 +119,38 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.CHAMPIONS_LEAGUE) {
+		if(round <= 2)
+			return 'Playoff Round';
+		if(round <= 8)
+			return 'Game ' + (round - 2);
+		if(round <= 10)
+			return '1/8 Finals';
+		if(round <= 12)
+			return '1/4 Finals';
+		if(round <= 14)
+			return '1/2 Finals';
+		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.EUROPA_LEAGUE) {
+		if(round <= 2)
+			return '2nd Qualif. Round';
+		if(round <= 2)
+			return '3rd Qualif. Round';
+		if(round <= 6)
+			return 'Playoff Round';
+		if(round <= 12)
+			return 'Game ' + (round - 6);
+		if(round <= 14)
+			return 'Round of 32';
+		if(round <= 16)
+			return '1/8 Finals';
+		if(round <= 18)
+			return '1/4 Finals';
+		if(round <= 20)
+			return '1/2 Finals';
+		return 'Final';
 	}
 
 
@@ -138,10 +175,10 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE) {
-		if(round <= 6)
-			return 'Game ' + round;
+		if(round <= 2)
+			return 'Qualification';
 		if(round <= 8)
-			return 'Qualif. ' + (round - 6);
+			return 'Game ' + (round - 2);
 		if(round == 9)
 			return 'Playoff';
 		if(round == 10)
@@ -220,11 +257,11 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.FA_WSL_CUP) {
-		if(round <= 5)
+		if(round <= 4)
 			return 'Game ' + round;
-		if(round == 6)
+		if(round == 5)
 			return '1/4 Finals';
-		if(round == 7)
+		if(round == 6)
 			return '1/2 Finals';
 		return 'Final';
 	}
@@ -234,74 +271,184 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 	return 'Rd ' + round;
 }
 
-// Returns the round number after which there is no next game (based on the competition)
-function getNoNextRound(competitionID) {
+
+// Returns the competition details
+exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 
 	switch(competitionID) {
-		/************* FIRST TEAM *************/
+
+		/************* TABLE COMPETITIONS *************/
+
 		case COMPETITIONS.PREMIER_LEAGUE:
-			return 38;
-		case COMPETITIONS.FA_CUP:
-			return 8;
-		case COMPETITIONS.CARABAO_CUP:
-			return 7;
-		case COMPETITIONS.COMMUNITY_SHIELD:
-		case COMPETITIONS.SUPER_CUP:
-		case COMPETITIONS.UEFA_SUPER_CUP:
-			return 1;
-		case COMPETITIONS.FIFA_CLUB_WORLD_CUP:
-			return 2;
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 38,
+				relegationPlace: 18
+			};
 		case COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP:
-			return 3;
-
-
-		/************* RESERVES TEAM *************/
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 3,
+				relegationPlace: null
+			};
 		case COMPETITIONS.PREMIER_LEAGUE_2:
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 22,
+				relegationPlace: 11
+			};
 		case COMPETITIONS.PREMIER_LEAGUE_2_DIV_2:
-			return 22;
-		case COMPETITIONS.PL_INTERNATIONAL_CUP:
-			return 6;
-		case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
-			return 13;
-
-
-		/************* ACADEMY TEAM *************/
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 22,
+				relegationPlace: null
+			};
 		case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
-			return 22;
-		case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
-			return 6;
-		case COMPETITIONS.FA_YOUTH_CUP:
-			return 8;
-		case COMPETITIONS.RUHR_CUP:
-			return 6;
-		case COMPETITIONS.OTTEN_CUP:
-			return 4;
-		case COMPETITIONS.VGH_CUP:
-			return 11;
-		case COMPETITIONS.DALLAS_CUP:
-		case COMPETITIONS.ICGT_TOURNAMENT:
-			return 5;
-
-
-		/************* WOMEN'S TEAM *************/
-		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 22,
+				relegationPlace: null
+			};
+		case COMPETITIONS.WOMEN_SUPER_LEAGUE:
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 20,
+				relegationPlace: 11
+			};
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
-			return 22;
-		case COMPETITIONS.FA_WSL_CUP:
-			return 7;
+			return {
+				type: COMPETITION_TYPE.TABLE,
+				finalRound: 20,
+				relegationPlace: 11
+			};
 
 
+		/************* MIXED COMPETITIONS *************/
 
 		case COMPETITIONS.CHAMPIONS_LEAGUE:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 15,
+				groupStageMin: 3,
+				groupStageMax: 8,
+				groupStageAdvance: 2,
+				isSingleRoundElim: false
+			};
 		case COMPETITIONS.EUROPA_LEAGUE:
-			return 14;
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 21,
+				groupStageMin: 7,
+				groupStageMax: 12,
+				groupStageAdvance: 2,
+				isSingleRoundElim: false
+			};
+		case COMPETITIONS.PL_INTERNATIONAL_CUP:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 8,
+				groupStageMin: 1,
+				groupStageMax: 3,
+				groupStageAdvance: 1,
+				isSingleRoundElim: true
+			};
+		case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 13,
+				groupStageMin: 1,
+				groupStageMax: 6,
+				groupStageAdvance: 2,
+				isSingleRoundElim: true
+			};
+		case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 10,
+				groupStageMin: 1,
+				groupStageMax: 6,
+				groupStageAdvance: 2,
+				isSingleRoundElim: true
+			};
+		case COMPETITIONS.FA_WSL_CUP:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 9,
+				groupStageMin: 1,
+				groupStageMax: 4,
+				groupStageAdvance: 2,
+				isSingleRoundElim: true
+			};
 
 
-		default:
-			return -1;
+		/*********** KNOCKOUT COMPETITIONS ************/
+
+		case COMPETITIONS.FA_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 8,
+				noNextRound: 8
+			};
+		case COMPETITIONS.CARABAO_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 7,
+				noNextRound: 7
+			};
+		case COMPETITIONS.COMMUNITY_SHIELD:
+		case COMPETITIONS.UEFA_SUPER_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 1,
+				noNextRound: 1
+			};
+		case COMPETITIONS.FIFA_CLUB_WORLD_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 3,
+				noNextRound: 2
+			};
+		case COMPETITIONS.FA_YOUTH_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 8,
+				noNextRound: 8
+			};
+		case COMPETITIONS.RUHR_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 10,
+				noNextRound: 6
+			};
+		case COMPETITIONS.OTTEN_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 7,
+				noNextRound: 4
+			};
+		case COMPETITIONS.VGH_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 11,
+				noNextRound: 11
+			};
+		case COMPETITIONS.DALLAS_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 5,
+				noNextRound: 5
+			};
+		case COMPETITIONS.ICGT_TOURNAMENT:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 8,
+				noNextRound: 5
+			};
 	}
-	
+
+	return null;
 }
+
 
 // Returns the competition logo based on the ID
 exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
