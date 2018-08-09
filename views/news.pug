@@ -40,20 +40,20 @@ block content
 
 		h1.bold.red LATEST NEWS
 		.col-lg-6.col-md-6
-			h2.blue.text-center.small-caps Summer Signings
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
 			+playerTransferMixin(incomingPlayers, true)
 			.pad-space-small
 
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
-			+playerTransferMixin(academySignings, true)
-			.pad-space-small
-
-		.col-lg-6.col-md-6
 			h2.blue.text-center.small-caps Loaned Out
 			+playerTransferMixin(loanedPlayers, false)
 			.pad-space-small
 
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Departures
+		.col-lg-6.col-md-6
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
+			+playerTransferMixin(academySignings, true)
+			.pad-space-small
+
+			h2.blue.text-center.small-caps Summer Departures
 			+playerTransferMixin(departingPlayers, false)
 			.pad-space-small
 
