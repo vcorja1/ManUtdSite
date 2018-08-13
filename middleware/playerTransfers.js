@@ -39,7 +39,8 @@ exports.loanedPlayers = [
 	{ name: 'Timothy Fosu-Mensah', flagImg: FLAG_IMG_FOLDER + 'nl.svg', position: 'RB', nextClub: 'Fulham', crestURI: CLUB_LOGO_FOLDER + 'Fulham.svg' },
 	{ name: 'Dean Henderson', flagImg: ENGLAND_FLAG, position: 'GK', nextClub: 'Sheffield United', crestURI: CLUB_LOGO_FOLDER + 'Sheffield_United.svg' },
 	{ name: 'Matthew Willock', flagImg: ENGLAND_FLAG, position: 'CM', nextClub: 'St Mirren', crestURI: CLUB_LOGO_FOLDER + 'St_Mirren.svg' },
-	{ name: 'Cameron Borthwick-Jackson', flagImg: ENGLAND_FLAG, position: 'LB', nextClub: 'Scunthorpe United', crestURI: CLUB_LOGO_FOLDER + 'Scunthorpe_United.svg' }
+	{ name: 'Cameron Borthwick-Jackson', flagImg: ENGLAND_FLAG, position: 'LB', nextClub: 'Scunthorpe United', crestURI: CLUB_LOGO_FOLDER + 'Scunthorpe_United.svg' },
+	{ name: 'James Wilson', flagImg: ENGLAND_FLAG, position: 'ST', nextClub: 'Aberdeen', crestURI: CLUB_LOGO_FOLDER + 'Aberdeen.svg' }
 ];
 
 // Data for export - World Cup participants

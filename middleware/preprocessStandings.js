@@ -1,5 +1,7 @@
 // Get Helper Functions
 const { COMPETITIONS } = require('../helpers/competitions');
+const { TEAMS } = require('../helpers/teams');
+const { getDefaultTable } = require('../helpers/standings');
 
 // Define Constants
 const CURRENT_SEASON = ' 2018/19';
@@ -114,14 +116,9 @@ exports.preprocessStandings = (req, res, next) => {
 
 
 
-	const DRAW_LATER = 'Manchester United will enter in the Group Stage round. The draw will take place in late 2018.';
-
 	// U18 Premier League Cup
-	req.plCupData = getUnavailableCupMessage(
-		'U18 Premier League Cup',
-		ACADEMY_STANDINGS_LOCATION + 'premier-league-cup',
-		DRAW_LATER,
-		true);
+	const plCupTeams = ['Chelsea FC', 'Manchester United FC', 'Newcastle United FC', 'Norwich City FC'];
+	req.plCupTable = getDefaultTable(plCupTeams, TEAMS.ACADEMY, COMPETITIONS.U18_PREMIER_LEAGUE_CUP);
 
 
 	// Continue

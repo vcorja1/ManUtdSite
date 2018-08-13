@@ -610,6 +610,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/***************** Scottish Clubs ******************/
 		/***************************************************/
 
+		case 'Aberdeen':
+			return {
+				teamName: 'Aberdeen FC',
+				fullName: 'Aberdeen FC' + teamNameEnding,
+				displayName: 'Aberdeen' + teamNameEnding,
+				displayNameShort: 'Aberdeen' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Aberdeen.svg'
+			};
 		case 'Celtic':
 			return {
 				teamName: 'Celtic FC',
