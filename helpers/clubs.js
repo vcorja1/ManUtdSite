@@ -330,6 +330,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Bees' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'London_Bees.png'
 			};
+		case 'Macclesfield Town':
+			return {
+				teamName: 'Macclesfield Town FC',
+				fullName: 'Macclesfield Town FC' + teamNameEnding,
+				displayName: 'Macclesfield Town' + teamNameEnding,
+				displayNameShort: 'Macclesfield' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Macclesfield_Town.svg'
+			};
 		case 'Middlesbrough':
 			return {
 				teamName: 'Middlesbrough FC',
