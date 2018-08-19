@@ -22,6 +22,7 @@ app.get('/premier-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			eplData: req.eplData,
 			isSingleCompetition: true
 		});
@@ -40,6 +41,7 @@ app.get('/fa-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faCupData: req.faCupData,
 			isSingleCompetition: true
 		});
@@ -58,6 +60,7 @@ app.get('/carabao-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Carabao Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			carabaoCupData: req.carabaoCupData,
 			isSingleCompetition: true
 		});
@@ -76,6 +79,7 @@ app.get('/community-shield', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Community Shield Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			communityShieldData: req.communityShieldData,
 			isSingleCompetition: true
 		});
@@ -94,6 +98,7 @@ app.get('/champions-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Champions League Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			uclData: req.uclData,
 			isSingleCompetition: true
 		});
@@ -112,6 +117,7 @@ app.get('/europa-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Europa League Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			europaLeagueData: req.europaLeagueData,
 			isSingleCompetition: true
 		});
@@ -130,6 +136,7 @@ app.get('/super-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Super Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			superCupData: req.superCupData,
 			isSingleCompetition: true
 		});
@@ -148,6 +155,7 @@ app.get('/club-world-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FIFA Club World Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			clubWorldCupData: req.clubWorldCupData,
 			isSingleCompetition: true
 		});
@@ -166,6 +174,7 @@ app.get('/international-champions-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'International Champions Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			iccData: req.iccData,
 			isSingleCompetition: true
 		});
@@ -185,6 +194,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Standings - First Team',
+			MATCH_STATUS: req.MATCH_STATUS,
 			eplData: req.eplData,
 			faCupData: req.faCupData,
 			carabaoCupData: req.carabaoCupData,

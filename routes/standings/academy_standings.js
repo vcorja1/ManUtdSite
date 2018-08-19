@@ -22,6 +22,7 @@ app.get('/premier-league-north', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'U18 Premier League North Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			u18PlNorthData: req.u18PlNorthData,
 			isSingleCompetition: true
 		});
@@ -40,6 +41,7 @@ app.get('/premier-league-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'U18 Premier League Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			plCupData: req.plCupData,
 			isSingleCompetition: true
 		});
@@ -58,6 +60,7 @@ app.get('/fa-youth-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Youth Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faYouthCupData: req.faYouthCupData,
 			isSingleCompetition: true
 		});
@@ -76,6 +79,7 @@ app.get('/ruhr-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Ruhr Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			ruhrCupData: req.ruhrCupData,
 			isSingleCompetition: true
 		});
@@ -94,6 +98,7 @@ app.get('/otten-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Otten Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			ottenCupData: req.ottenCupData,
 			isSingleCompetition: true
 		});
@@ -112,6 +117,7 @@ app.get('/vgh-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Sparkasse & VGH Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			vghCupData: req.vghCupData,
 			isSingleCompetition: true
 		});
@@ -130,6 +136,7 @@ app.get('/dallas-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Dallas Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			dallasCupData: req.dallasCupData,
 			isSingleCompetition: true
 		});
@@ -149,6 +156,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Academy Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			u18PlNorthData: req.u18PlNorthData,
 			plCupData: req.plCupData,
 			faYouthCupData: req.faYouthCupData,

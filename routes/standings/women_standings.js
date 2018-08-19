@@ -22,6 +22,7 @@ app.get('/fa-women-super-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Women\'s Super League Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faWomenSuperLeagueData: req.faWomenSuperLeagueData,
 			isSingleCompetition: true
 		});
@@ -40,6 +41,7 @@ app.get('/fa-women-championship', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Women\'s Championship Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faWomenChampionshipData: req.faWomenChampionshipData,
 			isSingleCompetition: true
 		});
@@ -58,6 +60,7 @@ app.get('/fa-wsl-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA WSL Continental Tyres Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faWSLCupData: req.faWSLCupData,
 			isSingleCompetition: true
 		});
@@ -77,6 +80,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Standings - Women\'s Team',
+			MATCH_STATUS: req.MATCH_STATUS,
 			faWomenChampionshipData: req.faWomenChampionshipData,
 			faWSLCupData: req.faWSLCupData,
 			isSingleCompetition: false

@@ -22,6 +22,7 @@ app.get('/', function(req, res, next) {
 
 		res.render('fixtures', {
 			title: 'Schedule & Results',
+			MATCH_STATUS: req.MATCH_STATUS,
 			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY),
 			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.FA_WOMEN_SUPER_LEAGUE && match.competition <= COMPETITIONS.FA_WSL_CUP),
 			lastMatch: lastMatch,

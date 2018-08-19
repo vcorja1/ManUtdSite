@@ -83,6 +83,9 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
 		const fixturesCount = req.fixtures.length;
 
+		// Store match status object, for reference
+		req.MATCH_STATUS = MATCH_STATUS;
+
 		req.fixtures.forEach( (match, index) => {
 			// Assign an index and prep to get quick info (last and next matches)
 			match.id = index;
@@ -99,20 +102,20 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 			match.roundName = getCompetitionRoundName(match.competition, match.round);
 			match.competitionLogoSrc = getCompetitionLogoSrc(match.competition);
 
-			// Store result string and color (to be used in fixtureMixin.pug)
-			if(match.status == MATCH_STATUS.FINISHED) {
+			// Store result data
+			if(match.status >= MATCH_STATUS.FINISHED) {
 				match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
 			}
 		});
 
 		// Get last match ID
-		const completedMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.FINISHED);
+		const completedMatches = req.fixtures.filter(match => match.status >= MATCH_STATUS.SUSPENDED);
 		const length = completedMatches.length;
 		if(length > 0)
 			req.lastMatchID = completedMatches[length - 1].id;
 
 		// Get next match ID
-		const nextMatches = req.fixtures.filter(match => match.status < MATCH_STATUS.FINISHED);
+		const nextMatches = req.fixtures.filter(match => match.status <= MATCH_STATUS.PAUSED);
 		if(nextMatches.length > 0)
 			req.nextMatchID = nextMatches[0].id;
 
@@ -176,13 +179,13 @@ function getLiveScoreFootballData(req, res, next) {
 				req.fixtures[nextMatchID].status = status;
 
 				// Process score, if applicable
-				if(status >= MATCH_STATUS.LIVE) {
+				if(status == MATCH_STATUS.LIVE || status == MATCH_STATUS.PAUSED || status >= MATCH_STATUS.FINISHED) {
 					let match = req.fixtures[nextMatchID];
 					match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
 				}
 
 				// If the game is over, note so
-				if(status == MATCH_STATUS.POSTPONED || status == MATCH_STATUS.CANCELED || status >= MATCH_STATUS.FINISHED) {
+				if(status >= MATCH_STATUS.SUSPENDED) {
 					req.lastMatchID = nextMatchID;
 					const nextMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.SCHEDULED);
 					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
@@ -222,7 +225,6 @@ function getLiveScoreSoccerway(req, res, next) {
 		if(gameTime != null && gameTime.length > 0) {
 			// Game is live
 			nextMatch.status = MATCH_STATUS.IN_PLAY;
-			nextMatch.gameMinute = $(gameTime).text().trim();
 
 			let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
 			if(liveScore == '-') {
@@ -233,10 +235,31 @@ function getLiveScoreSoccerway(req, res, next) {
 				const awaygoals = parseInt(liveScore.split('-')[1].trim());
 				nextMatch.result = getLiveScoreResult(homegoals, awaygoals, null);
 			}
+
+			// Save the match minute
+			nextMatch.result.gameMinute = $(gameTime).text().trim();
 		}
 		else {
 			let finalScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime').text().trim();
-			if(finalScore.includes('-')) {
+			if(finalScore === '') {
+				// Game is postponed
+				nextMatch.status = MATCH_STATUS.POSTPONED;
+
+				// Since the game is completed, note so
+				req.lastMatchID = req.nextMatchID;
+				const nextMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.SCHEDULED);
+				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+			}
+			else if(finalScore === 'Suspended' || finalScore === 'Cancelled') {
+				// Game is either suspended or cancelled
+				nextMatch.status = (finalScore === 'Suspended' ? MATCH_STATUS.SUSPENDED : MATCH_STATUS.CANCELED);
+
+				// Since the game is completed, note so
+				req.lastMatchID = req.nextMatchID;
+				const nextMatches = req.fixtures.filter(match => match.status == MATCH_STATUS.SCHEDULED);
+				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
+			}
+			else if(finalScore.includes('-')) {
 				// Game is completed
 				nextMatch.status = MATCH_STATUS.FINISHED;
 

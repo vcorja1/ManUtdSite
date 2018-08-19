@@ -11,7 +11,7 @@ mixin styledTeamName(competitionData, isSingleCompetition)
 			a(href=competitionData.competitionLink)=competitionData.competitionName
 
 //- For competitions that are completely of knockout style
-mixin knockoutCompetitionMixin(competitionData, isSingleCompetition)
+mixin knockoutCompetitionMixin(competitionData, isSingleCompetition, MATCH_STATUS)
 	+styledTeamName(competitionData, isSingleCompetition)
 	if(competitionData.specialNote != null)
 		h3.text-center.small-caps=competitionData.specialNote
@@ -22,7 +22,7 @@ mixin knockoutCompetitionMixin(competitionData, isSingleCompetition)
 		.panel.panel-default.align-items-center.text-center
 			each match in competitionData.fixtures
 				.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-						+quickMatchInfoMobile(match, true)
+					+quickMatchInfoMobile(match, MATCH_STATUS)
 	.pad-space-small
 
 //- Generates a table with all the standings
@@ -79,7 +79,7 @@ mixin tableCompetitionMixin(competitionData, isSingleCompetition)
 	.pad-space-small
 
 //- For competitions that are a mix of knockout stages and group play
-mixin mixedCompetitionMixin(competitionData, isSingleCompetition)
+mixin mixedCompetitionMixin(competitionData, isSingleCompetition, MATCH_STATUS)
 	+styledTeamName(competitionData, isSingleCompetition)
 	if(competitionData.specialNote != null)
 		h3.text-center.small-caps=competitionData.specialNote
@@ -94,7 +94,7 @@ mixin mixedCompetitionMixin(competitionData, isSingleCompetition)
 			.panel.panel-default.align-items-center.text-center
 				each match in competitionData.playoffMatches
 					.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-						+quickMatchInfoMobile(match)
+						+quickMatchInfoMobile(match, MATCH_STATUS)
 			.pad-space-small
 
 		//- Group Stage Section

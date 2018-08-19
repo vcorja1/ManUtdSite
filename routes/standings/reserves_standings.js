@@ -22,6 +22,7 @@ app.get('/premier-league-2', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League 2 Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Data: req.pl2Data,
 			isSingleCompetition: true
 		});
@@ -40,6 +41,7 @@ app.get('/premier-league-2-div-2', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League 2 Division II Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Div2Data: req.pl2Div2Data,
 			isSingleCompetition: true
 		});
@@ -58,6 +60,7 @@ app.get('/pl-international-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League International Cup Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			plIntlCupData: req.plIntlCupData,
 			isSingleCompetition: true
 		});
@@ -76,6 +79,7 @@ app.get('/youth-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'UEFA Youth League Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
 			youthLeagueData: req.youthLeagueData,
 			isSingleCompetition: true
 		});
@@ -95,6 +99,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Standings - Reserves Team',
+			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Data: req.pl2Data,
 			pl2Div2Data: req.pl2Div2Data,
 			plIntlCupData: req.plIntlCupData,

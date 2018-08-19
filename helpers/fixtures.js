@@ -14,8 +14,10 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 	date = new Date(date);
 	return {
 		date: date,
+		matchTime: date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true }),
 		dateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
-		matchTime: date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true })
+		shortWeekDateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'short' }),
+		weekDateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'long' })
 	};
 }
 
@@ -27,12 +29,12 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 // Store fixture statuses
 const MATCH_STATUS = {
 	SCHEDULED: 0,
-	POSTPONED: 1,
-	CANCELED: 2,
-	IN_PLAY: 3,
-	PAUSED: 4,
-	FINISHED: 5,
-	SUSPENDED: 6,
+	IN_PLAY: 1,
+	PAUSED: 2,
+	SUSPENDED: 3,
+	POSTPONED: 4,
+	CANCELED: 5,
+	FINISHED: 6,
 	AWARDED: 7
 };
 Object.freeze(MATCH_STATUS);
@@ -40,7 +42,7 @@ exports.MATCH_STATUS = MATCH_STATUS;
 
 // Store fixture names
 const MATCH_STATUS_NAMES = [
-	'SCHEDULED', 'POSTPONED', 'CANCELED', 'IN_PLAY', 'PAUSED', 'FINISHED', 'SUSPENDED', 'AWARDED'
+	'SCHEDULED', 'IN_PLAY', 'PAUSED', 'SUSPENDED', 'POSTPONED', 'CANCELED', 'FINISHED', 'AWARDED'
 ];
 Object.freeze(MATCH_STATUS_NAMES);
 exports.MATCH_STATUS_NAMES = MATCH_STATUS_NAMES;
@@ -63,11 +65,17 @@ exports.MATCH_RESULT = MATCH_RESULT;
 exports.getLiveScoreResult = function getLiveScoreResult(homeGoals, awayGoals, penaltyResult) {
 	const BLUE = '#009CDE';
 
+	const homePens = (penaltyResult != null ? penaltyResult.split('-')[0].trim() : null);
+	const awayPens = (penaltyResult != null ? penaltyResult.split('-')[1].trim() : null);
+
 	return {
 		homeGoals: homeGoals,
 		awayGoals: awayGoals,
 		resultString: homeGoals + ' - ' + awayGoals,
+		homePens: homePens,
+		awayPens: awayPens,
 		penaltyString: penaltyResult,
+		penaltyResultString: (penaltyResult != null ? `(${homePens}) ${homeGoals} - ${awayGoals} (${awayPens})` : null),
 		resultColor: BLUE
 	};
 }
