@@ -19,12 +19,13 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 	let today = new Date();
 	const yesterday = new Date((today.setDate(today.getDate() - 1)));
 	const tomorrow = new Date((today.setDate(today.getDate() + 1)));
+	const matchDateCopy = new Date(date);
 
-	let specialDay = (today.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Today' : null;
+	let specialDay = (today.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Today' : null;
 	if(specialDay == null) {
-		specialDay = (yesterday.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Yesterday' : null;
+		specialDay = (yesterday.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Yesterday' : null;
 		if(specialDay == null) {
-			specialDay = (tomorrow.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Tomorrow' : null;
+			specialDay = (tomorrow.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Tomorrow' : null;
 		}
 	}
 

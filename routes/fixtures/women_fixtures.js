@@ -21,7 +21,7 @@ app.get('/', function(req, res, next) {
 			req.fixtures[req.nextMatchID] : null;
 
 		res.render('fixtures', {
-			title: 'Schedule & Results',
+			title: 'Women\'s Team Schedule & Results',
 			MATCH_STATUS: req.MATCH_STATUS,
 			preseason: req.fixtures.filter(match => match.competition == COMPETITIONS.FRIENDLY),
 			regularSeason: req.fixtures.filter(match => match.competition >= COMPETITIONS.FA_WOMEN_SUPER_LEAGUE && match.competition <= COMPETITIONS.FA_WSL_CUP),
