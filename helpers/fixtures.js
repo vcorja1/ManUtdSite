@@ -8,16 +8,32 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 		return {
 			date: 'TBD',
 			dateTime: 'TBD',
-			matchTime: 'TBD'
+			matchTime: 'TBD',
+			shortWeekDateTime: 'TBD',
+			weekDateTime: 'TBD'
 		};
 
-	date = new Date(date);
+	matchDate = new Date(date);
+
+	// Check if this is a special case
+	let today = new Date();
+	const yesterday = new Date((today.setDate(today.getDate() - 1)));
+	const tomorrow = new Date((today.setDate(today.getDate() + 1)));
+
+	let specialDay = (today.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Today' : null;
+	if(specialDay == null) {
+		specialDay = (yesterday.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Yesterday' : null;
+		if(specialDay == null) {
+			specialDay = (tomorrow.setHours(0,0,0,0) == matchDate.setHours(0,0,0,0)) ? 'Tomorrow' : null;
+		}
+	}
+
 	return {
-		date: date,
-		matchTime: date.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true }),
-		dateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
-		shortWeekDateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'short' }),
-		weekDateTime: date.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'long' })
+		date: matchDate,
+		matchTime: matchDate.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true }),
+		dateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
+		shortWeekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'short' }),
+		weekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'long' })
 	};
 }
 

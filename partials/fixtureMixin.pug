@@ -27,11 +27,11 @@ mixin quickMatchInfoMobile(match, MATCH_STATUS)
 		if(match.status == MATCH_STATUS.SUSPENDED || match.status == MATCH_STATUS.POSTPONED || match.status == MATCH_STATUS.CANCELED)
 			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4.flex-align-center(style={'height': '100px'})
 				if(match.status == MATCH_STATUS.SUSPENDED)
-					h4.bold.postponed-match='SUSPENDED'
+					h4.bold.postponed-match.padding-right-30-only='SUSPENDED'
 				else if(match.status == MATCH_STATUS.POSTPONED)
-					h4.bold.postponed-match='POSTPONED'
+					h4.bold.postponed-match.padding-right-30-only='POSTPONED'
 				else if(match.status == MATCH_STATUS.CANCELED)
-					h4.bold.postponed-match='CANCELED'
+					h4.bold.postponed-match.padding-right-30-only='CANCELLED'
 		else if(match.status == MATCH_STATUS.IN_PLAY || match.status == MATCH_STATUS.PAUSED)
 			//- Game is currently in play
 			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4.flex-align-center(style={'height': '100px', 'flex-direction': 'column'})
@@ -66,7 +66,12 @@ mixin quickMatchInfoMobile(match, MATCH_STATUS)
 
 	//- Match Date & Competition
 	.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.bg-light(style={'border-top': '1px solid #d3d3d3'})
-		h5=match.matchDate.weekDateTime
+		if(match.status == MATCH_STATUS.IN_PLAY || match.status == MATCH_STATUS.PAUSED)
+			h4.bold.green='LIVE'
+				if(match.result.gameMinute != null)
+					span #{' - ' + match.result.gameMinute}
+		else
+			h5=match.matchDate.weekDateTime
 		h5.bold.small-caps #{match.competitionName + ' - ' + match.roundName}
 
 
@@ -85,7 +90,7 @@ mixin quickMatchInfoComputer(match, MATCH_STATUS)
 			else if (match.status == MATCH_STATUS.POSTPONED)
 				h4.bold.postponed-match='POSTPONED'
 			else if (match.status == MATCH_STATUS.CANCELED)
-				h4.bold.postponed-match='CANCELED'
+				h4.bold.postponed-match='CANCELLED'
 			else if (match.status == MATCH_STATUS.IN_PLAY || match.status == MATCH_STATUS.PAUSED)
 				//- Game is currently in play
 				h3.bold(style={ 'color': match.result.resultColor })=(match.result.penaltyResultString != null ? match.result.penaltyResultString : match.result.resultString)
@@ -180,7 +185,7 @@ mixin fixtures(matchList, MATCH_STATUS)
 								h4.bold.postponed-match='POSTPONED'
 								h5='TBD'
 							else if (match.status == MATCH_STATUS.CANCELED)
-								h4.bold.postponed-match='CANCELED'
+								h4.bold.postponed-match='CANCELLED'
 							else if (match.status == MATCH_STATUS.IN_PLAY || match.status == MATCH_STATUS.PAUSED)
 								//- Game is currently in play
 								h3.bold(style={ 'color': match.result.resultColor })=(match.result.penaltyResultString != null ? match.result.penaltyResultString : match.result.resultString)
