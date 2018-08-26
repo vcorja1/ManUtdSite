@@ -58,7 +58,8 @@ mixin playerInfoMixin(playersInfo)
 						h5=player.jerseynumber
 					.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-6
 						.hidden-ms.hidden-xs
-							h5=player.name
+							h5
+								a(href=currentUrl + player.id)=player.name
 						.hidden-lg.hidden-md.hidden-sm
 							h5
 							img(src=player.flagImg, height='20', width='30', alt=`Flag of ${player.country}`)

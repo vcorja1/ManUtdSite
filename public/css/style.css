@@ -365,6 +365,87 @@ abbr {
 }
 
 /* -------------------------------------------------------- */
+/* ------------------- PLAYER PROFILE --------------------- */
+/* -------------------------------------------------------- */
+
+/* Player Overview Pitch. */
+.player-position-pitch {
+  position: relative;
+  width: 350px;
+  height: 240px;
+  border-radius: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.player-position {
+  height: 30px;
+  width: 30px;
+  background-color: #0b00e0;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px #0b00e0;
+}
+.gk-overview {
+  position: absolute;
+  margin-top: 200px;
+  margin-left: 165px;
+}
+.cb-left-overview {
+  position: absolute;
+  margin-top: 175px;
+  margin-left: 105px;
+}
+.cb-right-overview {
+  position: absolute;
+  margin-top: 175px;
+  margin-left: 225px;
+}
+.rb-overview {
+  position: absolute;
+  margin-top: 155px;
+  margin-left: 300px;
+}
+.lb-overview {
+  position: absolute;
+  margin-top: 155px;
+  margin-left: 28px;
+}
+.dm-overview {
+  position: absolute;
+  margin-top: 125px;
+  margin-left: 165px;
+}
+.cm-overview {
+  position: absolute;
+  margin-top: 75px;
+  margin-left: 165px;
+}
+.am-overview {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 165px;
+}
+.rw-overview {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 255px;
+}
+.lw-overview {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 70px;
+}
+.st-overview {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 165px;
+}
+.position-overview-competent {
+  opacity: 0.4;
+}
+
+/* -------------------------------------------------------- */
 /* ------------------------ STAFF ------------------------- */
 /* -------------------------------------------------------- */
 

@@ -2,40 +2,94 @@
 const { Client } = require('pg');
 
 // Get helper functions
-const { TEAMS } = require('../helpers/teams');
+const { getClubData } = require('../helpers/clubs');
+const { TEAMS, getInternationalTeamName } = require('../helpers/teams');
 const { getFullCountryName } = require('../helpers/staff');
 
-// Store positions abbreviations
-const POSITIONS = [
-	'GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'RW', 'LW', 'ST'
-];
+// Store positions
+const POSITIONS = {
+	GOALKEEPER: 0,
+	CENTER_BACK: 1,
+	RIGHT_BACK: 2,
+	LEFT_BACK: 3,
+	DEFENSIVE_MID: 4,
+	CENTER_MID: 5,
+	ATTACKING_MID: 6,
+	RIGHT_WINGER: 7,
+	LEFT_WINGER: 8,
+	STRIKER: 9
+};
 Object.freeze(POSITIONS);
 
+// Store positions abbreviations
+const POSITION_ABBR = [
+	'GK', 'CB', 'RB', 'LB', 'DM', 'CM', 'AM', 'RW', 'LW', 'ST'
+];
+Object.freeze(POSITION_ABBR);
+
+// Store positions names
+const POSITION_NAMES = [
+	'Goalkeeper',
+	'Center Back',
+	'Right Back',
+	'Left Back',
+	'Defensive Midfielder',
+	'Center Midfielder',
+	'Attacking Midfielder',
+	'Right Winger',
+	'Left Winger',
+	'Striker'
+];
+Object.freeze(POSITION_NAMES);
 
 
-// Get fixtures for the reserves team
+
+// Get all first team players
 exports.getFirstTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.SENIOR, req, res, next);
 }
 
-// Get fixtures for the reserves team
+// Get all reserves team players
 exports.getReservesTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.RESERVES, req, res, next);
 };
 
-// Get fixtures for the academy team
+// Get all academy team players
 exports.getAcademyTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.ACADEMY, req, res, next);
 };
 
-// Get fixtures for the women's team
+// Get all women's team players
 exports.getWomenTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.WOMEN, req, res, next);
 };
 
 
 
-// Get fixtures for the given team
+// Get a particular first team player
+exports.getFirstTeamPlayerInfo = (req, res, next) => {
+	return getPlayerInfo(TEAMS.SENIOR, req, res, next);
+}
+
+// Get a particular reserves team player
+exports.getReservesTeamPlayerInfo = (req, res, next) => {
+	return getPlayerInfo(TEAMS.RESERVES, req, res, next);
+};
+
+// Get a particular academy team player
+exports.getAcademyTeamPlayerInfo = (req, res, next) => {
+	return getPlayerInfo(TEAMS.ACADEMY, req, res, next);
+};
+
+// Get a particular women's team player
+exports.getWomenTeamPlayerInfo = (req, res, next) => {
+	return getPlayerInfo(TEAMS.WOMEN, req, res, next);
+};
+
+
+
+
+// Get all players for the given team
 function getTeamPlayers(team, req, res, next) {
 	// Get Client
 	const client = new Client({
@@ -67,9 +121,10 @@ function getTeamPlayers(team, req, res, next) {
 
 			req.players.forEach( (player) => {
 				// Store position abbreviation
-				player.positionAbbr = POSITIONS[player.position];
+				player.positionAbbr = POSITION_ABBR[player.position];
 				// Store full country name and its flag image
 				getFullCountryName(player);
+				player.flagImg = '../' + player.flagImg;
 
 				// Store to appropriate location
 				if(player.position == 0) {
@@ -94,3 +149,98 @@ function getTeamPlayers(team, req, res, next) {
 		return next();
 	});
 };
+
+
+// Get the player's information
+function getPlayerInfo(team, req, res, next) {
+	// Get Client
+	const client = new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+
+	// Connect
+	client.connect();
+
+	// Get Staff Data
+	client.query(`SELECT * FROM PLAYERS WHERE team='${team}' and id='${req.params.player_id}';`, (err, resp) => {
+		// Handle error
+		if (err || !resp) {
+			req.loadedData = false;
+			res.status(400);
+			return next();
+		}
+
+		// Get player data
+		let player = JSON.parse(JSON.stringify(resp.rows));
+		player = player[0];
+
+		// Store player data
+		if(player != null) {
+			// Format player date of birth
+			if(player.dob != null && player.dob != '') {
+				let dob = new Date(player.dob);
+				player.dob = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+				player.age = ~~((Date.now() - dob) / (24 * 3600 * 365.25 * 1000));
+			}
+
+			// Store full country name and its flag image
+			getFullCountryName(player);
+			player.flagImg = '../' + player.flagImg;
+
+			// Store international level experience
+			player.internationalLevel = getInternationalTeamName(player.cappedlevel);
+
+			// Store position data
+			player.positionAbbr = POSITION_ABBR[player.position];
+			player.positionName = POSITION_NAMES[player.position];
+			const naturalPositions = player.naturalpositions != null ? JSON.parse(player.naturalpositions) : [];
+			const competentPositions = player.competentpositions != null ? JSON.parse(player.competentpositions) : [];
+
+			player.positions = {
+				gk: getPositionKnowledge(POSITIONS.GOALKEEPER, player.position, naturalPositions, competentPositions),
+				cb: getPositionKnowledge(POSITIONS.CENTER_BACK, player.position, naturalPositions, competentPositions),
+				rb: getPositionKnowledge(POSITIONS.RIGHT_BACK, player.position, naturalPositions, competentPositions),
+				lb: getPositionKnowledge(POSITIONS.LEFT_BACK, player.position, naturalPositions, competentPositions),
+				dm: getPositionKnowledge(POSITIONS.DEFENSIVE_MID, player.position, naturalPositions, competentPositions),
+				cm: getPositionKnowledge(POSITIONS.CENTER_MID, player.position, naturalPositions, competentPositions),
+				am: getPositionKnowledge(POSITIONS.ATTACKING_MID, player.position, naturalPositions, competentPositions),
+				rw: getPositionKnowledge(POSITIONS.RIGHT_WINGER, player.position, naturalPositions, competentPositions),
+				lw: getPositionKnowledge(POSITIONS.LEFT_WINGER, player.position, naturalPositions, competentPositions),
+				st: getPositionKnowledge(POSITIONS.STRIKER, player.position, naturalPositions, competentPositions)
+			};
+
+			// Format player's contract expiration date
+			if(player.contractexpires != null && player.contractexpires != '') {
+				let contractexpires = new Date(player.contractexpires);
+				player.contractexpires = contractexpires.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+			}
+
+			// Get loan club information (if applicable)
+			if(player.loanedto != null && player.loanedto != '') {
+				player.loanClub = getClubData(player.loanedto, player.team, -1);
+			}
+		}
+
+		// Save player
+		req.player = player;
+
+		// End connection
+		client.end();
+
+		// Continue
+		return next();
+	});
+}
+
+// Get position knowledge
+// True => Natural; False => Competent; Null => Unable to play
+function getPositionKnowledge(position, main, natural, competent) {
+	if(position === main || natural.includes(position)) {
+		return true;
+	}
+	if(competent.includes(position)) {
+		return false;
+	}
+	return null;
+}

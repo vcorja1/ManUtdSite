@@ -1,0 +1,106 @@
+extends layout
+block customcss
+	style(type="text/css").
+		body {
+			min-width: 360px;
+		}
+		/* Player Details Table. */
+		.player-details td {
+			padding: 15px;
+			font-size: 16px;
+		}
+		/* Tooltip For Position Description. */
+		.tooltip > .tooltip-inner {
+			background-color: #4ed652;
+			color: #23272d;
+			border: 1px solid green;
+			padding: 10px 15px;
+			font-size: 15px;
+			font-weight: bold;
+		}
+block content
+	.main.container-fluid
+		if (player == null)
+			//- Title
+			h2.menu-title.bold.red #{title}
+			.pad-space-small
+			h3.text-center='Could not find such player on this team.'
+			h3.text-center
+				| #{'Please return to the '}
+				a(href=teamPageUrl)='Team Page'
+				| #{' and click on the player name to see his/her profile.'}
+		else
+			//- Title
+			h1.menu-title.bold.red #{player.name}
+			.hidden-sm.hidden-ms.hidden-xs.pad-space-small
+
+			.col-lg-5.col-md-5
+				h3.bold.blue.small-caps.text-center=player.positionName
+				.pad-space-small
+				.player-position-pitch(style = { 'background-image': 'url("/img/pitch/playerPosition.jpg")' })
+					if(player.positions.gk != null)
+						.player-position.gk-overview(class = player.positions.gk ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='top' title='Goalkeeper')
+					if(player.positions.cb != null)
+						.player-position.cb-left-overview(class = player.positions.cb ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='top' title='Center Back')
+					if(player.positions.cb != null)
+						.player-position.cb-right-overview(class = player.positions.cb ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='top' title='Center Back')
+					if(player.positions.rb != null)
+						.player-position.rb-overview(class = player.positions.rb ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='left' title='Right Back')
+					if(player.positions.lb != null)
+						.player-position.lb-overview(class = player.positions.lb ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='right' title='Left Back')
+					if(player.positions.dm != null)
+						.player-position.dm-overview(class = player.positions.dm ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='top' title='Defensive Midfielder')
+					if(player.positions.cm != null)
+						.player-position.cm-overview(class = player.positions.cm ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='bottom' title='Center Midfielder')
+					if(player.positions.am != null)
+						.player-position.am-overview(class = player.positions.am ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='bottom' title='Attacking Midfielder')
+					if(player.positions.rw != null)
+						.player-position.rw-overview(class = player.positions.rw ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='bottom' title='Right Winger')
+					if(player.positions.lw != null)
+						.player-position.lw-overview(class = player.positions.lw ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='bottom' title='Left Winger')
+					if(player.positions.st != null)
+						.player-position.st-overview(class = player.positions.st ? '' : 'position-overview-competent' data-toggle='tooltip' data-placement='bottom' title='Striker')
+			.col-lg-6.col-md-7
+				.hidden-lg.hidden-md
+					.pad-space-small
+				h3.bold.blue.small-caps.text-center Player Profile
+				.pad-space-small
+				table.table-striped.full-width.player-details
+					tbody
+						tr
+							td.bold Full Name
+							td=player.fullname || player.name
+						if(player.captaincy != null)
+							tr
+								td.bold Club Status
+								td=player.captaincy ? 'Captain' : 'Vice-Captain'
+						tr
+							td.bold Nationality
+							td
+								img(src=player.flagImg, height='20', width='28', style={'margin-right': '5px'}, alt=`Flag of ${player.country}`)
+								| #{' ' + player.countryName}
+						if(player.internationalLevel != null)
+							tr
+								td.bold International Status
+								td=`Capped At ${player.internationalLevel} Level`
+						tr
+							td.bold Birthday
+							td=player.dob
+						tr
+							td.bold Age
+							td=player.age
+						if(player.loanedto != null)
+							tr
+								td.bold Loan Status
+								td
+									| On loan at 
+									img(src=player.loanClub.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.loanClub.displayName}`)
+									| #{' ' + player.loanClub.displayName}
+block jscripts
+	script(type='text/javascript').
+		(function($) {
+			$(function() { // DOM Ready
+				// Enable all tooltips
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+		})(jQuery);
