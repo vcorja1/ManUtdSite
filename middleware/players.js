@@ -114,20 +114,21 @@ function getTeamPlayers(team, req, res, next) {
 
 		// Store based on position
 		if(req.players != null && req.players != []) {
+			req.loanedOut = [];
 			req.goalkeepers = [];
 			req.defenders = [];
 			req.midfielders = [];
 			req.strikers = [];
 
 			req.players.forEach( (player) => {
-				// Store position abbreviation
-				player.positionAbbr = POSITION_ABBR[player.position];
-				// Store full country name and its flag image
-				getFullCountryName(player);
-				player.flagImg = '../' + player.flagImg;
+				// Process and store available player data
+				processPlayerInfo(player);
 
 				// Store to appropriate location
-				if(player.position == 0) {
+				if(player.loanedto != null && player.loanedto != '') {
+					req.loanedOut.push(player);
+				}
+				else if(player.position == 0) {
 					req.goalkeepers.push(player);
 				}
 				else if(player.position <= 3) {
@@ -177,23 +178,10 @@ function getPlayerInfo(team, req, res, next) {
 
 		// Store player data
 		if(player != null) {
-			// Format player date of birth
-			if(player.dob != null && player.dob != '') {
-				let dob = new Date(player.dob);
-				player.dob = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-				player.age = ~~((Date.now() - dob) / (24 * 3600 * 365.25 * 1000));
-			}
+			// Process and store available player data
+			processPlayerInfo(player);
 
-			// Store full country name and its flag image
-			getFullCountryName(player);
-			player.flagImg = '../' + player.flagImg;
-
-			// Store international level experience
-			player.internationalLevel = getInternationalTeamName(player.cappedlevel);
-
-			// Store position data
-			player.positionAbbr = POSITION_ABBR[player.position];
-			player.positionName = POSITION_NAMES[player.position];
+			// Store each position's proficiency level
 			const naturalPositions = player.naturalpositions != null ? JSON.parse(player.naturalpositions) : [];
 			const competentPositions = player.competentpositions != null ? JSON.parse(player.competentpositions) : [];
 
@@ -209,17 +197,6 @@ function getPlayerInfo(team, req, res, next) {
 				lw: getPositionKnowledge(POSITIONS.LEFT_WINGER, player.position, naturalPositions, competentPositions),
 				st: getPositionKnowledge(POSITIONS.STRIKER, player.position, naturalPositions, competentPositions)
 			};
-
-			// Format player's contract expiration date
-			if(player.contractexpires != null && player.contractexpires != '') {
-				let contractexpires = new Date(player.contractexpires);
-				player.contractexpires = contractexpires.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-			}
-
-			// Get loan club information (if applicable)
-			if(player.loanedto != null && player.loanedto != '') {
-				player.loanClub = getClubData(player.loanedto, player.team, -1);
-			}
 		}
 
 		// Save player
@@ -243,4 +220,37 @@ function getPositionKnowledge(position, main, natural, competent) {
 		return false;
 	}
 	return null;
+}
+
+
+// Process Player Data And Add Required Information
+function processPlayerInfo(player) {
+	// Format player date of birth
+	if(player.dob != null && player.dob != '') {
+		let dob = new Date(player.dob);
+		player.dob = dob.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+		player.age = ~~((Date.now() - dob) / (24 * 3600 * 365.25 * 1000));
+	}
+
+	// Store full country name and its flag image
+	getFullCountryName(player);
+	player.flagImg = '../' + player.flagImg;
+
+	// Store international level experience
+	player.internationalLevel = getInternationalTeamName(player.cappedlevel);
+
+	// Store position data
+	player.positionAbbr = POSITION_ABBR[player.position];
+	player.positionName = POSITION_NAMES[player.position];
+
+	// Format player's contract expiration date
+	if(player.contractexpires != null && player.contractexpires != '') {
+		let contractexpires = new Date(player.contractexpires);
+		player.contractexpires = contractexpires.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+	}
+
+	// Get loan club information (if applicable)
+	if(player.loanedto != null && player.loanedto != '') {
+		player.loanClub = getClubData(player.loanedto, TEAMS.SENIOR, -1);
+	}
 }

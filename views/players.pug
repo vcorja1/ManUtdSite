@@ -1,27 +1,46 @@
 extends layout
+block customcss
+	style(type="text/css").
+		body {
+			min-width: 360px;
+		}
+		/* Player Details Table. */
+		.team-player-details th, .team-player-details td {
+			padding: 15px;
+			font-size: 16px;
+		}
+		.team-player-details th {
+			text-align: center;
+		}
 block content
 	.main.container-fluid.text-center
 		//- Include players mixin
 		include ../partials/playerMixin.pug
 
-		if(goalkeepers != null && goalkeepers != [])
+		if(goalkeepers != null && goalkeepers.length > 0)
 			h2.blue.small-caps Goalkeepers
 			.pad-space-small
 			+playerInfoMixin(goalkeepers)
 			.pad-space-small
-		if(defenders != null && defenders != [])
+		if(defenders != null && defenders.length > 0)
 			h2.blue.small-caps Defenders
 			.pad-space-small
 			+playerInfoMixin(defenders)
 			.pad-space-small
-		if(midfielders != null && midfielders != [])
+		if(midfielders != null && midfielders.length > 0)
 			h2.blue.small-caps Midfielders
 			.pad-space-small
 			+playerInfoMixin(midfielders)
 			.pad-space-small
-		if(strikers != null && strikers != [])
+		if(strikers != null && strikers.length > 0)
 			h2.blue.small-caps Strikers
 			.pad-space-small
 			+playerInfoMixin(strikers)
 			.pad-space-small
+		if(loanedOut != null && loanedOut.length > 0)
+			h2.blue.small-caps Players Out On Loan
+			.pad-space-small
+			+playerLoanInfoMixin(loanedOut)
+			.pad-space-small
+
 		h6 Note: * = There is a club option to extend the player's contract by one more year.

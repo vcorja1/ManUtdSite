@@ -39,6 +39,8 @@ app.get('/', function(req, res, next) {
 			defenders: req.defenders,
 			midfielders: req.midfielders,
 			strikers: req.strikers,
+			loanedOut: req.loanedOut,
+			shouldDisplayJerseyNumber: true,
 			currentUrl: req.originalUrl.toString() + '/'
 		});
 	}

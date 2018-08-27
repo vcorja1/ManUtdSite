@@ -1,12 +1,12 @@
 //- Mixin for players that recently joined or left the club (for news section)
 mixin playerTransferMixin(playersInfo, incoming)
-	.panel.panel-default.align-items-center.text-center
+	.panel.panel-default.align-items-center
 		.panel-heading(style={'display':'flex', 'align-items': 'center', 'justify-content': 'center', 'height': '50px'})
 			.col-lg-2.col-md-2.col-sm-2.col-ms-2.col-xs-2
 				.hidden-xs
-					h5.text-center Position
+					h5 Position
 				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center Pos
+					h5 Pos
 			.col-lg-6.col-md-6.col-sm-6.col-ms-6.col-xs-6
 				h5 Player Name
 			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4
@@ -34,44 +34,55 @@ mixin playerTransferMixin(playersInfo, incoming)
 
 //- Mixin with all the players main info
 mixin playerInfoMixin(playersInfo)
-	.panel.panel-default.align-items-center.players-panel
-		.panel-heading
-			.col-lg-12.col-md-12.col-sm-12.flex-align-center.no-padding
-				.col-lg-1.col-md-1.col-sm-1.col-ms-2.col-xs-3
-					h4.small-caps.bold Shirt
-				.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-6
-					h4.small-caps.bold Name
-				.col-lg-2.col-md-2.col-sm-2.col-ms-3.col-xs-3
-					.hidden-xs
-						h4.small-caps.bold Position
-					.hidden-lg.hidden-md.hidden-sm.hidden-ms
-						h4.small-caps.bold
-							abbr(title='Position') Pos
-				.col-lg-3.col-md-3.col-sm-3.hidden-ms.hidden-xs
-					h4.small-caps.bold Country
-				.col-lg-2.col-md-2.col-sm-2.col-ms-3.hidden-xs
-					h4.small-caps.bold Contract Exp.
-		each player in playersInfo
-			.panel-body(style={'border-bottom': '2px solid #d3d3d3'})
-				.col-lg-12.col-md-12.col-sm-12.flex-align-center.no-padding
-					.col-lg-1.col-md-1.col-sm-1.col-ms-2.col-xs-3
-						h5=player.jerseynumber
-					.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-6
-						.hidden-ms.hidden-xs
-							h5
-								a(href=currentUrl + player.id)=player.name
-						.hidden-lg.hidden-md.hidden-sm
-							h5
-								img(src=player.flagImg, height='20', width='30', alt=`Flag of ${player.country}`)
-								| #{' '}
-								a(href=currentUrl + player.id)=player.name
-					.col-lg-2.col-md-2.col-sm-2.col-ms-3.col-xs-3
-						h5=player.positionAbbr
-					.col-lg-3.col-md-3.col-sm-3.hidden-ms.hidden-xs
-						h5
-							img(src=player.flagImg, height='20', width='30', alt=`Flag of ${player.country}`)
-							| #{' ' + player.countryName}
-					.col-lg-2.col-md-2.col-sm-2.col-ms-3.hidden-xs
-						h5=player.contractexpires
+	table.table-striped.full-width.team-player-details
+		thead
+			tr
+				if(shouldDisplayJerseyNumber)
+					th No
+				th Player
+				th
+					abbr(title='Position') Pos
+				th Age
+				th International Status
+				if(playersInfo[0].contractexpires != null && playersInfo[0].contractexpires != '')
+					th
+						abbr(title='Contract Expiration Date') Contract Exp.
+		tbody
+			each player in playersInfo
+				tr
+					if(shouldDisplayJerseyNumber)
+						td=player.jerseynumber
+					td.text-left
+						img(src=player.flagImg, height='20', width='28', style={'margin-right': '5px'}, alt=`Flag of ${player.country}`)
+						| #{' '}
+						a(href=currentUrl + player.id)=player.name
+					td=player.positionAbbr
+					td=player.age
+					td=(player.internationalLevel != null ? `Capped At ${player.internationalLevel} Level` : 'Uncapped')
+					if(player.contractexpires != null && player.contractexpires != '')
+						td=player.contractexpires
 							if(player.extentionoption)
 								span=' *'
+
+//- Mixin with the information about the loanees
+mixin playerLoanInfoMixin(playersInfo)
+	table.table-striped.full-width.team-player-details
+		thead
+			tr
+				th Player
+				th
+					abbr(title='Position') Pos
+				th Age
+				th Loan Club
+		tbody
+			each player in playersInfo
+				tr
+					td.text-left
+						img(src=player.flagImg, height='20', width='28', style={'margin-right': '5px'}, alt=`Flag of ${player.country}`)
+						| #{' '}
+						a(href=currentUrl + player.id)=player.name
+					td=player.positionAbbr
+					td=player.age
+					td
+						img(src=player.loanClub.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.loanClub.displayName}`)
+						| #{' ' + player.loanClub.displayName}
