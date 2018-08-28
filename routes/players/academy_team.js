@@ -34,7 +34,7 @@ app.get('/', function(req, res, next) {
 
 	try {
 		res.render('players', {
-			title: 'Academy Team',
+			title: 'Academy Team Players',
 			goalkeepers: req.goalkeepers,
 			defenders: req.defenders,
 			midfielders: req.midfielders,
