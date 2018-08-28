@@ -634,6 +634,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Celtic' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Celtic.svg'
 			};
+		case 'Heart of Midlothian':
+			return {
+				teamName: 'Heart of Midlothian FC',
+				fullName: 'Heart of Midlothian FC' + teamNameEnding,
+				displayName: 'Hearts' + teamNameEnding,
+				displayNameShort: 'Hearts' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Heart_of_Midlothian.svg'
+			};
 		case 'St Mirren':
 			return {
 				teamName: 'St Mirren FC',
