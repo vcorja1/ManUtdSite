@@ -118,6 +118,15 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 	}
 
 
+	if(competitionID == COMPETITIONS.CARABAO_CUP) {
+		if(round <= 5)
+			return 'Rd ' + round;
+		if(round == 6)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+
 	if(competitionID == COMPETITIONS.CHAMPIONS_LEAGUE) {
 		if(round <= 2)
 			return 'Playoff Round';
@@ -149,15 +158,6 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 		if(round <= 18)
 			return '1/4 Finals';
 		if(round <= 20)
-			return '1/2 Finals';
-		return 'Final';
-	}
-
-
-	if(competitionID == COMPETITIONS.CARABAO_CUP) {
-		if(round <= 5)
-			return 'Rd ' + round;
-		if(round == 6)
 			return '1/2 Finals';
 		return 'Final';
 	}

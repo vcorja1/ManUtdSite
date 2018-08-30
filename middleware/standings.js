@@ -93,7 +93,7 @@ function getSoccerwayTableStandings(competitionID, tableURL, tableID, req, res, 
 				case COMPETITIONS.PL_INTERNATIONAL_CUP:
 					req.plIntlCupTable = standings;
 					break;
-				case COMPETITIONS.YOUTH_LEAGUE:
+				case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 					req.youthLeagueTable = standings;
 					break;
 				case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
@@ -139,8 +139,8 @@ exports.getUCLTable = (req, res, next) => {
 	if(req.uclData != null || req.uclTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
+	const tableURL = 'https://us.soccerway.com/international/europe/uefa-champions-league/20182019/group-stage/r48410/';
+	const tableID = '#page_competition_1_block_competition_tables_group_15_block_competition_league_table_1_table';
 	return getSoccerwayTableStandings(COMPETITIONS.CHAMPIONS_LEAGUE, tableURL, tableID, req, res, next);
 };
 
@@ -199,9 +199,9 @@ exports.getYouthLeagueTable = (req, res, next) => {
 	if(req.youthLeagueData != null || req.youthLeagueTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.YOUTH_LEAGUE, tableURL, tableID, req, res, next);
+	const tableURL = 'https://us.soccerway.com/international/europe/uefa-youth-league/20182019/group-stage/r47508/';
+	const tableID = '#page_competition_1_block_competition_tables_group_15_block_competition_league_table_1_table';
+	return getSoccerwayTableStandings(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, tableURL, tableID, req, res, next);
 };
 
 // Get the U18 Premier League North Standings
@@ -450,14 +450,14 @@ function processMixedCompetitions(req) {
 
 		// Get relevant fixtures
 		if(req.fixtures != null && req.fixtures.length > 0) {
-			const youthLeague_games = req.fixtures.filter(match => match.competition == COMPETITIONS.YOUTH_LEAGUE).reverse();
+			const youthLeague_games = req.fixtures.filter(match => match.competition == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE).reverse();
 			if(youthLeague_games != null && youthLeague_games.length > 0) {
 				req.youthLeagueData.fixtures = youthLeague_games;
 			}
 		}
 
 		// Set competition status
-		getMixedCompetitionStatus(COMPETITIONS.YOUTH_LEAGUE, req.youthLeagueData);
+		getMixedCompetitionStatus(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, req.youthLeagueData);
 	}
 
 	// U18 Premier League Cup

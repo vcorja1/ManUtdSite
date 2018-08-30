@@ -79,37 +79,11 @@ exports.preprocessStandings = (req, res, next) => {
 		ENTER_LATER,
 		true);
 
-	// Carabao Cup
-	req.carabaoCupData = getUnavailableCupMessage(
-		'CARABAO CUP',
-		STANDINGS_LOCATION + 'carabao-cup',
-		ENTER_LATER,
-		true);
-
 	// FA Youth Cup
 	req.faYouthCupData = getUnavailableCupMessage(
 		'FA YOUTH CUP',
 		ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup',
 		ENTER_LATER,
-		true);
-
-
-
-
-	const UCL_DRAW = 'Manchester United will enter in the Group Stage round. The draw will take place in Monaco on August 30, 2018.';
-
-	// Champions League
-	req.uclData = getUnavailableCupMessage(
-		'CHAMPIONS LEAGUE',
-		STANDINGS_LOCATION + 'champions-league',
-		UCL_DRAW,
-		true);
-
-	// Under-19 UEFA Youth League
-	req.youthLeagueData = getUnavailableCupMessage(
-		'UEFA YOUTH LEAGUE',
-		RESERVES_STANDINGS_LOCATION + 'youth-league',
-		UCL_DRAW,
 		true);
 
 

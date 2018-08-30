@@ -39,7 +39,7 @@ function removeTeamNameAbbr(teamName) {
 	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ' || start === 'KV ' || start === 'SV ')
 		return teamName.substr(3);
 	start = teamName.substr(0,4);
-	if(start === 'AFC ' || start === 'RSC ')
+	if(start === 'AFC ' || start === 'RSC ' || start === 'BSC ')
 		return teamName.substr(4);
 
 	// Special cases below
@@ -656,6 +656,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** Belgian Clubs ******************/
 		/***************************************************/
 
+		case 'Young Boys':
+			return {
+				teamName: 'BSC Young Boys',
+				fullName: 'BSC Young Boys' + teamNameEnding,
+				displayName: 'Young Boys' + teamNameEnding,
+				displayNameShort: 'Young Boys' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Young_Boys.svg'
+			};
 		case 'Oostende':
 			return {
 				teamName: 'KV Oostende',

@@ -15,16 +15,6 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#premier-league
 						+tableCompetitionMixin(eplData, isSingleCompetition)
 
-		//- International Champions Cup Standings
-		if(iccData != null)
-			if(isSingleCompetition)
-				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
-					+tableCompetitionMixin(iccData, isSingleCompetition)
-			else
-				unless(iccData.shouldDisplayInSummary != null && !iccData.shouldDisplayInSummary)
-					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
-						+tableCompetitionMixin(iccData, isSingleCompetition)
-
 		//- Champions League Standings
 		if(uclData != null)
 			if(isSingleCompetition)
@@ -84,6 +74,17 @@ block content
 				unless(europaLeagueData.shouldDisplayInSummary != null && !europaLeagueData.shouldDisplayInSummary)
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#europa-league
 						+mixedCompetitionMixin(europaLeagueData, isSingleCompetition, MATCH_STATUS)
+
+		.pad-space.col-lg-12
+		//- International Champions Cup Standings
+		if(iccData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
+					+tableCompetitionMixin(iccData, isSingleCompetition)
+			else
+				unless(iccData.shouldDisplayInSummary != null && !iccData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#intenational-champions-cup
+						+tableCompetitionMixin(iccData, isSingleCompetition)
 
 		//- FIFA Club World Cup Standings
 		if(clubWorldCupData != null)
