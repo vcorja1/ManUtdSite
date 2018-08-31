@@ -107,7 +107,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			}
 			break;
 
-		case COMPETITIONS.UNDER_19_UEFA_YOUTH_LEAGUE:
+		case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 			if(position == 1) {
 				return GROUP_WINNERS;
 			}

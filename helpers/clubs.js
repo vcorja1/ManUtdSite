@@ -656,14 +656,6 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** Belgian Clubs ******************/
 		/***************************************************/
 
-		case 'Young Boys':
-			return {
-				teamName: 'BSC Young Boys',
-				fullName: 'BSC Young Boys' + teamNameEnding,
-				displayName: 'Young Boys' + teamNameEnding,
-				displayNameShort: 'Young Boys' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Young_Boys.svg'
-			};
 		case 'Oostende':
 			return {
 				teamName: 'KV Oostende',
@@ -671,6 +663,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Oostende' + teamNameEnding,
 				displayNameShort: 'Oostende' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Oostende.svg'
+			};
+
+
+		/***************************************************/
+		/******************* Swiss Clubs *******************/
+		/***************************************************/
+
+		case 'Young Boys':
+			return {
+				teamName: 'BSC Young Boys',
+				fullName: 'BSC Young Boys' + teamNameEnding,
+				displayName: 'Young Boys' + teamNameEnding,
+				displayNameShort: 'Young Boys' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Young_Boys.svg'
 			};
 
 
