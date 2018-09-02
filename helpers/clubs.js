@@ -36,8 +36,10 @@ function removeTeamNameAbbr(teamName) {
 
 	// Or remove beginning
 	var start = teamName.substr(0,3);
-	if(start === 'UC ' || start === 'SL ' || start === 'FC ' || start === 'FK ' || start === 'AS ' || start === 'KV ' || start === 'SV ')
+	if(start === 'AS ' || start === 'FC ' || start === 'FK ' || start === 'KV ' || start === 'SE '
+		|| start === 'SL ' || start === 'SK ' || start === 'SV ' || start === 'UC ') {
 		return teamName.substr(3);
+	}
 	start = teamName.substr(0,4);
 	if(start === 'AFC ' || start === 'RSC ' || start === 'BSC ')
 		return teamName.substr(4);
@@ -496,6 +498,22 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Dortmund' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Borussia_Dortmund.svg'
 			};
+		case 'Fortuna Dusseldorf':
+			return {
+				teamName: 'Dusseldorfer Turn-und Sportverein Fortuna 1895 e.V.',
+				fullName: 'Fortuna Dusseldorf' + teamNameEnding,
+				displayName: 'Fortuna Dusseldorf' + teamNameEnding,
+				displayNameShort: 'Fortuna' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Fortuna_Dusseldorf.svg'
+			};
+		case 'Koln':
+			return {
+				teamName: 'FC Koln',
+				fullName: 'FC Koln' + teamNameEnding,
+				displayName: 'Koln' + teamNameEnding,
+				displayNameShort: 'Koln' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Koln.svg'
+			};
 
 
 		/***************************************************/
@@ -698,6 +716,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/***************** Austrian Clubs ******************/
 		/***************************************************/
 
+		case 'Rapid Wien':
+			return {
+				teamName: 'SK Rapid Wien',
+				fullName: 'SK Rapid Wien' + teamNameEnding,
+				displayName: 'Rapid Wien' + teamNameEnding,
+				displayNameShort: 'Rapid' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Rapid_Wien.svg'
+			};
 		case 'Ried':
 			return {
 				teamName: 'SV Ried',
@@ -727,6 +753,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'San Jose Earthquakes' + teamNameEnding,
 				displayNameShort: 'Quakes' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'San_Jose_Earthquakes.svg'
+			};
+
+
+		/***************************************************/
+		/**************** Brazilian Clubs ******************/
+		/***************************************************/
+
+		case 'Palmeiras':
+			return {
+				teamName: 'Sociedade Esportiva Palmeiras',
+				fullName: 'SE Palmeiras' + teamNameEnding,
+				displayName: 'SE Palmeiras' + teamNameEnding,
+				displayNameShort: 'Palmeiras' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Palmeiras.svg'
 			};
 	}
 
