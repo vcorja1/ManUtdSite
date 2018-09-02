@@ -107,13 +107,15 @@ mixin quickMatchInfoComputer(match, MATCH_STATUS)
 				//- Game scheduled
 				h3.bold.blue-upcoming-match=match.matchDate.matchTime
 		//- Match date
-		div.flex-align-center.full-width(style={'height': '35px'})
+		div.flex-align-center.full-width(style={'flex-direction': 'column', 'height': '50px'})
 			if(match.status == MATCH_STATUS.IN_PLAY || match.status == MATCH_STATUS.PAUSED)
 				h4.bold.green='LIVE'
 					if(match.result.gameMinute != null)
 						span #{' - ' + match.result.gameMinute}
 			else
-				h5.italics=match.matchDate.dateTime
+				if(match.matchDate.weekday != null)
+					h5.italics(style={'margin': '10px 0'})=match.matchDate.weekday
+				h5.italics.no-margin=match.matchDate.dateTime
 	//- Away Team
 	.col-lg-4.col-md-4.col-sm-4.no-padding.recent-match
 		.container(style={'height': '95px'})
@@ -134,7 +136,7 @@ mixin quickMatchInfo(match, heading, MATCH_STATUS)
 			//- Teams and Match Status
 			+quickMatchInfoComputer(match, MATCH_STATUS)
 			//- Match data & Competition
-			.col-lg-12.col-md-12.col-sm-12
+			.col-lg-12.col-md-12.col-sm-12(style={'margin-top': '15px'})
 				h5.bold.small-caps #{match.competitionName + ' - ' + match.roundName}
 			//- Penalty Note, if applicable
 			if(match.result != null && match.result.penaltyMessage != null)

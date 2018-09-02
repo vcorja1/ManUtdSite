@@ -9,23 +9,33 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 			date: 'TBD',
 			dateTime: 'TBD',
 			matchTime: 'TBD',
+			weekday: null,
 			shortWeekDateTime: 'TBD',
 			weekDateTime: 'TBD'
 		};
 
 	matchDate = new Date(date);
 
+	// Days
+	const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 	// Check if this is a special case
 	let today = new Date();
-	const yesterday = new Date((today.setDate(today.getDate() - 1)));
-	const tomorrow = new Date((today.setDate(today.getDate() + 1)));
+	today.setHours(0,0,0,0);
+	const yesterday = new Date();
+	yesterday.setDate(today.getDate() - 1);
+	yesterday.setHours(0,0,0,0);
+	const tomorrow = new Date();
+	tomorrow.setDate(today.getDate() + 1);
+	tomorrow.setHours(0,0,0,0);
 	const matchDateCopy = new Date(date);
+	matchDateCopy.setHours(0,0,0,0);
 
-	let specialDay = (today.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Today' : null;
+	let specialDay = (today.getTime() == matchDateCopy.getTime() ? 'Today' : null);
 	if(specialDay == null) {
-		specialDay = (yesterday.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Yesterday' : null;
+		specialDay = (yesterday.getTime() == matchDateCopy.getTime() ? 'Yesterday' : null);
 		if(specialDay == null) {
-			specialDay = (tomorrow.setHours(0,0,0,0) == matchDateCopy.setHours(0,0,0,0)) ? 'Tomorrow' : null;
+			specialDay = (tomorrow.getTime() == matchDateCopy.getTime() ? 'Tomorrow' : null);
 		}
 	}
 
@@ -33,6 +43,7 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 		date: matchDate,
 		matchTime: matchDate.toLocaleTimeString("en-US", { hour: 'numeric', minute: '2-digit', hour12: true }),
 		dateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }),
+		weekday: specialDay == null ? days[ matchDate.getDay() ] : null,
 		shortWeekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'short' }),
 		weekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'long' })
 	};
