@@ -6,16 +6,6 @@
   "author": "Vladimir Corja",
   "license": "ISC",
   "homepage": "https://github.com/vcorja1/ManUtdSite#readme",
-  "scripts": {
-    "test": "npm test",
-    "watch": "nodemon server.js -e js,pug",
-    "outdated": "npm outdated",
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": "6.11.2",
-    "npm": "6.2.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vcorja1/ManUtdSite.git"
@@ -28,21 +18,34 @@
     "Man Utd",
     "ManUtd"
   ],
+  "engines": {
+    "node": "10.14.2",
+    "npm": "6.5.0"
+  },
+  "scripts": {
+    "test": "mocha --check-leaks test/*.js",
+    "lint": "jshint --verbose server.js helpers middleware partials routes test views",
+    "pretest": "npm run lint --silent",
+    "start": "node server.js"
+  },
   "dependencies": {
     "async": "2.6.1",
     "cheerio": "1.0.0-rc.2",
     "compression": "1.7.3",
-    "dotenv": "6.0.0",
-    "express": "4.16.3",
+    "dotenv": "6.2.0",
+    "express": "4.16.4",
     "iso-country-codes": "0.0.5",
-    "morgan": "1.9.0",
+    "morgan": "1.9.1",
     "nib": "1.1.2",
-    "nodemon": "1.18.3",
-    "pg": "7.4.3",
+    "pg": "7.7.1",
     "pug": "2.0.3",
-    "request": "2.87.0",
+    "request": "2.88.0",
     "request-promise": "4.2.2",
     "serve-favicon": "2.5.0",
     "stylus": "0.54.5"
+  },
+  "devDependencies": {
+    "jshint": "2.9.7",
+    "mocha": "5.2.0"
   }
 }
