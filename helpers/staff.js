@@ -24,7 +24,7 @@ exports.getStaffTitle = function getStaffTitle(titleID) {
 	 ];
 
 	return staffTitles[titleID];
-}
+};
 
 
 // Gets the proper team ending
@@ -44,7 +44,7 @@ exports.getTeamPrefix = function getTeamPrefix(team) {
 	if(team === TEAMS.U9_TEAM)
 		return 'U9 ';
 	return '';
-}
+};
 
 // Store the full country name and its flag location
 exports.getFullCountryName = function getFullCountryName(member) {
@@ -80,4 +80,4 @@ exports.getFullCountryName = function getFullCountryName(member) {
 			member.countryName = member.countryName.slice(0, -6);
 		}
 	}
-}
+};

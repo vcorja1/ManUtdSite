@@ -57,7 +57,7 @@ exports.COMPETITION_TYPE = COMPETITION_TYPE;
 // Returns the name of the competition based on the ID
 exports.getCompetitionName = function getCompetitionName(competitionID) {
 	return COMPETITION_NAMES[competitionID];
-}
+};
 
 
 // Get the team by competition ID
@@ -73,7 +73,7 @@ exports.getTeamByCompetitionID = function getTeamByCompetitionID(competitionID) 
 		return TEAMS.ACADEMY;
 	}
 	return TEAMS.WOMEN;
-}
+};
 
 
 // Returns the name of the competition round based on the ID
@@ -269,7 +269,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 	// Generic response
 	return 'Rd ' + round;
-}
+};
 
 
 // Returns the competition details
@@ -447,7 +447,7 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 	}
 
 	return null;
-}
+};
 
 
 // Returns the competition logo based on the ID
@@ -518,4 +518,4 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 		default:
 			return null;
 	}
-}
+};

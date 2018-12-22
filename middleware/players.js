@@ -47,7 +47,7 @@ Object.freeze(POSITION_NAMES);
 // Get all first team players
 exports.getFirstTeamPlayers = (req, res, next) => {
 	return getTeamPlayers(TEAMS.SENIOR, req, res, next);
-}
+};
 
 // Get all reserves team players
 exports.getReservesTeamPlayers = (req, res, next) => {
@@ -69,7 +69,7 @@ exports.getWomenTeamPlayers = (req, res, next) => {
 // Get a particular first team player
 exports.getFirstTeamPlayerInfo = (req, res, next) => {
 	return getPlayerInfo(TEAMS.SENIOR, req, res, next);
-}
+};
 
 // Get a particular reserves team player
 exports.getReservesTeamPlayerInfo = (req, res, next) => {
@@ -149,7 +149,7 @@ function getTeamPlayers(team, req, res, next) {
 		// Continue
 		return next();
 	});
-};
+}
 
 
 // Get the player's information

@@ -8,4 +8,4 @@ exports.parallelMiddlewares = function parallelMiddlewares(middlewares) {
       mw(req, res, cb);
     }, next);
   };
-}
+};

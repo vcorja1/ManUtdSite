@@ -14,7 +14,7 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 			weekDateTime: 'TBD'
 		};
 
-	matchDate = new Date(date);
+	const matchDate = new Date(date);
 
 	// Days
 	const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -47,7 +47,7 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 		shortWeekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'short' }),
 		weekDateTime: specialDay || matchDate.toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric', 'weekday': 'long' })
 	};
-}
+};
 
 
 /* -------------------------------------------------------- */
@@ -106,7 +106,7 @@ exports.getLiveScoreResult = function getLiveScoreResult(homeGoals, awayGoals, p
 		penaltyResultString: (penaltyResult != null ? `(${homePens}) ${homeGoals} - ${awayGoals} (${awayPens})` : null),
 		resultColor: BLUE
 	};
-}
+};
 
 exports.getResultData = function getResultData(homeTeam, homeGoals, awayGoals, penaltyResult) {
 	// Define constants
@@ -178,4 +178,4 @@ exports.getResultData = function getResultData(homeTeam, homeGoals, awayGoals, p
 		result: result,
 		resultColor: result == MATCH_RESULT.WIN ? GREEN : RED
 	};
-}
+};

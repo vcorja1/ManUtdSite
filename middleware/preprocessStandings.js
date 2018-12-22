@@ -1,7 +1,3 @@
-// Get Helper Functions
-const { COMPETITIONS } = require('../helpers/competitions');
-const { TEAMS } = require('../helpers/teams');
-
 // Define Constants
 const CURRENT_SEASON = ' 2018/19';
 const STANDINGS_LOCATION = '/standings/';
@@ -89,4 +85,4 @@ exports.preprocessStandings = (req, res, next) => {
 
 	// Continue
 	return next();
-}
+};

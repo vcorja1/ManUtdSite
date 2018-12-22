@@ -24,7 +24,7 @@ function getTeamPosition(standings) {
 	if(!position || position == 0) {
 		position = standings.indexOf(MANCHESTER_UNITED) + 1;
 	}
-	const suffix = [,'st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
+	const suffix = ['','st','nd','rd'][position % 100 >> 3 ^ 1 && position % 10] || 'th';
 	return `${position}${suffix}`;
 }
 
@@ -141,6 +141,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 10) {
 				return RELEGATION_COLOR;
 			}
+			break;
 
 		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 			if(position == 1) {
@@ -149,6 +150,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 11) {
 				return RELEGATION_COLOR;
 			}
+			break;
 
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			if(position == 1) {
@@ -157,14 +159,16 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 11) {
 				return RELEGATION_COLOR;
 			}
+			break;
 
 		case COMPETITIONS.FA_WSL_CUP:
 			if(position <= 2) {
 				return GROUP_WINNERS;
 			}
+			break;
 	}
 	return null;
-}
+};
 
 
 // Get Default Table Given Participating Teams
@@ -188,7 +192,7 @@ exports.getDefaultTable = function getDefaultTable(teamNames, team, competitionI
 	});
 
 	return table;
-}
+};
 
 
 // Return Stub Fixture
@@ -232,7 +236,7 @@ exports.getTableCompetitionStatus = function getTableCompetitionStatus(competiti
 		competitionData.competitionStatus = getTeamPosition(table);
 	}
 	return competitionData;
-}
+};
 
 // Update Mixed Competition Status And Add Fixture Stubs If Needed
 exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competitionID, competitionData) {
@@ -393,7 +397,7 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 	competitionData.competitionStatus = competitionData.groupStagePosition;
 	competitionData.competitionEnded = false;
 	return competitionData;
-}
+};
 
 // Update Knockout Competition Status And Add Fixture Stubs If Needed
 exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(competitionID, competitionData) {
@@ -442,4 +446,4 @@ exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(com
 	competitionData.competitionStatus = stubFixture.roundName;
 	competitionData.competitionEnded = false;
 	return competitionData;
-}
+};

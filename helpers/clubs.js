@@ -36,8 +36,8 @@ function removeTeamNameAbbr(teamName) {
 
 	// Or remove beginning
 	var start = teamName.substr(0,3);
-	if(start === 'AS ' || start === 'FC ' || start === 'FK ' || start === 'KV ' || start === 'SE '
-		|| start === 'SL ' || start === 'SK ' || start === 'SV ' || start === 'UC ') {
+	if(start === 'AS ' || start === 'FC ' || start === 'FK ' || start === 'KV ' || start === 'SE ' ||
+		start === 'SL ' || start === 'SK ' || start === 'SV ' || start === 'UC ') {
 		return teamName.substr(3);
 	}
 	start = teamName.substr(0,4);
@@ -72,7 +72,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Manchester United' + teamNameEnding,
 				displayNameShort: 'Man Utd' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Manchester_United.svg'
-			}
+			};
 
 		/***************************************************/
 		/***************** TBD Stub Fixture ****************/
@@ -85,7 +85,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'TBD',
 				displayNameShort: 'TBD',
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'defaultCrest.png'
-			}
+			};
 
 
 		/***************************************************/
@@ -778,4 +778,4 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		displayNameShort: displayName + teamNameEnding,
 		clubLogoSrc: CLUB_LOGOS_FOLDER + 'defaultCrest.png'
 	};
-}
+};

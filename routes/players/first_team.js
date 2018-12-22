@@ -10,7 +10,7 @@ app.use('/:player_id', getFirstTeamPlayerInfo);
 app.get('/:player_id', function(req, res, next) {
 
 	try {
-		const title = req.player != null ? (req.player.name + ' | Player Profile') : 'No Player Information Available'
+		const title = req.player != null ? (req.player.name + ' | Player Profile') : 'No Player Information Available';
 		res.render('playerInfo', {
 			title: title,
 			player: req.player,

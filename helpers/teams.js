@@ -46,4 +46,4 @@ exports.getInternationalTeamName = function getInternationalTeamName(team) {
 	if(team === INTERNATIONAL_TEAMS.U16_TEAM)
 		return 'Under-16';
 	return null;
-}
+};

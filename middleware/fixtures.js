@@ -23,11 +23,11 @@ const {
 // Get fixtures for the reserves team
 exports.getFirstTeamFixtures = (req, res, next) => {
 	return getTeamFixtures(TEAMS.SENIOR, '', req, res, next);
-}
+};
 exports.getFirstTeamCupFixtures = (req, res, next) => {
 	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_CUP} AND competition <= ${COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP}`;
 	return getTeamFixtures(TEAMS.SENIOR, cupConditional, req, res, next);
-}
+};
 
 // Get fixtures for the reserves team
 exports.getReservesTeamFixtures = (req, res, next) => {
@@ -36,7 +36,7 @@ exports.getReservesTeamFixtures = (req, res, next) => {
 exports.getReservesTeamCupFixtures = (req, res, next) => {
 	const cupConditional = ` AND competition >= ${COMPETITIONS.PL_INTERNATIONAL_CUP} AND competition <= ${COMPETITIONS.U19_UEFA_YOUTH_LEAGUE}`;
 	return getTeamFixtures(TEAMS.RESERVES, cupConditional, req, res, next);
-}
+};
 
 // Get fixtures for the academy team
 exports.getAcademyTeamFixtures = (req, res, next) => {
@@ -45,7 +45,7 @@ exports.getAcademyTeamFixtures = (req, res, next) => {
 exports.getAcademyTeamCupFixtures = (req, res, next) => {
 	const cupConditional = ` AND competition >= ${COMPETITIONS.U18_PREMIER_LEAGUE_CUP} AND competition <= ${COMPETITIONS.ICGT_TOURNAMENT}`;
 	return getTeamFixtures(TEAMS.ACADEMY, cupConditional, req, res, next);
-}
+};
 
 // Get fixtures for the academy team
 exports.getWomenTeamFixtures = (req, res, next) => {
@@ -54,7 +54,7 @@ exports.getWomenTeamFixtures = (req, res, next) => {
 exports.getWomenTeamCupFixtures = (req, res, next) => {
 	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_WSL_CUP} AND competition <= ${COMPETITIONS.FA_WSL_CUP}`;
 	return getTeamFixtures(TEAMS.WOMEN, cupConditional, req, res, next);
-}
+};
 
 
 
@@ -81,7 +81,6 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 
 		// Save all fixtures
 		req.fixtures = JSON.parse(JSON.stringify(resp.rows));
-		const fixturesCount = req.fixtures.length;
 
 		// Store match status object, for reference
 		req.MATCH_STATUS = MATCH_STATUS;
@@ -146,7 +145,7 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 		// Continue
 		return next();
 	});
-};
+}
 
 // Get live score from football-data
 function getLiveScoreFootballData(req, res, next) {
