@@ -18,7 +18,14 @@ app.use(compression());
 // Use Helmet to protect from some well-known web vulnerabilities by setting HTTP headers appropriately
 const helmet = require('helmet');
 app.use(helmet({
-  contentSecurityPolicy: { directives: { defaultSrc: ["'self'"] } },
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'unsafe-inline'", "'unsafe-eval'", "'self'"],
+      styleSrc: ["'unsafe-inline'", "'self'"],
+      upgradeInsecureRequests: true
+    }
+  },
   referrerPolicy: { policy: 'no-referrer' }
 }));
 
