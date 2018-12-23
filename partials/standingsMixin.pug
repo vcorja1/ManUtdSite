@@ -88,7 +88,7 @@ mixin mixedCompetitionMixin(competitionData, isSingleCompetition, MATCH_STATUS)
 			span(style={'color': 'red'})=competitionData.competitionStatus
 		.pad-space-small
 		//- Playoffs Section (if applicable)
-		if(competitionData.fixtures != null && competitionData.fixtures != [])
+		if(competitionData.playoffMatches != null && competitionData.playoffMatches != [])
 			h4.blue.text-center.small-caps Playoffs Results
 			.pad-space-small
 			.panel.panel-default.align-items-center.text-center
