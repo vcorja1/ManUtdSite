@@ -169,7 +169,6 @@ function getLiveScoreFootballData(req, res, next) {
 		resp.on('data', (chunk) => { rawData += chunk; });
 		resp.on('end', () => {
 			try {
-
 				// Get the data
 				const parsedData = JSON.parse(rawData);
 
@@ -193,7 +192,8 @@ function getLiveScoreFootballData(req, res, next) {
 				// Continue
 				return next();
 
-			} catch (e) {
+			}
+			catch (e) {
 				// Handle error here
 				return next(e);
 			}
@@ -207,10 +207,12 @@ function getLiveScoreFootballData(req, res, next) {
 // Get live score from soccerway
 function getLiveScoreSoccerway(req, res, next) {
 	let nextMatch = req.fixtures[req.nextMatchID];
+	const utcDate = nextMatch.matchdate;
+	const matchDate = utcDate.substr(0, 4) + '/' + utcDate.substr(5, 2) + '/' + utcDate.substr(8, 2);
 
 	// Get updated score
 	const OPTIONS = {
-		uri: `https://us.soccerway.com${nextMatch.soccerwayurl}`,
+		uri: `https://us.soccerway.com/matches/${matchDate}${nextMatch.soccerwayurl}`,
 		transform: function (body) {
 			return cheerio.load(body);
 		}
@@ -277,9 +279,9 @@ function getLiveScoreSoccerway(req, res, next) {
 		return next();
 
 	})
-    .catch(function (err) {
+    .catch(function () {
         // REQUEST FAILED: IGNORE THIS REQUEST
-		console.error(err);
-        return next(err);
+        console.error(`ERROR! Soccerway match not found for team '${nextMatch.team}' and date '${nextMatch.matchdate}'. (Competition = '${nextMatch.competition}' and round = '${nextMatch.round}')`);
+        return next();
     });
 }
