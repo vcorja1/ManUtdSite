@@ -27,7 +27,8 @@ const COMPETITIONS = {
 	ICGT_TOURNAMENT: 21,
 	FA_WOMEN_SUPER_LEAGUE: 22,
 	FA_WOMEN_CHAMPIONSHIP: 23,
-	FA_WSL_CUP: 24
+	WOMEN_FA_CUP: 24,
+	FA_WSL_CUP: 25
 };
 Object.freeze(COMPETITIONS);
 
@@ -39,7 +40,7 @@ const COMPETITION_NAMES = [
 	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'Under-19 UEFA Youth League',
 	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Ruhr Cup', 'Otten Cup',
 	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
-	'FA Women\'s Super League', 'FA Women\'s Championship', 'FA WSL Cup'
+	'FA Women\'s Super League', 'FA Women\'s Championship', 'Women\'s FA Cup', 'FA WSL Cup'
 ];
 Object.freeze(COMPETITION_NAMES);
 
@@ -107,7 +108,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 	}
 
 
-	if(competitionID == COMPETITIONS.FA_CUP || competitionID == COMPETITIONS.FA_YOUTH_CUP) {
+	if(competitionID == COMPETITIONS.FA_CUP || competitionID == COMPETITIONS.FA_YOUTH_CUP || competitionID == COMPETITIONS.WOMEN_FA_CUP) {
 		if(round <= 5)
 			return 'Rd ' + round;
 		if(round == 6)
@@ -444,6 +445,12 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 				finalRound: 8,
 				noNextRound: 5
 			};
+		case COMPETITIONS.WOMEN_FA_CUP:
+			return {
+				type: COMPETITION_TYPE.KNOCKOUT,
+				finalRound: 8,
+				noNextRound: 8
+			};
 	}
 
 	return null;
@@ -511,6 +518,8 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 			return LOGOS_FOLDER + 'fa_women_super_league.jpg';
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			return LOGOS_FOLDER + 'fa_women_championship.jpg';
+		case COMPETITIONS.WOMEN_FA_CUP:
+			return LOGOS_FOLDER + 'women_fa_cup.png';
 		case COMPETITIONS.FA_WSL_CUP:
 			return LOGOS_FOLDER + 'fa_wsl_cup.png';
 

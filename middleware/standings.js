@@ -647,4 +647,17 @@ function processKnockoutCompetitions(req) {
 		// Set competition status
 		getKnockoutCompetitionStatus(COMPETITIONS.DALLAS_CUP, req.dallasCupData);
 	}
+
+	// Women FA Cup
+	const womenFaCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.WOMEN_FA_CUP).reverse();
+	if(womenFaCupFixtures != null && womenFaCupFixtures.length > 0) {
+		req.womenFaCupData = {
+			competitionName: 'WOMEN\'S FA CUP ' + CURRENT_SEASON,
+			competitionLink: WOMEN_STANDINGS_LOCATION + 'women-fa-cup',
+			fixtures: womenFaCupFixtures
+		};
+
+		// Set competition status
+		getKnockoutCompetitionStatus(COMPETITIONS.WOMEN_FA_CUP, req.womenFaCupData);
+	}
 }

@@ -53,6 +53,25 @@ app.get('/fa-women-championship', function(req, res, next) {
 
 });
 
+// GET response for '/women-standings/women-fa-cup'
+app.use('/women-fa-cup', standings.processStandingsData);
+app.get('/women-fa-cup', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'Women\'s FA Cup Results',
+			MATCH_STATUS: req.MATCH_STATUS,
+			womenFaCupData: req.womenFaCupData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/women-standings/fa-wsl-cup'
 app.use('/fa-wsl-cup', [standings.getFAWSLCupTable, standings.processStandingsData]);
 app.get('/fa-wsl-cup', function(req, res, next) {
@@ -82,6 +101,7 @@ app.get('/', function(req, res, next) {
 			title: 'Standings - Women\'s Team',
 			MATCH_STATUS: req.MATCH_STATUS,
 			faWomenChampionshipData: req.faWomenChampionshipData,
+			womenFaCupData: req.womenFaCupData,
 			faWSLCupData: req.faWSLCupData,
 			isSingleCompetition: false
 		});

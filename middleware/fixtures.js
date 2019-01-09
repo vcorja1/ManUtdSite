@@ -52,7 +52,7 @@ exports.getWomenTeamFixtures = (req, res, next) => {
 	return getTeamFixtures(TEAMS.WOMEN, '', req, res, next);
 };
 exports.getWomenTeamCupFixtures = (req, res, next) => {
-	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_WSL_CUP} AND competition <= ${COMPETITIONS.FA_WSL_CUP}`;
+	const cupConditional = ` AND competition >= ${COMPETITIONS.WOMEN_FA_CUP} AND competition <= ${COMPETITIONS.FA_WSL_CUP}`;
 	return getTeamFixtures(TEAMS.WOMEN, cupConditional, req, res, next);
 };
 

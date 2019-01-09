@@ -226,6 +226,16 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#fa-women-championship
 						+tableCompetitionMixin(faWomenChampionshipData, isSingleCompetition)
 
+		//- FA Cup Standings
+		if(womenFaCupData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#women-fa-cup
+					+knockoutCompetitionMixin(womenFaCupData, isSingleCompetition, MATCH_STATUS)
+			else
+				unless(womenFaCupData.shouldDisplayInSummary != null && !womenFaCupData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#women-fa-cup
+						+knockoutCompetitionMixin(womenFaCupData, isSingleCompetition, MATCH_STATUS)
+
 		//- FA WSL Continental Tyres Cup
 		if(faWSLCupData != null)
 			if(isSingleCompetition)
