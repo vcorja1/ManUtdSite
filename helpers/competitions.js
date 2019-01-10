@@ -357,17 +357,17 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 			return {
 				type: COMPETITION_TYPE.MIXED,
 				finalRound: 13,
-				groupStageMin: 1,
-				groupStageMax: 6,
+				groupStageMin: 3,
+				groupStageMax: 8,
 				groupStageAdvance: 2,
 				isSingleRoundElim: true
 			};
 		case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
 			return {
 				type: COMPETITION_TYPE.MIXED,
-				finalRound: 10,
+				finalRound: 6,
 				groupStageMin: 1,
-				groupStageMax: 6,
+				groupStageMax: 3,
 				groupStageAdvance: 2,
 				isSingleRoundElim: true
 			};

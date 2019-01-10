@@ -476,14 +476,14 @@ function processMixedCompetitions(req) {
 
 		// Get relevant fixtures
 		if(req.fixtures != null && req.fixtures.length > 0) {
-			const plCup_games = req.fixtures.filter(match => match.competition == COMPETITIONS.U18_PL_CUP).reverse();
+			const plCup_games = req.fixtures.filter(match => match.competition == COMPETITIONS.U18_PREMIER_LEAGUE_CUP).reverse();
 			if(plCup_games != null && plCup_games.length > 0) {
 				req.plCupData.fixtures = plCup_games;
 			}
 		}
 
 		// Set competition status
-		getMixedCompetitionStatus(COMPETITIONS.U18_PL_CUP, req.plCupData);
+		getMixedCompetitionStatus(COMPETITIONS.U18_PREMIER_LEAGUE_CUP, req.plCupData);
 	}
 
 	// FA WSL Continental Tyres Cup

@@ -249,7 +249,7 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 		lastMatch = competitionData.fixtures[0];
 		qualificationMatches = competitionData.fixtures.filter(match => match.round < competitionDetails.groupStageMin);
 		playoffMatches = competitionData.fixtures.filter(match => match.round > competitionDetails.groupStageMax);
-		isGroupStage = competitionData.fixtures[0].round >= competitionDetails.groupStageMin || competitionData.fixtures[0].round <= competitionDetails.groupStageMax;
+		isGroupStage = lastMatch.round >= competitionDetails.groupStageMin && lastMatch.round <= competitionDetails.groupStageMax;
 	}
 
 	// Save fixtures
@@ -281,7 +281,7 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 		if(isPlayoffs) {
 			// Playoffs
 			if(competitionDetails.isSingleRoundElim) {
-				return this.getKnockoutCompetitionStatus(competitionID, competitionData);
+				return getKnockoutCompetitionStatus(competitionID, competitionData, true);
 			}
 
 			// Otherwise need to check if this is the final
@@ -400,9 +400,11 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 };
 
 // Update Knockout Competition Status And Add Fixture Stubs If Needed
-exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(competitionID, competitionData) {
+const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = function (competitionID, competitionData, isMixedCompetition = false) {
+	const matches = isMixedCompetition ? competitionData.playoffMatches : competitionData.fixtures;
+
 	// If the last match has not yet been completed, simply return the round information
-	const lastMatch = competitionData.fixtures[0];
+	const lastMatch = matches[0];
 	if(lastMatch.status < MATCH_STATUS.FINISHED) {
 		competitionData.competitionStatus = lastMatch.roundName;
 		competitionData.competitionEnded = false;
@@ -441,7 +443,7 @@ exports.getKnockoutCompetitionStatus = function getKnockoutCompetitionStatus(com
 	// Now need to add a stub for the future match that has not yet been drawn
 	const team = getTeamByCompetitionID(competitionID);
 	let stubFixture = getStubFixture(team, competitionID, lastMatch.round + 1);
-	competitionData.fixtures.unshift(stubFixture);
+	matches.unshift(stubFixture);
 
 	competitionData.competitionStatus = stubFixture.roundName;
 	competitionData.competitionEnded = false;
