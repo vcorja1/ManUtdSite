@@ -220,12 +220,12 @@ exports.getTableCompetitionStatus = function getTableCompetitionStatus(competiti
 		tablePosition = table.indexOf(MANCHESTER_UNITED) + 1;
 	}
 
-	competitionData.competitionEnded = (competitionData.competitionTable.playedGames == competitionDetails.finalRound);
+	competitionData.competitionEnded = (competitionData.competitionTable[tablePosition].playedGames == competitionDetails.finalRound);
 	if(competitionData.competitionEnded) {
 		if(tablePosition == 1) {
 			competitionData.competitionStatus = 'CHAMPIONS';
 		}
-		else if(tablePosition >= competitionDetails.relegationPlace) {
+		else if(competitionDetails.relegationPlace != null && tablePosition >= competitionDetails.relegationPlace) {
 			competitionData.competitionStatus = 'RELEGATED';
 		}
 		else {
