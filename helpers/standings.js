@@ -419,7 +419,7 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 			competitionData.competitionStatus = 'RUNNERS-UP';
 		}
 		else if(competitionDetails.finalRound != competitionDetails.noNextRound) {
-			competitionData.competitionStatus = lastMatch.roundName.split('/')[1];
+			competitionData.competitionStatus = isMixedCompetition ? lastMatch.roundName : lastMatch.roundName.split('/')[1];
 		}
 		else {
 			competitionData.competitionStatus = 'OUT';
