@@ -220,7 +220,7 @@ exports.getTableCompetitionStatus = function getTableCompetitionStatus(competiti
 		tablePosition = table.indexOf(MANCHESTER_UNITED) + 1;
 	}
 
-	competitionData.competitionEnded = (competitionData.competitionTable[tablePosition].playedGames == competitionDetails.finalRound);
+	competitionData.competitionEnded = competitionData.competitionTable.filter(team => team.playedGames != competitionDetails.finalRound).length == 0;
 	if(competitionData.competitionEnded) {
 		if(tablePosition == 1) {
 			competitionData.competitionStatus = 'CHAMPIONS';
