@@ -10,18 +10,18 @@ const FLAG_IMG_FOLDER = 'img/flags/';
 // Returns the job title for the corresponding ID
 exports.getStaffTitle = function getStaffTitle(titleID) {
 	const staffTitles = [
-		'Owner', 'Honorary President', 'Co-Chairman', 'Executive Vice Chairman', 'Director', 'Chief Financial Officer', 'Club Secretary', 'Club Ambassador',
+		'Owner', 'Honorary President', 'Co-Chairman', 'Executive Vice Chairman', 'Director', 'Chief Financial Officer', 'Chief Operating Officer', 'Club Secretary', 'Club Ambassador',
 		'Manager', 'Assistant Manager', 'Coach', 'Goalkeeping Coach', 'Fitness Coach', 'Tactical Analyst', 'Head of First-Team Development',
 		'Director of Youth Academy', 'Academy Operations Manager', 'Head of Academy Coaching', 'Academy Consultant',
 		'Head of Academy Recruitment', 'Assistant Head of Academy Recruitment', 'Player Recruitment',
-		'Chief Scout', 'Head of Global Scouting', 'Head of European Scouting', 'Scouting Manager', 'Scout', 
+		'Chief Scout', 'Head of Global Scouting', 'Scout',
 		'Head of Sports Science', 'Club Doctor', 'Physiotherapist', 'Sports Scientist',
-		'Masseur', 'Club Dietician', 'Head of Performance', 'Head of Strength and Conditioning', 'Head of Human Performance',
-		'Director of Group Operations', 'Director of Communications', 'Director of Legal and Business Affairs', 'Director of Finance and IT',
-		'Director of Partnerships', 'CEO of Media', 'Equality and Inclusion Manager',
-		'Director of Venue', 'Stadium Manager', 'Grounds Manager', 'Head of Stadium Safety and Security', 'Safety Officer',
-		'Ticket office manager', 'Programme Editor'
-	 ];
+		'Head of Human Performance', 'Masseur', 'Club Dietician',
+		'Director of Group Operations', 'Director of Communications', 'General Councel', 'Director of Finance and Risk',
+		'Head of Corporate Development', 'Director of Partnerships', 'CEO of Media', 'Disability Access Officer',
+		'Director of Venue', 'Stadium Manager', 'Facilities Manager', 'Grounds Manager', 'Head of Stadium Safety and Security', 'Safety Officer',
+		'Supporter Liaison Officer', 'Contact Centre Advisor', 'Head of Ticketing and Membership', 'Programme Editor'
+	];
 
 	return staffTitles[titleID];
 };

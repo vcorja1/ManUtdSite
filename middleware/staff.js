@@ -17,7 +17,7 @@ exports.getCoachingStaff = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query('SELECT * FROM STAFF WHERE TITLE > 7 AND TITLE < 22 ORDER BY TITLE, TEAM;', (err, resp) => {
+	client.query('SELECT * FROM STAFF WHERE TITLE >= 9 AND TITLE <= 22 ORDER BY TITLE, TEAM;', (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
@@ -32,7 +32,7 @@ exports.getCoachingStaff = (req, res, next) => {
 		const allStaff = JSON.parse(JSON.stringify(resp.rows));
 		allStaff.forEach((member) => {
 			// Get the full job title
-			if(member.title < 15 || member.title == 21) {
+			if(member.title <= 14 || member.title == 22) {
 				member.job_title = getTeamPrefix(member.team) + getStaffTitle(member.title);
 			}
 			else {
@@ -43,7 +43,7 @@ exports.getCoachingStaff = (req, res, next) => {
 			getFullCountryName(member);
 
 			// Place it into an appropriate list
-			if(member.title < 15 && member.team == TEAMS.SENIOR) {
+			if(member.title <= 14 && member.team == TEAMS.SENIOR) {
 				req.staffData.push(member);
 			}
 			else if(member.team == TEAMS.WOMEN) {
@@ -78,7 +78,7 @@ exports.getBoardMembers = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query('SELECT * FROM STAFF WHERE TITLE < 8 ORDER BY TITLE, TEAM;', (err, resp) => {
+	client.query('SELECT * FROM STAFF WHERE TITLE <= 8 ORDER BY TITLE, TEAM;', (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
@@ -113,7 +113,7 @@ exports.getMedicalTeam = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query('SELECT * FROM STAFF WHERE TITLE > 26 AND TITLE < 36 ORDER BY TITLE, TEAM;', (err, resp) => {
+	client.query('SELECT * FROM STAFF WHERE TITLE >= 26 AND TITLE <= 32 ORDER BY TITLE, TEAM;', (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
@@ -153,7 +153,7 @@ exports.getScoutingTeam = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query('SELECT * FROM STAFF WHERE TITLE > 21 AND TITLE < 27 ORDER BY TITLE, TEAM;', (err, resp) => {
+	client.query('SELECT * FROM STAFF WHERE TITLE >= 23 AND TITLE <= 25 ORDER BY TITLE, TEAM;', (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
@@ -188,7 +188,7 @@ exports.getClubStaff = (req, res, next) => {
 	client.connect();
 
 	// Get Staff Data
-	client.query('SELECT * FROM STAFF WHERE TITLE > 35 ORDER BY TITLE, TEAM;', (err, resp) => {
+	client.query('SELECT * FROM STAFF WHERE TITLE >= 33 ORDER BY TITLE, TEAM;', (err, resp) => {
 		// Handle error
 		if (err) {
 			res.status(400);
