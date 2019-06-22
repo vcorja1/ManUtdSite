@@ -87,7 +87,7 @@ exports.preprocessStandings = (req, res, next) => {
 		'EFL TROPHY',
 		RESERVES_STANDINGS_LOCATION + 'efl-trophy',
 		ENTER_LATER,
-		true);
+		false);
 
 
 	// Continue
