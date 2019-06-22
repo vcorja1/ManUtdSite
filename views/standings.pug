@@ -126,6 +126,16 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#pl-international-cup
 						+mixedCompetitionMixin(plIntlCupData, isSingleCompetition, MATCH_STATUS)
 
+		//- EFL Trophy Standings
+		if(eflTrophyData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#efl-trophy
+					+mixedCompetitionMixin(eflTrophyData, isSingleCompetition, MATCH_STATUS)
+			else
+				unless(eflTrophyData.shouldDisplayInSummary != null && !eflTrophyData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#efl-trophy
+						+mixedCompetitionMixin(eflTrophyData, isSingleCompetition, MATCH_STATUS)
+
 		//- UEFA Youth League Standings
 		if(youthLeagueData != null)
 			if(isSingleCompetition)

@@ -16,19 +16,20 @@ const COMPETITIONS = {
 	PREMIER_LEAGUE_2: 10,
 	PREMIER_LEAGUE_2_DIV_2: 11,
 	PL_INTERNATIONAL_CUP: 12,
-	U19_UEFA_YOUTH_LEAGUE: 13,
-	U18_PREMIER_LEAGUE_NORTH: 14,
-	U18_PREMIER_LEAGUE_CUP: 15,
-	FA_YOUTH_CUP: 16,
-	RUHR_CUP: 17,
-	OTTEN_CUP: 18,
-	VGH_CUP: 19,
-	DALLAS_CUP: 20,
-	ICGT_TOURNAMENT: 21,
-	FA_WOMEN_SUPER_LEAGUE: 22,
-	FA_WOMEN_CHAMPIONSHIP: 23,
-	WOMEN_FA_CUP: 24,
-	FA_WSL_CUP: 25
+	EFL_TROPHY: 13,
+	U19_UEFA_YOUTH_LEAGUE: 14,
+	U18_PREMIER_LEAGUE_NORTH: 15,
+	U18_PREMIER_LEAGUE_CUP: 16,
+	FA_YOUTH_CUP: 17,
+	RURH_CUP: 18,
+	OTTEN_CUP: 19,
+	VGH_CUP: 20,
+	DALLAS_CUP: 21,
+	ICGT_TOURNAMENT: 22,
+	WOMEN_SUPER_LEAGUE: 23,
+	FA_WOMEN_CHAMPIONSHIP: 24,
+	WOMEN_FA_CUP: 25,
+	FA_WSL_CUP: 26
 };
 Object.freeze(COMPETITIONS);
 
@@ -37,7 +38,7 @@ exports.COMPETITIONS = COMPETITIONS;
 const COMPETITION_NAMES = [
 	'Premier League', 'FA Cup', 'Carabao Cup', 'Community Shield', 'Champions League', 'Europa League',
 	'UEFA Super Cup', 'FIFA Club World Cup', 'International Champions Cup', 'Friendly',
-	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'Under-19 UEFA Youth League',
+	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'EFL Trophy', 'Under-19 UEFA Youth League',
 	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Ruhr Cup', 'Otten Cup',
 	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
 	'FA Women\'s Super League', 'FA Women\'s Championship', 'Women\'s FA Cup', 'FA WSL Cup'
@@ -138,6 +139,21 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 		if(round <= 12)
 			return '1/4 Finals';
 		if(round <= 14)
+			return '1/2 Finals';
+		return 'Final';
+	}
+
+
+	if(competitionID == COMPETITIONS.EFL_TROPHY) {
+		if(round <= 3)
+			return 'Game ' + round;
+		if(round == 4)
+			return 'Round of 32';
+		if(round == 5)
+			return '1/8 Finals';
+		if(round == 6)
+			return '1/4 Finals';
+		if(round == 7)
 			return '1/2 Finals';
 		return 'Final';
 	}
@@ -353,6 +369,15 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 				groupStageAdvance: 1,
 				isSingleRoundElim: true
 			};
+		case COMPETITIONS.EFL_TROPHY:
+			return {
+				type: COMPETITION_TYPE.MIXED,
+				finalRound: 8,
+				groupStageMin: 1,
+				groupStageMax: 3,
+				groupStageAdvance: 2,
+				isSingleRoundElim: true
+			};
 		case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 			return {
 				type: COMPETITION_TYPE.MIXED,
@@ -490,6 +515,8 @@ exports.getCompetitionLogoSrc = function getCompetitionLogoSrc(competitionID) {
 			return LOGOS_FOLDER + 'pl2_div2.png';
 		case COMPETITIONS.PL_INTERNATIONAL_CUP:
 			return LOGOS_FOLDER + 'plic.png';
+		case COMPETITIONS.EFL_TROPHY:
+			return LOGOS_FOLDER + 'efl_trophy.jpg';
 		case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 			return LOGOS_FOLDER + 'uefa_youth_league.png';
 

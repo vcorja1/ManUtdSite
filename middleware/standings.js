@@ -93,6 +93,9 @@ function getSoccerwayTableStandings(competitionID, tableURL, tableID, req, res, 
 				case COMPETITIONS.PL_INTERNATIONAL_CUP:
 					req.plIntlCupTable = standings;
 					break;
+				case COMPETITIONS.EFL_TROPHY:
+					req.eflTrophyTable = standings;
+					break;
 				case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 					req.youthLeagueTable = standings;
 					break;
@@ -192,6 +195,16 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 	const tableURL = 'https://us.soccerway.com/international/europe/premier-league-international-cup/20182019/group-stage/r47607/';
 	const tableID = '#page_competition_1_block_competition_tables_group_13_block_competition_league_table_1_table';
 	return getSoccerwayTableStandings(COMPETITIONS.PL_INTERNATIONAL_CUP, tableURL, tableID, req, res, next);
+};
+
+// Get the EFL Trophy Standings
+exports.getEFLTrophyTable = (req, res, next) => {
+	if(req.eflTrophyData != null || req.eflTrophyTable != null) {
+		return next();
+	}
+	const tableURL = '';
+	const tableID = '';
+	return getSoccerwayTableStandings(COMPETITIONS.EFL_TROPHY, tableURL, tableID, req, res, next);
 };
 
 // Get the Under-19 UEFA Youth League Standings
@@ -432,6 +445,32 @@ function processMixedCompetitions(req) {
 
 		// Set competition status
 		getMixedCompetitionStatus(COMPETITIONS.PL_INTERNATIONAL_CUP, req.plIntlCupData);
+	}
+
+	// EFL Trophy
+	if(req.eflTrophyData == null) {
+		// Store basic information
+		req.eflTrophyData = {
+			competitionName: 'EFL Trophy ' + CURRENT_SEASON,
+			competitionLink: RESERVES_STANDINGS_LOCATION + 'efl-trophy'
+		};
+
+		// Store group stage standings results
+		if(req.eflTrophyTable != null) {
+			req.eflTrophyData.competitionTable = req.eflTrophyTable;
+			req.eflTrophyData.groupStagePosition = getTeamPosition(req.eflTrophyTable.map(team => team.teamData.teamName));
+		}
+
+		// Get relevant fixtures
+		if(req.fixtures != null && req.fixtures.length > 0) {
+			const eflTrophy_games = req.fixtures.filter(match => match.competition == COMPETITIONS.EFL_TROPHY).reverse();
+			if(eflTrophy_games != null && eflTrophy_games.length > 0) {
+				req.eflTrophyData.fixtures = eflTrophy_games;
+			}
+		}
+
+		// Set competition status
+		getMixedCompetitionStatus(COMPETITIONS.EFL_TROPHY, req.eflTrophyData);
 	}
 
 	// Under-19 UEFA Youth League

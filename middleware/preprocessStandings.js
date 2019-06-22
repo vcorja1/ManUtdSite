@@ -82,6 +82,13 @@ exports.preprocessStandings = (req, res, next) => {
 		ENTER_LATER,
 		true);
 
+	// EFL Trophy
+	req.eflTrophyData = getUnavailableCupMessage(
+		'EFL TROPHY',
+		RESERVES_STANDINGS_LOCATION + 'efl-trophy',
+		ENTER_LATER,
+		true);
+
 
 	// Continue
 	return next();

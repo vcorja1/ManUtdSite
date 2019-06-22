@@ -72,6 +72,25 @@ app.get('/pl-international-cup', function(req, res, next) {
 
 });
 
+// GET response for '/reserves-standings/efl-trophy'
+app.use('/efl-trophy', [standings.getEFLTrophyTable, standings.processStandingsData]);
+app.get('/efl-trophy', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'EFL Trophy Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
+			eflTrophyData: req.eflTrophyData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/reserves-standings/youth-league'
 app.use('/youth-league', [standings.getYouthLeagueTable, standings.processStandingsData]);
 app.get('/youth-league', function(req, res, next) {
@@ -92,7 +111,7 @@ app.get('/youth-league', function(req, res, next) {
 });
 
 // GET response for '/reserves-standings'
-app.use('/', parallelMiddlewares([standings.getPL2Table, standings.getPL2Div2Table, standings.getPLInternationalCupTable, standings.getYouthLeagueTable]));
+app.use('/', parallelMiddlewares([standings.getPL2Table, standings.getPL2Div2Table, standings.getPLInternationalCupTable, standings.getEFLTrophyTable, standings.getYouthLeagueTable]));
 app.use('/', standings.processStandingsData);
 app.get('/', function(req, res, next) {
 
@@ -103,6 +122,7 @@ app.get('/', function(req, res, next) {
 			pl2Data: req.pl2Data,
 			pl2Div2Data: req.pl2Div2Data,
 			plIntlCupData: req.plIntlCupData,
+			eflTrophyData: req.eflTrophyData,
 			youthLeagueData: req.youthLeagueData,
 			isSingleCompetition: false
 		});
