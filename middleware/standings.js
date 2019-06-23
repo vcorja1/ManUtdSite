@@ -15,7 +15,7 @@ const {
  } = require('../helpers/standings');
 
 // Define Constants
-const CURRENT_SEASON = ' 2018/19';
+const CURRENT_SEASON = ' 2019/20';
 const STANDINGS_LOCATION = '/standings/';
 const RESERVES_STANDINGS_LOCATION = '/reserves-standings/';
 const ACADEMY_STANDINGS_LOCATION = '/academy-standings/';
@@ -132,7 +132,7 @@ exports.getEPLTable = (req, res, next) => {
 	if(req.eplData != null || req.eplTable != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/national/england/premier-league/20182019/regular-season/r48730/';
+	const tableURL = 'https://uk.soccerway.com/national/england/premier-league/20192020/regular-season/r53145/';
 	const tableID = '#page_competition_1_block_competition_tables_6_block_competition_league_table_1_table';
 	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE, tableURL, tableID, req, res, next);
 };
@@ -142,8 +142,8 @@ exports.getUCLTable = (req, res, next) => {
 	if(req.uclData != null || req.uclTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/europe/uefa-champions-league/20182019/group-stage/r48410/';
-	const tableID = '#page_competition_1_block_competition_tables_group_15_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.CHAMPIONS_LEAGUE, tableURL, tableID, req, res, next);
 };
 
@@ -162,7 +162,7 @@ exports.getICCTable = (req, res, next) => {
 	if(req.iccData != null || req.iccTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2018/china-pr/r43217/';
+	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2019/regular-season/r50008/';
 	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
 	return getSoccerwayTableStandings(COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP, tableURL, tableID, req, res, next);
 };
@@ -182,8 +182,8 @@ exports.getPL2Div2Table = (req, res, next) => {
 	if(req.pl2Div2Data != null || req.pl2Div2Table != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/national/england/premier-league-2-division-two/20182019/regular-season/r49650/tables/?ICID=PL_3N_03';
-	const tableID = '#page_competition_1_block_competition_tables_5_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE_2_DIV_2, tableURL, tableID, req, res, next);
 };
 
@@ -192,8 +192,8 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 	if(req.plIntlCupData != null || req.plIntlCupTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/europe/premier-league-international-cup/20182019/group-stage/r47607/';
-	const tableID = '#page_competition_1_block_competition_tables_group_13_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.PL_INTERNATIONAL_CUP, tableURL, tableID, req, res, next);
 };
 
@@ -212,8 +212,8 @@ exports.getYouthLeagueTable = (req, res, next) => {
 	if(req.youthLeagueData != null || req.youthLeagueTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/europe/uefa-youth-league/20182019/group-stage/r47508/';
-	const tableID = '#page_competition_1_block_competition_tables_group_15_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, tableURL, tableID, req, res, next);
 };
 
@@ -232,8 +232,8 @@ exports.getU18PLCupTable = (req, res, next) => {
 	if(req.plCupData != null || req.plCupTable != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/national/england/u18-premier-league-cup/20182019/group-stage/r46681/';
-	const tableID = '#page_competition_1_block_competition_tables_group_12_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_CUP, tableURL, tableID, req, res, next);
 };
 
@@ -252,8 +252,8 @@ exports.getFAWomenChampionshipTable = (req, res, next) => {
 	if(req.faWomenChampionshipData != null || req.faWomenChampionshipTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/national/england/wsl-2/20182019/regular-season/r48048/';
-	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_CHAMPIONSHIP, tableURL, tableID, req, res, next);
 };
 
@@ -262,8 +262,8 @@ exports.getFAWSLCupTable = (req, res, next) => {
 	if(req.faWSLCupData != null || req.faWSLCupTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.women.soccerway.com/national/england/wsl-cup/20182019/group-stage/group-2-north/g13001/';
-	const tableID = '#page_competition_1_block_competition_tables_8_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.FA_WSL_CUP, tableURL, tableID, req, res, next);
 };
 

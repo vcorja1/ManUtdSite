@@ -216,6 +216,16 @@ block content
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#dallas-cup
 						+knockoutCompetitionMixin(dallasCupData, isSingleCompetition, MATCH_STATUS)
 
+		//- ICGT Tournament
+		if(icgtTournamentData != null)
+			if(isSingleCompetition)
+				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#icgt-tournament
+					+knockoutCompetitionMixin(icgtTournamentData, isSingleCompetition, MATCH_STATUS)
+			else
+				unless(icgtTournamentData.shouldDisplayInSummary != null && !icgtTournamentData.shouldDisplayInSummary)
+					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#icgt-tournament
+						+knockoutCompetitionMixin(icgtTournamentData, isSingleCompetition, MATCH_STATUS)
+
 		//- FA Women's Super League
 		if(faWomenSuperLeagueData != null)
 			if(isSingleCompetition)

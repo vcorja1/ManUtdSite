@@ -148,6 +148,25 @@ app.get('/dallas-cup', function(req, res, next) {
 
 });
 
+// GET response for '/academy-standings/icgt-tournament'
+app.use('/icgt-tournament', standings.processStandingsData);
+app.get('/icgt-tournament', function(req, res, next) {
+
+	try {
+		res.render('standings', {
+			title: 'ICGT Tournament Standings',
+			MATCH_STATUS: req.MATCH_STATUS,
+			icgtTournamentData: req.icgtTournamentData,
+			isSingleCompetition: true
+		});
+	}
+	catch (e) {
+		// If there are any errors, send them off the the logger
+		next(e);
+	}
+
+});
+
 // GET response for '/academy-standings'
 app.use('/', parallelMiddlewares([standings.getU18PLTable, standings.getU18PLCupTable]));
 app.use('/', standings.processStandingsData);
@@ -164,6 +183,7 @@ app.get('/', function(req, res, next) {
 			ottenCupData: req.ottenCupData,
 			vghCupData: req.vghCupData,
 			dallasCupData: req.dallasCupData,
+			icgtTournamentData: req.icgtTournamentData,
 			isSingleCompetition: false
 		});
 	}

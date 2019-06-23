@@ -26,7 +26,7 @@ const COMPETITIONS = {
 	VGH_CUP: 20,
 	DALLAS_CUP: 21,
 	ICGT_TOURNAMENT: 22,
-	WOMEN_SUPER_LEAGUE: 23,
+	FA_WOMEN_SUPER_LEAGUE: 23,
 	FA_WOMEN_CHAMPIONSHIP: 24,
 	WOMEN_FA_CUP: 25,
 	FA_WSL_CUP: 26
@@ -326,7 +326,7 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 				finalRound: 22,
 				relegationPlace: null
 			};
-		case COMPETITIONS.WOMEN_SUPER_LEAGUE:
+		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 			return {
 				type: COMPETITION_TYPE.TABLE,
 				finalRound: 20,

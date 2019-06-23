@@ -100,6 +100,7 @@ app.get('/', function(req, res, next) {
 		res.render('standings', {
 			title: 'Standings - Women\'s Team',
 			MATCH_STATUS: req.MATCH_STATUS,
+			faWomenSuperLeagueData: req.faWomenSuperLeagueData,
 			faWomenChampionshipData: req.faWomenChampionshipData,
 			womenFaCupData: req.womenFaCupData,
 			faWSLCupData: req.faWSLCupData,
