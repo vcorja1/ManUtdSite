@@ -222,8 +222,8 @@ exports.getU18PLTable = (req, res, next) => {
 	if(req.u18PlNorthData != null || req.u18PlNorthTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/national/england/premier-academy-league/20182019/north/r49673/';
-	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
+	const tableURL = '';
+	const tableID = '';
 	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_NORTH, tableURL, tableID, req, res, next);
 };
 
@@ -242,8 +242,8 @@ exports.getFAWomenSuperLeagueTable = (req, res, next) => {
 	if(req.faWomenSuperLeagueData != null || req.faWomeSuperLeagueTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
+	const tableURL = 'https://us.women.soccerway.com/national/england/wsl/20192020/regular-season/r54947/';
+	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
 	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_SUPER_LEAGUE, tableURL, tableID, req, res, next);
 };
 
