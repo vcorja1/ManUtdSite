@@ -2,38 +2,32 @@
 var express = require('express');
 var app = express();
 
-// Get Helper Data
-const {
-	incomingPlayers,
-	academySignings,
-	departingPlayers,
-	loanedPlayers,
-	worldCupParticipants
-} = require('../middleware/playerTransfers');
+// Run middleware in parallel where possible
+const { parallelMiddlewares } = require('../helpers/parallelMiddlewares');
 
-// Country flag images location
-const ICON_IMG_FOLDER = 'img/icons/';
-
+// Require the player information preprocessing middleware
+const { processNews } = require('../middleware/news');
+// Require the player information preprocessing middleware
+const { getRecentlySignedAndLoanedOutNewsInfo } = require('../middleware/players');
 
 // GET response for '/news'
+app.use('/', processNews);
+app.use('/', parallelMiddlewares([getRecentlySignedAndLoanedOutNewsInfo]));
 app.get('/', function(req, res, next) {
 
 	try {
 		res.render('news', {
 			title: 'Latest News and Season Overview',
-			icons: {
-				trophyIcon: ICON_IMG_FOLDER + 'trophyIcon.svg',
-				cupIcon: ICON_IMG_FOLDER + 'cupIcon.svg',
-				progressIcon: ICON_IMG_FOLDER + 'progressIcon.svg',
-				crossIcon: ICON_IMG_FOLDER + 'crossIcon.svg',
-				ballIcon: ICON_IMG_FOLDER + 'ballIcon.svg',
-				gloveIcon: ICON_IMG_FOLDER + 'gloveIcon.svg'
-			},
-			incomingPlayers: incomingPlayers,
-			academySignings: academySignings,
-			loanedPlayers: loanedPlayers,
-			departingPlayers: departingPlayers,
-			worldCupParticipants: worldCupParticipants
+			currentSeason: req.otherInfo.currentSeason,
+			lastSeason: req.otherInfo.lastSeason,
+			transferSigningDateStart: req.otherInfo.transferSigningDateStart,
+			departedPlayers: req.otherInfo.departedPlayers,
+			loanedOut: req.loanedOut,
+			recentlySigned: req.recentlySigned,
+			recentlySignedToAcademy: req.recentlySignedToAcademy,
+			worldCupTitle: req.otherInfo.worldCupTitle,
+			worldCupParticipants: req.otherInfo.worldCupParticipants,
+			awards: req.otherInfo.awards
 		});
 	}
 	catch (e) {

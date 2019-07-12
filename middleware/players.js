@@ -86,6 +86,11 @@ exports.getWomenTeamPlayerInfo = (req, res, next) => {
 	return getPlayerInfo(TEAMS.WOMEN, req, res, next);
 };
 
+// Get recently signed and loaned out players
+exports.getRecentlySignedAndLoanedOutNewsInfo = (req, res, next) => {
+	return getRecentlySignedAndLoanedOutNewsInfo(req, res, next);
+};
+
 
 
 
@@ -223,7 +228,90 @@ function getPositionKnowledge(position, main, natural, competent) {
 }
 
 
+// Get recently signed and loaned out players
+function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
+	// Get Client
+	const client = new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+
+	// Connect
+	client.connect();
+
+	// Get Staff Data
+	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= '${req.otherInfo.transferSigningDateStart}' OR loanedto IS NOT NULL ORDER BY team;`, (err, resp) => {
+		// Handle error
+		if (err || !resp) {
+			console.log(err);
+			req.loadedData = false;
+			res.status(400);
+			return next();
+		}
+
+		// Save all players
+		const players = JSON.parse(JSON.stringify(resp.rows));
+		req.loanedOut = [];
+		req.recentlySigned = [];
+		req.recentlySignedToAcademy = [];
+
+		// Store based on status
+		if(players != null) {
+			players.forEach( (player) => {
+				// Process and store available player data
+				processPlayerInfo(player);
+
+				// Get logo of previous or next club
+				let previousOrNextClubData;
+				if(player.loanedto != null && player.loanedto != '') {
+					previousOrNextClubData = getClubData(player.loanedto, TEAMS.SENIOR, -1);
+				}
+				else if(player.previousclub != null) {
+					previousOrNextClubData = getClubData(player.previousclub, TEAMS.SENIOR, -1);
+				}
+				else {
+					previousOrNextClubData = getClubData('', TEAMS.SENIOR, -1);
+				}
+
+				let playerInfo = {
+					id: player.id,
+					name: player.name,
+					team: player.team,
+					position: player.positionAbbr,
+					countryName: player.countryName,
+					flagImg: player.flagImg.substr(3),
+					prevClub: player.loanedto == null ? previousOrNextClubData.displayName : null,
+					nextClub: previousOrNextClubData.displayName,
+					crestURI: previousOrNextClubData.clubLogoSrc
+				};
+
+				// Store to appropriate location
+				if(player.loanedto != null && player.loanedto != '') {
+					req.loanedOut.push(playerInfo);
+				}
+				if(player.datejoined >= req.otherInfo.transferSigningDateStart) {
+					if(player.team == TEAMS.ACADEMY) {
+						req.recentlySignedToAcademy.push(playerInfo);
+					}
+					else {
+						req.recentlySigned.push(playerInfo);
+					}
+				}
+			});
+		}
+
+		// End connection
+		client.end();
+
+		// Continue
+		return next();
+	});
+}
+
+
 // Process Player Data And Add Required Information
+exports.processPlayerInfo = (player) => { return processPlayerInfo(player); };
+
 function processPlayerInfo(player) {
 	// Format player date of birth
 	if(player.dob != null && player.dob != '') {

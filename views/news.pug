@@ -41,186 +41,98 @@ block content
 		h1.bold.red LATEST NEWS
 		.col-lg-6.col-md-6
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
-			+playerTransferMixin(incomingPlayers, true)
+			+playerTransferMixin(recentlySigned, true)
 			.pad-space-small
 
 			h2.blue.text-center.small-caps Loaned Out
-			+playerTransferMixin(loanedPlayers, false)
+			+playerTransferMixin(loanedOut, false)
 			.pad-space-small
 
 		.col-lg-6.col-md-6
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
-			+playerTransferMixin(academySignings, true)
+			+playerTransferMixin(recentlySignedToAcademy, true)
 			.pad-space-small
 
 			h2.blue.text-center.small-caps Summer Departures
-			+playerTransferMixin(departingPlayers, false)
+			+playerTransferMixin(departedPlayers, false)
 			.pad-space-small
 
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Professional Women's Team
-		.row.table-bordered
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				.hidden-xs
-					h5.text-center.red March 21
-				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center.red Mar 21
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 Manchester United has applied to the FA to establish the club's first-ever professional women's team.
-		.row
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				h5.text-center.red May 28
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 The Football Association has approved Manchester United’s application. The team will be called ‘Manchester United Women’ and will be based at The Cliff, the club’s historic training ground in Salford, once redevelopment work has been completed.
-		.row.table-bordered
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				.hidden-xs
-					h5.text-center.red June 2
-				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center.red Jun 2
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 It was announced that Manchester United Women will enter into Women's Super League 2 next season. The league is more commonly known as FA Women's Championship.
-		.row
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				.hidden-xs
-					h5.text-center.red June 8
-				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center.red Jun 8
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 Manchester United Women officially appoint Casey Stoney as their manager. The 36-year old is an ex-England captain who earned 130 international caps and won 12 major trophies over the 19 seasons of her illustrious professional career.
-		.row.table-bordered
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				.hidden-xs
-					h5.text-center.red June 28
-				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center.red Jun 28
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 Willie Kirk is officially named as Manchester United Women's assistant coach. Kirk spent the last three seasons as the head coach of Bristol City's Women's team before stepping down at the end of the 2017/18 season.
-		.row.table-bordered(style={'border-top': 'none'})
-			.col-lg-3.col-md-3.col-sm-3.col-ms-2.col-xs-2
-				.hidden-xs
-					h5.text-center.red July 13
-				.hidden-lg.hidden-md.hidden-sm.hidden-ms
-					h5.text-center.red Jul 13
-			.col-lg-8.col-md-8.col-sm-9.col-ms-10.col-xs-10
-				h5 The squad for the 2018/19 season has been unveiled, headlined by the experienced goalkeeper Siobhan Chamberlain and the English international defender Alex Greenwood. Alex Greenwood was also named as the captain of the club.
-
-		.pad-space-small
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) World Cup Participants
-		.text-center
-			h4 The following club players have been selected to represent their respective national teams at the 2018 World Cup:
+		if(worldCupParticipants != null)
 			.pad-space-small
-			table.table.table-bordered
-				tbody
-					each player in worldCupParticipants
-						tr
-							td.col-lg-4.col-md-4
-								.container(style={'justify-content': 'center'})
-									p
-										img(src=player.flagImg alt=`Flag of ${player.country}`)
-									h5.bold.all-caps=player.country
-							td.col-lg-8.col-md-8
-								h5=player.playerNames
-			.pad-space-small
-			h4 Additionally, Sergio Romero was selected to represent Argentina, but he will miss the World Cup after sustaining a knee injury.
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'})=`${worldCupTitle} Participants`
+			.text-center
+				h4 The following club players have been selected to represent their respective national teams at the #{worldCupTitle}:
+				.pad-space-small
+				table.table.table-bordered
+					tbody
+						each player in worldCupParticipants
+							tr
+								td.col-lg-4.col-md-4
+									.container(style={'justify-content': 'center'})
+										p
+											img(src=player.flagImg alt=`Flag of ${player.countryName}`)
+										h5.bold.all-caps=player.countryName
+								td.col-lg-8.col-md-8
+									h5=player.name
 
 		.pad-space
-		h1.bold.red 2017/18 SEASON OVERVIEW
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
-		table.table.table-bordered
-			tbody
-				tr
-					td.col-lg-3
-						h5.text-center.bold Premier League
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.progressIcon alt='Progress Icon')
-							h5 Finished second with a total of 81 points, 68 goals scored, 28 goals allowed, and 18 clean sheats (all highest since the retirement of Sir Alex Ferguson).
-						.container
-							p
-								img(src=icons.progressIcon alt='Progress Icon')
-							h5 Recorded wins over all 19 teams in the league.
-						.container
-							p
-								img(src=icons.gloveIcon alt='Glove Icon')
-							h5 David de Gea received his first Premier League Golden Glove after keeping league-high 18 clean sheets and achieving the highest save percentage, stopping 80% of the shots he faced.
-						.container
-							p
-								img(src=icons.gloveIcon alt='Glove Icon')
-							h5 David de Gea was also named in the PFA Team of the Year. It is his fourth appearance in the Team of the Year over the past 5 years.
-				tr
-					td.col-lg-3
-						h5.text-center.bold FA Cup
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.cupIcon alt='Cup Icon')
-							h5 Manchester United are the second team in history after Arsenal to reach the FA Cup final on 20 occasions.
-						.container
-							p
-								img(src=icons.cupIcon alt='Cup Icon')
-							h5 Manchester United have reached their 29th major domestic cup final (20 in FA Cup, 9 in League Cup), more than any other side in English football.
+		h1.bold.red=`${lastSeason} SEASON OVERVIEW`
+		if(awards.seniorTeam != null)
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
+			table.table.table-bordered
+				tbody
+					each competitionName in Object.keys(awards.seniorTeam)
+						tr
+							td.col-lg-3
+								h5.text-center.bold=competitionName
+							td.col-lg-9
+								each award in awards.seniorTeam[competitionName]
+									.container
+										p
+											img(src=award.awardIconImg alt=award.awardIconAlt)
+										h5=award.awardDescription
 
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U23 Reserves Team
-		table.table.table-bordered
-			tbody
-				tr
-					td.col-lg-3
-						h5.text-center.bold Premier League 2
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.crossIcon alt='Cross Icon')
-							h5 Manchester United's under 23 team were relegated to the Second Division after finishing bottom of the table with just 4 wins out of 22 games.
+		if(awards.reservesTeam != null)
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Reserves Team
+			table.table.table-bordered
+				tbody
+					each competitionName in Object.keys(awards.reservesTeam)
+						tr
+							td.col-lg-3
+								h5.text-center.bold=competitionName
+							td.col-lg-9
+								each award in awards.reservesTeam[competitionName]
+									.container
+										p
+											img(src=award.awardIconImg alt=award.awardIconAlt)
+										h5=award.awardDescription
 
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U19 Academy Team
-		table.table.table-bordered
-			tbody
-				tr
-					td.col-lg-3
-						h5.text-center.bold U18 Premier League North
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.trophyIcon alt='Trophy Icon')
-							h5 Manchester United became the Northern Champions after winning 15 of the 22 matches to finish the season with 48 points, 6 more than the second-place Liverpool.
-						.container
-							p
-								img(src=icons.ballIcon alt='Ball Icon')
-							h5 Scored league-high 65 goals.
-						.container
-							p
-								img(src=icons.ballIcon alt='Ball Icon')
-							h5 Mason Greenwood lead all scorers with 16 goals.
-				tr
-					td.col-lg-3
-						h5.text-center.bold Sparkasse & VGH Cup
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.trophyIcon alt='Trophy Icon')
-							h5 Manchester United defeated Austria Vienna's youth team 4-3 on penalties in the final to win all 11 of their tournament games and clinch a deserved victory in the Sparkasse & VGH Cup.
-						.container
-							p
-								img(src=icons.ballIcon alt='Ball Icon')
-							h5 Over the course of those 11 games, the team scored 46 goals and kept 5 clean sheets.
-				tr
-					td.col-lg-3
-						h5.text-center.bold ICGT Competition
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.trophyIcon alt='Trophy Icon')
-							h5 Manchester United won the ICGT tournament created for players aged 16-19 after beating Real Madrid 1-0 in the final.
+		if(awards.academyTeam != null)
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Team
+			table.table.table-bordered
+				tbody
+					each competitionName in Object.keys(awards.academyTeam)
+						tr
+							td.col-lg-3
+								h5.text-center.bold=competitionName
+							td.col-lg-9
+								each award in awards.academyTeam[competitionName]
+									.container
+										p
+											img(src=award.awardIconImg alt=award.awardIconAlt)
+										h5=award.awardDescription
 
-		h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) U16 Girls Team
-		table.table.table-bordered
-			tbody
-				tr
-					td.col-lg-3
-						h5.text-center.bold U16 Girls' Premier League
-					td.col-lg-9
-						.container
-							p
-								img(src=icons.trophyIcon alt='Trophy Icon')
-							h5 Manchester United's under 16 girls team have been crowned league champions.
+		if(awards.womenTeam != null)
+			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Women Team
+			table.table.table-bordered
+				tbody
+					each competitionName in Object.keys(awards.womenTeam)
+						tr
+							td.col-lg-3
+								h5.text-center.bold=competitionName
+							td.col-lg-9
+								each award in awards.womenTeam[competitionName]
+									.container
+										p
+											img(src=award.awardIconImg alt=award.awardIconAlt)
+										h5=award.awardDescription

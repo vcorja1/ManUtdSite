@@ -226,7 +226,6 @@ exports.preprocessStandings = (req, res, next) => {
 
 				/************* WOMEN'S TEAM *************/
 				case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
-					console.log(competitionName);
 					req.faWomenSuperLeagueData = getUnavailableCupMessage(
 						`${competitionName} ${CURRENT_SEASON}`,
 						WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
