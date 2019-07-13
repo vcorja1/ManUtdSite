@@ -51,7 +51,7 @@ exports.preprocessStandings = (req, res, next) => {
 		const ENTER_LATER = `Manchester United will enter in the later rounds. The draw will take place in late ${CURRENT_SEASON.substr(0, 4)}.`;
 
 		// Select competitions
-		let competitionsInfo = req.otherInfo.filter(row => row.info_name == 'COMPETITIONS');
+		const competitionsInfo = req.otherInfo.filter(row => row.info_name == 'COMPETITIONS');
 
 		competitionsInfo.forEach( (competition) => {
 			const competitionName = getCompetitionName(competition.info_competition).toUpperCase();

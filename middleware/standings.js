@@ -23,10 +23,14 @@ const WOMEN_STANDINGS_LOCATION = '/women-standings/';
 
 
 // Get fixtures for the given team
-function getSoccerwayTableStandings(competitionID, tableURL, tableID, req, res, next) {
-	if(tableURL == null || tableURL == '' || tableID == null || tableID == '') {
+function getSoccerwayTableStandings(competitionID, req, res, next) {
+	const tableInfo = req.otherInfo.filter(row => row.info_name == 'TABLES' && row.info_competition == competitionID);
+	if(tableInfo.length == 0) {
 		return next();
 	}
+
+	const tableURL = tableInfo[0].info_value;
+	const tableID = tableInfo[0].info_note;
 
 	const OPTIONS = {
 		uri: tableURL,
@@ -132,9 +136,7 @@ exports.getEPLTable = (req, res, next) => {
 	if(req.eplData != null || req.eplTable != null) {
 		return next();
 	}
-	const tableURL = 'https://uk.soccerway.com/national/england/premier-league/20192020/regular-season/r53145/';
-	const tableID = '#page_competition_1_block_competition_tables_6_block_competition_league_table_1_table';
-	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE, req, res, next);
 };
 
 // Get the Champions League standings
@@ -142,9 +144,7 @@ exports.getUCLTable = (req, res, next) => {
 	if(req.uclData != null || req.uclTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.CHAMPIONS_LEAGUE, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.CHAMPIONS_LEAGUE, req, res, next);
 };
 
 // Get the Europa League standings
@@ -152,9 +152,7 @@ exports.getEuropaLeagueTable = (req, res, next) => {
 	if(req.europaLeagueData != null || req.europaLeagueTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.EUROPA_LEAGUE, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.EUROPA_LEAGUE, req, res, next);
 };
 
 // Get the International Champions Cup Standings
@@ -162,9 +160,7 @@ exports.getICCTable = (req, res, next) => {
 	if(req.iccData != null || req.iccTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.soccerway.com/international/world/international-champions-cup/2019/regular-season/r50008/';
-	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
-	return getSoccerwayTableStandings(COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP, req, res, next);
 };
 
 // Get the Premier League 2 Standings
@@ -172,9 +168,7 @@ exports.getPL2Table = (req, res, next) => {
 	if(req.pl2Data != null || req.pl2Table != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE_2, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE_2, req, res, next);
 };
 
 // Get the Premier League 2 Division 2 Standings
@@ -182,9 +176,7 @@ exports.getPL2Div2Table = (req, res, next) => {
 	if(req.pl2Div2Data != null || req.pl2Div2Table != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE_2_DIV_2, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.PREMIER_LEAGUE_2_DIV_2, req, res, next);
 };
 
 // Get the PL International Cup Standings
@@ -192,9 +184,7 @@ exports.getPLInternationalCupTable = (req, res, next) => {
 	if(req.plIntlCupData != null || req.plIntlCupTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.PL_INTERNATIONAL_CUP, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.PL_INTERNATIONAL_CUP, req, res, next);
 };
 
 // Get the EFL Trophy Standings
@@ -202,9 +192,7 @@ exports.getEFLTrophyTable = (req, res, next) => {
 	if(req.eflTrophyData != null || req.eflTrophyTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.EFL_TROPHY, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.EFL_TROPHY, req, res, next);
 };
 
 // Get the Under-19 UEFA Youth League Standings
@@ -212,9 +200,7 @@ exports.getYouthLeagueTable = (req, res, next) => {
 	if(req.youthLeagueData != null || req.youthLeagueTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, req, res, next);
 };
 
 // Get the U18 Premier League North Standings
@@ -222,9 +208,7 @@ exports.getU18PLTable = (req, res, next) => {
 	if(req.u18PlNorthData != null || req.u18PlNorthTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_NORTH, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_NORTH, req, res, next);
 };
 
 // Get the U18 Premier League Cup Standings
@@ -232,9 +216,7 @@ exports.getU18PLCupTable = (req, res, next) => {
 	if(req.plCupData != null || req.plCupTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_CUP, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.U18_PREMIER_LEAGUE_CUP, req, res, next);
 };
 
 // Get the FA Women's Super League Standings
@@ -242,9 +224,7 @@ exports.getFAWomenSuperLeagueTable = (req, res, next) => {
 	if(req.faWomenSuperLeagueData != null || req.faWomenSuperLeagueTable != null) {
 		return next();
 	}
-	const tableURL = 'https://us.women.soccerway.com/national/england/wsl/20192020/regular-season/r54947/';
-	const tableID = '#page_competition_1_block_competition_tables_7_block_competition_league_table_1_table';
-	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_SUPER_LEAGUE, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_SUPER_LEAGUE, req, res, next);
 };
 
 // Get the FA Women's Championship Standings
@@ -252,9 +232,7 @@ exports.getFAWomenChampionshipTable = (req, res, next) => {
 	if(req.faWomenChampionshipData != null || req.faWomenChampionshipTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_CHAMPIONSHIP, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.FA_WOMEN_CHAMPIONSHIP, req, res, next);
 };
 
 // Get the FA WSL Continental Tyres Cup
@@ -262,9 +240,7 @@ exports.getFAWSLCupTable = (req, res, next) => {
 	if(req.faWSLCupData != null || req.faWSLCupTable != null) {
 		return next();
 	}
-	const tableURL = '';
-	const tableID = '';
-	return getSoccerwayTableStandings(COMPETITIONS.FA_WSL_CUP, tableURL, tableID, req, res, next);
+	return getSoccerwayTableStandings(COMPETITIONS.FA_WSL_CUP, req, res, next);
 };
 
 
