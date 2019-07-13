@@ -43,7 +43,7 @@ function removeTeamNameAbbr(teamName) {
 	if(removableAbrr.includes(start)) {
 		return teamName.substr(3);
 	}
-	removableAbrr = ['AFC ', 'ACS ', 'BSC ', 'RSC '];
+	removableAbrr = ['AFC ', 'ACS ', 'BSC ', 'RSC ', 'VfL '];
 	start = teamName.substr(0,4);
 	if(removableAbrr.includes(start))
 		return teamName.substr(4);
@@ -303,6 +303,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Bristol' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bristol_City.svg'
 			};
+		case 'Burton Albion':
+			return {
+				teamName: 'Burton Albion FC',
+				fullName: 'Burton Albion FC' + teamNameEnding,
+				displayName: 'Burton Albion' + teamNameEnding,
+				displayNameShort: 'Burton' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Burton_Albion.svg'
+			};
 		case 'Charlton Athletic':
 			return {
 				teamName: 'Charlton Athletic FC',
@@ -526,6 +534,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Dortmund' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Borussia_Dortmund.svg'
 			};
+		case 'FFC Frankfurt':
+			return {
+				teamName: 'FFC Frankfurt',
+				fullName: 'FFC Frankfurt' + teamNameEnding,
+				displayName: 'FFC Frankfurt' + teamNameEnding,
+				displayNameShort: 'FFC Frankfurt' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'FFC_Frankfurt.svg'
+			};
 		case 'Fortuna Dusseldorf':
 			return {
 				teamName: 'Dusseldorfer Turn-und Sportverein Fortuna 1895 e.V.',
@@ -541,6 +557,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Koln' + teamNameEnding,
 				displayNameShort: 'Koln' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Koln.svg'
+			};
+		case 'Wolfsburg':
+			return {
+				teamName: 'Verein fur Leibesubungen Wolfsburg e. V.',
+				fullName: 'VfL Wolfsburg' + teamNameEnding,
+				displayName: 'Wolfsburg' + teamNameEnding,
+				displayNameShort: 'Wolfsburg' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Wolfsburg.svg'
 			};
 
 

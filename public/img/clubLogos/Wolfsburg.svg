@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg>
+<svg width="420" height="420" viewBox="-105 -105 210 210" xmlns="http://www.w3.org/2000/svg">
+<g fill="#52a600">
+<path transform="translate(0,-100) rotate(-65)" d="m0 0a100 100 0 1 0 0 84.524 91 91 0 1 1 0 -84.524"/>
+<path d="m-25-65c-10 0-29 2-29 15v70a32 32 0 1 0 64 0h-11a32 32 0 1 0 64 0v-85c-10 0-29 2-29 15v69a7.5 4.5 0 1 1 -15 0v-67c-10 0-29 2-29 15v52a7.5 4.5 0 1 1 -15 0"/>
+</g>
+</svg>
