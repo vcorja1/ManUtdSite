@@ -7,7 +7,7 @@ app.get('/', function(req, res, next) {
 
 	try {
 		res.render('kits', {
-			title: '2018/19 Kits'
+			title: '2019/20 Kits'
 		});
 	}
 	catch (e) {
