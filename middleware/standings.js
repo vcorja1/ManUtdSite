@@ -239,7 +239,7 @@ exports.getU18PLCupTable = (req, res, next) => {
 
 // Get the FA Women's Super League Standings
 exports.getFAWomenSuperLeagueTable = (req, res, next) => {
-	if(req.faWomenSuperLeagueData != null || req.faWomeSuperLeagueTable != null) {
+	if(req.faWomenSuperLeagueData != null || req.faWomenSuperLeagueTable != null) {
 		return next();
 	}
 	const tableURL = 'https://us.women.soccerway.com/national/england/wsl/20192020/regular-season/r54947/';
@@ -344,11 +344,11 @@ function processTableCompetitions(req) {
 	}
 
 	// FA Women's Super League
-	if(req.faWomenSuperLeagueData == null && req.faWomeSuperLeagueTable != null) {
+	if(req.faWomenSuperLeagueData == null && req.faWomenSuperLeagueTable != null) {
 		req.faWomenSuperLeagueData = {
 			competitionName: 'FA Women\'s Super League' + CURRENT_SEASON,
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
-			competitionTable: req.faWomeSuperLeagueTable
+			competitionTable: req.faWomenSuperLeagueTable
 		};
 
 		// Set competition status
