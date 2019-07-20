@@ -189,6 +189,9 @@ function getLiveScoreFootballData(req, res, next) {
 					req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
 				}
 
+				// Update match details in the database
+				updateMatch(nextMatch);
+
 				// Continue
 				return next();
 
@@ -275,13 +278,40 @@ function getLiveScoreSoccerway(req, res, next) {
 				req.nextMatchID = (nextMatches.length > 0) ? nextMatches[0].id : null;
 			}
 		}
+
+		// Update match details in the database
+		updateMatch(nextMatch);
+
 		// Continue
 		return next();
 
 	})
-    .catch(function () {
-        // REQUEST FAILED: IGNORE THIS REQUEST
-        console.error(`ERROR! Soccerway match not found for team '${nextMatch.team}' and date '${nextMatch.matchdate}'. (Competition = '${nextMatch.competition}' and round = '${nextMatch.round}')`);
-        return next();
-    });
+	.catch(function () {
+		// REQUEST FAILED: IGNORE THIS REQUEST
+		console.error(`ERROR! Soccerway match not found for team '${nextMatch.team}' and date '${nextMatch.matchdate}'. (Competition = '${nextMatch.competition}' and round = '${nextMatch.round}')`);
+		return next();
+	});
+}
+
+
+// Update match details in the database
+function updateMatch(updateMatchDetails) {
+	// Get Client
+	const client = new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+
+	// Connect
+	client.connect();
+
+	// Get All Fixtures
+	client.query(`UPDATE FIXTURES SET status = ($1), homeGoals = ($2), awayGoals = ($3) WHERE (matchDate=($4) AND team = ($5));`, [updateMatchDetails.status, updateMatchDetails.homegoals, updateMatchDetails.awaygoals, updateMatchDetails.matchdate, updateMatchDetails.team], (err, resp) => {
+		if(err || !resp) {
+			console.error(`ERROR: Error while updating match details in database`, err);
+		}
+		else {
+			console.log(`Successfully updated match details for team = ${updateMatchDetails.team} played on ${updateMatchDetails.matchdate}.`);
+		}
+	});
 }
