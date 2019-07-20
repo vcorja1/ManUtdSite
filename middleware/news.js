@@ -129,17 +129,17 @@ exports.processNews = (req, res, next) => {
 
 function getAwardIcon(iconType) {
 	switch(iconType) {
-		case 'Progress':
+		case 'Trophy':
 			return `${ICON_IMG_FOLDER}trophyIcon.svg`;
-		case 'Glove':
-			return `${ICON_IMG_FOLDER}cupIcon.svg`;
 		case 'Cup':
+			return `${ICON_IMG_FOLDER}cupIcon.svg`;
+		case 'Progress':
 			return `${ICON_IMG_FOLDER}progressIcon.svg`;
 		case 'Cross':
 			return `${ICON_IMG_FOLDER}crossIcon.svg`;
-		case 'Trophy':
-			return `${ICON_IMG_FOLDER}ballIcon.svg`;
 		case 'Ball':
+			return `${ICON_IMG_FOLDER}ballIcon.svg`;
+		case 'Glove':
 			return `${ICON_IMG_FOLDER}gloveIcon.svg`;
 		default:
 			return '';
