@@ -70,6 +70,7 @@ exports.processNews = (req, res, next) => {
 				worldCupTitle = 'Women\'s World Cup';
 			}
 		});
+		worldCupParticipants.sort((a, b) => a.countryName.localeCompare(b.countryName));
 
 		// Store last season's awards
 		let awards = {
