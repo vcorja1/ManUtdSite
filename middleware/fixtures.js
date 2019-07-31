@@ -169,17 +169,19 @@ function getLiveScoreFootballData(req, res, next) {
 		resp.on('data', (chunk) => { rawData += chunk; });
 		resp.on('end', () => {
 			try {
+				// Get the next match details
+				let nextMatch = req.fixtures[nextMatchID];
+
 				// Get the data
 				const parsedData = JSON.parse(rawData);
 
 				// Get live scores
 				const status = MATCH_STATUS_NAMES.indexOf(parsedData.fixture.status);
-				req.fixtures[nextMatchID].status = status;
+				nextMatch.status = status;
 
 				// Process score, if applicable
 				if(status == MATCH_STATUS.LIVE || status == MATCH_STATUS.PAUSED || status >= MATCH_STATUS.FINISHED) {
-					let match = req.fixtures[nextMatchID];
-					match.result = getResultData(match.hometeam, match.homegoals, match.awaygoals, match.note);
+					nextMatch.result = getResultData(nextMatch.hometeam, nextMatch.homegoals, nextMatch.awaygoals, nextMatch.note);
 				}
 
 				// If the game is over, note so
