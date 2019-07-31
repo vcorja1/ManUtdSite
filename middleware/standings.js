@@ -61,7 +61,7 @@ function getSoccerwayTableStandings(competitionID, req, res, next) {
 				};
 
 				// Remove team name ending for youth teams
-				if(getTeamByCompetitionID(competitionID) == TEAMS.RESERVES || getTeamByCompetitionID(competitionID) == TEAMS.ACADEMY) {
+				if((getTeamByCompetitionID(competitionID) == TEAMS.RESERVES || getTeamByCompetitionID(competitionID) == TEAMS.ACADEMY) && /.* U\d\d$/.test(curTeamData.name)) {
 					curTeamData.name = curTeamData.name.slice(0, -4);
 				}
 
