@@ -12,8 +12,16 @@ const CLUB_LOGOS_FOLDER = '/img/clubLogos/';
 
 // Gets the proper team ending
 function getTeamNameEnding(team, competition) {
-	if(team === TEAMS.RESERVES)
-		return competition === COMPETITIONS.U19_UEFA_YOUTH_LEAGUE ? ' U19' : ' U23';
+	if(team === TEAMS.RESERVES) {
+		switch(competition) {
+			case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
+				return ' U19';
+			case COMPETITIONS.EFL_TROPHY:
+				return ' U21';
+			default:
+				return ' U23';
+		}
+	}
 	if(team === TEAMS.ACADEMY)
 		return ' U18';
 	return '';
