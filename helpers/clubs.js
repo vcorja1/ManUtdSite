@@ -28,7 +28,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Otherwise remove ending
-	let removableAbrr = [' FC', 'CF'];
+	let removableAbrr = [' FC', ' CF', ' SC'];
 	let ending = teamName.substr(-3);
 	if(removableAbrr.includes(ending))
 		return teamName.slice(0, -3);
@@ -319,6 +319,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Charlton' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Charlton_Athletic.svg'
 			};
+		case 'Doncaster Rovers':
+			return {
+				teamName: 'Doncaster Rovers FC',
+				fullName: 'Doncaster Rovers FC' + teamNameEnding,
+				displayName: 'Doncaster Rovers' + teamNameEnding,
+				displayNameShort: 'Doncaster' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Doncaster_Rovers.svg'
+			};
 		case 'Derby County':
 			return {
 				teamName: 'Derby County FC',
@@ -351,6 +359,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Lewes' + teamNameEnding,
 				displayNameShort: 'Lewes' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lewes.png'
+			};
+		case 'Lincoln City':
+			return {
+				teamName: 'Lincoln City FC',
+				fullName: 'Lincoln City FC' + teamNameEnding,
+				displayName: 'Lincoln City' + teamNameEnding,
+				displayNameShort: 'Lincoln City' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lincoln_City.svg'
 			};
 		case 'London Bees':
 			return {
@@ -400,6 +416,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Norwich' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Norwich_City.svg'
 			};
+		case 'Nottingham Forest':
+			return {
+				teamName: 'Nottingham Forest FC',
+				fullName: 'Nottingham Forest FC' + teamNameEnding,
+				displayName: 'Nottingham Forest' + teamNameEnding,
+				displayNameShort: 'Nottingham Forest' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Nottingham_Forest.svg'
+			};
 		case 'Reading':
 			return {
 				teamName: 'Reading FC',
@@ -407,6 +431,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Reading' + teamNameEnding,
 				displayNameShort: 'Reading' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Reading.svg'
+			};
+		case 'Rotherham United':
+			return {
+				teamName: 'Rotherham United FC',
+				fullName: 'Rotherham United FC' + teamNameEnding,
+				displayName: 'Rotherham United' + teamNameEnding,
+				displayNameShort: 'Rotherham United' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Rotherham_United.svg'
 			};
 		case 'Scunthorpe United':
 			return {
@@ -620,6 +652,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** French Clubs *******************/
 		/***************************************************/
 
+		case 'Amiens':
+			return {
+				teamName: 'Amiens SC',
+				fullName: 'Amiens SC' + teamNameEnding,
+				displayName: 'Amiens' + teamNameEnding,
+				displayNameShort: 'Amiens' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Amiens.svg'
+			};
 		case 'Olympique Lyonnais':
 			return {
 				teamName: 'Olympique Lyonnais',
@@ -720,6 +760,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Hearts' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Heart_of_Midlothian.svg'
 			};
+		case 'Rangers':
+			return {
+				teamName: 'Rangers FC',
+				fullName: 'Rangers FC' + teamNameEnding,
+				displayName: 'Rangers' + teamNameEnding,
+				displayNameShort: 'Rangers' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Rangers.svg'
+			};
 		case 'St Mirren':
 			return {
 				teamName: 'St Mirren FC',
@@ -727,6 +775,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'St Mirren' + teamNameEnding,
 				displayNameShort: 'St Mirren' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'St_Mirren.svg'
+			};
+
+
+		/***************************************************/
+		/************** Northern Irish Clubs ***************/
+		/***************************************************/
+
+		case 'Ballymena United':
+			return {
+				teamName: 'Ballymena United FC',
+				fullName: 'Ballymena United FC' + teamNameEnding,
+				displayName: 'Ballymena United' + teamNameEnding,
+				displayNameShort: 'Ballymena United' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Ballymena_United.png'
 			};
 
 
@@ -830,6 +892,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Valerenga' + teamNameEnding,
 				displayNameShort: 'Valerenga' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Valerenga.svg'
+			};
+
+
+		/***************************************************/
+		/****************** Slovak Clubs *******************/
+		/***************************************************/
+
+		case '1. FC Tatran Presov':
+			return {
+				teamName: '1. FC Tatran Presov',
+				fullName: '1. FC Tatran Presov' + teamNameEnding,
+				displayName: 'Tatran Presov' + teamNameEnding,
+				displayNameShort: 'Tatran Presov' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Tatran_Presov.png'
 			};
 
 
