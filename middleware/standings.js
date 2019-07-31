@@ -68,7 +68,7 @@ function getSoccerwayTableStandings(competitionID, req, res, next) {
 				// Store Appropriate Color Based On The Table Position
 				curTeamData.color = getPositionColorByCompetitionID(competitionID, curTeamData.position);
 				// Store Club Data
-				curTeamData.teamData = getClubData(curTeamData.name.trim(), curTeamData.team, curTeamData.competitionID);
+				curTeamData.teamData = getClubData(curTeamData.name.trim(), null, competitionID);
 
 				// Add Team Data To Standings
 				standings.push(curTeamData);

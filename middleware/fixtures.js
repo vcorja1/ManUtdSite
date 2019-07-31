@@ -93,8 +93,8 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 			match.matchDate = getFormattedMatchDate(match.matchdate);
 
 			// Store team data
-			match.homeTeam = getClubData(match.hometeam, match.team);
-			match.awayTeam = getClubData(match.awayteam, match.team);
+			match.homeTeam = getClubData(match.hometeam, match.team, match.competition);
+			match.awayTeam = getClubData(match.awayteam, match.team, match.competition);
 
 			// Store competition data
 			match.competitionName = getCompetitionName(match.competition);
