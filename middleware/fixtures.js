@@ -269,10 +269,30 @@ function getLiveScoreSoccerway(req, res, next) {
 				// Game is completed
 				nextMatch.status = MATCH_STATUS.FINISHED;
 
+				// Check for penalties
+				if(finalScore.includes('P')) {
+					// Penalty shoot-out
+					finalScore = finalScore.replace(/P/g, '');
+
+					try {
+						let soccerwayScoreDetails = $('#page_match_1_block_match_info_4 .container.middle dt:contains("Penalties")');
+						nextMatch.note = soccerwayScoreDetails.next().text().trim();
+
+					}
+					catch(err) {
+						console.error(`ERROR! Soccerway penalty result not obtained for team '${nextMatch.team}' and date '${nextMatch.matchdate}'. (Competition = '${nextMatch.competition}' and round = '${nextMatch.round}')`);
+						console.error(err);
+					}
+				}
+				else if(finalScore.includes('E')) {
+					// Extra time
+					finalScore = finalScore.replace(/E/g, '');
+				}
+
 				// Store result data
 				nextMatch.homegoals = parseInt(finalScore.split('-')[0].trim());
 				nextMatch.awaygoals = parseInt(finalScore.split('-')[1].trim());
-				nextMatch.result = getResultData(nextMatch.hometeam, nextMatch.homegoals, nextMatch.awaygoals, null);
+				nextMatch.result = getResultData(nextMatch.hometeam, nextMatch.homegoals, nextMatch.awaygoals, nextMatch.note);
 
 				// Since the game is completed, note so
 				req.lastMatchID = req.nextMatchID;

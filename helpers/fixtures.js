@@ -126,16 +126,19 @@ exports.getResultData = function getResultData(homeTeam, homeGoals, awayGoals, p
 		const awayPens = penaltyResult.split('-')[1].trim();
 
 		// Check result
+		let penaltyMessage;
 		if(homePens > awayPens) {
 			// Home Team Won the Shootout
 			result = isManUtdHome ? MATCH_RESULT.WIN : MATCH_RESULT.LOSS;
+			penaltyMessage = `Manchester United ${ isManUtdHome ? 'wins' : 'loses' } `;
 		}
 		else {
 			// Away Team Won the Shootout
 			result = isManUtdHome ? MATCH_RESULT.LOSS : MATCH_RESULT.WIN;
+			penaltyMessage = `Manchester United ${ isManUtdHome ? 'loses' : 'wins' } `;
 		}
 
-		let penaltyMessage = 'Manchester United' + (isManUtdHome ? ' loses ' : ' wins ') + (isManUtdHome ? penaltyResult : awayPens + ' - ' + homePens) + ' on penalty kicks.';
+		penaltyMessage += (isManUtdHome ? penaltyResult : awayPens + ' - ' + homePens) + ' on penalty kicks.';
 
 		return {
 			homeGoals: homeGoals,
