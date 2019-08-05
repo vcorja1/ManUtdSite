@@ -133,13 +133,13 @@ function getTeamPlayers(team, req, res, next) {
 				if(player.loanedto != null && player.loanedto != '') {
 					req.loanedOut.push(player);
 				}
-				else if(player.position == 0) {
+				else if(player.position == POSITIONS.GOALKEEPER) {
 					req.goalkeepers.push(player);
 				}
-				else if(player.position <= 3) {
+				else if(player.position <= POSITIONS.LEFT_BACK) {
 					req.defenders.push(player);
 				}
-				else if(player.position <= 6) {
+				else if(player.position <= POSITIONS.ATTACKING_MID) {
 					req.midfielders.push(player);
 				}
 				else {
