@@ -282,7 +282,7 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 					flagImg: player.flagImg.substr(3),
 					prevClub: player.loanedto == null ? previousOrNextClubData.displayName : null,
 					nextClub: previousOrNextClubData.displayName,
-					crestURI: previousOrNextClubData.clubLogoSrc
+					clubLogoSrc: previousOrNextClubData.clubLogoSrc
 				};
 
 				// Store to appropriate location
