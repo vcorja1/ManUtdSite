@@ -120,6 +120,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Bournemouth' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bournemouth.svg'
 			};
+		case 'Brighton':
 		case 'Brighton & Hove Albion':
 			return {
 				teamName: 'Brighton & Hove Albion FC',
