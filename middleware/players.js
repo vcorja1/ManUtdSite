@@ -335,8 +335,8 @@ function processPlayerInfo(player) {
 
 	// Format player's contract expiration date
 	if(player.contractexpires != null && player.contractexpires != '') {
-		let contractexpires = new Date(player.contractexpires);
-		player.contractexpires = contractexpires.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+		let contractexpires = new Date(player.contractexpires + '-06-30');
+		player.contractexpires = contractexpires.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 	}
 
 	// Get loan club information (if applicable)
