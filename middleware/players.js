@@ -291,7 +291,9 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 				}
 				if(player.datejoined >= req.otherInfo.transferSigningDateStart) {
 					if(player.team == TEAMS.ACADEMY) {
-						req.recentlySignedToAcademy.push(playerInfo);
+						if(player.previousclub != 'Manchester United FC') {
+							req.recentlySignedToAcademy.push(playerInfo);
+						}
 					}
 					else {
 						req.recentlySigned.push(playerInfo);
