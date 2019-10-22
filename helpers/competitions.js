@@ -329,8 +329,8 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 			return {
 				type: COMPETITION_TYPE.TABLE,
-				finalRound: 20,
-				relegationPlace: 11
+				finalRound: 22,
+				relegationPlace: 12
 			};
 		case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 			return {

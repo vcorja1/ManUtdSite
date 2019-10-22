@@ -144,7 +144,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 2) {
 				return QUALIFICATION_COLOR;
 			}
-			if(position == 10) {
+			if(position == 12) {
 				return RELEGATION_COLOR;
 			}
 			break;
