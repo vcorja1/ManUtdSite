@@ -326,6 +326,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Charlton' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Charlton_Athletic.svg'
 			};
+		case 'Colchester United':
+			return {
+				teamName: 'Colchester United FC',
+				fullName: 'Colchester United FC' + teamNameEnding,
+				displayName: 'Colchester United' + teamNameEnding,
+				displayNameShort: 'Colchester' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Colchester_United.svg'
+			};
 		case 'Doncaster Rovers':
 			return {
 				teamName: 'Doncaster Rovers FC',
