@@ -36,7 +36,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Otherwise remove ending
-	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK'];
+	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV'];
 	let ending = teamName.substr(-3);
 	if(removableAbrr.includes(ending))
 		return teamName.slice(0, -3);
@@ -892,6 +892,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** Belgian Clubs ******************/
 		/***************************************************/
 
+		case 'Club Brugge':
+			return {
+				teamName: 'Club Brugge KV',
+				fullName: 'Club Brugge KV' + teamNameEnding,
+				displayName: 'Club Brugge' + teamNameEnding,
+				displayNameShort: 'Club Brugge' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Club_Brugge.svg'
+			};
 		case 'Oostende':
 			return {
 				teamName: 'KV Oostende',
