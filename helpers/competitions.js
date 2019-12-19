@@ -123,7 +123,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 	if(competitionID == COMPETITIONS.CARABAO_CUP) {
 		if(round <= 5)
 			return 'Rd ' + round;
-		if(round == 6)
+		if(round <= 7)
 			return '1/2 Finals';
 		return 'Final';
 	}
