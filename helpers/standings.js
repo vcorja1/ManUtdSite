@@ -129,10 +129,10 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			break;
 
 		case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
-			if(position <= 2) {
+			if(position == 1) {
 				return GROUP_WINNERS;
 			}
-			if(position == 3) {
+			if(position == 2) {
 				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
 			}
 			break;
@@ -252,6 +252,7 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 	// Filter out fixtures appropriately
 	let lastMatch, qualificationMatches, playoffMatches, isGroupStage = true;
 	if(competitionData.fixtures != null && competitionData.fixtures.length > 0) {
+		competitionData.fixtures.sort((a, b) => b.round - a.round);
 		lastMatch = competitionData.fixtures[0];
 		qualificationMatches = competitionData.fixtures.filter(match => match.round < competitionDetails.groupStageMin);
 		playoffMatches = competitionData.fixtures.filter(match => match.round > competitionDetails.groupStageMax);

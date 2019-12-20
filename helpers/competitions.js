@@ -393,7 +393,7 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 				finalRound: 6,
 				groupStageMin: 1,
 				groupStageMax: 3,
-				groupStageAdvance: 2,
+				groupStageAdvance: 1,
 				isSingleRoundElim: true
 			};
 		case COMPETITIONS.FA_WSL_CUP:
