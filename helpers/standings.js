@@ -299,41 +299,14 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 			}
 		}
 
-		// Process result -> First check if the two-match tie ended in penalties 
-		if(lastMatch.result.homePens != null) {
-			if(lastMatch.result.homePens > lastMatch.result.awayPens) {
-				competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
-			}
-			else {
-				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
-			}
+		// Get two leg result
+		getTwoLegResult(lastMatch, competitionData, playoffMatches);
+
+		// Process competition status if it isn't over
+		if(competitionData.competitionEnded) {
+			competitionData.competitionStatus = 'OUT';
 		}
-
-		// If didn't go to penalties, need to process the two last games
-		if(competitionData.competitionEnded == null) {
-			let prevMatch = playoffMatches[1];
-			const team1 = lastMatch.result.homeGoals + prevMatch.result.awayGoals;
-			const team2 = lastMatch.result.awayGoals + prevMatch.result.homeGoals;
-
-			if(team1 > team2) {
-				competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
-			}
-			else if(team2 < team1) {
-				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
-			}
-			else {
-				// Away-goal rule
-				if(prevMatch.result.awayGoals > lastMatch.result.awayGoals) {
-					competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
-				}
-				else {
-					competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
-				}
-			}
-		}
-
-		// Process competition status
-		if(!competitionData.competitionEnded) {
+		else {
 			if(!isPlayoffs && competitionDetails.groupStageMin === lastMatch.round + 1) {
 				// Qualified to the group stage
 				competitionData.competitionStatus = 'GROUP STAGE';
@@ -351,9 +324,6 @@ exports.getMixedCompetitionStatus = function getMixedCompetitionStatus(competiti
 
 				competitionData.competitionStatus = stubFixture.roundName;
 			}
-		}
-		else {
-			competitionData.competitionStatus = 'OUT';
 		}
 
 		return competitionData;
@@ -420,19 +390,29 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 
 	// Otherwise need to analyze the result of the last match
 	const competitionDetails = getCompetitionDetails(competitionID);
-	const result = lastMatch.result.result;
-	if(result == MATCH_RESULT.LOSS) {
-		if(lastMatch.round >= competitionDetails.finalRound) {
-			competitionData.competitionStatus = 'RUNNERS-UP';
+	if(competitionID == COMPETITIONS.CARABAO_CUP && lastMatch.round == 7) {
+		// Carabao Cup semifinals are played over 2 legs
+		getTwoLegResult(lastMatch, competitionDetails, matches);
+	}
+	else if(matches.length > 1 && lastMatch.round === matches[1].round) {
+		// Replay of the same round
+		getTwoLegResult(lastMatch, competitionDetails, matches);
+	}
+	else {
+		const result = lastMatch.result.result;
+		if(result == MATCH_RESULT.LOSS) {
+			if(lastMatch.round >= competitionDetails.finalRound) {
+				competitionData.competitionStatus = 'RUNNERS-UP';
+			}
+			else if(competitionDetails.finalRound != competitionDetails.noNextRound) {
+				competitionData.competitionStatus = isMixedCompetition ? lastMatch.roundName : lastMatch.roundName.split('/')[1];
+			}
+			else {
+				competitionData.competitionStatus = 'OUT';
+			}
+			competitionData.competitionEnded = true;
+			return competitionData;
 		}
-		else if(competitionDetails.finalRound != competitionDetails.noNextRound) {
-			competitionData.competitionStatus = isMixedCompetition ? lastMatch.roundName : lastMatch.roundName.split('/')[1];
-		}
-		else {
-			competitionData.competitionStatus = 'OUT';
-		}
-		competitionData.competitionEnded = true;
-		return competitionData;
 	}
 
 	// Now it is necessary to check whether the competition is won or over
@@ -456,3 +436,38 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 	competitionData.competitionEnded = false;
 	return competitionData;
 };
+
+function getTwoLegResult(lastMatch, competitionData, playoffMatches) {
+	// Process result -> First check if the two-match tie ended in penalties 
+	if(lastMatch.result.homePens != null) {
+		if(lastMatch.result.homePens > lastMatch.result.awayPens) {
+			competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+		}
+		else {
+			competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+		}
+	}
+
+	// If didn't go to penalties, need to process the two last games
+	if(competitionData.competitionEnded == null) {
+		let prevMatch = playoffMatches[1];
+		const team1 = lastMatch.result.homeGoals + prevMatch.result.awayGoals;
+		const team2 = lastMatch.result.awayGoals + prevMatch.result.homeGoals;
+
+		if(team1 > team2) {
+			competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+		}
+		else if(team2 < team1) {
+			competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+		}
+		else {
+			// Away-goal rule
+			if(prevMatch.result.awayGoals > lastMatch.result.awayGoals) {
+				competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+			else {
+				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
+			}
+		}
+	}
+}
