@@ -294,6 +294,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Blackburn' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Blackburn_Rovers.svg'
 			};
+		case 'Bolton Wanderers':
+		case 'Bolton':
+			return {
+				teamName: 'Bolton Wanderers FC',
+				fullName: 'Bolton Wanderers FC' + teamNameEnding,
+				displayName: 'Bolton Wanderers' + teamNameEnding,
+				displayNameShort: 'Bolton' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bolton_Wanderers.svg'
+			};
 		case 'Bradford City':
 			return {
 				teamName: 'Bradford City AFC',
