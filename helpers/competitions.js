@@ -418,8 +418,8 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 		case COMPETITIONS.CARABAO_CUP:
 			return {
 				type: COMPETITION_TYPE.KNOCKOUT,
-				finalRound: 7,
-				noNextRound: 7
+				finalRound: 8,
+				noNextRound: 8
 			};
 		case COMPETITIONS.COMMUNITY_SHIELD:
 		case COMPETITIONS.UEFA_SUPER_CUP:
