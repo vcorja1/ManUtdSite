@@ -226,13 +226,13 @@ function getLiveScoreSoccerway(req, res, next) {
 	rp(OPTIONS)
 	.then( ($) => {
 		// REQUEST SUCCEEDED: SCRAPE STANDINGS
-		let gameTime = $('#page_match_1_block_match_info_4 .game-minute');
+		let gameTime = $('.game-minute');
 
 		if(gameTime != null && gameTime.length > 0) {
 			// Game is live
 			nextMatch.status = MATCH_STATUS.IN_PLAY;
 
-			let liveScore = $('#page_match_1_block_match_info_4 h3.thick.scoretime.score-orange').text().trim();
+			let liveScore = $('h3.thick.scoretime.score-orange').text().trim();
 			if(liveScore == '-') {
 				nextMatch.result = getLiveScoreResult('??', '??', null);
 			}
@@ -275,7 +275,7 @@ function getLiveScoreSoccerway(req, res, next) {
 					finalScore = finalScore.replace(/P/g, '');
 
 					try {
-						let soccerwayScoreDetails = $('#page_match_1_block_match_info_4 .container.middle dt:contains("Penalties")');
+						let soccerwayScoreDetails = $('.container.middle dt:contains("Penalties")');
 						nextMatch.note = soccerwayScoreDetails.next().text().trim();
 
 					}
