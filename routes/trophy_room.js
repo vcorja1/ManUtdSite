@@ -1,6 +1,6 @@
 // Require router dependencies
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 // GET response for '/kits'
 app.get('/', function(req, res, next) {

@@ -29,21 +29,29 @@ exports.INTERNATIONAL_TEAMS = INTERNATIONAL_TEAMS;
 
 // Gets the proper team ending
 exports.getInternationalTeamName = function getInternationalTeamName(team) {
-	if(team === INTERNATIONAL_TEAMS.SENIOR)
+	if(team === INTERNATIONAL_TEAMS.SENIOR) {
 		return 'Senior';
-	if(team === INTERNATIONAL_TEAMS.U23_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U23_TEAM) {
 		return 'Under-23';
-	if(team === INTERNATIONAL_TEAMS.U21_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U21_TEAM) {
 		return 'Under-21';
-	if(team === INTERNATIONAL_TEAMS.U20_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U20_TEAM) {
 		return 'Under-20';
-	if(team === INTERNATIONAL_TEAMS.U19_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U19_TEAM) {
 		return 'Under-19';
-	if(team === INTERNATIONAL_TEAMS.U18_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U18_TEAM) {
 		return 'Under-18';
-	if(team === INTERNATIONAL_TEAMS.U17_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U17_TEAM) {
 		return 'Under-17';
-	if(team === INTERNATIONAL_TEAMS.U16_TEAM)
+	}
+	if(team === INTERNATIONAL_TEAMS.U16_TEAM) {
 		return 'Under-16';
+	}
 	return null;
 };

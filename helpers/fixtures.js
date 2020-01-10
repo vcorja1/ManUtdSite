@@ -4,7 +4,7 @@
 
 // Convert date to short format and to match time
 exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
-	if(date == null || date == '' || date == 'TBD')
+	if(date == null || date == '' || date == 'TBD') {
 		return {
 			date: 'TBD',
 			dateTime: 'TBD',
@@ -13,6 +13,7 @@ exports.getFormattedMatchDate = function getFormattedMatchDate(date) {
 			shortWeekDateTime: 'TBD',
 			weekDateTime: 'TBD'
 		};
+	}
 
 	const matchDate = new Date(date);
 

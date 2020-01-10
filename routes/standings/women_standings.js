@@ -1,6 +1,6 @@
 // Require router dependencies
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 // Run middleware in parallel where possible
 const { parallelMiddlewares } = require('../../helpers/parallelMiddlewares');

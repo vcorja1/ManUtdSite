@@ -110,13 +110,15 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 		// Get last match ID
 		const completedMatches = req.fixtures.filter(match => match.status >= MATCH_STATUS.SUSPENDED);
 		const length = completedMatches.length;
-		if(length > 0)
+		if(length > 0) {
 			req.lastMatchID = completedMatches[length - 1].id;
+		}
 
 		// Get next match ID
 		const nextMatches = req.fixtures.filter(match => match.status <= MATCH_STATUS.PAUSED);
-		if(nextMatches.length > 0)
+		if(nextMatches.length > 0) {
 			req.nextMatchID = nextMatches[0].id;
+		}
 
 		// End connection
 		client.end();

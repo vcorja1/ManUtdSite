@@ -1,6 +1,6 @@
 // Require router dependencies
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 // Connect and use the middleware
 const fixtures = require('../../middleware/fixtures');

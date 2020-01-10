@@ -22,8 +22,9 @@ function getTeamNameEnding(team, competition) {
 				return ' U23';
 		}
 	}
-	if(team === TEAMS.ACADEMY)
+	if(team === TEAMS.ACADEMY) {
 		return ' U18';
+	}
 	return '';
 }
 
@@ -38,12 +39,14 @@ function removeTeamNameAbbr(teamName) {
 	// Otherwise remove ending
 	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV'];
 	let ending = teamName.substr(-3);
-	if(removableAbrr.includes(ending))
+	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -3);
+	}
 	removableAbrr = [' AFC', ' LFC'];
 	ending = teamName.substr(-4);
-	if(removableAbrr.includes(ending))
+	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -4);
+	}
 
 	// Or remove beginning
 	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'SE ', 'SL ', 'SK ', 'SV ', 'UC '];
@@ -53,12 +56,14 @@ function removeTeamNameAbbr(teamName) {
 	}
 	removableAbrr = ['AFC ', 'ACS ', 'BSC ', 'RSC ', 'VfL '];
 	start = teamName.substr(0,4);
-	if(removableAbrr.includes(start))
+	if(removableAbrr.includes(start)) {
 		return teamName.substr(4);
+	}
 
 	// Special cases below
-	if(teamName === '1.FSV Mainz 05')
+	if(teamName === '1.FSV Mainz 05') {
 		return 'Mainz 05';
+	}
 
 	return teamName;
 }

@@ -110,176 +110,231 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.FA_CUP || competitionID == COMPETITIONS.FA_YOUTH_CUP || competitionID == COMPETITIONS.WOMEN_FA_CUP) {
-		if(round <= 5)
+		if(round <= 5) {
 			return 'Rd ' + round;
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '1/4 Finals';
-		if(round == 7)
+		}
+		if(round == 7) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.CARABAO_CUP) {
-		if(round <= 5)
+		if(round <= 5) {
 			return 'Rd ' + round;
-		if(round <= 7)
+		}
+		if(round <= 7) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.CHAMPIONS_LEAGUE) {
-		if(round <= 2)
+		if(round <= 2) {
 			return 'Playoff Round';
-		if(round <= 8)
+		}
+		if(round <= 8) {
 			return 'Game ' + (round - 2);
-		if(round <= 10)
+		}
+		if(round <= 10) {
 			return '1/8 Finals';
-		if(round <= 12)
+		}
+		if(round <= 12) {
 			return '1/4 Finals';
-		if(round <= 14)
+		}
+		if(round <= 14) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.EFL_TROPHY) {
-		if(round <= 3)
+		if(round <= 3) {
 			return 'Game ' + round;
-		if(round == 4)
+		}
+		if(round == 4) {
 			return 'Round of 32';
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '1/8 Finals';
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '1/4 Finals';
-		if(round == 7)
+		}
+		if(round == 7) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.EUROPA_LEAGUE) {
-		if(round <= 2)
+		if(round <= 2) {
 			return '2nd Qualif. Round';
-		if(round <= 2)
+		}
+		if(round <= 2) {
 			return '3rd Qualif. Round';
-		if(round <= 6)
+		}
+		if(round <= 6) {
 			return 'Playoff Round';
-		if(round <= 12)
+		}
+		if(round <= 12) {
 			return 'Game ' + (round - 6);
-		if(round <= 14)
+		}
+		if(round <= 14) {
 			return 'Round of 32';
-		if(round <= 16)
+		}
+		if(round <= 16) {
 			return '1/8 Finals';
-		if(round <= 18)
+		}
+		if(round <= 18) {
 			return '1/4 Finals';
-		if(round <= 20)
+		}
+		if(round <= 20) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.PL_INTERNATIONAL_CUP || competitionID == COMPETITIONS.U18_PREMIER_LEAGUE_CUP) {
-		if(round <= 3)
+		if(round <= 3) {
 			return 'Game ' + round;
-		if(round == 4)
+		}
+		if(round == 4) {
 			return '1/4 Finals';
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE) {
-		if(round <= 2)
+		if(round <= 2) {
 			return 'Qualification';
-		if(round <= 8)
+		}
+		if(round <= 8) {
 			return 'Game ' + (round - 2);
-		if(round == 9)
+		}
+		if(round == 9) {
 			return 'Playoff';
-		if(round == 10)
+		}
+		if(round == 10) {
 			return '1/8 Finals';
-		if(round == 11)
+		}
+		if(round == 11) {
 			return '1/4 Finals';
-		if(round == 12)
+		}
+		if(round == 12) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.RUHR_CUP) {
-		if(round <= 4)
+		if(round <= 4) {
 			return 'Game ' + round;
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '1/2 Finals';
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '9th/10th Place';
-		if(round == 7)
+		}
+		if(round == 7) {
 			return '7th/8th Place';
-		if(round == 8)
+		}
+		if(round == 8) {
 			return '5th/6th Place';
-		if(round == 9)
+		}
+		if(round == 9) {
 			return '3rd/4th Place';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.OTTEN_CUP) {
-		if(round <= 3)
+		if(round <= 3) {
 			return 'Game ' + round;
-		if(round == 4)
+		}
+		if(round == 4) {
 			return '7th/8th Place';
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '5th/6th Place';
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '3rd/4th Place';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.VGH_CUP) {
-		if(round <= 8)
+		if(round <= 8) {
 			return 'Game ' + round;
-		if(round == 9)
+		}
+		if(round == 9) {
 			return '1/4 Finals';
-		if(round == 10)
+		}
+		if(round == 10) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.DALLAS_CUP) {
-		if(round <= 3)
+		if(round <= 3) {
 			return 'Game ' + round;
-		if(round == 4)
+		}
+		if(round == 4) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.ICGT_TOURNAMENT) {
-		if(round <= 3)
+		if(round <= 3) {
 			return 'Game ' + round;
-		if(round == 4)
+		}
+		if(round == 4) {
 			return '1/2 Finals';
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '7th/8th Place';
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '5th/6th Place';
-		if(round == 7)
+		}
+		if(round == 7) {
 			return '3rd/4th Place';
+		}
 		return 'Final';
 	}
 
 
 	if(competitionID == COMPETITIONS.FA_WSL_CUP) {
-		if(round <= 4)
+		if(round <= 4) {
 			return 'Game ' + round;
-		if(round == 5)
+		}
+		if(round == 5) {
 			return '1/4 Finals';
-		if(round == 6)
+		}
+		if(round == 6) {
 			return '1/2 Finals';
+		}
 		return 'Final';
 	}
 

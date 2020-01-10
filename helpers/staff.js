@@ -29,20 +29,27 @@ exports.getStaffTitle = function getStaffTitle(titleID) {
 
 // Gets the proper team ending
 exports.getTeamPrefix = function getTeamPrefix(team) {
-	if(team === TEAMS.RESERVES)
+	if(team === TEAMS.RESERVES) {
 		return 'U23 ';
-	if(team === TEAMS.ACADEMY)
+	}
+	if(team === TEAMS.ACADEMY) {
 		return 'U18 ';
-	if(team === TEAMS.U16_TEAM)
+	}
+	if(team === TEAMS.U16_TEAM) {
 		return 'U16 ';
-	if(team === TEAMS.U14_TEAM)
+	}
+	if(team === TEAMS.U14_TEAM) {
 		return 'U14 ';
-	if(team === TEAMS.U12_TEAM)
+	}
+	if(team === TEAMS.U12_TEAM) {
 		return 'U12 ';
-	if(team === TEAMS.U10_TEAM)
+	}
+	if(team === TEAMS.U10_TEAM) {
 		return 'U10 ';
-	if(team === TEAMS.U9_TEAM)
+	}
+	if(team === TEAMS.U9_TEAM) {
 		return 'U9 ';
+	}
 	return '';
 };
 

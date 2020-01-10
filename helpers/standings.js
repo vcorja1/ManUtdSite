@@ -17,8 +17,9 @@ const MANCHESTER_UNITED = 'Manchester United';
 
 // Get Team Position From The Table
 function getTeamPosition(standings) {
-	if(standings == null || standings == [])
+	if(standings == null || standings == []) {
 		return '';
+	}
 
 	let position = standings.indexOf(MANCHESTER_UNITED_FC) + 1;
 	if(!position || position == 0) {
