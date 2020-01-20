@@ -41,15 +41,15 @@
     "iso-country-codes": "0.0.5",
     "morgan": "1.9.1",
     "nib": "1.1.2",
-    "pg": "7.12.1",
+    "pg": "7.17.1",
     "pug": "2.0.4",
     "request": "2.88.0",
-    "request-promise": "4.2.4",
+    "request-promise": "4.2.5",
     "serve-favicon": "2.5.0",
     "stylus": "0.54.7"
   },
   "devDependencies": {
-    "jshint": "2.10.2",
-    "mocha": "6.2.2"
+    "jshint": "2.11.0",
+    "mocha": "7.0.0"
   }
 }
