@@ -71,7 +71,7 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 	client.connect();
 
 	// Get All Fixtures
-	client.query(`SELECT * FROM FIXTURES WHERE team=${team}${cupConditional} ORDER BY matchdate;`, (err, resp) => {
+	client.query(`SELECT * FROM FIXTURES WHERE team=($1) ORDER BY matchdate;`, [`${team}${cupConditional}`], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;

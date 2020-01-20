@@ -106,7 +106,7 @@ function getTeamPlayers(team, req, res, next) {
 	client.connect();
 
 	// Get Staff Data
-	client.query(`SELECT * FROM PLAYERS WHERE team='${team}' ORDER BY position;`, (err, resp) => {
+	client.query(`SELECT * FROM PLAYERS WHERE team=($1) ORDER BY position;`, [team], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;
@@ -169,7 +169,7 @@ function getPlayerInfo(team, req, res, next) {
 	client.connect();
 
 	// Get Staff Data
-	client.query(`SELECT * FROM PLAYERS WHERE team='${team}' and id='${req.params.player_id}';`, (err, resp) => {
+	client.query(`SELECT * FROM PLAYERS WHERE team=($1) and id=($2);`, [team, req.params.player_id], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;
@@ -240,7 +240,7 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 	client.connect();
 
 	// Get Staff Data
-	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= '${req.otherInfo.transferSigningDateStart}' OR loanedto IS NOT NULL ORDER BY team;`, (err, resp) => {
+	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= ($2) OR loanedto IS NOT NULL ORDER BY team;`, [req.otherInfo.transferSigningDateStart], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			console.log(err);
