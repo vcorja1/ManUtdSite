@@ -18,49 +18,51 @@ const {
 	getLiveScoreResult
 } = require('../helpers/fixtures');
 
+// Database queries for fixtures
+const GET_TEAM_FIXTURES_QUERY = 'SELECT * FROM FIXTURES WHERE team=($1) ORDER BY matchdate;';
+const GET_TEAM_CUP_FIXTURES_QUERY = 'SELECT * FROM FIXTURES WHERE team=($1) AND competition>=($2) AND competition<=($3) ORDER BY matchdate;';
+
 
 
 // Get fixtures for the reserves team
 exports.getFirstTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(TEAMS.SENIOR, '', req, res, next);
+	return getTeamFixtures(GET_TEAM_FIXTURES_QUERY, [TEAMS.SENIOR], req, res, next);
 };
 exports.getFirstTeamCupFixtures = (req, res, next) => {
-	const cupConditional = ` AND competition >= ${COMPETITIONS.FA_CUP} AND competition <= ${COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP}`;
-	return getTeamFixtures(TEAMS.SENIOR, cupConditional, req, res, next);
+	const cupQueryParams = [TEAMS.SENIOR, COMPETITIONS.FA_CUP, COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP];
+	return getTeamFixtures(GET_TEAM_CUP_FIXTURES_QUERY, cupQueryParams, req, res, next);
 };
 
 // Get fixtures for the reserves team
 exports.getReservesTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(TEAMS.RESERVES, '', req, res, next);
+	return getTeamFixtures(GET_TEAM_FIXTURES_QUERY, [TEAMS.RESERVES], req, res, next);
 };
 exports.getReservesTeamCupFixtures = (req, res, next) => {
-	const cupConditional = ` AND competition >= ${COMPETITIONS.PL_INTERNATIONAL_CUP} AND competition <= ${COMPETITIONS.U19_UEFA_YOUTH_LEAGUE}`;
-	return getTeamFixtures(TEAMS.RESERVES, cupConditional, req, res, next);
+	const cupQueryParams = [TEAMS.RESERVES, COMPETITIONS.PL_INTERNATIONAL_CUP, COMPETITIONS.U19_UEFA_YOUTH_LEAGUE];
+	return getTeamFixtures(GET_TEAM_CUP_FIXTURES_QUERY, cupQueryParams, req, res, next);
 };
 
 // Get fixtures for the academy team
 exports.getAcademyTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(TEAMS.ACADEMY, '', req, res, next);
+	return getTeamFixtures(GET_TEAM_FIXTURES_QUERY, [TEAMS.ACADEMY], req, res, next);
 };
 exports.getAcademyTeamCupFixtures = (req, res, next) => {
-	const cupConditional = ` AND competition >= ${COMPETITIONS.U18_PREMIER_LEAGUE_CUP} AND competition <= ${COMPETITIONS.ICGT_TOURNAMENT}`;
-	return getTeamFixtures(TEAMS.ACADEMY, cupConditional, req, res, next);
+	const cupQueryParams = [TEAMS.ACADEMY, COMPETITIONS.U18_PREMIER_LEAGUE_CUP, COMPETITIONS.ICGT_TOURNAMENT];
+	return getTeamFixtures(GET_TEAM_CUP_FIXTURES_QUERY, cupQueryParams, req, res, next);
 };
 
 // Get fixtures for the academy team
 exports.getWomenTeamFixtures = (req, res, next) => {
-	return getTeamFixtures(TEAMS.WOMEN, '', req, res, next);
+	return getTeamFixtures(GET_TEAM_FIXTURES_QUERY, [TEAMS.WOMEN], req, res, next);
 };
 exports.getWomenTeamCupFixtures = (req, res, next) => {
-	const cupConditional = ` AND competition >= ${COMPETITIONS.WOMEN_FA_CUP} AND competition <= ${COMPETITIONS.FA_WSL_CUP}`;
-	return getTeamFixtures(TEAMS.WOMEN, cupConditional, req, res, next);
+	const cupQueryParams = [TEAMS.WOMEN, COMPETITIONS.WOMEN_FA_CUP, COMPETITIONS.FA_WSL_CUP];
+	return getTeamFixtures(GET_TEAM_CUP_FIXTURES_QUERY, cupQueryParams, req, res, next);
 };
-
-
 
 
 // Get fixtures for the given team
-function getTeamFixtures(team, cupConditional, req, res, next) {
+function getTeamFixtures(query, queryParams, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
@@ -71,7 +73,7 @@ function getTeamFixtures(team, cupConditional, req, res, next) {
 	client.connect();
 
 	// Get All Fixtures
-	client.query(`SELECT * FROM FIXTURES WHERE team=($1) ORDER BY matchdate;`, [`${team}${cupConditional}`], (err, resp) => {
+	client.query(query, queryParams, (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			req.loadedData = false;
