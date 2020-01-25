@@ -240,7 +240,7 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 	client.connect();
 
 	// Get Staff Data
-	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= ($2) OR loanedto IS NOT NULL ORDER BY team;`, [req.otherInfo.transferSigningDateStart], (err, resp) => {
+	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= ($1) OR loanedto IS NOT NULL ORDER BY team;`, [req.otherInfo.transferSigningDateStart], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			console.log(err);
