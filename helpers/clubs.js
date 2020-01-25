@@ -461,6 +461,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Nottingham Forest' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Nottingham_Forest.svg'
 			};
+		case 'Oldham Athletic':
+			return {
+				teamName: 'Oldham Athletic AFC',
+				fullName: 'Oldham Athletic AFC' + teamNameEnding,
+				displayName: 'Oldham Athletic' + teamNameEnding,
+				displayNameShort: 'Oldham' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Oldham_Athletic.svg'
+			};
 		case 'Reading':
 			return {
 				teamName: 'Reading FC',
@@ -484,6 +492,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Rotherham United' + teamNameEnding,
 				displayNameShort: 'Rotherham United' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Rotherham_United.svg'
+			};
+		case 'Salford City':
+			return {
+				teamName: 'Salford City FC',
+				fullName: 'Salford City FC' + teamNameEnding,
+				displayName: 'Salford City' + teamNameEnding,
+				displayNameShort: 'Salford' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Salford_City.svg'
 			};
 		case 'Scunthorpe United':
 			return {
