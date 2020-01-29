@@ -393,11 +393,19 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 	const competitionDetails = getCompetitionDetails(competitionID);
 	if(competitionID == COMPETITIONS.CARABAO_CUP && lastMatch.round == 7) {
 		// Carabao Cup semifinals are played over 2 legs
-		getTwoLegResult(lastMatch, competitionDetails, matches);
+		getTwoLegResult(lastMatch, competitionData, matches);
+		if(competitionData.competitionEnded) {
+			competitionData.competitionStatus = getCompetitionRoundName(competitionID, lastMatch.round);
+			return competitionData;
+		}
 	}
 	else if(matches.length > 1 && lastMatch.round === matches[1].round) {
 		// Replay of the same round
-		getTwoLegResult(lastMatch, competitionDetails, matches);
+		getTwoLegResult(lastMatch, competitionData, matches);
+		if(competitionData.competitionEnded) {
+			competitionData.competitionStatus = getCompetitionRoundName(competitionID, lastMatch.round);
+			return competitionData;
+		}
 	}
 	else {
 		const result = lastMatch.result.result;
@@ -439,7 +447,7 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 };
 
 function getTwoLegResult(lastMatch, competitionData, playoffMatches) {
-	// Process result -> First check if the two-match tie ended in penalties 
+	// Process result -> First check if the two-match tie ended in penalties
 	if(lastMatch.result.homePens != null) {
 		if(lastMatch.result.homePens > lastMatch.result.awayPens) {
 			competitionData.competitionEnded = (lastMatch.awayTeam.teamName === MANCHESTER_UNITED_FC);
