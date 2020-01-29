@@ -37,7 +37,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Otherwise remove ending
-	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV'];
+	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV', ' CP'];
 	let ending = teamName.substr(-3);
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -3);
@@ -807,6 +807,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Porto' + teamNameEnding,
 				displayNameShort: 'Porto' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Porto.svg'
+			};
+		case 'Sporting':
+			return {
+				teamName: 'Sporting Clube de Portugal',
+				fullName: 'Sporting CP' + teamNameEnding,
+				displayName: 'Sporting' + teamNameEnding,
+				displayNameShort: 'Sporting' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sporting.svg'
 			};
 		case 'Vitoria Setubal':
 			return {
