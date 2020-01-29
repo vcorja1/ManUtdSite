@@ -8,7 +8,7 @@ const {
 	getTeamByCompetitionID,
 	getCompetitionDetails
 } = require('./competitions');
-const { MATCH_STATUS, MATCH_RESULT, getFormattedMatchDate } = require('./fixtures');
+const { MATCH_STATUS, MATCH_RESULT, getFormattedMatchDate, getTwoLegResultMessage } = require('./fixtures');
 
 // Store Manchester United name
 const MANCHESTER_UNITED_FC = 'Manchester United FC';
@@ -478,5 +478,8 @@ function getTwoLegResult(lastMatch, competitionData, playoffMatches) {
 				competitionData.competitionEnded = (lastMatch.homeTeam.teamName === MANCHESTER_UNITED_FC);
 			}
 		}
+
+		// Get result message
+		getTwoLegResultMessage(lastMatch, competitionData.competitionEnded, team1, team2);
 	}
 }

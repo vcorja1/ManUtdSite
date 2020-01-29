@@ -59,10 +59,14 @@ mixin quickMatchInfoMobile(match, MATCH_STATUS)
 			.col-lg-4.col-md-4.col-sm-4.col-ms-4.col-xs-4.flex-align-center.no-padding(style={'height': '100px'})
 				h4.bold.blue-upcoming-match=match.matchDate.matchTime
 
-	//- If the game went to penalties
-	if(match.result != null && match.result.penaltyMessage != null)
-		.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.match-penalty-result
-			h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage
+	//- If the game went to extra time or penalties
+	if(match.result != null)
+		if (match.result.extraTimeMessage != null)
+			.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.match-penalty-result
+				h5(style={ 'color': match.result.extraTimeMessageColor })=match.result.extraTimeMessage
+		else if(match.result.penaltyMessage != null)
+			.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.match-penalty-result
+				h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage
 
 	//- Match Date & Competition
 	.col-lg-12.col-md-12.col-sm-12.col-ms-12.col-xs-12.bg-light(style={'border-top': '1px solid #d3d3d3'})
@@ -138,10 +142,14 @@ mixin quickMatchInfo(match, heading, MATCH_STATUS)
 			//- Match data & Competition
 			.col-lg-12.col-md-12.col-sm-12(style={'margin-top': '15px'})
 				h5.bold.small-caps #{match.competitionName + ' - ' + match.roundName}
-			//- Penalty Note, if applicable
-			if(match.result != null && match.result.penaltyMessage != null)
-				.col-lg-12.col-md-12.col-sm-12.bg-light.match-penalty-result
-					h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage
+			//- Extra Time or Penalty Note, if applicable
+			if(match.result != null)
+				if (match.result.extraTimeMessage != null)
+					.col-lg-12.col-md-12.col-sm-12.bg-light.match-penalty-result
+						h5(style={ 'color': match.result.extraTimeMessageColor })=match.result.extraTimeMessage
+				else if (match.result.penaltyMessage != null)
+					.col-lg-12.col-md-12.col-sm-12.bg-light.match-penalty-result
+						h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage
 
 
 mixin fixtures(matchList, MATCH_STATUS)
@@ -219,7 +227,11 @@ mixin fixtures(matchList, MATCH_STATUS)
 						.col-lg-2.col-md-2.col-sm-3.image-container
 							img.image.image-responsive(src=match.competitionLogoSrc, alt=`${match.competitionName} Competition Logo`)
 				.col-lg-12.col-md-12.col-sm-12.hidden-ms.hidden-xs
-					//- Penalty Note, if applicable
-					if(match.result != null && match.result.penaltyMessage != null)
-						.bg-light.match-penalty-result
-							h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage
+					//- Extra Time or Penalty Note, if applicable
+					if(match.result != null)
+						if (match.result.extraTimeMessage != null)
+							.bg-light.match-penalty-result
+								h5(style={ 'color': match.result.extraTimeMessageColor })=match.result.extraTimeMessage
+						else if (match.result.penaltyMessage != null)
+							.bg-light.match-penalty-result
+								h5(style={ 'color': match.result.resultColor })=match.result.penaltyMessage

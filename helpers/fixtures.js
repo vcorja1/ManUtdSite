@@ -89,11 +89,11 @@ const MATCH_RESULT = {
 Object.freeze(MATCH_RESULT);
 exports.MATCH_RESULT = MATCH_RESULT;
 
+const GREEN = '#00cc00', GRAY = '#97999B', RED = '#D50032', BLUE = '#009CDE';
+
 
 
 exports.getLiveScoreResult = function getLiveScoreResult(homeGoals, awayGoals, penaltyResult) {
-	const BLUE = '#009CDE';
-
 	const homePens = (penaltyResult != null ? penaltyResult.split('-')[0].trim() : null);
 	const awayPens = (penaltyResult != null ? penaltyResult.split('-')[1].trim() : null);
 
@@ -113,7 +113,6 @@ exports.getResultData = function getResultData(homeTeam, homeGoals, awayGoals, p
 	// Define constants
 	const MANCHESTER_UNITED_FC = 'Manchester United FC';
 	const MANCHESTER_UNITED = 'Manchester United';
-	const GREEN = '#00cc00', GRAY = '#97999B', RED = '#D50032';
 
 	// Check if Manchester United is the home team
 	const isManUtdHome = (homeTeam == MANCHESTER_UNITED_FC || homeTeam == MANCHESTER_UNITED);
@@ -182,4 +181,9 @@ exports.getResultData = function getResultData(homeTeam, homeGoals, awayGoals, p
 		result: result,
 		resultColor: result == MATCH_RESULT.WIN ? GREEN : RED
 	};
+};
+
+exports.getTwoLegResultMessage = function getTwoLegResultMessage(secondMatch, isAggregateLoss, totalFirstTeamGoals, totalSecondTeamGoals) {
+    secondMatch.result.extraTimeMessage = `Manchester United ${ isAggregateLoss ? 'loses' : 'wins' } ${totalFirstTeamGoals} - ${totalSecondTeamGoals} on aggregate.`;
+    secondMatch.result.extraTimeMessageColor = isAggregateLoss ? RED : GREEN;
 };
