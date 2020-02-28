@@ -581,6 +581,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'West Brom' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'West_Bromwich_Albion.svg'
 			};
+		case 'Wigan Athletic':
+			return {
+				teamName: 'Wigan Athletic FC',
+				fullName: 'Wigan Athletic FC' + teamNameEnding,
+				displayName: 'Wigan Athletic' + teamNameEnding,
+				displayNameShort: 'Wigan' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Wigan_Athletic.svg'
+			};
 
 
 		/***************************************************/
