@@ -1019,6 +1019,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Austria Wien' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Austria_Wien.svg'
 			};
+		case 'LASK':
+			return {
+				teamName: 'Linzer Athletik-Sport-Klub',
+				fullName: 'LASK' + teamNameEnding,
+				displayName: 'LASK' + teamNameEnding,
+				displayNameShort: 'LASK' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'LASK.svg'
+			};
 		case 'Mattersburg':
 			return {
 				teamName: 'SV Mattersburg',
