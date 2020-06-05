@@ -39,26 +39,26 @@ block content
 		include ../partials/playerMixin.pug
 
 		h1.bold.red LATEST NEWS
-		.col-lg-6.col-md-6
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
-			+playerTransferMixin(recentlySigned, true)
-			.pad-space-small
+		.container-fluid
+			.col-lg-6.col-md-6
+				h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Summer Signings
+				+playerTransferMixin(recentlySigned, true)
+				.pad-space-small
 
-			h2.blue.text-center.small-caps Summer Departures
-			+playerTransferMixin(departedPlayers, false)
-			.pad-space-small
+				h2.blue.text-center.small-caps Summer Departures
+				+playerTransferMixin(departedPlayers, false)
+				.pad-space-small
 
-		.col-lg-6.col-md-6
-			h2.blue.text-center.small-caps Loaned Out
-			+playerTransferMixin(loanedOut, false)
-			.pad-space-small
+			.col-lg-6.col-md-6
+				h2.blue.text-center.small-caps Loaned Out
+				+playerTransferMixin(loanedOut, false)
+				.pad-space-small
 
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
-			+playerTransferMixin(recentlySignedToAcademy, true)
-			.pad-space-small
+				h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Signings
+				+playerTransferMixin(recentlySignedToAcademy, true)
+				.pad-space-small
 
-		if(worldCupParticipants != null)
-			.pad-space-small
+		if(worldCupParticipants != null && worldCupParticipants.length > 0)
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'})=`${worldCupTitle} Participants`
 			.text-center
 				h4 The following club players have been selected to represent their respective national teams at the #{worldCupTitle}:
@@ -75,7 +75,6 @@ block content
 								td.col-lg-8.col-md-8
 									h5=player.name
 
-		.pad-space
 		h1.bold.red=`${lastSeason} SEASON OVERVIEW`
 		if(awards.seniorTeam != null)
 			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
