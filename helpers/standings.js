@@ -52,7 +52,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 4) {
 				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
 			}
-			if(position == 5) {
+			if(position == 5 || position == 6) {
 				return EUROPA_LEAGUE_COLOR;
 			}
 			if(position >= 18) {
