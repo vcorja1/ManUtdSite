@@ -250,7 +250,7 @@ function getLiveScoreSoccerway(req, res, next) {
 			nextMatch.result.gameMinute = $(gameTime).text().trim();
 		}
 		else {
-			let finalScore = $('h3.thick.scoretime').text().trim();
+			let finalScore = $('h3.thick.scoretime').clone().children().remove().end().text().trim();
 			if(finalScore === '') {
 				// Game is postponed
 				nextMatch.status = MATCH_STATUS.POSTPONED;
