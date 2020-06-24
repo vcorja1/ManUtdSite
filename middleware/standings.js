@@ -66,7 +66,9 @@ function getSoccerwayTableStandings(competitionID, req, res, next) {
 				}
 
 				// Store Appropriate Color Based On The Table Position
-				curTeamData.color = getPositionColorByCompetitionID(competitionID, curTeamData.position);
+				if(competitionID === COMPETITIONS.PREMIER_LEAGUE && curTeamData.name.trim() != 'Manchester City') {
+					curTeamData.color = getPositionColorByCompetitionID(competitionID, curTeamData.position);
+				}
 				// Store Club Data
 				curTeamData.teamData = getClubData(curTeamData.name.trim(), null, competitionID);
 
