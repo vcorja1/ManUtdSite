@@ -235,8 +235,7 @@ function getLiveScoreSoccerway(req, res, next) {
 		if(gameTime != null && gameTime.length > 0) {
 			// Game is live
 			nextMatch.status = MATCH_STATUS.IN_PLAY;
-
-			let liveScore = $('h3.thick.scoretime.score-orange').text().trim();
+			let liveScore = $('h3.thick.scoretime').clone().children().remove().end().text().trim();
 			if(liveScore == '-') {
 				nextMatch.result = getLiveScoreResult('??', '??', null);
 			}
