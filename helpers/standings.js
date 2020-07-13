@@ -46,13 +46,13 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 1) {
 				return CHAMPIONS_COLOR;
 			}
-			if(position <= 4) {
+			if(position <= 3) {
 				return QUALIFICATION_COLOR;
 			}
-			if(position == 5) {
+			if(position == 4) {
 				return CHAMPIONS_LEAGUE_QUALIFYING_COLOR;
 			}
-			if(position == 6 || position == 7) {
+			if(position == 5 || position == 6) {
 				return EUROPA_LEAGUE_COLOR;
 			}
 			if(position >= 18) {
