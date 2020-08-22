@@ -127,7 +127,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 		if(round <= 5) {
 			return 'Rd ' + round;
 		}
-		if(round <= 7) {
+		if(round == 6) {
 			return '1/2 Finals';
 		}
 		return 'Final';

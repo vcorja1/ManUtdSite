@@ -391,15 +391,7 @@ const getKnockoutCompetitionStatus = exports.getKnockoutCompetitionStatus = func
 
 	// Otherwise need to analyze the result of the last match
 	const competitionDetails = getCompetitionDetails(competitionID);
-	if(competitionID == COMPETITIONS.CARABAO_CUP && lastMatch.round == 7) {
-		// Carabao Cup semifinals are played over 2 legs
-		getTwoLegResult(lastMatch, competitionData, matches);
-		if(competitionData.competitionEnded) {
-			competitionData.competitionStatus = getCompetitionRoundName(competitionID, lastMatch.round);
-			return competitionData;
-		}
-	}
-	else if(matches.length > 1 && lastMatch.round === matches[1].round) {
+	if(matches.length > 1 && lastMatch.round === matches[1].round) {
 		// Replay of the same round
 		getTwoLegResult(lastMatch, competitionData, matches);
 		if(competitionData.competitionEnded) {
