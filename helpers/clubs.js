@@ -362,7 +362,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				fullName: 'Crewe Alexandra FC' + teamNameEnding,
 				displayName: 'Crewe Alexandra' + teamNameEnding,
 				displayNameShort: 'Crewe Alexandra' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Crewe_Alexandra.png'
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Crewe_Alexandra.svg'
 			};
 		case 'Doncaster Rovers':
 			return {
@@ -1017,6 +1017,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/******************* Swiss Clubs *******************/
 		/***************************************************/
 
+		case 'Basel':
+			return {
+				teamName: 'FC Basel 1893',
+				fullName: 'FC Basel' + teamNameEnding,
+				displayName: 'Basel' + teamNameEnding,
+				displayNameShort: 'Basel' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Basel.svg'
+			};
 		case 'Young Boys':
 			return {
 				teamName: 'BSC Young Boys',
@@ -1157,16 +1165,16 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 
 
 		/***************************************************/
-		/******************* Swiss Clubs *******************/
+		/******************* Czech Clubs *******************/
 		/***************************************************/
 
-		case 'Basel':
+		case 'Sigma Olomouc':
 			return {
-				teamName: 'FC Basel 1893',
-				fullName: 'FC Basel' + teamNameEnding,
-				displayName: 'Basel' + teamNameEnding,
-				displayNameShort: 'Basel' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Basel.svg'
+				teamName: 'SK Sigma Olomouc',
+				fullName: 'SK Sigma Olomouc' + teamNameEnding,
+				displayName: 'Sigma Olomouc' + teamNameEnding,
+				displayNameShort: 'Olomouc' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sigma_Olomouc.svg'
 			};
 
 
