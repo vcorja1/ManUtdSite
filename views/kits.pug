@@ -23,7 +23,7 @@ block customcss
 		}
 block content
 	.main.container-fluid
-		h1#home HOME KIT 2019/20
+		h1#home HOME KIT #{currentSeason}
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players
@@ -36,7 +36,7 @@ block content
 					source(type='image/webp' srcset='/img/kits/gk_home.webp')
 					img.image(src='/img/kits/gk_home.jpg' alt='Manchester United Goalkeeper Home Kit')
 		.pad-space
-		h1#away AWAY KIT 2019/20
+		h1#away AWAY KIT #{currentSeason}
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players
@@ -49,7 +49,7 @@ block content
 					source(type='image/webp' srcset='/img/kits/gk_away.webp')
 					img.image(src='/img/kits/gk_away.jpg' alt='Manchester United Goalkeeper Away Kit')
 		.pad-space
-		h1#third THIRD KIT 2019/20
+		h1#third THIRD KIT #{currentSeason}
 		.row
 			.col-xs-12.col-ms-12.col-sm-7.col-md-7
 				h2.small-caps.text-center Players

@@ -127,6 +127,38 @@ exports.processNews = (req, res, next) => {
 
 };
 
+exports.getCurrentSeason = (req, res, next) => {
+	// Get Client
+	const client = new Client({
+		connectionString: process.env.DATABASE_URL,
+		ssl: true,
+	});
+
+	// Connect
+	client.connect();
+
+	// Get Staff Data
+	client.query(`SELECT * FROM OTHER_INFO WHERE OTHER_INFO.info_name = 'CURRENT_YEAR' LIMIT 1;`, (err, resp) => {
+		// Handle error
+		if (err || !resp) {
+			req.loadedData = false;
+			res.status(400);
+			return next();
+		}
+
+		// Save all information
+		const currentSeason = JSON.parse(JSON.stringify(resp.rows));
+		req.currentSeason = currentSeason[0].info_value;
+
+		// End connection
+		client.end();
+
+		// Continue
+		return next();
+	});
+
+};
+
 
 function getAwardIcon(iconType) {
 	switch(iconType) {
