@@ -11,9 +11,11 @@ const { preprocessStandings } = require('../../middleware/preprocessStandings');
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
 const { getAcademyTeamCupFixtures } = require('../../middleware/fixtures');
+// Require middleware to get the current season
+const { getCurrentSeason } = require('../../middleware/news');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', parallelMiddlewares([getAcademyTeamCupFixtures, preprocessStandings]));
+app.use('/', parallelMiddlewares([getAcademyTeamCupFixtures, preprocessStandings, getCurrentSeason]));
 
 // GET response for '/academy-standings/premier-league-north'
 app.use('/premier-league-north', [standings.getU18PLTable, standings.processStandingsData]);
@@ -22,6 +24,7 @@ app.get('/premier-league-north', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'U18 Premier League North Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			u18PlNorthData: req.u18PlNorthData,
 			isSingleCompetition: true
@@ -41,6 +44,7 @@ app.get('/premier-league-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'U18 Premier League Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			plCupData: req.plCupData,
 			isSingleCompetition: true
@@ -60,6 +64,7 @@ app.get('/fa-youth-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Youth Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			faYouthCupData: req.faYouthCupData,
 			isSingleCompetition: true
@@ -79,6 +84,7 @@ app.get('/ruhr-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Ruhr Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			ruhrCupData: req.ruhrCupData,
 			isSingleCompetition: true
@@ -98,6 +104,7 @@ app.get('/otten-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Otten Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			ottenCupData: req.ottenCupData,
 			isSingleCompetition: true
@@ -117,6 +124,7 @@ app.get('/vgh-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Sparkasse & VGH Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			vghCupData: req.vghCupData,
 			isSingleCompetition: true
@@ -136,6 +144,7 @@ app.get('/dallas-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Dallas Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			dallasCupData: req.dallasCupData,
 			isSingleCompetition: true
@@ -155,6 +164,7 @@ app.get('/icgt-tournament', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'ICGT Tournament Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			icgtTournamentData: req.icgtTournamentData,
 			isSingleCompetition: true
@@ -175,6 +185,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Academy Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			u18PlNorthData: req.u18PlNorthData,
 			plCupData: req.plCupData,

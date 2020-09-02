@@ -5,10 +5,10 @@
 //- Mixin to get the properly-styled team name
 mixin styledTeamName(competitionData, isSingleCompetition)
 	if(isSingleCompetition)
-		h2.menu-title.blue=competitionData.competitionName
+		h2.menu-title.blue #{competitionData.competitionName + ' ' + currentSeason}
 	else
 		h2.menu-title
-			a(href=competitionData.competitionLink)=competitionData.competitionName
+			a(href=competitionData.competitionLink) #{competitionData.competitionName + ' ' + currentSeason}
 
 //- For competitions that are completely of knockout style
 mixin knockoutCompetitionMixin(competitionData, isSingleCompetition, MATCH_STATUS)

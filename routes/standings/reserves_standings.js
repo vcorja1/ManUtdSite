@@ -11,9 +11,11 @@ const { preprocessStandings } = require('../../middleware/preprocessStandings');
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
 const { getReservesTeamCupFixtures } = require('../../middleware/fixtures');
+// Require middleware to get the current season
+const { getCurrentSeason } = require('../../middleware/news');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', parallelMiddlewares([getReservesTeamCupFixtures, preprocessStandings]));
+app.use('/', parallelMiddlewares([getReservesTeamCupFixtures, preprocessStandings, getCurrentSeason]));
 
 // GET response for '/reserves-standings/premier-league-2'
 app.use('/premier-league-2', [standings.getPL2Table, standings.processStandingsData]);
@@ -22,6 +24,7 @@ app.get('/premier-league-2', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League 2 Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Data: req.pl2Data,
 			isSingleCompetition: true
@@ -41,6 +44,7 @@ app.get('/premier-league-2-div-2', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League 2 Division II Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Div2Data: req.pl2Div2Data,
 			isSingleCompetition: true
@@ -60,6 +64,7 @@ app.get('/pl-international-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League International Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			plIntlCupData: req.plIntlCupData,
 			isSingleCompetition: true
@@ -79,6 +84,7 @@ app.get('/efl-trophy', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'EFL Trophy Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			eflTrophyData: req.eflTrophyData,
 			isSingleCompetition: true
@@ -98,6 +104,7 @@ app.get('/youth-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'UEFA Youth League Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			youthLeagueData: req.youthLeagueData,
 			isSingleCompetition: true
@@ -118,6 +125,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Standings - Reserves Team',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			pl2Data: req.pl2Data,
 			pl2Div2Data: req.pl2Div2Data,

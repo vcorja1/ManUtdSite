@@ -64,63 +64,63 @@ exports.preprocessStandings = (req, res, next) => {
 				/************* FIRST TEAM *************/
 				case COMPETITIONS.PREMIER_LEAGUE:
 					req.eplData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'premier-league',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.FA_CUP:
 					req.faCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'fa-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.CARABAO_CUP:
 					req.carabaoCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'carabao-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.COMMUNITY_SHIELD:
 					req.communityShieldData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'community-shield',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.CHAMPIONS_LEAGUE:
 					req.uclData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'champions-league',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.EUROPA_LEAGUE:
 					req.europaLeagueData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'europa-league',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.UEFA_SUPER_CUP:
 					req.superCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'super-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.FIFA_CLUB_WORLD_CUP:
 					req.clubWorldCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'club-world-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.INTERNATIONAL_CHAMPIONS_CUP:
 					req.iccData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						STANDINGS_LOCATION + 'international-champions-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
@@ -130,35 +130,35 @@ exports.preprocessStandings = (req, res, next) => {
 				/************* RESERVES TEAM *************/
 				case COMPETITIONS.PREMIER_LEAGUE_2:
 					req.pl2Data = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						RESERVES_STANDINGS_LOCATION + 'premier-league-2',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.PREMIER_LEAGUE_2_DIV_2:
 					req.pl2Div2Data = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						RESERVES_STANDINGS_LOCATION + 'premier-league-2-div-2',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.PL_INTERNATIONAL_CUP:
 					req.plIntlCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						RESERVES_STANDINGS_LOCATION + 'pl-international-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.EFL_TROPHY:
 					req.eflTrophyData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						RESERVES_STANDINGS_LOCATION + 'efl-trophy',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.U19_UEFA_YOUTH_LEAGUE:
 					req.youthLeagueData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						RESERVES_STANDINGS_LOCATION + 'youth-league',
 						specialCupNote,
 						shouldDisplayInSummary);
@@ -168,56 +168,56 @@ exports.preprocessStandings = (req, res, next) => {
 				/************* ACADEMY TEAM *************/
 				case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
 					req.u18PlNorthData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'premier-league-north',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.U18_PREMIER_LEAGUE_CUP:
 					req.plCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'premier-league-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.FA_YOUTH_CUP:
 					req.faYouthCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.RUHR_CUP:
 					req.ruhrCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'ruhr-cup',
 						specialCupNote,
 						false);
 					break;
 				case COMPETITIONS.OTTEN_CUP:
 					req.ottenCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'otten-cup',
 						specialCupNote,
 						false);
 					break;
 				case COMPETITIONS.VGH_CUP:
 					req.vghCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'vgh-cup',
 						specialCupNote,
 						false);
 					break;
 				case COMPETITIONS.DALLAS_CUP:
 					req.dallasCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'dallas-cup',
 						specialCupNote,
 						false);
 					break;
 				case COMPETITIONS.ICGT_TOURNAMENT:
 					req.icgtTournamentData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						ACADEMY_STANDINGS_LOCATION + 'icgt-tournament',
 						specialCupNote,
 						false);
@@ -227,28 +227,28 @@ exports.preprocessStandings = (req, res, next) => {
 				/************* WOMEN'S TEAM *************/
 				case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
 					req.faWomenSuperLeagueData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.FA_WOMEN_CHAMPIONSHIP:
 					req.faWomenChampionshipData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						WOMEN_STANDINGS_LOCATION + 'fa-women-championship',
 						specialLeagueNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.WOMEN_FA_CUP:
 					req.womenFaCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						WOMEN_STANDINGS_LOCATION + 'women-fa-cup',
 						specialCupNote,
 						shouldDisplayInSummary);
 					break;
 				case COMPETITIONS.FA_WSL_CUP:
 					req.faWSLCupData = getUnavailableCupMessage(
-						`${competitionName} ${CURRENT_SEASON}`,
+						competitionName,
 						WOMEN_STANDINGS_LOCATION + 'fa-wsl-cup',
 						specialCupNote,
 						shouldDisplayInSummary);

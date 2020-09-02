@@ -15,7 +15,6 @@ const {
  } = require('../helpers/standings');
 
 // Define Constants
-const CURRENT_SEASON = ' 2019/20';
 const STANDINGS_LOCATION = '/standings/';
 const RESERVES_STANDINGS_LOCATION = '/reserves-standings/';
 const ACADEMY_STANDINGS_LOCATION = '/academy-standings/';
@@ -263,7 +262,7 @@ function processTableCompetitions(req) {
 	// Premier League
 	if(req.eplData == null && req.eplTable != null) {
 		req.eplData = {
-			competitionName: 'Premier League ' + CURRENT_SEASON,
+			competitionName: 'Premier League',
 			competitionLink: STANDINGS_LOCATION + 'premier-league',
 			competitionTable: req.eplTable
 		};
@@ -275,7 +274,7 @@ function processTableCompetitions(req) {
 	// International Champions Cup
 	if(req.iccData == null && req.iccTable != null) {
 		req.iccData = {
-			competitionName: 'International Champions Cup ' + CURRENT_SEASON,
+			competitionName: 'International Champions Cup',
 			competitionLink: STANDINGS_LOCATION + 'international-champions-cup',
 			competitionTable: req.iccTable
 		};
@@ -287,7 +286,7 @@ function processTableCompetitions(req) {
 	// Premier League 2
 	if(req.pl2Data == null && req.pl2Table != null) {
 		req.pl2Data = {
-			competitionName: 'Premier League 2 ' + CURRENT_SEASON,
+			competitionName: 'Premier League 2',
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'premier-league-2',
 			competitionTable: req.pl2Table
 		};
@@ -299,7 +298,7 @@ function processTableCompetitions(req) {
 	// Premier League 2 Division 2
 	if(req.pl2Div2Data == null && req.pl2Div2Table != null) {
 		req.pl2Div2Data = {
-			competitionName: 'Premier League 2 Division II' + CURRENT_SEASON,
+			competitionName: 'Premier League 2 Division II',
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'premier-league-2-div-2',
 			competitionTable: req.pl2Div2Table
 		};
@@ -311,7 +310,7 @@ function processTableCompetitions(req) {
 	// U18 Premier League North
 	if(req.u18PlNorthData == null && req.u18PlNorthTable != null) {
 		req.u18PlNorthData = {
-			competitionName: 'U18 Premier League North' + CURRENT_SEASON,
+			competitionName: 'U18 Premier League North',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'premier-league-north',
 			competitionTable: req.u18PlNorthTable
 		};
@@ -323,7 +322,7 @@ function processTableCompetitions(req) {
 	// FA Women's Super League
 	if(req.faWomenSuperLeagueData == null && req.faWomenSuperLeagueTable != null) {
 		req.faWomenSuperLeagueData = {
-			competitionName: 'FA Women\'s Super League' + CURRENT_SEASON,
+			competitionName: 'FA Women\'s Super League',
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-super-league',
 			competitionTable: req.faWomenSuperLeagueTable
 		};
@@ -335,7 +334,7 @@ function processTableCompetitions(req) {
 	// FA Women's Championship
 	if(req.faWomenChampionshipData == null && req.faWomenChampionshipTable != null) {
 		req.faWomenChampionshipData = {
-			competitionName: 'FA Women\'s Championship' + CURRENT_SEASON,
+			competitionName: 'FA Women\'s Championship',
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-women-championship',
 			competitionTable: req.faWomenChampionshipTable
 		};
@@ -350,7 +349,7 @@ function processMixedCompetitions(req) {
 	if(req.uclData == null) {
 		// Store basic information
 		req.uclData = {
-			competitionName: 'Champions League ' + CURRENT_SEASON,
+			competitionName: 'Champions League',
 			competitionLink: STANDINGS_LOCATION + 'champions-league'
 		};
 
@@ -376,7 +375,7 @@ function processMixedCompetitions(req) {
 	if(req.europaLeagueData == null) {
 		// Store basic information
 		req.europaLeagueData = {
-			competitionName: 'Europa League ' + CURRENT_SEASON,
+			competitionName: 'Europa League',
 			competitionLink: STANDINGS_LOCATION + 'europa-league'
 		};
 
@@ -402,7 +401,7 @@ function processMixedCompetitions(req) {
 	if(req.plIntlCupData == null) {
 		// Store basic information
 		req.plIntlCupData = {
-			competitionName: 'Premier League International Cup ' + CURRENT_SEASON,
+			competitionName: 'Premier League International Cup',
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'pl-international-cup'
 		};
 
@@ -428,7 +427,7 @@ function processMixedCompetitions(req) {
 	if(req.eflTrophyData == null) {
 		// Store basic information
 		req.eflTrophyData = {
-			competitionName: 'EFL Trophy ' + CURRENT_SEASON,
+			competitionName: 'EFL Trophy',
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'efl-trophy'
 		};
 
@@ -454,7 +453,7 @@ function processMixedCompetitions(req) {
 	if(req.youthLeagueData == null) {
 		// Store basic information
 		req.youthLeagueData = {
-			competitionName: 'UEFA Youth League ' + CURRENT_SEASON,
+			competitionName: 'UEFA Youth League',
 			competitionLink: RESERVES_STANDINGS_LOCATION + 'youth-league'
 		};
 
@@ -480,7 +479,7 @@ function processMixedCompetitions(req) {
 	if(req.plCupData == null) {
 		// Store basic information
 		req.plCupData = {
-			competitionName: 'U18 Premier League Cup ' + CURRENT_SEASON,
+			competitionName: 'U18 Premier League Cup',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'premier-league-cup'
 		};
 
@@ -506,7 +505,7 @@ function processMixedCompetitions(req) {
 	if(req.faWSLCupData == null) {
 		// Store basic information
 		req.faWSLCupData = {
-			competitionName: 'FA WSL Continental Tyres Cup ' + CURRENT_SEASON,
+			competitionName: 'FA WSL Continental Tyres Cup',
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-wsl-cup'
 		};
 
@@ -538,7 +537,7 @@ function processKnockoutCompetitions(req) {
 	const faCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.FA_CUP).reverse();
 	if(faCupFixtures != null && faCupFixtures.length > 0) {
 		req.faCupData = {
-			competitionName: 'FA CUP ' + CURRENT_SEASON,
+			competitionName: 'FA CUP',
 			competitionLink: STANDINGS_LOCATION + 'fa-cup',
 			fixtures: faCupFixtures
 		};
@@ -551,7 +550,7 @@ function processKnockoutCompetitions(req) {
 	const carabaoCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.CARABAO_CUP).reverse();
 	if(carabaoCupFixtures != null && carabaoCupFixtures.length > 0) {
 		req.carabaoCupData = {
-			competitionName: 'CARABAO CUP ' + CURRENT_SEASON,
+			competitionName: 'CARABAO CUP',
 			competitionLink: STANDINGS_LOCATION + 'carabao-cup',
 			fixtures: carabaoCupFixtures
 		};
@@ -564,7 +563,7 @@ function processKnockoutCompetitions(req) {
 	const communityShieldFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.COMMUNITY_SHIELD).reverse();
 	if(communityShieldFixtures != null && communityShieldFixtures.length > 0) {
 		req.communityShieldData = {
-			competitionName: 'COMMUNITY SHIELD ' + CURRENT_SEASON,
+			competitionName: 'COMMUNITY SHIELD',
 			competitionLink: STANDINGS_LOCATION + 'community-shield',
 			fixtures: communityShieldFixtures
 		};
@@ -577,7 +576,7 @@ function processKnockoutCompetitions(req) {
 	const superCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.SUPER_CUP).reverse();
 	if(superCupFixtures != null && superCupFixtures.length > 0) {
 		req.superCupData = {
-			competitionName: 'UEFA SUPER CUP ' + CURRENT_SEASON,
+			competitionName: 'UEFA SUPER CUP',
 			competitionLink: STANDINGS_LOCATION + 'super-cup',
 			fixtures: superCupFixtures
 		};
@@ -590,7 +589,7 @@ function processKnockoutCompetitions(req) {
 	const clubWorldCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.CLUB_WORLD_CUP).reverse();
 	if(clubWorldCupFixtures != null && clubWorldCupFixtures.length > 0) {
 		req.clubWorldCupData = {
-			competitionName: 'FIFA CLUB WORLD CUP ' + CURRENT_SEASON,
+			competitionName: 'FIFA CLUB WORLD CUP',
 			competitionLink: STANDINGS_LOCATION + 'club-world-cup',
 			fixtures: clubWorldCupFixtures
 		};
@@ -603,7 +602,7 @@ function processKnockoutCompetitions(req) {
 	const faYouthCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.FA_YOUTH_CUP).reverse();
 	if(faYouthCupFixtures != null && faYouthCupFixtures.length > 0) {
 		req.faYouthCupData = {
-			competitionName: 'FA YOUTH CUP ' + CURRENT_SEASON,
+			competitionName: 'FA YOUTH CUP',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'fa-youth-cup',
 			fixtures: faYouthCupFixtures
 		};
@@ -616,7 +615,7 @@ function processKnockoutCompetitions(req) {
 	const ruhrCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.RUHR_CUP).reverse();
 	if(ruhrCupFixtures != null && ruhrCupFixtures.length > 0) {
 		req.ruhrCupData = {
-			competitionName: 'RUHR CUP ' + CURRENT_SEASON,
+			competitionName: 'RUHR CUP',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'ruhr-cup',
 			fixtures: ruhrCupFixtures
 		};
@@ -629,7 +628,7 @@ function processKnockoutCompetitions(req) {
 	const ottenCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.OTTEN_CUP).reverse();
 	if(ottenCupFixtures != null && ottenCupFixtures.length > 0) {
 		req.ottenCupData = {
-			competitionName: 'OTTEN CUP ' + CURRENT_SEASON,
+			competitionName: 'OTTEN CUP',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'otten-cup',
 			fixtures: ottenCupFixtures
 		};
@@ -642,7 +641,7 @@ function processKnockoutCompetitions(req) {
 	const vghCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.VGH_CUP).reverse();
 	if(vghCupFixtures != null && vghCupFixtures.length > 0) {
 		req.vghCupData = {
-			competitionName: 'SPARKASSE & VGH CUP ' + CURRENT_SEASON,
+			competitionName: 'SPARKASSE & VGH CUP',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'vgh-cup',
 			fixtures: vghCupFixtures
 		};
@@ -655,7 +654,7 @@ function processKnockoutCompetitions(req) {
 	const dallasCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.DALLAS_CUP).reverse();
 	if(dallasCupFixtures != null && dallasCupFixtures.length > 0) {
 		req.dallasCupData = {
-			competitionName: 'DALLAS CUP ' + CURRENT_SEASON,
+			competitionName: 'DALLAS CUP',
 			competitionLink: ACADEMY_STANDINGS_LOCATION + 'dallas-cup',
 			fixtures: dallasCupFixtures
 		};
@@ -668,7 +667,7 @@ function processKnockoutCompetitions(req) {
 	const womenFaCupFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.WOMEN_FA_CUP).reverse();
 	if(womenFaCupFixtures != null && womenFaCupFixtures.length > 0) {
 		req.womenFaCupData = {
-			competitionName: 'WOMEN\'S FA CUP ' + CURRENT_SEASON,
+			competitionName: 'WOMEN\'S FA CUP',
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'women-fa-cup',
 			fixtures: womenFaCupFixtures
 		};

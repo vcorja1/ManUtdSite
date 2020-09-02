@@ -11,9 +11,11 @@ const { preprocessStandings } = require('../../middleware/preprocessStandings');
 const standings = require('../../middleware/standings');
 // Also require the fixtures middleware
 const { getFirstTeamCupFixtures } = require('../../middleware/fixtures');
+// Require middleware to get the current season
+const { getCurrentSeason } = require('../../middleware/news');
 
 // Get the fixtures and the information for cups not yet drawn
-app.use('/', parallelMiddlewares([getFirstTeamCupFixtures, preprocessStandings]));
+app.use('/', parallelMiddlewares([getFirstTeamCupFixtures, preprocessStandings, getCurrentSeason]));
 
 // GET response for '/standings/premier-league'
 app.use('/premier-league', [standings.getEPLTable, standings.processStandingsData]);
@@ -22,6 +24,7 @@ app.get('/premier-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Premier League Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			eplData: req.eplData,
 			isSingleCompetition: true
@@ -41,6 +44,7 @@ app.get('/fa-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FA Cup Results',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			faCupData: req.faCupData,
 			isSingleCompetition: true
@@ -60,6 +64,7 @@ app.get('/carabao-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Carabao Cup Results',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			carabaoCupData: req.carabaoCupData,
 			isSingleCompetition: true
@@ -79,6 +84,7 @@ app.get('/community-shield', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Community Shield Results',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			communityShieldData: req.communityShieldData,
 			isSingleCompetition: true
@@ -98,6 +104,7 @@ app.get('/champions-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Champions League Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			uclData: req.uclData,
 			isSingleCompetition: true
@@ -117,6 +124,7 @@ app.get('/europa-league', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Europa League Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			europaLeagueData: req.europaLeagueData,
 			isSingleCompetition: true
@@ -136,6 +144,7 @@ app.get('/super-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Super Cup Results',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			superCupData: req.superCupData,
 			isSingleCompetition: true
@@ -155,6 +164,7 @@ app.get('/club-world-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'FIFA Club World Cup Results',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			clubWorldCupData: req.clubWorldCupData,
 			isSingleCompetition: true
@@ -174,6 +184,7 @@ app.get('/international-champions-cup', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'International Champions Cup Standings',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			iccData: req.iccData,
 			isSingleCompetition: true
@@ -194,6 +205,7 @@ app.get('/', function(req, res, next) {
 	try {
 		res.render('standings', {
 			title: 'Standings - First Team',
+			currentSeason: req.currentSeason,
 			MATCH_STATUS: req.MATCH_STATUS,
 			eplData: req.eplData,
 			faCupData: req.faCupData,
