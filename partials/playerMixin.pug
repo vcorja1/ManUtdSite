@@ -84,5 +84,5 @@ mixin playerLoanInfoMixin(playersInfo)
 					td=player.positionAbbr
 					td=player.age
 					td
-						img(src=player.loanClub.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.loanClub.displayName}`)
-						| #{' ' + player.loanClub.displayName}
+						img(src=player.clubLoanedTo.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.clubLoanedTo.displayName}`)
+						| #{' ' + player.clubLoanedTo.displayName}

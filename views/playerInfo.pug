@@ -94,8 +94,15 @@ block content
 								td.bold Loan Status
 								td
 									| On loan at 
-									img(src=player.loanClub.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.loanClub.displayName}`)
-									| #{' ' + player.loanClub.displayName}
+									img(src=player.clubLoanedTo.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.clubLoanedTo.displayName}`)
+									| #{' ' + player.clubLoanedTo.displayName}
+						if(player.loanedfrom != null)
+							tr
+								td.bold Loan Status
+								td
+									| On loan from 
+									img(src=player.clubLoanedFrom.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${player.clubLoanedFrom.displayName}`)
+									| #{' ' + player.clubLoanedFrom.displayName}
 block jscripts
 	script(type='text/javascript').
 		(function($) {

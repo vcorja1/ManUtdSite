@@ -240,7 +240,7 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 	client.connect();
 
 	// Get Staff Data
-	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= ($1) OR loanedto IS NOT NULL ORDER BY team;`, [req.otherInfo.transferSigningDateStart], (err, resp) => {
+	client.query(`SELECT * FROM PLAYERS WHERE datejoined >= ($1) OR loanedto IS NOT NULL OR loanedfrom IS NOT NULL ORDER BY team;`, [req.otherInfo.transferSigningDateStart], (err, resp) => {
 		// Handle error
 		if (err || !resp) {
 			console.log(err);
@@ -266,6 +266,9 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 				if(player.loanedto != null && player.loanedto != '') {
 					previousOrNextClubData = getClubData(player.loanedto, TEAMS.SENIOR, -1);
 				}
+				else if(player.loanedfrom != null) {
+					previousOrNextClubData = getClubData(player.loanedfrom, TEAMS.SENIOR, -1);
+				}
 				else if(player.previousclub != null) {
 					previousOrNextClubData = getClubData(player.previousclub, TEAMS.SENIOR, -1);
 				}
@@ -289,13 +292,16 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 				if(player.loanedto != null && player.loanedto != '') {
 					req.loanedOut.push(playerInfo);
 				}
-				if(player.datejoined >= req.otherInfo.transferSigningDateStart) {
+				if(player.datejoined >= req.otherInfo.transferSigningDateStart || player.loanedfrom) {
 					if(player.team == TEAMS.ACADEMY) {
 						if(player.previousclub != 'Manchester United FC') {
 							req.recentlySignedToAcademy.push(playerInfo);
 						}
 					}
 					else {
+						if(player.loanedfrom) {
+							playerInfo.prevClub = playerInfo.prevClub + " (Loan)";
+						}
 						req.recentlySigned.push(playerInfo);
 					}
 				}
@@ -341,6 +347,9 @@ function processPlayerInfo(player) {
 
 	// Get loan club information (if applicable)
 	if(player.loanedto != null && player.loanedto != '') {
-		player.loanClub = getClubData(player.loanedto, TEAMS.SENIOR, -1);
+		player.clubLoanedTo = getClubData(player.loanedto, TEAMS.SENIOR, -1);
+	}
+	if(player.loanedfrom != null && player.loanedfrom != '') {
+		player.clubLoanedFrom = getClubData(player.loanedfrom, TEAMS.SENIOR, -1);
 	}
 }

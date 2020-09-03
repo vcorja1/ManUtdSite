@@ -1278,9 +1278,23 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 			return {
 				teamName: 'Perth Glory FC',
 				fullName: 'Perth Glory FC' + teamNameEnding,
-				displayName: 'Perth_Glory' + teamNameEnding,
-				displayNameShort: 'Perth_Glory' + teamNameEnding,
+				displayName: 'Perth Glory' + teamNameEnding,
+				displayNameShort: 'Perth Glory' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Perth_Glory.svg'
+			};
+
+
+		/***************************************************/
+		/***************** Chinese Clubs *******************/
+		/***************************************************/
+
+		case 'Shanghai Shenhua':
+			return {
+				teamName: 'Shanghai Greenland Shenhua FC',
+				fullName: 'Shanghai Shenhua FC' + teamNameEnding,
+				displayName: 'Shanghai Shenhua' + teamNameEnding,
+				displayNameShort: 'Shanghai Shenhua' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Shanghai_Shenhua.svg'
 			};
 	}
 
