@@ -153,8 +153,11 @@ function getTeamFixtures(query, queryParams, req, res, next) {
 
 // Get live score from football-data
 function getLiveScoreFootballData(req, res, next) {
-	const nextMatchID = req.nextMatchID;
-	const fixtureURL = `http://api.football-data.org/v1/fixtures/${req.fixtures[nextMatchID].matchid}`;
+	let nextMatch = req.fixtures[req.nextMatchID];
+	if(!nextMatch.matchid) {
+		return next();
+	}
+	const fixtureURL = `http://api.football-data.org/v1/fixtures/${nextMatch.matchid}`;
 
 	http.get(fixtureURL, (resp) => {
 		const { statusCode } = resp;
@@ -173,9 +176,6 @@ function getLiveScoreFootballData(req, res, next) {
 		resp.on('data', (chunk) => { rawData += chunk; });
 		resp.on('end', () => {
 			try {
-				// Get the next match details
-				let nextMatch = req.fixtures[nextMatchID];
-
 				// Get the data
 				const parsedData = JSON.parse(rawData);
 
@@ -216,6 +216,9 @@ function getLiveScoreFootballData(req, res, next) {
 // Get live score from soccerway
 function getLiveScoreSoccerway(req, res, next) {
 	let nextMatch = req.fixtures[req.nextMatchID];
+	if(!nextMatch.soccerwayurl) {
+		return next();
+	}
 	const utcDate = nextMatch.matchdate;
 	const matchDate = utcDate.substr(0, 4) + '/' + utcDate.substr(5, 2) + '/' + utcDate.substr(8, 2);
 
