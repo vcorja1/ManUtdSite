@@ -91,7 +91,7 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 			return 'Week ' + round;
 
 		case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
-			return round === 23 ? 'Final' : ('Week ' + round);
+			return round === 25 ? 'Final' : ('Week ' + round);
 
 		case COMPETITIONS.COMMUNITY_SHIELD:
 		case COMPETITIONS.UEFA_SUPER_CUP:
