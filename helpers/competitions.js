@@ -41,7 +41,7 @@ const COMPETITION_NAMES = [
 	'Premier League 2', 'Premier League 2 Div 2', 'PL International Cup', 'EFL Trophy', 'Under-19 UEFA Youth League',
 	'U18 Premier League North', 'U18 Premier League Cup', 'FA Youth Cup', 'Ruhr Cup', 'Otten Cup',
 	'Sparkasse & VGH Cup', 'Dallas Cup', 'ICGT Tournament',
-	'FA Women\'s Super League', 'FA Women\'s Championship', 'Women\'s FA Cup', 'FA WSL Cup'
+	'FA Women\'s Super League', 'FA Women\'s Championship', 'Women\'s FA Cup', 'Women\'s League Cup'
 ];
 Object.freeze(COMPETITION_NAMES);
 

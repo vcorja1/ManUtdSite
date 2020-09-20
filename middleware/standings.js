@@ -505,7 +505,7 @@ function processMixedCompetitions(req) {
 	if(req.faWSLCupData == null) {
 		// Store basic information
 		req.faWSLCupData = {
-			competitionName: 'FA WSL Continental Tyres Cup',
+			competitionName: 'WOMEN\'S LEAGUE CUP',
 			competitionLink: WOMEN_STANDINGS_LOCATION + 'fa-wsl-cup'
 		};
 
