@@ -405,6 +405,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Lewes' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lewes.png'
 			};
+		case 'Luton Town':
+			return {
+				teamName: 'Luton Town FC',
+				fullName: 'Luton Town FC' + teamNameEnding,
+				displayName: 'Luton Town' + teamNameEnding,
+				displayNameShort: 'Luton' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Luton_Town.jpg'
+			};
 		case 'Lincoln City':
 			return {
 				teamName: 'Lincoln City FC',
@@ -1232,6 +1240,22 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'America' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Club_America.svg'
 			};
+		case 'North Carolina Tar Heels':
+			return {
+				teamName: 'North Carolina Tar Heels FC',
+				fullName: 'North Carolina Tar Heels FC' + teamNameEnding,
+				displayName: 'Tar Heels' + teamNameEnding,
+				displayNameShort: 'Tar Heels' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Tar_Heels.svg'
+			};
+		case 'Portland Thorns':
+			return {
+				teamName: 'Portland Thorns FC',
+				fullName: 'Portland Thorns FC' + teamNameEnding,
+				displayName: 'Portland Thorns' + teamNameEnding,
+				displayNameShort: 'Thorns' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Portland_Thorns.svg'
+			};
 		case 'San Jose Earthquakes':
 			return {
 				teamName: 'San Jose Earthquakes',
@@ -1239,6 +1263,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'San Jose Earthquakes' + teamNameEnding,
 				displayNameShort: 'Quakes' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'San_Jose_Earthquakes.svg'
+			};
+		case 'Utah Royals':
+			return {
+				teamName: 'Utah Royals FC',
+				fullName: 'Utah Royals FC' + teamNameEnding,
+				displayName: 'Utah Royals' + teamNameEnding,
+				displayNameShort: 'Royals' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Utah_Royals.svg'
 			};
 
 
