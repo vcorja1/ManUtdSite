@@ -37,7 +37,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Otherwise remove ending
-	let removableAbrr = [' FC', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV', ' CP', ' UD'];
+	let removableAbrr = [' FC', ' FK', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV', ' CP', ' UD', ' BC'];
 	let ending = teamName.substr(-3);
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -3);
@@ -49,7 +49,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Or remove beginning
-	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'SE ', 'SK ', 'SL ', 'SM ', 'SV ', 'UC '];
+	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'SE ', 'SK ', 'SL ', 'SM ', 'SS ', 'SV ', 'UC ', 'RB '];
 	let start = teamName.substr(0,3);
 	if(removableAbrr.includes(start)) {
 		return teamName.substr(3);
@@ -388,6 +388,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Durham City' + teamNameEnding,
 				displayNameShort: 'Durham' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Durham_City.png'
+			};
+		case 'Kidderminster Harriers':
+			return {
+				teamName: 'Kidderminster Harriers FC',
+				fullName: 'Kidderminster Harriers FC' + teamNameEnding,
+				displayName: 'Kidderminster Harriers' + teamNameEnding,
+				displayNameShort: 'Kidderminster' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Kidderminster_Harriers.png'
 			};
 		case 'Leeds United':
 			return {
@@ -731,6 +739,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Koln' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Koln.svg'
 			};
+		case 'Leipzig':
+			return {
+				teamName: 'RasenBallsport Leipzig e.V.',
+				fullName: 'RB Leipzig' + teamNameEnding,
+				displayName: 'Leipzig' + teamNameEnding,
+				displayNameShort: 'Leipzig' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Leipzig.svg'
+			};
 		case 'Werder':
 		case 'Werder Bremen':
 			return {
@@ -763,6 +779,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'AC Milan' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'AC_Milan.svg'
 			};
+		case 'Atalanta':
+			return {
+				teamName: 'Atalanta Bergamasca Calcio',
+				fullName: 'Atalanta BC' + teamNameEnding,
+				displayName: 'Atalanta' + teamNameEnding,
+				displayNameShort: 'Atalanta' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Atalanta.svg'
+			};
 		case 'Fiorentina':
 			return {
 				teamName: 'ACS Fiorentina',
@@ -788,13 +812,21 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Juventus' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Juventus.svg'
 			};
+		case 'Lazio':
+			return {
+				teamName: 'Societa Sportiva Lazio',
+				fullName: 'SS Lazio' + teamNameEnding,
+				displayName: 'Lazio' + teamNameEnding,
+				displayNameShort: 'Lazio' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lazio.svg'
+			};
 		case 'Parma':
 			return {
 				teamName: 'Parma Calcio 1913',
 				fullName: 'Parma' + teamNameEnding,
 				displayName: 'Parma' + teamNameEnding,
 				displayNameShort: 'Parma' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Parma.png'
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Parma.svg'
 			};
 		case 'Roma':
 			return {
@@ -850,6 +882,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Paris Saint-Germain' + teamNameEnding,
 				displayNameShort: 'PSG' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Paris_Saint-Germain.svg'
+			};
+		case 'Sochaux-Montbeliard':
+		case 'Sochaux':
+			return {
+				teamName: 'FC Sochaux-Montbeliard',
+				fullName: 'FC Sochaux-Montbeliard' + teamNameEnding,
+				displayName: 'Sochaux-Montbeliard' + teamNameEnding,
+				displayNameShort: 'Sochaux' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sochaux_Montbeliard.svg'
 			};
 
 
@@ -1144,7 +1185,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				fullName: 'Kristiansund BK' + teamNameEnding,
 				displayName: 'Kristiansund' + teamNameEnding,
 				displayNameShort: 'Kristiansund' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Kristiansund.png'
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Kristiansund.svg'
 			};
 		case 'Sandefjord':
 			return {
@@ -1211,6 +1252,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Tatran Presov' + teamNameEnding,
 				displayNameShort: 'Tatran Presov' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Tatran_Presov.png'
+			};
+
+
+		/***************************************************/
+		/***************** Turkish Clubs *******************/
+		/***************************************************/
+
+		case 'Istanbul Basaksehir':
+			return {
+				teamName: 'Istanbul Basaksehir FK',
+				fullName: 'Istanbul Basaksehir FK' + teamNameEnding,
+				displayName: 'Istanbul Basaksehir' + teamNameEnding,
+				displayNameShort: 'Basaksehir' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Istanbul_Basaksehir.svg'
 			};
 
 
@@ -1285,6 +1340,21 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'SE Palmeiras' + teamNameEnding,
 				displayNameShort: 'Palmeiras' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Palmeiras.svg'
+			};
+
+
+		/***************************************************/
+		/**************** Uruguayan Clubs ******************/
+		/***************************************************/
+
+		case 'Club Atletico Penarol':
+		case 'Penarol':
+			return {
+				teamName: 'Club Atletico Penarol',
+				fullName: 'Penarol' + teamNameEnding,
+				displayName: 'Penarol' + teamNameEnding,
+				displayNameShort: 'Penarol' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Club_Atletico_Penarol.svg'
 			};
 
 
