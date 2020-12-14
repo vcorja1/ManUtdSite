@@ -275,6 +275,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/*************** Other English Clubs ***************/
 		/***************************************************/
 
+		case 'Accrington Stanley':
+			return {
+				teamName: 'Accrington Stanley FC',
+				fullName: 'Accrington Stanley FC' + teamNameEnding,
+				displayName: 'Accrington Stanley' + teamNameEnding,
+				displayNameShort: 'Accrington' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Accrington_Stanley.png'
+			};
 		case 'Aston Villa':
 			return {
 				teamName: 'Aston Villa FC',
@@ -667,6 +675,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Real Madrid' + teamNameEnding,
 				displayNameShort: 'Real' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Real_Madrid.svg'
+			};
+		case 'Real Sociedad':
+			return {
+				teamName: 'Real Sociedad de Futbol, S.A.D.',
+				fullName: 'Real Sociedad' + teamNameEnding,
+				displayName: 'Real Sociedad' + teamNameEnding,
+				displayNameShort: 'Sociedad' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Real_Sociedad.svg'
 			};
 		case 'Real Zaragoza':
 			return {

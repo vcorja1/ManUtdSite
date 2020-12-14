@@ -97,8 +97,9 @@ mixin mixedCompetitionMixin(competitionData, isSingleCompetition, MATCH_STATUS)
 						+quickMatchInfoMobile(match, MATCH_STATUS)
 			.pad-space-small
 
-		//- Group Stage Section
-		h4.blue.text-center.small-caps Group Stage Standings
-		.pad-space-small
-		+tableStandingsMixin(competitionData)
-		.pad-space-small
+		//- Group Stage Section (if applicable)
+		if(competitionData.competitionTable != null && competitionData.competitionTable != [])
+			h4.blue.text-center.small-caps Group Stage Standings
+			.pad-space-small
+			+tableStandingsMixin(competitionData)
+			.pad-space-small
