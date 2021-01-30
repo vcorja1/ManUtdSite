@@ -218,14 +218,20 @@ exports.getCompetitionRoundName = function getCompetitionRoundName(competitionID
 
 
 	if(competitionID == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE) {
-		if(round <= 2) {
-			return 'Qualification';
-		}
-		if(round <= 8) {
-			return 'Game ' + (round - 2);
+		// if(round <= 2) {
+		// 	return 'Qualification';
+		// }
+		// if(round <= 8) {
+		// 	return 'Game ' + (round - 2);
+		// }
+		// if(round == 9) {
+		// 	return 'Playoff';
+		// }
+		if(round == 8) {
+			return '1/32 Finals';
 		}
 		if(round == 9) {
-			return 'Playoff';
+			return '1/16 Finals';
 		}
 		if(round == 10) {
 			return '1/8 Finals';

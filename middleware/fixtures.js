@@ -66,7 +66,9 @@ function getTeamFixtures(query, queryParams, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -327,7 +329,9 @@ function updateMatch(updateMatchDetails) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect

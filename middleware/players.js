@@ -99,7 +99,9 @@ function getTeamPlayers(team, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -162,7 +164,9 @@ function getPlayerInfo(team, req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -233,7 +237,9 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect

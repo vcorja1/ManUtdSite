@@ -10,7 +10,9 @@ exports.getCoachingStaff = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -71,7 +73,9 @@ exports.getBoardMembers = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -106,7 +110,9 @@ exports.getMedicalTeam = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -146,7 +152,9 @@ exports.getScoutingTeam = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
@@ -181,7 +189,9 @@ exports.getClubStaff = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect

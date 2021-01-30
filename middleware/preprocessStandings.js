@@ -26,7 +26,9 @@ exports.preprocessStandings = (req, res, next) => {
 	// Get Client
 	const client = new Client({
 		connectionString: process.env.DATABASE_URL,
-		ssl: true,
+		ssl: {
+			rejectUnauthorized: false
+		},
 	});
 
 	// Connect
