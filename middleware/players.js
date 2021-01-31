@@ -267,48 +267,49 @@ function getRecentlySignedAndLoanedOutNewsInfo(req, res, next) {
 				// Process and store available player data
 				processPlayerInfo(player);
 
-				// Get logo of previous or next club
-				let previousOrNextClubData;
 				if(player.loanedto != null && player.loanedto != '') {
-					previousOrNextClubData = getClubData(player.loanedto, TEAMS.SENIOR, -1);
-				}
-				else if(player.loanedfrom != null) {
-					previousOrNextClubData = getClubData(player.loanedfrom, TEAMS.SENIOR, -1);
-				}
-				else if(player.previousclub != null) {
-					previousOrNextClubData = getClubData(player.previousclub, TEAMS.SENIOR, -1);
-				}
-				else {
-					previousOrNextClubData = getClubData('', TEAMS.SENIOR, -1);
-				}
-
-				let playerInfo = {
-					id: player.id,
-					name: player.name,
-					team: player.team,
-					position: player.positionAbbr,
-					countryName: player.countryName,
-					flagImg: player.flagImg.substr(3),
-					prevClub: player.loanedto == null ? previousOrNextClubData.displayName : null,
-					nextClub: previousOrNextClubData.displayName,
-					clubLogoSrc: previousOrNextClubData.clubLogoSrc
-				};
-
-				// Store to appropriate location
-				if(player.loanedto != null && player.loanedto != '') {
+					// Get data for players loaned out
+					const nextClubData = getClubData(player.loanedto, TEAMS.SENIOR, -1);
+					let playerInfo = {
+						id: player.id,
+						name: player.name,
+						team: player.team,
+						position: player.positionAbbr,
+						countryName: player.countryName,
+						flagImg: player.flagImg.substr(3),
+						nextClub: nextClubData.displayName,
+						clubLogoSrc: nextClubData.clubLogoSrc
+					};
 					req.loanedOut.push(playerInfo);
 				}
-				if(player.datejoined >= req.otherInfo.transferSigningDateStart || player.loanedfrom) {
-					if(player.team == TEAMS.ACADEMY) {
-						if(player.previousclub != 'Manchester United FC') {
-							req.recentlySignedToAcademy.push(playerInfo);
+
+				if(player.loanedfrom != null || player.previousclub != null) {
+					// Get data for newly acquired players
+					const previousClubData = getClubData(player.loanedfrom || player.previousclub, TEAMS.SENIOR, -1);
+					let playerInfo = {
+						id: player.id,
+						name: player.name,
+						team: player.team,
+						position: player.positionAbbr,
+						countryName: player.countryName,
+						flagImg: player.flagImg.substr(3),
+						prevClub: previousClubData.displayName,
+						clubLogoSrc: previousClubData.clubLogoSrc
+					};
+
+					// Store to appropriate location
+					if(player.datejoined >= req.otherInfo.transferSigningDateStart || player.loanedfrom) {
+						if(player.team == TEAMS.ACADEMY) {
+							if(player.previousclub != 'Manchester United FC') {
+								req.recentlySignedToAcademy.push(playerInfo);
+							}
 						}
-					}
-					else {
-						if(player.loanedfrom) {
-							playerInfo.prevClub = playerInfo.prevClub + " (Loan)";
+						else {
+							if(player.loanedfrom) {
+								playerInfo.prevClub = playerInfo.prevClub + " (Loan)";
+							}
+							req.recentlySigned.push(playerInfo);
 						}
-						req.recentlySigned.push(playerInfo);
 					}
 				}
 			});
