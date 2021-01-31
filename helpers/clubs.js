@@ -42,7 +42,7 @@ function removeTeamNameAbbr(teamName) {
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -3);
 	}
-	removableAbrr = [' AFC', ' LFC', ' WFC'];
+	removableAbrr = [' AFC', ' LFC', ' WFC', ' SAD'];
 	ending = teamName.substr(-4);
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -4);
@@ -469,6 +469,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Lionesses' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Millwall_Lionesses.png'
 			};
+		case 'MK Dons':
+			return {
+				teamName: 'Milton Keynes Dons Football Club',
+				fullName: 'MK Dons' + teamNameEnding,
+				displayName: 'MK Dons' + teamNameEnding,
+				displayNameShort: 'MK Dons' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'MK_Dons.png'
+			};
 		case 'Morecambe':
 			return {
 				teamName: 'Morecambe FC',
@@ -508,6 +516,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Oldham Athletic' + teamNameEnding,
 				displayNameShort: 'Oldham' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Oldham_Athletic.svg'
+			};
+		case 'Portadown':
+			return {
+				teamName: 'Portadown FC',
+				fullName: 'Portadown FC' + teamNameEnding,
+				displayName: 'Portadown' + teamNameEnding,
+				displayNameShort: 'Portadown' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Portadown.png'
 			};
 		case 'Preston North End':
 			return {
@@ -660,6 +676,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Barcelona' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Barcelona.svg'
 			};
+		case 'Deportivo Alaves':
+		case 'Alaves':
+			return {
+				teamName: 'Deportivo Alaves SAD',
+				fullName: 'Deportivo Alaves FC' + teamNameEnding,
+				displayName: 'Deportivo Alaves' + teamNameEnding,
+				displayNameShort: 'Alaves' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Deportivo_Alaves.svg'
+			};
 		case 'Levante':
 			return {
 				teamName: 'Levante Unión Deportiva, S.A.D.',
@@ -714,6 +739,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** German Clubs *******************/
 		/***************************************************/
 
+		case 'Bayer Leverkusen':
+		case 'Leverkusen':
+			return {
+				teamName: 'Bayer 04 Leverkusen',
+				fullName: 'Bayer 04 Leverkusen' + teamNameEnding,
+				displayName: 'Bayer Leverkusen' + teamNameEnding,
+				displayNameShort: 'Leverkusen' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bayer_Leverkusen.svg'
+			};
 		case 'Bayern Munich':
 		case 'Bayern München':
 			return {
@@ -802,6 +836,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Atalanta' + teamNameEnding,
 				displayNameShort: 'Atalanta' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Atalanta.svg'
+			};
+		case 'Carpi':
+			return {
+				teamName: 'Carpi Football Club 1909',
+				fullName: 'Carpi FC' + teamNameEnding,
+				displayName: 'Carpi' + teamNameEnding,
+				displayNameShort: 'Carpi' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Carpi.png'
 			};
 		case 'Fiorentina':
 			return {
@@ -1104,6 +1146,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/****************** Swedish Clubs ******************/
 		/***************************************************/
 
+		case 'Goteborg':
+			return {
+				teamName: 'Kopparbergs/Goteborg FC',
+				fullName: 'Goteborg FC' + teamNameEnding,
+				displayName: 'Goteborg' + teamNameEnding,
+				displayNameShort: 'Goteborg' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Goteborg.png'
+			};
 		case 'Hammarby':
 			return {
 				teamName: 'Hammarby Fotboll',
@@ -1268,6 +1318,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Tatran Presov' + teamNameEnding,
 				displayNameShort: 'Tatran Presov' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Tatran_Presov.png'
+			};
+
+
+		/***************************************************/
+		/****************** Polish Clubs *******************/
+		/***************************************************/
+
+		case 'Slask Wroclaw':
+			return {
+				teamName: 'Wroclawski Klub Sportowy Sląsk Wroclaw Spolka Akcyjna',
+				fullName: 'Slask Wroclaw' + teamNameEnding,
+				displayName: 'Slask Wroclaw' + teamNameEnding,
+				displayNameShort: 'Slask Wroclaw' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Slask_Wroclaw.png'
 			};
 
 
