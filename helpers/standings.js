@@ -142,7 +142,7 @@ exports.getPositionColorByCompetitionID = function getPositionColorByCompetition
 			if(position == 1) {
 				return CHAMPIONS_COLOR;
 			}
-			if(position == 2) {
+			if(position < 3) {
 				return QUALIFICATION_COLOR;
 			}
 			if(position == 12) {

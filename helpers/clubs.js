@@ -49,7 +49,7 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Or remove beginning
-	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'SE ', 'SK ', 'SL ', 'SM ', 'SS ', 'SV ', 'UC ', 'RB '];
+	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'NK ', 'SE ', 'SK ', 'SL ', 'SM ', 'SS ', 'SV ', 'UC ', 'RB '];
 	let start = teamName.substr(0,3);
 	if(removableAbrr.includes(start)) {
 		return teamName.substr(3);
@@ -685,6 +685,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Alaves' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Deportivo_Alaves.svg'
 			};
+		case 'Granada':
+			return {
+				teamName: 'Granada CF',
+				fullName: 'Granada CF' + teamNameEnding,
+				displayName: 'Granada' + teamNameEnding,
+				displayNameShort: 'Granada' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Granada.svg'
+			};
 		case 'Levante':
 			return {
 				teamName: 'Levante Unión Deportiva, S.A.D.',
@@ -1290,6 +1298,21 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Sigma Olomouc' + teamNameEnding,
 				displayNameShort: 'Olomouc' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sigma_Olomouc.svg'
+			};
+
+
+		/***************************************************/
+		/**************** Croatian Clubs *******************/
+		/***************************************************/
+
+		case 'Istra':
+		case 'Istra 1961':
+			return {
+				teamName: 'Nogometni Klub Istra 1961',
+				fullName: 'NK Istra 1961' + teamNameEnding,
+				displayName: 'Istra' + teamNameEnding,
+				displayNameShort: 'Istra' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Istra.svg'
 			};
 
 
