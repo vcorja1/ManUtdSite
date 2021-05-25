@@ -741,6 +741,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Valencia' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Valencia.svg'
 			};
+			case 'Villarreal':
+				return {
+					teamName: 'Villarreal Club de Futbol, S.A.D.',
+					fullName: 'Villarreal CF' + teamNameEnding,
+					displayName: 'Villarreal' + teamNameEnding,
+					displayNameShort: 'Villarreal' + teamNameEnding,
+					clubLogoSrc: CLUB_LOGOS_FOLDER + 'Villarreal.svg'
+				};
 
 
 		/***************************************************/
@@ -1436,6 +1444,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/**************** Brazilian Clubs ******************/
 		/***************************************************/
 
+		case 'Boca Juniors':
+			return {
+				teamName: 'Club Atletico Boca Juniors',
+				fullName: 'Boca Juniors' + teamNameEnding,
+				displayName: 'Boca Juniors' + teamNameEnding,
+				displayNameShort: 'Boca Juniors' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Boca_Juniors.svg'
+			};
 		case 'Palmeiras':
 			return {
 				teamName: 'Sociedade Esportiva Palmeiras',
