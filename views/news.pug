@@ -75,63 +75,63 @@ block content
 								td.col-lg-8.col-md-8
 									h5=player.name
 
-		h1.bold.red=`${lastSeason} SEASON OVERVIEW`
-		if(awards.seniorTeam != null)
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
-			table.table.table-bordered
-				tbody
-					each competitionName in Object.keys(awards.seniorTeam)
-						tr
-							td.col-lg-3
-								h5.text-center.bold=competitionName
-							td.col-lg-9
-								each award in awards.seniorTeam[competitionName]
-									.container
-										p
-											img(src=award.awardIconImg alt=award.awardIconAlt)
-										h5=award.awardDescription
+		//- h1.bold.red=`${lastSeason} SEASON OVERVIEW`
+		//- if(awards.seniorTeam != null)
+		//- 	h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) First Team
+		//- 	table.table.table-bordered
+		//- 		tbody
+		//- 			each competitionName in Object.keys(awards.seniorTeam)
+		//- 				tr
+		//- 					td.col-lg-3
+		//- 						h5.text-center.bold=competitionName
+		//- 					td.col-lg-9
+		//- 						each award in awards.seniorTeam[competitionName]
+		//- 							.container
+		//- 								p
+		//- 									img(src=award.awardIconImg alt=award.awardIconAlt)
+		//- 								h5=award.awardDescription
 
-		if(awards.reservesTeam != null)
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Reserves Team
-			table.table.table-bordered
-				tbody
-					each competitionName in Object.keys(awards.reservesTeam)
-						tr
-							td.col-lg-3
-								h5.text-center.bold=competitionName
-							td.col-lg-9
-								each award in awards.reservesTeam[competitionName]
-									.container
-										p
-											img(src=award.awardIconImg alt=award.awardIconAlt)
-										h5=award.awardDescription
+		//- if(awards.reservesTeam != null)
+		//- 	h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Reserves Team
+		//- 	table.table.table-bordered
+		//- 		tbody
+		//- 			each competitionName in Object.keys(awards.reservesTeam)
+		//- 				tr
+		//- 					td.col-lg-3
+		//- 						h5.text-center.bold=competitionName
+		//- 					td.col-lg-9
+		//- 						each award in awards.reservesTeam[competitionName]
+		//- 							.container
+		//- 								p
+		//- 									img(src=award.awardIconImg alt=award.awardIconAlt)
+		//- 								h5=award.awardDescription
 
-		if(awards.academyTeam != null)
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Team
-			table.table.table-bordered
-				tbody
-					each competitionName in Object.keys(awards.academyTeam)
-						tr
-							td.col-lg-3
-								h5.text-center.bold=competitionName
-							td.col-lg-9
-								each award in awards.academyTeam[competitionName]
-									.container
-										p
-											img(src=award.awardIconImg alt=award.awardIconAlt)
-										h5=award.awardDescription
+		//- if(awards.academyTeam != null)
+		//- 	h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Academy Team
+		//- 	table.table.table-bordered
+		//- 		tbody
+		//- 			each competitionName in Object.keys(awards.academyTeam)
+		//- 				tr
+		//- 					td.col-lg-3
+		//- 						h5.text-center.bold=competitionName
+		//- 					td.col-lg-9
+		//- 						each award in awards.academyTeam[competitionName]
+		//- 							.container
+		//- 								p
+		//- 									img(src=award.awardIconImg alt=award.awardIconAlt)
+		//- 								h5=award.awardDescription
 
-		if(awards.womenTeam != null)
-			h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Women Team
-			table.table.table-bordered
-				tbody
-					each competitionName in Object.keys(awards.womenTeam)
-						tr
-							td.col-lg-3
-								h5.text-center.bold=competitionName
-							td.col-lg-9
-								each award in awards.womenTeam[competitionName]
-									.container
-										p
-											img(src=award.awardIconImg alt=award.awardIconAlt)
-										h5=award.awardDescription
+		//- if(awards.womenTeam != null)
+		//- 	h2.blue.text-center.small-caps(style={'margin-bottom': '20px'}) Women Team
+		//- 	table.table.table-bordered
+		//- 		tbody
+		//- 			each competitionName in Object.keys(awards.womenTeam)
+		//- 				tr
+		//- 					td.col-lg-3
+		//- 						h5.text-center.bold=competitionName
+		//- 					td.col-lg-9
+		//- 						each award in awards.womenTeam[competitionName]
+		//- 							.container
+		//- 								p
+		//- 									img(src=award.awardIconImg alt=award.awardIconAlt)
+		//- 								h5=award.awardDescription

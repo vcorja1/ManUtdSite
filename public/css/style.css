@@ -32,11 +32,11 @@
 }
 
 .blue-upcoming-match {
-  color: #009CDE;
+  color: #009cde;
 }
 
 .postponed-match {
-  color: #D01414;
+  color: #d01414;
 }
 
 /* -------------------------------------------------------- */
@@ -100,9 +100,9 @@
 /* -------------------------------------------------------- */
 
 .navbar {
-  position: fixed;  /* Set the navbar to fixed position */
-  top: 0;           /* Position the navbar at the top of the page */
-  width: 100%;      /* Full width */
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
 }
 
 .navbar-brand {
@@ -158,7 +158,8 @@
   }
 }
 
-.hidden-mobile, .hidden-case-1 {
+.hidden-mobile,
+.hidden-case-1 {
   display: block;
 }
 
@@ -192,7 +193,7 @@
 
 .main {
   margin-top: 70px;
-  margin-bottom: 70px;
+  margin-bottom: 90px;
 }
 
 .main.container-fluid > h1 {
@@ -269,26 +270,31 @@
 /* ---------------------- FIXTURES ------------------------ */
 /* -------------------------------------------------------- */
 
-.quick-match-info .panel-heading, .fixtures-container .panel-heading, .fixtures-container .main-score-status {
+.quick-match-info .panel-heading,
+.fixtures-container .panel-heading,
+.fixtures-container .main-score-status {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 80px;
 }
 
-.quick-match-info .panel-body, .fixtures-large-view {
+.quick-match-info .panel-body,
+.fixtures-large-view {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.quick-match-info h3, .fixtures-container h3 {
+.quick-match-info h3,
+.fixtures-container h3 {
   margin: 0;
 }
 
 @media (max-width: 767px) {
-  .quick-match-info .panel-body, .fixtures-container .panel-body {
+  .quick-match-info .panel-body,
+  .fixtures-container .panel-body {
     padding: 0;
   }
 }
@@ -307,7 +313,9 @@
   padding: 0;
 }
 
-.recent-match .container > p, .recent-match-mobile .container > p, .main-score-status > p {
+.recent-match .container > p,
+.recent-match-mobile .container > p,
+.main-score-status > p {
   float: left;
   height: 30px;
   width: 30px;
@@ -350,10 +358,16 @@ abbr {
 /* ---------------------- STANDINGS ----------------------- */
 /* -------------------------------------------------------- */
 
-@media (min-width:992px) {
-  .col-half {width: 44.33333334%;}
-  .col-half-offset-left {margin-left: 2.83333333%;}
-  .col-half-offset-right {margin-right: 2.83333333%;}
+@media (min-width: 992px) {
+  .col-half {
+    width: 44.33333334%;
+  }
+  .col-half-offset-left {
+    margin-left: 2.83333333%;
+  }
+  .col-half-offset-right {
+    margin-right: 2.83333333%;
+  }
 }
 
 /* -------------------------------------------------------- */
@@ -491,15 +505,18 @@ abbr {
 /* --------------------- TROPHY ROOM ---------------------- */
 /* -------------------------------------------------------- */
 
-.large-height {   /* Trophy box height (large) */
+.large-height {
+  /* Trophy box height (large) */
   height: 620px;
 }
 
-.small-height {   /* Trophy box height (small) */
+.small-height {
+  /* Trophy box height (small) */
   height: 580px;
 }
 
-.content-equal-height {   /* Trophy box content height */
+.content-equal-height {
+  /* Trophy box content height */
   margin-top: 15px;
   height: 70px;
   line-height: 70px;
@@ -507,11 +524,11 @@ abbr {
 
 .columns-2 {
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
-  -moz-column-count:    2; /* Firefox */
-  column-count:         2;
-  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
-  -moz-column-gap:      20px; /* Firefox */
-  column-gap:           20px;
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
+  -moz-column-gap: 20px; /* Firefox */
+  column-gap: 20px;
   -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
   -moz-column-rule: 1px double #ccc; /* Firefox */
   column-rule: 1px double #ccc;
@@ -519,11 +536,11 @@ abbr {
 
 .columns-3 {
   -webkit-column-count: 3; /* Chrome, Safari, Opera */
-  -moz-column-count:    3; /* Firefox */
-  column-count:         3;
-  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
-  -moz-column-gap:      20px; /* Firefox */
-  column-gap:           20px;
+  -moz-column-count: 3; /* Firefox */
+  column-count: 3;
+  -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
+  -moz-column-gap: 20px; /* Firefox */
+  column-gap: 20px;
   -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
   -moz-column-rule: 1px double #ccc; /* Firefox */
   column-rule: 1px double #ccc;
@@ -531,11 +548,11 @@ abbr {
 
 .columns-4 {
   -webkit-column-count: 4; /* Chrome, Safari, Opera */
-  -moz-column-count:    4; /* Firefox */
-  column-count:         4;
-  -webkit-column-gap:   20px; /* Chrome, Safari, Opera */
-  -moz-column-gap:      20px; /* Firefox */
-  column-gap:           20px;
+  -moz-column-count: 4; /* Firefox */
+  column-count: 4;
+  -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
+  -moz-column-gap: 20px; /* Firefox */
+  column-gap: 20px;
   -webkit-column-rule: 1px double #ccc; /* Chrome, Safari, Opera */
   -moz-column-rule: 1px double #ccc; /* Firefox */
   column-rule: 1px double #ccc;
@@ -558,25 +575,33 @@ footer {
   padding: 1%;
 }
 
-
 /* -------------------------------------------------------- */
 /* ----------------- BOOTSTRAP 4.0 THEMES ----------------- */
 /* -------------------------------------------------------- */
 .bg-light {
-  background-color: #f8f9fa!important;
+  background-color: #f8f9fa !important;
 }
-a.bg-light:focus,a.bg-light:hover,button.bg-light:focus,button.bg-light:hover {
-  background-color: #dae0e5!important;
+a.bg-light:focus,
+a.bg-light:hover,
+button.bg-light:focus,
+button.bg-light:hover {
+  background-color: #dae0e5 !important;
 }
 .bg-dark {
-  background-color: #343a40!important;
+  background-color: #343a40 !important;
 }
-a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover {
-  background-color: #1d2124!important;
+a.bg-dark:focus,
+a.bg-dark:hover,
+button.bg-dark:focus,
+button.bg-dark:hover {
+  background-color: #1d2124 !important;
 }
-.bg-info{
-  background-color: #d9edf7!important;
+.bg-info {
+  background-color: #d9edf7 !important;
 }
-a.bg-info:focus,a.bg-info:hover,button.bg-info:focus,button.bg-info:hover {
-  background-color: #afd9ee!important;
+a.bg-info:focus,
+a.bg-info:hover,
+button.bg-info:focus,
+button.bg-info:hover {
+  background-color: #afd9ee !important;
 }

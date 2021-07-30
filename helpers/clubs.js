@@ -37,19 +37,19 @@ function removeTeamNameAbbr(teamName) {
 	}
 
 	// Otherwise remove ending
-	let removableAbrr = [' FC', ' FK', ' CF', ' SC', ' IF', ' IL', ' BK', ' KV', ' CP', ' UD', ' BC'];
+	let removableAbrr = [' BC', ' BK', ' CF', ' CP', ' FC', ' FK', ' IF', ' IL', ' KV', ' SC',' UD'];
 	let ending = teamName.substr(-3);
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -3);
 	}
-	removableAbrr = [' AFC', ' LFC', ' WFC', ' SAD'];
+	removableAbrr = [' AFC', ' LFC', ' SAD', ' WFC'];
 	ending = teamName.substr(-4);
 	if(removableAbrr.includes(ending)) {
 		return teamName.slice(0, -4);
 	}
 
 	// Or remove beginning
-	removableAbrr = ['AS ', 'FC ', 'FK ', 'KV ', 'NK ', 'SE ', 'SK ', 'SL ', 'SM ', 'SS ', 'SV ', 'UC ', 'RB '];
+	removableAbrr = ['AS ', 'FC ', 'FK ', 'IL ', 'KV ', 'NK ', 'RB ', 'SE ', 'SK ', 'SL ', 'SM ', 'SS ', 'SV ', 'UC '];
 	let start = teamName.substr(0,3);
 	if(removableAbrr.includes(start)) {
 		return teamName.substr(3);
@@ -453,6 +453,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Macclesfield' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Macclesfield_Town.svg'
 			};
+		case 'Mansfield Town':
+			return {
+				teamName: 'Mansfield Town FC',
+				fullName: 'Mansfield Town FC' + teamNameEnding,
+				displayName: 'Mansfield Town' + teamNameEnding,
+				displayNameShort: 'Mansfield' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Mansfield_Town.svg'
+			};
 		case 'Middlesbrough':
 			return {
 				teamName: 'Middlesbrough FC',
@@ -533,6 +541,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'The North End' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Preston_North_End.svg'
 			};
+		case 'QPR':
+		case 'Queens Park Rangers':
+			return {
+				teamName: 'Queens Park Rangers FC',
+				fullName: 'Queens Park Rangers FC' + teamNameEnding,
+				displayName: 'Queens Park Rangers' + teamNameEnding,
+				displayNameShort: 'QPR' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Queens_Park_Rangers.svg'
+			};
 		case 'Reading':
 			return {
 				teamName: 'Reading FC',
@@ -596,6 +613,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Stalybridge Celtic' + teamNameEnding,
 				displayNameShort: 'Stalybridge Celtic' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Stalybridge_Celtic.png'
+			};
+		case 'Stockport County':
+			return {
+				teamName: 'Stockport County FC',
+				fullName: 'Stockport County FC' + teamNameEnding,
+				displayName: 'Stockport County' + teamNameEnding,
+				displayNameShort: 'Stockport' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Stockport_County.svg'
 			};
 		case 'Stoke City':
 			return {
@@ -1082,6 +1107,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Hearts' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Heart_of_Midlothian.svg'
 			};
+		case 'Hibernian':
+			return {
+				teamName: 'Hibernian FC',
+				fullName: 'Hibernian FC' + teamNameEnding,
+				displayName: 'Hibernian' + teamNameEnding,
+				displayNameShort: 'Hibernian' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Hibernian.svg'
+			};
 		case 'Rangers':
 			return {
 				teamName: 'Rangers FC',
@@ -1089,6 +1122,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Rangers' + teamNameEnding,
 				displayNameShort: 'Rangers' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Rangers.svg'
+			};
+		case 'St Johnstone':
+			return {
+				teamName: 'St Johnstone FC',
+				fullName: 'St Johnstone FC' + teamNameEnding,
+				displayName: 'St Johnstone' + teamNameEnding,
+				displayNameShort: 'St Johnstone' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'St_Johnstone.png'
 			};
 		case 'St Mirren':
 			return {
@@ -1250,6 +1291,20 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 
 
 		/***************************************************/
+		/***************** Danish Clubs ******************/
+		/***************************************************/
+
+		case 'Copenhagen':
+			return {
+				teamName: 'FC Copenhagen',
+				fullName: 'FC Copenhagen' + teamNameEnding,
+				displayName: 'Copenhagen' + teamNameEnding,
+				displayNameShort: 'Copenhagen' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Copenhagen.svg'
+			};
+
+
+		/***************************************************/
 		/**************** Norwegian Clubs ******************/
 		/***************************************************/
 
@@ -1276,6 +1331,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Sandefjord' + teamNameEnding,
 				displayNameShort: 'Sandefjord' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sandefjord.svg'
+			};
+		case 'Sandviken':
+			return {
+				teamName: 'IL Sandviken',
+				fullName: 'IL Sandviken' + teamNameEnding,
+				displayName: 'Sandefjord' + teamNameEnding,
+				displayNameShort: 'Sandviken' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sandviken.svg'
 			};
 		case 'Tromso':
 			return {
@@ -1398,6 +1461,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 		/***************** American Clubs ******************/
 		/***************************************************/
 
+		case 'Atlanta United':
+			return {
+				teamName: 'Atlanta United FC',
+				fullName: 'Atlanta United FC' + teamNameEnding,
+				displayName: 'Atlanta United' + teamNameEnding,
+				displayNameShort: 'Atlanta' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Atlanta_United.svg'
+			};
 		case 'Club America':
 			return {
 				teamName: 'Club de Futbol America S.A. de C.V.',
@@ -1413,6 +1484,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Tar Heels' + teamNameEnding,
 				displayNameShort: 'Tar Heels' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Tar_Heels.svg'
+			};
+		case 'Orlando Pride':
+			return {
+				teamName: 'Orlando Pride',
+				fullName: 'Orlando Pride' + teamNameEnding,
+				displayName: 'Orlando Pride' + teamNameEnding,
+				displayNameShort: 'Pride' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Orlando_Pride.svg'
 			};
 		case 'Portland Thorns':
 			return {
