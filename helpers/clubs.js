@@ -397,6 +397,15 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Durham' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Durham_City.png'
 			};
+		case 'Hull City':
+		case 'Hull':
+			return {
+				teamName: 'Hull City AFC',
+				fullName: 'Hull City AFC' + teamNameEnding,
+				displayName: 'Hull City' + teamNameEnding,
+				displayNameShort: 'Hull' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Hull_City.svg'
+			};
 		case 'Kidderminster Harriers':
 			return {
 				teamName: 'Kidderminster Harriers FC',
