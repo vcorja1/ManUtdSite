@@ -607,6 +607,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Sheffield' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sheffield_United.svg'
 			};
+		case 'Sheffield Wednesday':
+			return {
+				teamName: 'Sheffield Wednesday FC',
+				fullName: 'Sheffield Wednesday FC' + teamNameEnding,
+				displayName: 'Sheffield Wednesday' + teamNameEnding,
+				displayNameShort: 'Sheffield Wednesday' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Sheffield_Wednesday.svg'
+			};
 		case 'Southend United':
 			return {
 				teamName: 'Southend United FC',
