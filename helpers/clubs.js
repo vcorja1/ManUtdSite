@@ -322,7 +322,7 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				fullName: 'Bradford City AFC' + teamNameEnding,
 				displayName: 'Bradford City' + teamNameEnding,
 				displayNameShort: 'Bradford' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bradford_City.svg'
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bradford_City.png'
 			};
 		case 'Brentford':
 			return {
