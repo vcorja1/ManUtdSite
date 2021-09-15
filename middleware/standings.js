@@ -450,30 +450,30 @@ function processMixedCompetitions(req) {
 	}
 
 	// // Under-19 UEFA Youth League
-	// if(req.youthLeagueData == null) {
-	// 	// Store basic information
-	// 	req.youthLeagueData = {
-	// 		competitionName: 'UEFA Youth League',
-	// 		competitionLink: RESERVES_STANDINGS_LOCATION + 'youth-league'
-	// 	};
+	if(req.youthLeagueData == null) {
+		// Store basic information
+		req.youthLeagueData = {
+			competitionName: 'UEFA Youth League',
+			competitionLink: RESERVES_STANDINGS_LOCATION + 'youth-league'
+		};
 
-	// 	// Store group stage standings results
-	// 	if(req.youthLeagueTable != null) {
-	// 		req.youthLeagueData.competitionTable = req.youthLeagueTable;
-	// 		req.youthLeagueData.groupStagePosition = getTeamPosition(req.youthLeagueTable.map(team => team.teamData.teamName));
-	// 	}
+		// Store group stage standings results
+		if(req.youthLeagueTable != null) {
+			req.youthLeagueData.competitionTable = req.youthLeagueTable;
+			req.youthLeagueData.groupStagePosition = getTeamPosition(req.youthLeagueTable.map(team => team.teamData.teamName));
+		}
 
-	// 	// Get relevant fixtures
-	// 	if(req.fixtures != null && req.fixtures.length > 0) {
-	// 		const youthLeague_games = req.fixtures.filter(match => match.competition == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE).reverse();
-	// 		if(youthLeague_games != null && youthLeague_games.length > 0) {
-	// 			req.youthLeagueData.fixtures = youthLeague_games;
-	// 		}
-	// 	}
+		// Get relevant fixtures
+		if(req.fixtures != null && req.fixtures.length > 0) {
+			const youthLeague_games = req.fixtures.filter(match => match.competition == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE).reverse();
+			if(youthLeague_games != null && youthLeague_games.length > 0) {
+				req.youthLeagueData.fixtures = youthLeague_games;
+			}
+		}
 
-	// 	// Set competition status
-	// 	getMixedCompetitionStatus(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, req.youthLeagueData);
-	// }
+		// Set competition status
+		getMixedCompetitionStatus(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, req.youthLeagueData);
+	}
 
 	// U18 Premier League Cup
 	if(req.plCupData == null) {
@@ -609,19 +609,6 @@ function processKnockoutCompetitions(req) {
 
 		// Set competition status
 		getKnockoutCompetitionStatus(COMPETITIONS.FA_YOUTH_CUP, req.faYouthCupData);
-	}
-
-	// Under-19 UEFA Youth League
-	const youthLeagueFixtures = req.fixtures.filter(match => match.competition == COMPETITIONS.U19_UEFA_YOUTH_LEAGUE).reverse();
-	if(youthLeagueFixtures != null && youthLeagueFixtures.length > 0) {
-		req.youthLeagueData = {
-			competitionName: 'UEFA Youth League',
-			competitionLink: RESERVES_STANDINGS_LOCATION + 'youth-league',
-			fixtures: youthLeagueFixtures
-		};
-
-		// Set competition status
-		getKnockoutCompetitionStatus(COMPETITIONS.U19_UEFA_YOUTH_LEAGUE, req.youthLeagueData);
 	}
 
 	// Ruhr Cup

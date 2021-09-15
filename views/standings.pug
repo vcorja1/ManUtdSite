@@ -140,11 +140,11 @@ block content
 		if(youthLeagueData != null)
 			if(isSingleCompetition)
 				.col-lg-offset-1.col-lg-10.col-md-offset-1.col-md-10.col-sm-12.col-ms-12.col-xs-12.no-padding#youth-league
-					+knockoutCompetitionMixin(youthLeagueData, isSingleCompetition, MATCH_STATUS)
+					+mixedCompetitionMixin(youthLeagueData, isSingleCompetition, MATCH_STATUS)
 			else
 				unless(youthLeagueData.shouldDisplayInSummary != null && !youthLeagueData.shouldDisplayInSummary)
 					.col-half.col-half-offset-left.col-half-offset-right.col-sm-12.col-ms-12.col-xs-12.no-padding#youth-league
-						+knockoutCompetitionMixin(youthLeagueData, isSingleCompetition, MATCH_STATUS)
+						+mixedCompetitionMixin(youthLeagueData, isSingleCompetition, MATCH_STATUS)
 
 		//- U18 Premier League North Standings
 		if(u18PlNorthData != null)
