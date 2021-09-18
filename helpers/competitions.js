@@ -456,7 +456,7 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 				type: COMPETITION_TYPE.MIXED,
 				finalRound: 9,
 				groupStageMin: 1,
-				groupStageMax: 3,
+				groupStageMax: 4,
 				groupStageAdvance: 2,
 				isSingleRoundElim: true
 			};
