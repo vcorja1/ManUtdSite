@@ -332,6 +332,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Brentford' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Brentford.svg'
 			};
+		case 'Bridgwater United':
+			return {
+				teamName: 'Bridgwater United FC',
+				fullName: 'Bridgwater United FC' + teamNameEnding,
+				displayName: 'Bridgwater United' + teamNameEnding,
+				displayNameShort: 'Bridgwater United' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bridgwater_United.png'
+			};
 		case 'Bristol City':
 			return {
 				teamName: 'Bristol City FC',
@@ -687,6 +695,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'West Brom' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'West_Bromwich_Albion.svg'
 			};
+		case 'Walsall':
+			return {
+				teamName: 'Walsall FC',
+				fullName: 'Walsall FC' + teamNameEnding,
+				displayName: 'Walsall' + teamNameEnding,
+				displayNameShort: 'Walsall' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Walsall.svg'
+			};
 		case 'Wigan Athletic':
 			return {
 				teamName: 'Wigan Athletic FC',
@@ -936,6 +952,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Lazio' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Lazio.svg'
 			};
+		case 'Napoli':
+			return {
+				teamName: 'Societa Sportiva Calcio Napoli',
+				fullName: 'SSC Napoli' + teamNameEnding,
+				displayName: 'Napoli' + teamNameEnding,
+				displayNameShort: 'Napoli' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Napoli.svg'
+			};
 		case 'Parma':
 			return {
 				teamName: 'Parma Calcio 1913',
@@ -1107,6 +1131,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayName: 'Celtic' + teamNameEnding,
 				displayNameShort: 'Celtic' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Celtic.svg'
+			};
+		case 'Dundee United':
+			return {
+				teamName: 'Dundee United FC',
+				fullName: 'Dundee United FC' + teamNameEnding,
+				displayName: 'Dundee United' + teamNameEnding,
+				displayNameShort: 'Dundee' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Dundee_United.png'
 			};
 		case 'Glasgow City':
 			return {
@@ -1494,6 +1526,14 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'America' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Club_America.svg'
 			};
+		case 'North Carolina Courage':
+			return {
+				teamName: 'North Carolina Courage',
+				fullName: 'North Carolina Courage' + teamNameEnding,
+				displayName: 'Courage' + teamNameEnding,
+				displayNameShort: 'Courage' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'North_Carolina_Courage.svg'
+			};
 		case 'North Carolina Tar Heels':
 			return {
 				teamName: 'North Carolina Tar Heels FC',
@@ -1548,11 +1588,19 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Boca Juniors' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Boca_Juniors.svg'
 			};
+		case 'Flamengo':
+			return {
+				teamName: 'Clube de Regatas do Flamengo',
+				fullName: 'Flamengo' + teamNameEnding,
+				displayName: 'Flamengo' + teamNameEnding,
+				displayNameShort: 'Flamengo' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Flamengo.svg'
+			};
 		case 'Palmeiras':
 			return {
 				teamName: 'Sociedade Esportiva Palmeiras',
 				fullName: 'SE Palmeiras' + teamNameEnding,
-				displayName: 'SE Palmeiras' + teamNameEnding,
+				displayName: 'Palmeiras' + teamNameEnding,
 				displayNameShort: 'Palmeiras' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Palmeiras.svg'
 			};
