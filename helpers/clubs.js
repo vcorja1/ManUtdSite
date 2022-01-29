@@ -332,13 +332,13 @@ exports.getClubData = function getClubData(clubName, team, competition) {
 				displayNameShort: 'Brentford' + teamNameEnding,
 				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Brentford.svg'
 			};
-		case 'Bridgwater United':
+		case 'Bridgewater United':
 			return {
-				teamName: 'Bridgwater United FC',
-				fullName: 'Bridgwater United FC' + teamNameEnding,
-				displayName: 'Bridgwater United' + teamNameEnding,
-				displayNameShort: 'Bridgwater United' + teamNameEnding,
-				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bridgwater_United.png'
+				teamName: 'Bridgewater United FC',
+				fullName: 'Bridgewater United FC' + teamNameEnding,
+				displayName: 'Bridgewater United' + teamNameEnding,
+				displayNameShort: 'Bridgewater United' + teamNameEnding,
+				clubLogoSrc: CLUB_LOGOS_FOLDER + 'Bridgewater_United.png'
 			};
 		case 'Bristol City':
 			return {
