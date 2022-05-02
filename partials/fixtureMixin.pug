@@ -176,7 +176,7 @@ mixin fixtures(matchList, MATCH_STATUS)
 						h4
 							if (match.neutral)
 								abbr(title='Neutral')='(N)'
-							else if (match.hometeam === 'Manchester United FC')
+							else if (match.hometeam === 'Manchester United' || match.hometeam === 'Manchester United FC')
 								abbr(title='Home')='(H)'
 							else
 								abbr(title='Away')='(A)'

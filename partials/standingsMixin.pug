@@ -54,7 +54,7 @@ mixin tableStandingsMixin(competitionData)
 					td.text-center=team.position
 					td
 						img(src=team.teamData.clubLogoSrc, height='20', width='20', alt=`Club Logo of ${team.teamName}`)
-						if(team.teamData.teamName == 'Manchester United FC')
+						if(team.teamData.teamName == 'Manchester United' || team.teamData.teamName == 'Manchester United FC')
 							span.bold #{' ' + team.teamData.displayName}
 						else
 							span #{' ' + team.teamData.displayName}
