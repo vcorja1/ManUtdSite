@@ -366,19 +366,19 @@ exports.getCompetitionDetails = function getCompetitionDetails(competitionID) {
 		case COMPETITIONS.PREMIER_LEAGUE_2:
 			return {
 				type: COMPETITION_TYPE.TABLE,
-				finalRound: 22,
+				finalRound: 26,
 				relegationPlace: 11
 			};
 		case COMPETITIONS.PREMIER_LEAGUE_2_DIV_2:
 			return {
 				type: COMPETITION_TYPE.TABLE,
-				finalRound: 22,
+				finalRound: 26,
 				relegationPlace: null
 			};
 		case COMPETITIONS.U18_PREMIER_LEAGUE_NORTH:
 			return {
 				type: COMPETITION_TYPE.TABLE,
-				finalRound: 22,
+				finalRound: 26,
 				relegationPlace: null
 			};
 		case COMPETITIONS.FA_WOMEN_SUPER_LEAGUE:
